@@ -3,9 +3,208 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+    <title>LunarRider0's Tool Hub</title>
     
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6', 
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-gray-900 text-white min-h-screen flex flex-col items-center justify-center">
+
+    <nav class="sticky top-0 z-50 w-full bg-gray-900/80 backdrop-blur-md border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                
+                <div class="flex-shrink-0">
+                    <a href="#" class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent hover:scale-105 transition-transform inline-block">
+                        CoreVault
+                    </a>
+                </div>
+
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-2">
+                        <a href="#" data-i18n="nav_home" class="text-gray-300 px-4 py-2 rounded-lg border border-transparent hover:border-gray-600 hover:bg-gray-800 transition-all duration-200 text-sm font-medium">Home</a>
+                        <a href="#" data-i18n="nav_tools" class="text-gray-300 px-4 py-2 rounded-lg border border-transparent hover:border-gray-600 hover:bg-gray-800 transition-all duration-200 text-sm font-medium">Tools Vault</a>
+                        <a href="#" data-i18n="nav_about" class="text-gray-300 px-4 py-2 rounded-lg border border-transparent hover:border-gray-600 hover:bg-gray-800 transition-all duration-200 text-sm font-medium">About Me</a>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-3">
+                    <button onclick="toggleLanguage()" class="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium border border-transparent hover:border-gray-600 hover:bg-gray-800 rounded-lg transition-all flex items-center gap-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M4.545 6.714 4.11 8H3l1.862-5h1.284L8 8H6.833l-.435-1.286H4.545zm1.634-.736L5.5 3.956h-.049l-.679 2.022h1.407z"/>
+                            <path d="M0 2a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v3h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2zm7.138 9.995c.193.301.402.583.63.846-.748.575-1.673 1.001-2.768 1.292.178.217.451.635.555.867 1.125-.359 2.08-.844 2.886-1.494l.844.757.515-.494-.848-.761c.42-.516.75-1.096 1.005-1.748h1.246v-.65h-2.148V9.5h-.645v.65h-.953c-.112-.424-.185-.865-.22-1.3h.684l-.56-1.5h-.64l-.248 1.5h-.52c.045-.25.105-.5.18-.748l-.756-.251c-.085.27-.156.55-.213.84h-.543v.65h.918c.036.5.118.983.242 1.442zM12.39 12.35c-.244-.43-.518-.838-.819-1.22l-.52.502c.28.36.54.74.77 1.144l.568-.426z"/>
+                        </svg>
+                        <span data-i18n="lang_btn">EN / VN</span>
+                    </button>
+                    
+                    <button data-i18n="nav_login" class="text-sm font-semibold text-white bg-blue-600 hover:bg-blue-500 px-5 py-2 rounded-lg transition-colors shadow-lg shadow-blue-500/20">
+                        Login
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full flex-grow flex flex-col items-center justify-center">
+        
+        <div class="p-10 bg-gray-800/80 rounded-2xl shadow-2xl border border-gray-700 max-w-2xl text-center mb-16 backdrop-blur-sm">
+            <h1 data-i18n="hero_title" class="text-5xl font-extrabold mb-6 bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-500 bg-clip-text text-transparent">
+                Welcome to CoreVault!
+            </h1>
+            <p data-i18n="hero_desc" class="text-gray-300 text-lg mb-8 leading-relaxed">
+                Your premier destination for premium tools, optimized resources, and exclusive tech applications.
+            </p>
+            <button data-i18n="hero_btn" class="px-8 py-3 bg-white text-gray-900 hover:bg-gray-200 transition-all duration-300 rounded-full font-bold shadow-lg hover:scale-105">
+                Explore Now
+            </button>
+        </div>
+
+        <div class="flex items-center justify-between mb-10 w-full">
+            <div>
+                <h2 class="text-3xl font-bold text-white">Latest Tools</h2>
+                <p class="text-gray-400 mt-1">Hand-picked premium & free resources for you.</p>
+            </div>
+            <div class="flex gap-2">
+                <span class="px-3 py-1 bg-blue-600/20 text-blue-400 border border-blue-600/30 rounded-full text-xs font-medium">All</span>
+                <span class="px-3 py-1 bg-gray-800 text-gray-400 border border-gray-700 rounded-full text-xs font-medium hover:bg-gray-700 cursor-pointer">Premium</span>
+                <span class="px-3 py-1 bg-gray-800 text-gray-400 border border-gray-700 rounded-full text-xs font-medium hover:bg-gray-700 cursor-pointer">Free</span>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
+            
+            <div class="group bg-gray-800/50 border border-gray-700 rounded-2xl overflow-hidden hover:border-blue-500/50 transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/10">
+                <div class="h-48 bg-gray-700 flex items-center justify-center relative overflow-hidden">
+                    <span class="text-gray-500 font-mono text-sm group-hover:scale-110 transition-transform">TOOL PREVIEW</span>
+                    <div class="absolute top-4 right-4 px-3 py-1 bg-green-500 text-white text-xs font-bold rounded-full shadow-lg">FREE</div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2 group-hover:text-blue-400 transition-colors">PC Optimizer Pro</h3>
+                    <p class="text-gray-400 text-sm mb-4 line-clamp-2">Boost your gaming performance by optimizing background processes and RAM usage for low-end PCs.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-gray-500 text-xs uppercase font-bold tracking-widest">Utility</span>
+                        <button class="text-sm font-bold text-white bg-gray-700 hover:bg-blue-600 px-4 py-2 rounded-lg transition-all border border-gray-600">Download</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="group bg-gray-800/50 border border-gray-700 rounded-2xl overflow-hidden hover:border-purple-500/50 transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/10">
+                <div class="h-48 bg-gray-700 flex items-center justify-center relative overflow-hidden">
+                    <span class="text-gray-500 font-mono text-sm group-hover:scale-110 transition-transform">STREAM OVERLAY</span>
+                    <div class="absolute top-4 right-4 px-3 py-1 bg-yellow-500 text-gray-900 text-xs font-bold rounded-full shadow-lg">$19.99</div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2 group-hover:text-purple-400 transition-colors">Neon Stream Pack v2</h3>
+                    <p class="text-gray-400 text-sm mb-4 line-clamp-2">Fully animated Twitch/TikTok overlay with VPet integration support and custom alerts.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-gray-500 text-xs uppercase font-bold tracking-widest">Graphics</span>
+                        <button class="text-sm font-bold text-white bg-purple-600 hover:bg-purple-500 px-4 py-2 rounded-lg transition-all shadow-lg shadow-purple-500/20">Purchase Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="group bg-gray-800/50 border border-gray-700 rounded-2xl overflow-hidden hover:border-blue-500/50 transition-all duration-300">
+                <div class="h-48 bg-gray-700 flex items-center justify-center relative overflow-hidden">
+                    <span class="text-gray-500 font-mono text-sm group-hover:scale-110 transition-transform">GAME TOOL</span>
+                    <div class="absolute top-4 right-4 px-3 py-1 bg-gray-900/80 text-white text-xs font-bold rounded-full">PRIVATE</div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2 group-hover:text-blue-400 transition-colors">Valorant Recoil Helper</h3>
+                    <p class="text-gray-400 text-sm mb-4 line-clamp-2">Advanced pattern learning for recoil compensation. Safe, undetectable, and updated weekly.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-gray-500 text-xs uppercase font-bold tracking-widest">Gaming</span>
+                        <button class="text-sm font-bold text-white bg-gray-700 hover:bg-blue-600 px-4 py-2 rounded-lg transition-all border border-gray-600">Details</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="bg-gray-900 border-t border-gray-800 pt-12 pb-8 w-full mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-8">
+                
+                <div class="col-span-1 md:col-span-1">
+                    <a href="#" class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                        CoreVault
+                    </a>
+                    <p class="mt-4 text-gray-400 text-sm leading-relaxed">
+                        The ultimate destination for premium gaming tools, system optimizers, and exclusive digital assets. Secure, reliable, and always updated.
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="text-white font-bold mb-4 uppercase text-xs tracking-widest">Navigation</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-blue-400 text-sm transition-colors">Home</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-blue-400 text-sm transition-colors">Tools Vault</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-blue-400 text-sm transition-colors">About Developer</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-blue-400 text-sm transition-colors">Pricing Plan</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-white font-bold mb-4 uppercase text-xs tracking-widest">Support</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-blue-400 text-sm transition-colors">Terms of Service</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-blue-400 text-sm transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-blue-400 text-sm transition-colors">Contact via Messenger</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-white font-bold mb-4 uppercase text-xs tracking-widest">Follow LunarRider0</h3>
+                    <div class="flex space-x-4">
+                        <a href="https://twitch.tv/LunarRider0" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-800 border border-gray-700 text-purple-400 hover:bg-purple-500 hover:text-white transition-all duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M3.857 0 1 2.857v10.286h3.429V16l2.857-2.857H9.57L14.714 8V0H3.857zm9.714 7.429-2.285 2.285H9l-2 2v-2H4.429V1.143h9.142v6.286z"/>
+                                <path d="M11.857 3.143h-1.143V6.28h1.143V3.143zm-3.143 0H7.571V6.28h1.143V3.143z"/>
+                            </svg>
+                        </a>
+                        <a href="https://tiktok.com/@LunarRider0" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-800 border border-gray-700 text-pink-500 hover:bg-pink-500 hover:text-white transition-all duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M9 0h1.98c.144.715.54 1.617 1.235 2.512C12.895 3.389 13.797 4 15 4v2c-1.753 0-3.07-.814-4-1.829V11a5 5 0 1 1-5-5v2a3 3 0 1 0 3 3V0Z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-800 border border-gray-700 text-blue-400 hover:bg-blue-500 hover:text-white transition-all duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M12.632 15.144a.215.215 0 0 1-.214.214.215.215 0 0 1-.214-.214V13.8a.215.215 0 0 1 .214-.214.215.215 0 0 1 .214.214v1.344zm-2.812 0a.215.215 0 0 1-.214.214.215.215 0 0 1-.214-.214V13.8a.215.215 0 0 1 .214-.214.215.215 0 0 1 .214.214v1.344z"/>
+                                <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.669 11.538a.498.498 0 0 1-.705.005 3.993 3.993 0 0 0-5.928 0 .498.498 0 0 1-.705-.005.498.498 0 0 1-.005-.705 4.993 4.993 0 0 1 7.413 0 .498.498 0 0 1-.005.705z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-500 text-xs">
+                    © 2026 CoreVault Project. Developed by <span class="text-gray-300">LunarRider0</span>. All rights reserved.
+                </p>
+                <div class="flex items-center gap-6">
+                    <span class="flex items-center gap-2 text-xs text-gray-500">
+                        <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                        Server Status: Online
+                    </span>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="lang.js"></script>
 </body>
 </html>
