@@ -10,38 +10,41 @@
 
     <aside class="w-64 bg-gray-800 border-r border-gray-700 flex flex-col">
         <div class="h-16 flex items-center px-6 border-b border-gray-700">
-            <span class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">CoreVault OS</span>
+            <span data-i18n="admin_os" class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">CoreVault OS</span>
         </div>
         <nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
             <a href="admin.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-700 rounded-xl transition-all">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
-                Dashboard
+                <span data-i18n="admin_dashboard">Dashboard</span>
             </a>
             <a href="admin-products.html" class="flex items-center gap-3 px-4 py-3 bg-blue-600/20 text-blue-400 rounded-xl border border-blue-600/30 font-medium transition-all">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
-                Products
+                <span data-i18n="admin_products">Products</span>
             </a>
             <a href="admin-users.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-700 rounded-xl transition-all">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                Users
+                <span data-i18n="admin_users">Users</span>
             </a>
-              <a href="admin-orders.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-700 rounded-xl transition-all">
+            <a href="admin-orders.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-700 rounded-xl transition-all">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                Orders
+                <span data-i18n="admin_orders">Orders</span>
             </a>
         </nav>
     </aside>
 
     <main class="flex-1 flex flex-col h-screen overflow-hidden relative">
-        
         <header class="h-16 bg-gray-900 border-b border-gray-800 flex items-center justify-between px-8">
             <div class="relative w-64">
                 <span class="absolute inset-y-0 left-0 flex items-center pl-3">
                     <svg class="w-5 h-5 text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                 </span>
-                <input type="text" class="w-full bg-gray-800 text-white border border-gray-700 rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:border-blue-500 transition-colors text-sm" placeholder="Search...">
+                <input type="text" data-i18n="admin_search" class="w-full bg-gray-800 text-white border border-gray-700 rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:border-blue-500 transition-colors text-sm" placeholder="Search...">
             </div>
             <div class="flex items-center gap-4">
+                <button onclick="toggleLanguage()" class="text-gray-300 hover:text-white px-3 py-1.5 text-sm font-medium border border-gray-700 hover:border-gray-500 hover:bg-gray-800 rounded-lg transition-all flex items-center gap-1">
+                    <span data-i18n="lang_btn">EN / VN</span>
+                </button>
+                <button class="text-gray-400 hover:text-white"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg></button>
                 <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 flex items-center justify-center font-bold text-sm shadow-lg cursor-pointer">LR</div>
             </div>
         </header>
@@ -49,64 +52,185 @@
         <div class="flex-1 overflow-y-auto p-8">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
                 <div>
-                    <h1 class="text-3xl font-bold text-white">Products Vault</h1>
-                    <p class="text-gray-400 mt-1">Manage your tools, updates, pricing, and downloads.</p>
+                    <h1 data-i18n="prod_title" class="text-3xl font-bold text-white">Products Vault</h1>
+                    <p data-i18n="prod_desc" class="text-gray-400 mt-1">Manage your tools, updates, pricing, and downloads.</p>
                 </div>
-                <button class="bg-blue-600 hover:bg-blue-500 text-white px-6 py-2.5 rounded-xl font-bold flex items-center gap-2 transition-all shadow-lg shadow-blue-500/30">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-                    Add New Tool
-                </button>
+            <button onclick="openModal()" class="bg-blue-600 hover:bg-blue-500 text-white px-6 py-2.5 rounded-xl font-bold flex items-center gap-2 transition-all shadow-lg shadow-blue-500/30">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                <span data-i18n="prod_add">Add New Tool</span>
+            </button>
             </div>
 
             <div class="bg-gray-800 rounded-xl border border-gray-700 overflow-hidden shadow-lg">
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse">
-                        <thead>
-                            <tr class="bg-gray-900/50 text-gray-400 text-xs uppercase tracking-wider">
-                                <th class="p-4 font-medium">Product Info</th>
-                                <th class="p-4 font-medium">Category</th>
-                                <th class="p-4 font-medium">Price</th>
-                                <th class="p-4 font-medium">Status</th>
-                                <th class="p-4 font-medium text-right">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-gray-700/50">
-                            <tr class="hover:bg-gray-700/20 transition-colors group">
-                                <td class="p-4 flex items-center gap-4">
-                                    <div class="w-12 h-12 rounded-lg bg-gray-700 flex items-center justify-center text-xl">🎮</div>
-                                    <div>
-                                        <p class="text-white font-bold text-sm">Valorant Helper</p>
-                                        <p class="text-gray-500 text-xs mt-0.5">Updated: 2 days ago</p>
-                                    </div>
-                                </td>
-                                <td class="p-4"><span class="text-gray-300 text-sm">Gaming Utilities</span></td>
-                                <td class="p-4"><span class="text-white font-bold text-sm">$15.00</span></td>
-                                <td class="p-4"><span class="px-2.5 py-1 bg-green-500/20 text-green-400 border border-green-500/30 rounded-full text-xs font-bold">Active</span></td>
-                                <td class="p-4 text-right">
-                                    <button class="text-gray-400 hover:text-blue-400 px-2">Edit</button>
-                                </td>
-                            </tr>
-                            <tr class="hover:bg-gray-700/20 transition-colors group">
-                                <td class="p-4 flex items-center gap-4">
-                                    <div class="w-12 h-12 rounded-lg bg-gray-700 flex items-center justify-center text-xl">✨</div>
-                                    <div>
-                                        <p class="text-white font-bold text-sm">Neon Stream Pack v2</p>
-                                        <p class="text-gray-500 text-xs mt-0.5">VPet Integration</p>
-                                    </div>
-                                </td>
-                                <td class="p-4"><span class="text-gray-300 text-sm">Stream Graphics</span></td>
-                                <td class="p-4"><span class="text-white font-bold text-sm">$19.99</span></td>
-                                <td class="p-4"><span class="px-2.5 py-1 bg-green-500/20 text-green-400 border border-green-500/30 rounded-full text-xs font-bold">Active</span></td>
-                                <td class="p-4 text-right">
-                                    <button class="text-gray-400 hover:text-blue-400 px-2">Edit</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-gray-900/50 text-gray-400 text-xs uppercase tracking-wider">
+                            <th data-i18n="prod_th_info" class="p-4 font-medium">Product Info</th>
+                            <th data-i18n="prod_th_cat" class="p-4 font-medium">Category</th>
+                            <th data-i18n="prod_th_price" class="p-4 font-medium">Price</th>
+                            <th data-i18n="prod_th_status" class="p-4 font-medium">Status</th>
+                            <th data-i18n="prod_th_action" class="p-4 font-medium text-right">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-700/50">
+                        <tr class="hover:bg-gray-700/20 transition-colors group">
+                            <td class="p-4 flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-lg bg-gray-700 flex items-center justify-center text-xl">🎮</div>
+                                <div><p class="text-white font-bold text-sm">Valorant Helper</p></div>
+                            </td>
+                            <td class="p-4"><span data-i18n="val_gaming" class="text-gray-300 text-sm">Gaming</span></td>
+                            <td class="p-4"><span data-price-value="15" class="text-white font-bold text-sm"></span></td>
+                            <td class="p-4"><span data-i18n="val_active" class="px-2.5 py-1 bg-green-500/20 text-green-400 border border-green-500/30 rounded-full text-xs font-bold">Active</span></td>
+                            <td class="p-4 text-right"><button data-i18n="btn_edit" class="text-gray-400 hover:text-blue-400 px-2">Edit</button></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </main>
 
+    <div id="addToolModal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/60 backdrop-blur-sm transition-opacity duration-300 opacity-0">
+        <div class="bg-gray-800 border border-gray-700 rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-y-auto p-8 shadow-2xl relative transform scale-95 transition-transform duration-300" id="modalContent">
+            
+            <div class="flex justify-between items-center mb-6 border-b border-gray-700 pb-4">
+                <h3 data-i18n="prod_add" class="text-2xl font-bold text-white">Add New Tool</h3>
+                <button type="button" onclick="closeModal()" class="text-gray-400 hover:text-white transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+
+            <form id="addToolForm" onsubmit="saveTool(event)">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+                    <div>
+                        <label data-i18n="modal_name" class="block text-sm font-medium text-gray-400 mb-1">Product Name *</label>
+                        <input type="text" id="toolName" required class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label data-i18n="modal_cat" class="block text-sm font-medium text-gray-400 mb-1">Category *</label>
+                        <select id="toolCat" required class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-blue-500">
+                            <option value="Gaming">Gaming</option>
+                            <option value="Graphics">Graphics</option>
+                            <option value="System">System</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label data-i18n="modal_price" class="block text-sm font-medium text-gray-400 mb-1">Price * (0 for Free)</label>
+                        <input type="number" id="toolPrice" step="0.01" min="0" required class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-blue-500" placeholder="e.g. 15.00">
+                    </div>
+                    <div>
+                        <label data-i18n="modal_status" class="block text-sm font-medium text-gray-400 mb-1">Status *</label>
+                        <select id="toolStatus" required class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-blue-500">
+                            <option value="Active">Active</option>
+                            <option value="Maintenance">Maintenance</option>
+                            <option value="Hidden">Hidden</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mb-5">
+                    <label data-i18n="modal_desc" class="block text-sm font-medium text-gray-400 mb-1">Description</label>
+                    <textarea id="toolDesc" rows="3" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-blue-500 placeholder-gray-600" placeholder="..."></textarea>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8 p-5 bg-gray-900/50 rounded-xl border border-gray-700/50">
+                    <div>
+                        <label data-i18n="modal_icon" class="block text-xs font-bold text-gray-400 mb-2">Icon (Optional)</label>
+                        <input type="file" id="toolIcon" accept="image/*" class="block w-full text-xs text-gray-400 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-gray-700 file:text-white hover:file:bg-gray-600 cursor-pointer transition-colors">
+                    </div>
+                    <div>
+                        <label data-i18n="modal_file" class="block text-xs font-bold text-gray-400 mb-2">File .zip (Optional)</label>
+                        <input type="file" id="toolFile" accept=".zip,.rar,.exe" class="block w-full text-xs text-gray-400 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-gray-700 file:text-white hover:file:bg-gray-600 cursor-pointer transition-colors">
+                    </div>
+                    <div>
+                        <label data-i18n="modal_video" class="block text-xs font-bold text-gray-400 mb-2">Demo Video (Optional)</label>
+                        <input type="file" id="toolVideo" accept="video/*" class="block w-full text-xs text-gray-400 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-gray-700 file:text-white hover:file:bg-gray-600 cursor-pointer transition-colors">
+                    </div>
+                </div>
+
+                <div class="flex justify-end gap-3 pt-5 border-t border-gray-700">
+                    <button type="button" onclick="closeModal()" data-i18n="modal_btn_cancel" class="px-5 py-2.5 text-sm font-bold text-gray-400 hover:text-white bg-gray-800 hover:bg-gray-700 border border-gray-700 rounded-xl transition-colors">Cancel</button>
+                    <button type="submit" data-i18n="modal_btn_save" class="px-6 py-2.5 text-sm font-bold text-white bg-blue-600 hover:bg-blue-500 rounded-xl shadow-lg shadow-blue-500/30 transition-all">Save Product</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="lang.js"></script>
+
+    <script>
+        function openModal() {
+            const modal = document.getElementById('addToolModal');
+            const content = document.getElementById('modalContent');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                content.classList.remove('scale-95');
+                content.classList.add('scale-100');
+            }, 10);
+            updateLanguage(); 
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('addToolModal');
+            const content = document.getElementById('modalContent');
+            modal.classList.add('opacity-0');
+            content.classList.remove('scale-100');
+            content.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.getElementById('addToolForm').reset(); 
+            }, 300);
+        }
+
+        function saveTool(e) {
+            e.preventDefault(); 
+            
+            const name = document.getElementById('toolName').value;
+            const cat = document.getElementById('toolCat').value;
+            const price = parseFloat(document.getElementById('toolPrice').value);
+            const status = document.getElementById('toolStatus').value;
+            const iconFile = document.getElementById('toolIcon').files[0];
+
+            let iconDisplay = '📦'; 
+            if (!iconFile) {
+                if (cat === 'Gaming') iconDisplay = '🎮';
+                if (cat === 'Graphics') iconDisplay = '✨';
+                if (cat === 'System') iconDisplay = '⚙️';
+            } else {
+                iconDisplay = '🖼️'; 
+            }
+
+            const catI18n = cat === 'Gaming' ? 'val_gaming' : (cat === 'Graphics' ? 'val_graphics' : 'val_system');
+            const statusI18n = status === 'Active' ? 'val_active' : (status === 'Maintenance' ? 'val_maintenance' : 'val_hidden');
+
+            let priceDisplay = price === 0 
+                ? '<span data-i18n="val_free" class="text-green-400 font-bold text-sm">FREE</span>' 
+                : `<span data-price-value="${price}" class="text-white font-bold text-sm"></span>`;
+
+            let statusDisplay = status === 'Active' 
+                ? `<span data-i18n="${statusI18n}" class="px-2.5 py-1 bg-green-500/20 text-green-400 border border-green-500/30 rounded-full text-xs font-bold">Active</span>` 
+                : `<span data-i18n="${statusI18n}" class="px-2.5 py-1 bg-yellow-500/20 text-yellow-500 border border-yellow-500/30 rounded-full text-xs font-bold">${status}</span>`;
+
+            const tbody = document.querySelector('tbody');
+            const newRow = document.createElement('tr');
+            newRow.className = "hover:bg-gray-700/20 transition-colors group";
+            
+            newRow.innerHTML = `
+                <td class="p-4 flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-lg bg-gray-700 flex items-center justify-center text-xl">${iconDisplay}</div>
+                    <div><p class="text-white font-bold text-sm">${name}</p><p class="text-xs text-gray-500 mt-0.5">Just now</p></div>
+                </td>
+                <td class="p-4"><span data-i18n="${catI18n}" class="text-gray-300 text-sm">${cat}</span></td>
+                <td class="p-4">${priceDisplay}</td>
+                <td class="p-4">${statusDisplay}</td>
+                <td class="p-4 text-right"><button data-i18n="btn_edit" class="text-gray-400 hover:text-blue-400 px-2">Edit</button></td>
+            `;
+            
+            tbody.prepend(newRow);
+            closeModal();
+            
+            updateLanguage(); 
+        }
+    </script>
 </body>
 </html>

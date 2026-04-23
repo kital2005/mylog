@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentication | CoreVault</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .fade-enter { opacity: 0; transform: translateY(10px); }
+        .fade-enter-active { opacity: 1; transform: translateY(0); transition: all 0.4s ease-out; }
+        .hidden-form { display: none; }
+    </style>
+</head>
+<body class="bg-gray-900 text-white font-sans min-h-screen flex items-center justify-center relative overflow-x-hidden py-12">
+
+    <div class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-blue-600/20 rounded-full blur-[100px]"></div>
+    <div class="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-purple-600/20 rounded-full blur-[100px]"></div>
+
+    <a href="index.html" class="absolute top-6 left-6 text-gray-400 hover:text-white flex items-center gap-2 transition-colors z-20">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+        <span data-i18n="auth_back">Back to Home</span>
+    </a>
+
+    <button onclick="toggleLanguage()" class="absolute top-6 right-6 text-gray-300 hover:text-white px-4 py-2 border border-gray-700 hover:border-gray-500 rounded-lg transition-colors z-20">
+        <span data-i18n="lang_btn">EN / VN</span>
+    </button>
+
+    <div class="w-full max-w-md bg-gray-800/80 backdrop-blur-xl rounded-3xl border border-gray-700 shadow-2xl overflow-hidden relative z-10 m-4">
+        
+        <div class="pt-8 pb-4 px-8 text-center">
+            <h2 class="text-3xl font-extrabold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent inline-block mb-2">CoreVault</h2>
+            <p data-i18n="auth_subtitle_login" class="text-gray-400 text-sm" id="form-subtitle">Welcome back, gamer!</p>
+        </div>
+
+        <div id="main-tabs" class="flex border-b border-gray-700">
+            <button onclick="switchTab('login')" id="tab-login" class="flex-1 py-4 text-center font-bold text-blue-400 border-b-2 border-blue-500 bg-gray-700/30 transition-all">
+                <span data-i18n="auth_tab_login">Log In</span>
+            </button>
+            <button onclick="switchTab('register')" id="tab-register" class="flex-1 py-4 text-center font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-300 transition-all">
+                <span data-i18n="auth_tab_reg">Sign Up</span>
+            </button>
+        </div>
+
+        <div class="p-8">
+            <form id="form-login" class="fade-enter-active">
+                <div class="space-y-5">
+                    <div>
+                        <label data-i18n="auth_user_email" class="block text-sm font-medium text-gray-400 mb-1">Username or Email</label>
+                        <input type="text" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500" placeholder="...">
+                    </div>
+                    <div>
+                        <label data-i18n="auth_pwd" class="block text-sm font-medium text-gray-400 mb-1">Password</label>
+                        <div class="relative">
+                            <input type="password" id="login-pwd" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500" placeholder="••••••••">
+                            <button type="button" onclick="togglePassword('login-pwd')" class="absolute right-4 top-3.5 text-gray-500 hover:text-gray-300">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between text-sm">
+                        <label class="flex items-center text-gray-400 cursor-pointer">
+                            <input type="checkbox" class="mr-2 rounded bg-gray-900"> <span data-i18n="auth_remember">Remember me</span>
+                        </label>
+                        <button type="button" onclick="showForgot()" data-i18n="auth_forgot" class="text-blue-400 hover:text-blue-300 font-medium">Forgot Password?</button>
+                    </div>
+                    
+                    <button type="submit" data-i18n="auth_btn_login" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-xl transition-all shadow-lg">Sign In</button>
+                </div>
+            </form>
+
+            <form id="form-register" class="hidden-form" onsubmit="return submitRegister(event)">
+                <div class="space-y-4">
+                    <div class="flex flex-col items-center justify-center mb-2">
+                        <div class="relative group cursor-pointer" onclick="document.getElementById('avatar-upload').click()">
+                            <img id="avatar-preview" src="https://api.dicebear.com/7.x/avataaars/svg?seed=placeholder" class="w-20 h-20 rounded-full border-2 border-gray-600 object-cover group-hover:border-blue-500 transition-all">
+                        </div>
+                        <input type="file" id="avatar-upload" class="hidden" accept="image/*" onchange="previewAvatar(event)">
+                        <span data-i18n="auth_avatar" class="text-xs text-gray-500 mt-2">Avatar (Optional)</span>
+                    </div>
+
+                    <div>
+                        <input type="text" id="reg-user" data-i18n="auth_user" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500" placeholder="Username (Unique)">
+                        <p id="err-user" data-i18n="auth_err_user" class="text-red-400 text-xs mt-1 hidden">This username is already taken.</p>
+                    </div>
+                    <div>
+                        <input type="email" data-i18n="auth_email" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500" placeholder="Email Address">
+                    </div>
+                    <div>
+                        <div class="relative">
+                            <input type="password" id="reg-pwd" data-i18n="auth_pwd" onkeyup="checkPassword()" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500" placeholder="Password">
+                            <button type="button" onclick="togglePassword('reg-pwd')" class="absolute right-4 top-3.5 text-gray-500 hover:text-gray-300">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                            </button>
+                        </div>
+                        <ul class="text-xs text-gray-500 mt-2 space-y-1 pl-1">
+                            <li id="rule-len" class="flex items-center gap-1"><span class="w-3">○</span> 8-12 characters</li>
+                            <li id="rule-upper" class="flex items-center gap-1"><span class="w-3">○</span> 1 Uppercase letter</li>
+                            <li id="rule-num" class="flex items-center gap-1"><span class="w-3">○</span> 1 Number</li>
+                            <li id="rule-spec" class="flex items-center gap-1"><span class="w-3">○</span> 1 Special character (@$!%*?&)</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <input type="password" id="reg-pwd-confirm" onkeyup="checkPasswordMatch()" data-i18n="auth_pwd_confirm" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-all" placeholder="Confirm Password">
+                        <p id="err-pwd-match" data-i18n="auth_err_match" class="text-red-400 text-xs mt-1 hidden">Passwords do not match.</p>
+                    </div>
+
+                    <label class="flex items-start text-xs text-gray-400 cursor-pointer mt-2">
+                        <input type="checkbox" class="mr-2 mt-0.5 rounded bg-gray-900"> 
+                        <span data-i18n="auth_agree">I agree to the Terms of Service and Privacy Policy.</span>
+                    </label>
+
+                    <button type="submit" data-i18n="auth_btn_reg" class="w-full bg-purple-600 hover:bg-purple-500 text-white font-bold py-3 rounded-xl transition-all shadow-lg">Create Account</button>
+                </div>
+            </form>
+
+            <form id="form-forgot" class="hidden-form">
+                <div class="space-y-5 text-center">
+                    <p data-i18n="auth_forgot_desc" class="text-gray-400 text-sm">Enter your email address and we'll send you a link to reset your password.</p>
+                    <input type="email" data-i18n="auth_email" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 text-left" placeholder="Email Address">
+                    
+                    <button type="button" data-i18n="auth_btn_reset" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-xl transition-all shadow-lg">Send Reset Link</button>
+                    
+                    <button type="button" onclick="cancelForgot()" data-i18n="auth_cancel" class="text-gray-400 hover:text-white text-sm mt-4 font-medium">Cancel and return to Login</button>
+                </div>
+            </form>
+
+            <div id="social-auth" class="mt-8">
+                <div class="relative flex items-center py-5">
+                    <div class="flex-grow border-t border-gray-700"></div>
+                    <span data-i18n="auth_or" class="flex-shrink-0 mx-4 text-gray-500 text-sm">Or continue with</span>
+                    <div class="flex-grow border-t border-gray-700"></div>
+                </div>
+                
+                <button type="button" class="w-full flex items-center justify-center gap-3 bg-white hover:bg-gray-100 text-gray-900 font-bold py-3 rounded-xl transition-all shadow">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24">
+                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                    </svg>
+                    Google
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="lang.js"></script>
+    <script>
+        function switchTab(tab) {
+            const formLogin = document.getElementById('form-login');
+            const formRegister = document.getElementById('form-register');
+            const tabLogin = document.getElementById('tab-login');
+            const tabRegister = document.getElementById('tab-register');
+            const subtitle = document.getElementById('form-subtitle');
+
+            if (tab === 'login') {
+                formRegister.classList.replace('fade-enter-active', 'hidden-form');
+                formLogin.classList.replace('hidden-form', 'fade-enter-active');
+                tabLogin.className = "flex-1 py-4 text-center font-bold text-blue-400 border-b-2 border-blue-500 bg-gray-700/30 transition-all";
+                tabRegister.className = "flex-1 py-4 text-center font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-300 transition-all";
+                
+                subtitle.setAttribute('data-i18n', 'auth_subtitle_login');
+            } else {
+                formLogin.classList.replace('fade-enter-active', 'hidden-form');
+                formRegister.classList.replace('hidden-form', 'fade-enter-active');
+                tabRegister.className = "flex-1 py-4 text-center font-bold text-purple-400 border-b-2 border-purple-500 bg-gray-700/30 transition-all";
+                tabLogin.className = "flex-1 py-4 text-center font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-300 transition-all";
+                
+                subtitle.setAttribute('data-i18n', 'auth_subtitle_reg');
+            }
+            updateLanguage();
+        }
+
+        function showForgot() {
+            document.getElementById('form-login').classList.replace('fade-enter-active', 'hidden-form');
+            document.getElementById('main-tabs').style.display = 'none';
+            document.getElementById('social-auth').style.display = 'none';
+            document.getElementById('form-forgot').classList.replace('hidden-form', 'fade-enter-active');
+            
+            const subtitle = document.getElementById('form-subtitle');
+            subtitle.setAttribute('data-i18n', 'auth_subtitle_forgot');
+            updateLanguage();
+        }
+
+        function cancelForgot() {
+            document.getElementById('form-forgot').classList.replace('fade-enter-active', 'hidden-form');
+            document.getElementById('main-tabs').style.display = 'flex';
+            document.getElementById('social-auth').style.display = 'block';
+            document.getElementById('form-login').classList.replace('hidden-form', 'fade-enter-active');
+            
+            const subtitle = document.getElementById('form-subtitle');
+            subtitle.setAttribute('data-i18n', 'auth_subtitle_login');
+            updateLanguage();
+        }
+
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            input.type = input.type === "password" ? "text" : "password";
+        }
+
+        function previewAvatar(event) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                document.getElementById('avatar-preview').src = reader.result;
+            }
+            if(event.target.files[0]) reader.readAsDataURL(event.target.files[0]);
+        }
+
+        function checkPassword() {
+            const pwd = document.getElementById('reg-pwd').value;
+            
+            const elLen = document.getElementById('rule-len');
+            if(pwd.length >= 8 && pwd.length <= 12) {
+                elLen.className = "flex items-center gap-1 text-green-400"; elLen.innerHTML = '<span class="w-3">✓</span> 8-12 characters';
+            } else {
+                elLen.className = "flex items-center gap-1 text-gray-500"; elLen.innerHTML = '<span class="w-3">○</span> 8-12 characters';
+            }
+
+            const elUpper = document.getElementById('rule-upper');
+            if(/[A-Z]/.test(pwd)) {
+                elUpper.className = "flex items-center gap-1 text-green-400"; elUpper.innerHTML = '<span class="w-3">✓</span> 1 Uppercase letter';
+            } else {
+                elUpper.className = "flex items-center gap-1 text-gray-500"; elUpper.innerHTML = '<span class="w-3">○</span> 1 Uppercase letter';
+            }
+
+            const elNum = document.getElementById('rule-num');
+            if(/\d/.test(pwd)) {
+                elNum.className = "flex items-center gap-1 text-green-400"; elNum.innerHTML = '<span class="w-3">✓</span> 1 Number';
+            } else {
+                elNum.className = "flex items-center gap-1 text-gray-500"; elNum.innerHTML = '<span class="w-3">○</span> 1 Number';
+            }
+
+            const elSpec = document.getElementById('rule-spec');
+            if(/[!@#$%^&*(),.?":{}|<>]/.test(pwd)) {
+                elSpec.className = "flex items-center gap-1 text-green-400"; elSpec.innerHTML = '<span class="w-3">✓</span> 1 Special character (@$!%*?&)';
+            } else {
+                elSpec.className = "flex items-center gap-1 text-gray-500"; elSpec.innerHTML = '<span class="w-3">○</span> 1 Special character (@$!%*?&)';
+            }
+            
+            // Kích hoạt luôn hàm so sánh nếu người dùng sửa lại password đầu tiên
+            checkPasswordMatch();
+        }
+
+        // HÀM MỚI: KIỂM TRA 2 MẬT KHẨU CÓ KHỚP NHAU KHÔNG
+        function checkPasswordMatch() {
+            const pwd = document.getElementById('reg-pwd').value;
+            const confirmPwd = document.getElementById('reg-pwd-confirm');
+            const errMatch = document.getElementById('err-pwd-match');
+            
+            if (confirmPwd.value.length > 0 && pwd !== confirmPwd.value) {
+                errMatch.classList.remove('hidden');
+                confirmPwd.classList.add('border-red-500');
+            } else {
+                errMatch.classList.add('hidden');
+                confirmPwd.classList.remove('border-red-500');
+            }
+        }
+
+        // HÀM MỚI: KIỂM TRA TOÀN BỘ KHI BẤM NÚT CREATE ACCOUNT
+        function submitRegister(event) {
+            event.preventDefault(); // Chặn trang load lại để hiển thị lỗi (sau này nối DB thì bỏ dòng này)
+            
+            const pwd = document.getElementById('reg-pwd').value;
+            const confirmPwd = document.getElementById('reg-pwd-confirm').value;
+            
+            if (pwd !== confirmPwd) {
+                checkPasswordMatch(); // Hiển thị khung đỏ
+                return false; // Dừng lại không cho đăng ký
+            }
+            
+            // Nếu qua ải thì thông báo (tạm thời)
+            alert("Success! Everything looks good (Demo).");
+        }
+
+        document.getElementById('reg-user').addEventListener('blur', function(e) {
+            const err = document.getElementById('err-user');
+            if(e.target.value.toLowerCase() === 'admin') {
+                err.classList.remove('hidden');
+                e.target.classList.add('border-red-500');
+            } else {
+                err.classList.add('hidden');
+                e.target.classList.remove('border-red-500');
+            }
+        });
+    </script>
+</body>
+</html>
