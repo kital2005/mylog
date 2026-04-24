@@ -6,7 +6,7 @@
     <title>Users | CoreVault OS</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-900 text-white font-sans flex h-screen overflow-hidden">
+<body class="bg-gray-900 text-white font-sans flex h-screen overflow-hidden" style="display: none;">
 
     <aside class="w-64 bg-gray-800 border-r border-gray-700 flex flex-col">
         <div class="h-16 flex items-center px-6 border-b border-gray-700">
@@ -45,8 +45,7 @@
                     <span data-i18n="lang_btn">EN / VN</span>
                 </button>
                 <button class="text-gray-400 hover:text-white"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg></button>
-                <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 flex items-center justify-center font-bold text-sm shadow-lg cursor-pointer">LR</div>
-            </div>
+<div onclick="logoutAdmin()" title="Đăng Xuất (Logout)" class="w-9 h-9 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 flex items-center justify-center font-bold text-sm shadow-lg cursor-pointer hover:scale-110 transition-transform">LR</div>            </div>
         </header>
 
         <div class="flex-1 overflow-y-auto p-8">
@@ -83,5 +82,6 @@
         </div>
     </main>
     <script src="lang.js"></script>
+    <script type="module" src="auth-guard.js"></script>
 </body>
 </html>

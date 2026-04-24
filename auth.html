@@ -42,7 +42,7 @@
         </div>
 
         <div class="p-8">
-            <form id="form-login" class="fade-enter-active">
+            <form id="form-login" class="fade-enter-active" onsubmit="return submitLogin(event)">
                 <div class="space-y-5">
                     <div>
                         <label data-i18n="auth_user_email" class="block text-sm font-medium text-gray-400 mb-1">Username or Email</label>
@@ -146,8 +146,18 @@
     </div>
 
     <script src="lang.js"></script>
-    <script>
-        function switchTab(tab) {
+    <script type="module">
+        // Import đầy đủ đồ nghề từ firebase.js
+        import { 
+            auth, 
+            createUserWithEmailAndPassword, 
+            signInWithEmailAndPassword,
+            setPersistence,
+            browserLocalPersistence,
+            browserSessionPersistence
+        } from './firebase.js';
+
+        window.switchTab = function(tab) {
             const formLogin = document.getElementById('form-login');
             const formRegister = document.getElementById('form-register');
             const tabLogin = document.getElementById('tab-login');
@@ -159,47 +169,41 @@
                 formLogin.classList.replace('hidden-form', 'fade-enter-active');
                 tabLogin.className = "flex-1 py-4 text-center font-bold text-blue-400 border-b-2 border-blue-500 bg-gray-700/30 transition-all";
                 tabRegister.className = "flex-1 py-4 text-center font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-300 transition-all";
-                
                 subtitle.setAttribute('data-i18n', 'auth_subtitle_login');
             } else {
                 formLogin.classList.replace('fade-enter-active', 'hidden-form');
                 formRegister.classList.replace('hidden-form', 'fade-enter-active');
                 tabRegister.className = "flex-1 py-4 text-center font-bold text-purple-400 border-b-2 border-purple-500 bg-gray-700/30 transition-all";
                 tabLogin.className = "flex-1 py-4 text-center font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-300 transition-all";
-                
                 subtitle.setAttribute('data-i18n', 'auth_subtitle_reg');
             }
             updateLanguage();
         }
 
-        function showForgot() {
+        window.showForgot = function() {
             document.getElementById('form-login').classList.replace('fade-enter-active', 'hidden-form');
             document.getElementById('main-tabs').style.display = 'none';
             document.getElementById('social-auth').style.display = 'none';
             document.getElementById('form-forgot').classList.replace('hidden-form', 'fade-enter-active');
-            
-            const subtitle = document.getElementById('form-subtitle');
-            subtitle.setAttribute('data-i18n', 'auth_subtitle_forgot');
+            document.getElementById('form-subtitle').setAttribute('data-i18n', 'auth_subtitle_forgot');
             updateLanguage();
         }
 
-        function cancelForgot() {
+        window.cancelForgot = function() {
             document.getElementById('form-forgot').classList.replace('fade-enter-active', 'hidden-form');
             document.getElementById('main-tabs').style.display = 'flex';
             document.getElementById('social-auth').style.display = 'block';
             document.getElementById('form-login').classList.replace('hidden-form', 'fade-enter-active');
-            
-            const subtitle = document.getElementById('form-subtitle');
-            subtitle.setAttribute('data-i18n', 'auth_subtitle_login');
+            document.getElementById('form-subtitle').setAttribute('data-i18n', 'auth_subtitle_login');
             updateLanguage();
         }
 
-        function togglePassword(inputId) {
+        window.togglePassword = function(inputId) {
             const input = document.getElementById(inputId);
             input.type = input.type === "password" ? "text" : "password";
         }
 
-        function previewAvatar(event) {
+        window.previewAvatar = function(event) {
             const reader = new FileReader();
             reader.onload = function() {
                 document.getElementById('avatar-preview').src = reader.result;
@@ -207,70 +211,90 @@
             if(event.target.files[0]) reader.readAsDataURL(event.target.files[0]);
         }
 
-        function checkPassword() {
+        window.checkPassword = function() {
             const pwd = document.getElementById('reg-pwd').value;
-            
             const elLen = document.getElementById('rule-len');
-            if(pwd.length >= 8 && pwd.length <= 12) {
-                elLen.className = "flex items-center gap-1 text-green-400"; elLen.innerHTML = '<span class="w-3">✓</span> 8-12 characters';
-            } else {
-                elLen.className = "flex items-center gap-1 text-gray-500"; elLen.innerHTML = '<span class="w-3">○</span> 8-12 characters';
-            }
-
+            if(pwd.length >= 8 && pwd.length <= 12) { elLen.className = "flex items-center gap-1 text-green-400"; elLen.innerHTML = '<span class="w-3">✓</span> 8-12 characters'; } else { elLen.className = "flex items-center gap-1 text-gray-500"; elLen.innerHTML = '<span class="w-3">○</span> 8-12 characters'; }
             const elUpper = document.getElementById('rule-upper');
-            if(/[A-Z]/.test(pwd)) {
-                elUpper.className = "flex items-center gap-1 text-green-400"; elUpper.innerHTML = '<span class="w-3">✓</span> 1 Uppercase letter';
-            } else {
-                elUpper.className = "flex items-center gap-1 text-gray-500"; elUpper.innerHTML = '<span class="w-3">○</span> 1 Uppercase letter';
-            }
-
+            if(/[A-Z]/.test(pwd)) { elUpper.className = "flex items-center gap-1 text-green-400"; elUpper.innerHTML = '<span class="w-3">✓</span> 1 Uppercase letter'; } else { elUpper.className = "flex items-center gap-1 text-gray-500"; elUpper.innerHTML = '<span class="w-3">○</span> 1 Uppercase letter'; }
             const elNum = document.getElementById('rule-num');
-            if(/\d/.test(pwd)) {
-                elNum.className = "flex items-center gap-1 text-green-400"; elNum.innerHTML = '<span class="w-3">✓</span> 1 Number';
-            } else {
-                elNum.className = "flex items-center gap-1 text-gray-500"; elNum.innerHTML = '<span class="w-3">○</span> 1 Number';
-            }
-
+            if(/\d/.test(pwd)) { elNum.className = "flex items-center gap-1 text-green-400"; elNum.innerHTML = '<span class="w-3">✓</span> 1 Number'; } else { elNum.className = "flex items-center gap-1 text-gray-500"; elNum.innerHTML = '<span class="w-3">○</span> 1 Number'; }
             const elSpec = document.getElementById('rule-spec');
-            if(/[!@#$%^&*(),.?":{}|<>]/.test(pwd)) {
-                elSpec.className = "flex items-center gap-1 text-green-400"; elSpec.innerHTML = '<span class="w-3">✓</span> 1 Special character (@$!%*?&)';
-            } else {
-                elSpec.className = "flex items-center gap-1 text-gray-500"; elSpec.innerHTML = '<span class="w-3">○</span> 1 Special character (@$!%*?&)';
-            }
-            
-            // Kích hoạt luôn hàm so sánh nếu người dùng sửa lại password đầu tiên
-            checkPasswordMatch();
+            if(/[!@#$%^&*(),.?":{}|<>]/.test(pwd)) { elSpec.className = "flex items-center gap-1 text-green-400"; elSpec.innerHTML = '<span class="w-3">✓</span> 1 Special character (@$!%*?&)'; } else { elSpec.className = "flex items-center gap-1 text-gray-500"; elSpec.innerHTML = '<span class="w-3">○</span> 1 Special character (@$!%*?&)'; }
+            window.checkPasswordMatch();
         }
 
-        // HÀM MỚI: KIỂM TRA 2 MẬT KHẨU CÓ KHỚP NHAU KHÔNG
-        function checkPasswordMatch() {
+        window.checkPasswordMatch = function() {
             const pwd = document.getElementById('reg-pwd').value;
             const confirmPwd = document.getElementById('reg-pwd-confirm');
             const errMatch = document.getElementById('err-pwd-match');
-            
             if (confirmPwd.value.length > 0 && pwd !== confirmPwd.value) {
-                errMatch.classList.remove('hidden');
-                confirmPwd.classList.add('border-red-500');
+                errMatch.classList.remove('hidden'); confirmPwd.classList.add('border-red-500');
             } else {
-                errMatch.classList.add('hidden');
-                confirmPwd.classList.remove('border-red-500');
+                errMatch.classList.add('hidden'); confirmPwd.classList.remove('border-red-500');
             }
         }
 
-        // HÀM MỚI: KIỂM TRA TOÀN BỘ KHI BẤM NÚT CREATE ACCOUNT
-        function submitRegister(event) {
-            event.preventDefault(); // Chặn trang load lại để hiển thị lỗi (sau này nối DB thì bỏ dòng này)
+        // ==========================================
+        // 1. HÀM XỬ LÝ ĐĂNG NHẬP (ĐÃ TÁCH RỜI)
+        // ==========================================
+        window.submitLogin = function(event) {
+            event.preventDefault(); 
+
+            const emailInput = document.querySelector('#form-login input[type="text"]').value;
+            const pwdInput = document.getElementById('login-pwd').value;
             
+            // Lấy trạng thái của ô Checkbox "Remember me"
+            const rememberMe = document.querySelector('#form-login input[type="checkbox"]').checked;
+            
+            // Cài đặt bộ nhớ dựa theo Checkbox
+            const persistenceType = rememberMe ? browserLocalPersistence : browserSessionPersistence;
+
+            // Áp dụng bộ nhớ -> Sau đó Đăng nhập
+            setPersistence(auth, persistenceType)
+                .then(() => {
+                    return signInWithEmailAndPassword(auth, emailInput, pwdInput);
+                })
+                .then((userCredential) => {
+                    const userEmail = userCredential.user.email;
+                    
+                    // PHÂN LOẠI KHÁCH HÀNG:
+                    if (userEmail === "thaituan.28012020@gmail.com") {
+                        alert("Welcome Back, Admin " + userEmail);
+                        window.location.href = "admin.html"; // Ném vào trang Quản trị
+                    } else {
+                        alert("Đăng nhập thành công! Chào mừng: " + userEmail);
+                        window.location.href = "index.html"; // Ném ra Trang Chủ mua sắm
+                    }
+                })
+                .catch((error) => {
+                    alert("Lỗi đăng nhập: Sai email hoặc mật khẩu!");
+                });
+        }
+
+        // ==========================================
+        // 2. HÀM XỬ LÝ TẠO TÀI KHOẢN (ĐÃ TÁCH RỜI)
+        // ==========================================
+        window.submitRegister = function(event) {
+            event.preventDefault(); 
+            
+            const email = document.querySelector('#form-register input[type="email"]').value; 
             const pwd = document.getElementById('reg-pwd').value;
             const confirmPwd = document.getElementById('reg-pwd-confirm').value;
             
             if (pwd !== confirmPwd) {
-                checkPasswordMatch(); // Hiển thị khung đỏ
-                return false; // Dừng lại không cho đăng ký
+                window.checkPasswordMatch(); 
+                return false; 
             }
-            
-            // Nếu qua ải thì thông báo (tạm thời)
-            alert("Success! Everything looks good (Demo).");
+
+            createUserWithEmailAndPassword(auth, email, pwd)
+                .then((userCredential) => {
+                    alert("Tạo tài khoản thành công cho Email: " + userCredential.user.email);
+                    window.switchTab('login'); 
+                })
+                .catch((error) => {
+                    alert("Lỗi khi đăng ký: " + error.message);
+                });
         }
 
         document.getElementById('reg-user').addEventListener('blur', function(e) {

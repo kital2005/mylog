@@ -6,7 +6,7 @@
     <title>Products | CoreVault OS</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-900 text-white font-sans flex h-screen overflow-hidden">
+<body class="bg-gray-900 text-white font-sans flex h-screen overflow-hidden" style="display: none;">
 
     <aside class="w-64 bg-gray-800 border-r border-gray-700 flex flex-col">
         <div class="h-16 flex items-center px-6 border-b border-gray-700">
@@ -45,8 +45,7 @@
                     <span data-i18n="lang_btn">EN / VN</span>
                 </button>
                 <button class="text-gray-400 hover:text-white"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg></button>
-                <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 flex items-center justify-center font-bold text-sm shadow-lg cursor-pointer">LR</div>
-            </div>
+<div onclick="logoutAdmin()" title="Đăng Xuất (Logout)" class="w-9 h-9 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 flex items-center justify-center font-bold text-sm shadow-lg cursor-pointer hover:scale-110 transition-transform">LR</div>            </div>
         </header>
 
         <div class="flex-1 overflow-y-auto p-8">
@@ -155,10 +154,15 @@
         </div>
     </div>
 
-    <script src="lang.js"></script>
+   <script src="lang.js"></script>
+    <script type="module" src="auth-guard.js"></script>
 
-    <script>
-        function openModal() {
+    <script type="module">
+        // Nhập đồ nghề Database từ file firebase.js
+        import { db, collection, addDoc, getDocs } from './firebase.js';
+
+        // 1. Mở Modal
+        window.openModal = function() {
             const modal = document.getElementById('addToolModal');
             const content = document.getElementById('modalContent');
             modal.classList.remove('hidden');
@@ -168,9 +172,10 @@
                 content.classList.add('scale-100');
             }, 10);
             updateLanguage(); 
-        }
+        };
 
-        function closeModal() {
+        // 2. Đóng Modal
+        window.closeModal = function() {
             const modal = document.getElementById('addToolModal');
             const content = document.getElementById('modalContent');
             modal.classList.add('opacity-0');
@@ -180,11 +185,68 @@
                 modal.classList.add('hidden');
                 document.getElementById('addToolForm').reset(); 
             }, 300);
-        }
+        };
 
-        function saveTool(e) {
+        // 3. Hàm tải danh sách sản phẩm TỪ MÁY CHỦ
+        window.loadProducts = async function() {
+            const tbody = document.querySelector('tbody');
+            tbody.innerHTML = '<tr><td colspan="5" class="text-center p-8 text-gray-500 animate-pulse">Đang tải dữ liệu từ máy chủ...</td></tr>';
+
+            try {
+                // Lấy toàn bộ dữ liệu từ bộ sưu tập "products"
+                const querySnapshot = await getDocs(collection(db, "products"));
+                tbody.innerHTML = ''; // Xóa chữ "Đang tải"
+
+                if (querySnapshot.empty) {
+                    tbody.innerHTML = '<tr><td colspan="5" class="text-center p-8 text-gray-500">Kho sản phẩm trống. Hãy thêm công cụ mới!</td></tr>';
+                    return;
+                }
+
+                // Duyệt qua từng sản phẩm và vẽ ra HTML
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data(); // Lấy dữ liệu của 1 sản phẩm
+                    const newRow = document.createElement('tr');
+                    newRow.className = "hover:bg-gray-700/20 transition-colors group";
+                    
+                    const catI18n = data.category === 'Gaming' ? 'val_gaming' : (data.category === 'Graphics' ? 'val_graphics' : 'val_system');
+                    const statusI18n = data.status === 'Active' ? 'val_active' : (data.status === 'Maintenance' ? 'val_maintenance' : 'val_hidden');
+
+                    let priceDisplay = data.price === 0 
+                        ? '<span data-i18n="val_free" class="text-green-400 font-bold text-sm">FREE</span>' 
+                        : `<span data-price-value="${data.price}" class="text-white font-bold text-sm"></span>`;
+
+                    let statusDisplay = data.status === 'Active' 
+                        ? `<span data-i18n="${statusI18n}" class="px-2.5 py-1 bg-green-500/20 text-green-400 border border-green-500/30 rounded-full text-xs font-bold">Active</span>` 
+                        : `<span data-i18n="${statusI18n}" class="px-2.5 py-1 bg-yellow-500/20 text-yellow-500 border border-yellow-500/30 rounded-full text-xs font-bold">${data.status}</span>`;
+
+                    newRow.innerHTML = `
+                        <td class="p-4 flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-lg bg-gray-700 flex items-center justify-center text-xl">${data.icon}</div>
+                            <div><p class="text-white font-bold text-sm">${data.name}</p></div>
+                        </td>
+                        <td class="p-4"><span data-i18n="${catI18n}" class="text-gray-300 text-sm">${data.category}</span></td>
+                        <td class="p-4">${priceDisplay}</td>
+                        <td class="p-4">${statusDisplay}</td>
+                        <td class="p-4 text-right"><button data-i18n="btn_edit" class="text-gray-400 hover:text-blue-400 px-2">Edit</button></td>
+                    `;
+                    
+                    tbody.prepend(newRow); // Đưa sản phẩm mới lên đầu bảng
+                });
+
+                // Cập nhật lại ngôn ngữ/tiền tệ cho các dòng vừa được tải về
+                if (typeof updateLanguage === 'function') updateLanguage();
+
+            } catch (error) {
+                console.error("Lỗi:", error);
+                tbody.innerHTML = '<tr><td colspan="5" class="text-center p-8 text-red-500">Lỗi kết nối máy chủ!</td></tr>';
+            }
+        };
+
+        // 4. Lưu Sản Phẩm LÊN MÁY CHỦ
+        window.saveTool = async function(e) {
             e.preventDefault(); 
             
+            // Lấy thông tin từ Form
             const name = document.getElementById('toolName').value;
             const cat = document.getElementById('toolCat').value;
             const price = parseFloat(document.getElementById('toolPrice').value);
@@ -200,37 +262,32 @@
                 iconDisplay = '🖼️'; 
             }
 
-            const catI18n = cat === 'Gaming' ? 'val_gaming' : (cat === 'Graphics' ? 'val_graphics' : 'val_system');
-            const statusI18n = status === 'Active' ? 'val_active' : (status === 'Maintenance' ? 'val_maintenance' : 'val_hidden');
+            // GÓI DỮ LIỆU ĐỂ GỬI LÊN FIRESTORE
+            const newProduct = {
+                name: name,
+                category: cat,
+                price: price,
+                status: status,
+                icon: iconDisplay,
+                timestamp: new Date() // Lưu luôn giờ tạo
+            };
 
-            let priceDisplay = price === 0 
-                ? '<span data-i18n="val_free" class="text-green-400 font-bold text-sm">FREE</span>' 
-                : `<span data-price-value="${price}" class="text-white font-bold text-sm"></span>`;
+            try {
+                // Đẩy lên bộ sưu tập "products" trong Firebase
+                await addDoc(collection(db, "products"), newProduct);
+                alert("Lưu công cụ thành công lên Cloud!");
+                
+                closeModal(); // Đóng bảng
+                loadProducts(); // Ra lệnh tải lại danh sách từ trên mạng về
+            } catch (error) {
+                alert("Lỗi khi lưu dữ liệu: " + error.message);
+            }
+        };
 
-            let statusDisplay = status === 'Active' 
-                ? `<span data-i18n="${statusI18n}" class="px-2.5 py-1 bg-green-500/20 text-green-400 border border-green-500/30 rounded-full text-xs font-bold">Active</span>` 
-                : `<span data-i18n="${statusI18n}" class="px-2.5 py-1 bg-yellow-500/20 text-yellow-500 border border-yellow-500/30 rounded-full text-xs font-bold">${status}</span>`;
-
-            const tbody = document.querySelector('tbody');
-            const newRow = document.createElement('tr');
-            newRow.className = "hover:bg-gray-700/20 transition-colors group";
-            
-            newRow.innerHTML = `
-                <td class="p-4 flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-lg bg-gray-700 flex items-center justify-center text-xl">${iconDisplay}</div>
-                    <div><p class="text-white font-bold text-sm">${name}</p><p class="text-xs text-gray-500 mt-0.5">Just now</p></div>
-                </td>
-                <td class="p-4"><span data-i18n="${catI18n}" class="text-gray-300 text-sm">${cat}</span></td>
-                <td class="p-4">${priceDisplay}</td>
-                <td class="p-4">${statusDisplay}</td>
-                <td class="p-4 text-right"><button data-i18n="btn_edit" class="text-gray-400 hover:text-blue-400 px-2">Edit</button></td>
-            `;
-            
-            tbody.prepend(newRow);
-            closeModal();
-            
-            updateLanguage(); 
-        }
+        // Khi vừa mở trang lên thì tự động gọi hàm tải dữ liệu
+        document.addEventListener("DOMContentLoaded", () => {
+            loadProducts();
+        });
     </script>
 </body>
 </html>

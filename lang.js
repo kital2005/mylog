@@ -25,7 +25,7 @@ const langData = {
         // TRANG AUTH
         "auth_subtitle_login": "Welcome back, gamer!", "auth_subtitle_reg": "Join CoreVault today.", "auth_subtitle_forgot": "Password Recovery",
         "auth_tab_login": "Log In", "auth_tab_reg": "Sign Up", "auth_back": "Back to Home",
-        "auth_user_email": "Username or Email", "auth_pwd": "Password", "auth_remember": "Remember me", "auth_forgot": "Forgot Password?",
+        "auth_user_email": "Email Address", "auth_pwd": "Password", "auth_remember": "Remember me", "auth_forgot": "Forgot Password?",
         "auth_btn_login": "Sign In", "auth_avatar": "Avatar (Optional)", "auth_user": "Username (Unique)",
         "auth_err_user": "This username is already taken.", "auth_email": "Email Address", "auth_pwd_confirm": "Confirm Password",
         "auth_err_match": "Passwords do not match.", 
@@ -65,7 +65,7 @@ const langData = {
         // TRANG AUTH
         "auth_subtitle_login": "Chào mừng trở lại, gamer!", "auth_subtitle_reg": "Tham gia CoreVault ngay hôm nay.", "auth_subtitle_forgot": "Khôi phục mật khẩu",
         "auth_tab_login": "Đăng Nhập", "auth_tab_reg": "Đăng Ký", "auth_back": "Quay lại Trang Chủ",
-        "auth_user_email": "Tên đăng nhập hoặc Email", "auth_pwd": "Mật khẩu", "auth_remember": "Ghi nhớ đăng nhập", "auth_forgot": "Quên mật khẩu?",
+        "auth_user_email": "Địa chỉ Email", "auth_pwd": "Mật khẩu", "auth_remember": "Ghi nhớ đăng nhập", "auth_forgot": "Quên mật khẩu?",
         "auth_btn_login": "Đăng Nhập", "auth_avatar": "Ảnh đại diện (Tùy chọn)", "auth_user": "Tên đăng nhập (Duy nhất)",
         "auth_err_user": "Tên đăng nhập đã tồn tại.", "auth_email": "Địa chỉ Email", "auth_pwd_confirm": "Xác nhận Mật khẩu",
         "auth_err_match": "Mật khẩu không khớp.", 
