@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings | CoreVault OS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white font-sans flex h-screen overflow-hidden" style="display: none;">
+
+<aside class="w-64 bg-gray-800 border-r border-gray-700 flex flex-col">
+        <a href="index.html" title="Về Trang Chủ" class="h-16 flex items-center px-6 border-b border-gray-700 hover:bg-gray-700/50 transition-colors cursor-pointer">
+            <span data-i18n="admin_os" class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">CoreVault OS</span>
+        </a>
+        <nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
+            <a href="admin.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-700 rounded-xl transition-all">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                <span data-i18n="admin_dashboard">Dashboard</span>
+            </a>
+            <a href="admin-products.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-700 rounded-xl transition-all">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+                <span data-i18n="admin_products">Products</span>
+            </a>
+            <a href="admin-users.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-700 rounded-xl transition-all">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                <span data-i18n="admin_users">Users</span>
+            </a>
+            <a href="admin-orders.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-700 rounded-xl transition-all">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                <span data-i18n="admin_orders">Orders</span>
+            </a>
+            <a href="admin-settings.html" class="flex items-center gap-3 px-4 py-3 bg-blue-600/20 text-blue-400 rounded-xl border border-blue-600/30 font-medium transition-all">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                </svg>
+                <span data-i18n="admin_settings">Settings</span>
+            </a>
+        </nav>
+    </aside>
+
+    <main class="flex-1 flex flex-col h-screen overflow-hidden relative">
+        <header class="h-16 bg-gray-900 border-b border-gray-800 flex items-center justify-end px-8">
+            <div class="flex items-center gap-4">
+                <button onclick="toggleLanguage()" class="text-gray-300 hover:text-white px-3 py-1.5 text-sm font-medium border border-gray-700 hover:border-gray-500 rounded-lg">EN / VN</button>
+                <div onclick="logoutAdmin()" class="w-9 h-9 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 flex items-center justify-center font-bold text-sm shadow-lg cursor-pointer">LR</div>
+            </div>
+        </header>
+
+        <div class="flex-1 overflow-y-auto p-8">
+            <div class="mb-8">
+                <h1 data-i18n="set_title" class="text-3xl font-bold">Homepage Configuration</h1>
+                <p data-i18n="set_desc" class="text-gray-400 mt-1">Manage hero carousel and welcome texts.</p>
+            </div>
+
+            <div class="max-w-3xl bg-gray-800 rounded-2xl border border-gray-700 p-8 shadow-xl">
+                <form id="settingsForm" onsubmit="saveSettings(event)">
+                    
+                    <h2 data-i18n="set_hero_text" class="text-xl font-bold text-blue-400 mb-4 border-b border-gray-700 pb-2">Hero Texts</h2>
+                    <div class="space-y-4 mb-8">
+                        <div>
+                            <label class="block text-sm text-gray-400 mb-1">Title (EN)</label>
+                            <input type="text" id="titleEn" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-2 text-white focus:border-blue-500" placeholder="Welcome to CoreVault!">
+                        </div>
+                        <div>
+                            <label class="block text-sm text-gray-400 mb-1">Title (VN)</label>
+                            <input type="text" id="titleVn" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-2 text-white focus:border-blue-500" placeholder="Chào mừng đến CoreVault!">
+                        </div>
+                        <div>
+                            <label class="block text-sm text-gray-400 mb-1">Description (EN)</label>
+                            <input type="text" id="descEn" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-2 text-white focus:border-blue-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm text-gray-400 mb-1">Description (VN)</label>
+                            <input type="text" id="descVn" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-2 text-white focus:border-blue-500">
+                        </div>
+                    </div>
+
+                    <h2 data-i18n="set_hero_slides" class="text-xl font-bold text-purple-400 mb-4 border-b border-gray-700 pb-2">Carousel Slides (Image URLs)</h2>
+                    <div class="space-y-4 mb-8">
+                        <div>
+                            <label class="block text-sm text-gray-400 mb-1">Slide 1 Image Link</label>
+                            <input type="url" id="slide1" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-2 text-white focus:border-purple-500" placeholder="https://i.imgur.com/your-image.gif">
+                        </div>
+                        <div>
+                            <label class="block text-sm text-gray-400 mb-1">Slide 2 Image Link</label>
+                            <input type="url" id="slide2" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-2 text-white focus:border-purple-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm text-gray-400 mb-1">Slide 3 Image Link</label>
+                            <input type="url" id="slide3" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-2 text-white focus:border-purple-500">
+                        </div>
+                        <div>
+                            <label data-i18n="set_interval" class="block text-sm text-gray-400 mb-1">Slide Interval (seconds)</label>
+                            <input type="number" id="interval" value="5" min="2" class="w-32 bg-gray-900 border border-gray-700 rounded-xl px-4 py-2 text-white focus:border-purple-500">
+                        </div>
+                    </div>
+
+                    <div class="flex justify-end">
+                        <button type="submit" data-i18n="btn_save_settings" class="bg-blue-600 hover:bg-blue-500 text-white px-8 py-3 rounded-xl font-bold shadow-lg transition-all">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script src="lang.js"></script>
+    <script type="module" src="auth-guard.js"></script>
+    <script type="module">
+        import { db, doc, setDoc, getDoc } from './firebase.js';
+
+        // Tải thiết lập có sẵn
+        async function loadSettings() {
+            try {
+                const docSnap = await getDoc(doc(db, "settings", "hero"));
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    document.getElementById('titleEn').value = data.titleEn || "";
+                    document.getElementById('titleVn').value = data.titleVn || "";
+                    document.getElementById('descEn').value = data.descEn || "";
+                    document.getElementById('descVn').value = data.descVn || "";
+                    document.getElementById('slide1').value = data.slide1 || "";
+                    document.getElementById('slide2').value = data.slide2 || "";
+                    document.getElementById('slide3').value = data.slide3 || "";
+                    document.getElementById('interval').value = data.interval || 5;
+                }
+            } catch (e) { console.error(e); }
+        }
+
+        // Lưu thiết lập
+        window.saveSettings = async function(e) {
+            e.preventDefault();
+            const config = {
+                titleEn: document.getElementById('titleEn').value,
+                titleVn: document.getElementById('titleVn').value,
+                descEn: document.getElementById('descEn').value,
+                descVn: document.getElementById('descVn').value,
+                slide1: document.getElementById('slide1').value,
+                slide2: document.getElementById('slide2').value,
+                slide3: document.getElementById('slide3').value,
+                interval: parseInt(document.getElementById('interval').value)
+            };
+
+            try {
+                await setDoc(doc(db, "settings", "hero"), config);
+                alert("Đã lưu cấu hình Trang chủ thành công!");
+            } catch (error) { alert("Lỗi: " + error.message); }
+        };
+
+        document.addEventListener("DOMContentLoaded", loadSettings);
+    </script>
+</body>
+</html>

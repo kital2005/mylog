@@ -9,9 +9,9 @@
 <body class="bg-gray-900 text-white font-sans flex h-screen overflow-hidden" style="display: none;">
 
     <aside class="w-64 bg-gray-800 border-r border-gray-700 flex flex-col">
-        <div class="h-16 flex items-center px-6 border-b border-gray-700">
+        <a href="index.html" title="Về Trang Chủ" class="h-16 flex items-center px-6 border-b border-gray-700 hover:bg-gray-700/50 transition-colors cursor-pointer">
             <span data-i18n="admin_os" class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">CoreVault OS</span>
-        </div>
+        </a>
         <nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
             <a href="admin.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-700 rounded-xl transition-all">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
@@ -29,6 +29,13 @@
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                 <span data-i18n="admin_orders">Orders</span>
             </a>
+<a href="admin-settings.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-700 rounded-xl transition-all">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                </svg>
+                <span data-i18n="admin_settings">Settings</span>
+            </a>
         </nav>
     </aside>
 
@@ -45,7 +52,8 @@
                     <span data-i18n="lang_btn">EN / VN</span>
                 </button>
                 <button class="text-gray-400 hover:text-white"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg></button>
-<div onclick="logoutAdmin()" title="Đăng Xuất (Logout)" class="w-9 h-9 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 flex items-center justify-center font-bold text-sm shadow-lg cursor-pointer hover:scale-110 transition-transform">LR</div>            </div>
+                <div onclick="logoutAdmin()" title="Đăng Xuất (Logout)" class="w-9 h-9 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 flex items-center justify-center font-bold text-sm shadow-lg cursor-pointer hover:scale-110 transition-transform">LR</div>
+            </div>
         </header>
 
         <div class="flex-1 overflow-y-auto p-8">
@@ -72,17 +80,7 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-700/50">
-                        <tr class="hover:bg-gray-700/20 transition-colors group">
-                            <td class="p-4 flex items-center gap-4">
-                                <div class="w-12 h-12 rounded-lg bg-gray-700 flex items-center justify-center text-xl">🎮</div>
-                                <div><p class="text-white font-bold text-sm">Valorant Helper</p></div>
-                            </td>
-                            <td class="p-4"><span data-i18n="val_gaming" class="text-gray-300 text-sm">Gaming</span></td>
-                            <td class="p-4"><span data-price-value="15" class="text-white font-bold text-sm"></span></td>
-                            <td class="p-4"><span data-i18n="val_active" class="px-2.5 py-1 bg-green-500/20 text-green-400 border border-green-500/30 rounded-full text-xs font-bold">Active</span></td>
-                            <td class="p-4 text-right"><button data-i18n="btn_edit" class="text-gray-400 hover:text-blue-400 px-2">Edit</button></td>
-                        </tr>
-                    </tbody>
+                        </tbody>
                 </table>
             </div>
         </div>
@@ -92,13 +90,15 @@
         <div class="bg-gray-800 border border-gray-700 rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-y-auto p-8 shadow-2xl relative transform scale-95 transition-transform duration-300" id="modalContent">
             
             <div class="flex justify-between items-center mb-6 border-b border-gray-700 pb-4">
-                <h3 data-i18n="prod_add" class="text-2xl font-bold text-white">Add New Tool</h3>
+                <h3 data-i18n="prod_add" id="modalTitle" class="text-2xl font-bold text-white">Add New Tool</h3>
                 <button type="button" onclick="closeModal()" class="text-gray-400 hover:text-white transition-colors">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </button>
             </div>
 
             <form id="addToolForm" onsubmit="saveTool(event)">
+                <input type="hidden" id="toolId" value="">
+
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
                     <div>
                         <label data-i18n="modal_name" class="block text-sm font-medium text-gray-400 mb-1">Product Name *</label>
@@ -154,12 +154,15 @@
         </div>
     </div>
 
-   <script src="lang.js"></script>
+    <script src="lang.js"></script>
     <script type="module" src="auth-guard.js"></script>
 
     <script type="module">
-        // Nhập đồ nghề Database từ file firebase.js
-        import { db, collection, addDoc, getDocs } from './firebase.js';
+        // Nhập đồ nghề Database (Đã bổ sung doc, updateDoc, deleteDoc)
+        import { db, collection, addDoc, getDocs, doc, updateDoc, deleteDoc } from './firebase.js';
+
+        // Biến toàn cục để lưu trữ tạm thời dữ liệu đang hiển thị trên bảng
+        let currentToolsData = {};
 
         // 1. Mở Modal
         window.openModal = function() {
@@ -184,27 +187,32 @@
             setTimeout(() => {
                 modal.classList.add('hidden');
                 document.getElementById('addToolForm').reset(); 
+                document.getElementById('toolId').value = ''; // Xóa sạch ID ẩn đi
             }, 300);
         };
 
-        // 3. Hàm tải danh sách sản phẩm TỪ MÁY CHỦ
+        // 3. Tải dữ liệu từ máy chủ
         window.loadProducts = async function() {
             const tbody = document.querySelector('tbody');
             tbody.innerHTML = '<tr><td colspan="5" class="text-center p-8 text-gray-500 animate-pulse">Đang tải dữ liệu từ máy chủ...</td></tr>';
 
             try {
-                // Lấy toàn bộ dữ liệu từ bộ sưu tập "products"
                 const querySnapshot = await getDocs(collection(db, "products"));
-                tbody.innerHTML = ''; // Xóa chữ "Đang tải"
+                tbody.innerHTML = ''; 
+                currentToolsData = {}; // Xóa bộ nhớ tạm cũ
 
                 if (querySnapshot.empty) {
                     tbody.innerHTML = '<tr><td colspan="5" class="text-center p-8 text-gray-500">Kho sản phẩm trống. Hãy thêm công cụ mới!</td></tr>';
                     return;
                 }
 
-                // Duyệt qua từng sản phẩm và vẽ ra HTML
-                querySnapshot.forEach((doc) => {
-                    const data = doc.data(); // Lấy dữ liệu của 1 sản phẩm
+                querySnapshot.forEach((documentSnapshot) => {
+                    const data = documentSnapshot.data();
+                    const docId = documentSnapshot.id; // Lấy ID ĐỘC NHẤT của món hàng
+                    
+                    // Lưu dữ liệu vào bộ nhớ tạm để lát nữa bấm Edit rút ra cho lẹ
+                    currentToolsData[docId] = data;
+
                     const newRow = document.createElement('tr');
                     newRow.className = "hover:bg-gray-700/20 transition-colors group";
                     
@@ -227,13 +235,15 @@
                         <td class="p-4"><span data-i18n="${catI18n}" class="text-gray-300 text-sm">${data.category}</span></td>
                         <td class="p-4">${priceDisplay}</td>
                         <td class="p-4">${statusDisplay}</td>
-                        <td class="p-4 text-right"><button data-i18n="btn_edit" class="text-gray-400 hover:text-blue-400 px-2">Edit</button></td>
+                        <td class="p-4 text-right space-x-3">
+                            <button onclick="editTool('${docId}')" data-i18n="btn_edit" class="text-blue-400 hover:text-blue-300 font-medium transition-colors">Edit</button>
+                            <button onclick="deleteTool('${docId}')" data-i18n="btn_delete" class="text-red-400 hover:text-red-300 font-medium transition-colors">Delete</button>
+                        </td>
                     `;
                     
-                    tbody.prepend(newRow); // Đưa sản phẩm mới lên đầu bảng
+                    tbody.prepend(newRow); 
                 });
 
-                // Cập nhật lại ngôn ngữ/tiền tệ cho các dòng vừa được tải về
                 if (typeof updateLanguage === 'function') updateLanguage();
 
             } catch (error) {
@@ -242,11 +252,11 @@
             }
         };
 
-        // 4. Lưu Sản Phẩm LÊN MÁY CHỦ
+        // 4. Lưu Sản Phẩm (Bao gồm cả Tạo mới và Sửa lỗi)
         window.saveTool = async function(e) {
             e.preventDefault(); 
             
-            // Lấy thông tin từ Form
+            const toolId = document.getElementById('toolId').value; // Kiểm tra xem có đang mang ID cũ không
             const name = document.getElementById('toolName').value;
             const cat = document.getElementById('toolCat').value;
             const price = parseFloat(document.getElementById('toolPrice').value);
@@ -262,29 +272,65 @@
                 iconDisplay = '🖼️'; 
             }
 
-            // GÓI DỮ LIỆU ĐỂ GỬI LÊN FIRESTORE
-            const newProduct = {
+            const productData = {
                 name: name,
                 category: cat,
                 price: price,
                 status: status,
-                icon: iconDisplay,
-                timestamp: new Date() // Lưu luôn giờ tạo
+                icon: iconDisplay
             };
 
             try {
-                // Đẩy lên bộ sưu tập "products" trong Firebase
-                await addDoc(collection(db, "products"), newProduct);
-                alert("Lưu công cụ thành công lên Cloud!");
+                if (toolId) {
+                    // CÓ ID: Đây là lệnh UPDATE (Cập nhật)
+                    const productRef = doc(db, "products", toolId);
+                    await updateDoc(productRef, productData);
+                    alert("Cập nhật công cụ thành công!");
+                } else {
+                    // KHÔNG CÓ ID: Đây là lệnh ADD (Tạo mới)
+                    productData.timestamp = new Date(); 
+                    await addDoc(collection(db, "products"), productData);
+                    alert("Lưu công cụ mới thành công!");
+                }
                 
-                closeModal(); // Đóng bảng
-                loadProducts(); // Ra lệnh tải lại danh sách từ trên mạng về
+                closeModal(); 
+                loadProducts(); 
             } catch (error) {
                 alert("Lỗi khi lưu dữ liệu: " + error.message);
             }
         };
 
-        // Khi vừa mở trang lên thì tự động gọi hàm tải dữ liệu
+        // 5. HÀM MỚI: Bấm để Sửa (Edit)
+        window.editTool = function(id) {
+            const data = currentToolsData[id];
+            if(!data) return;
+
+            // Nhét dữ liệu cũ vào các ô để sửa
+            document.getElementById('toolId').value = id; // Nhét ID vào chỗ giấu
+            document.getElementById('toolName').value = data.name;
+            document.getElementById('toolCat').value = data.category;
+            document.getElementById('toolPrice').value = data.price;
+            document.getElementById('toolStatus').value = data.status;
+            
+            openModal(); // Mở bảng lên
+        };
+
+        // 6. HÀM MỚI: Bấm để Xóa (Delete)
+        window.deleteTool = async function(id) {
+            // Hỏi lại cho chắc ăn
+            if(confirm("Bạn có chắc chắn muốn XÓA VĨNH VIỄN công cụ này khỏi máy chủ không?")) {
+                try {
+                    const productRef = doc(db, "products", id);
+                    await deleteDoc(productRef);
+                    alert("Đã xóa công cụ thành công!");
+                    loadProducts(); // Tải lại bảng
+                } catch(error) {
+                    alert("Lỗi khi xóa: " + error.message);
+                }
+            }
+        };
+
+        // Chạy khi khởi động
         document.addEventListener("DOMContentLoaded", () => {
             loadProducts();
         });

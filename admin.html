@@ -10,9 +10,10 @@
 <body class="bg-gray-900 text-white font-sans flex h-screen overflow-hidden" style="display: none;">
 
     <aside class="w-64 bg-gray-800 border-r border-gray-700 flex flex-col">
-        <div class="h-16 flex items-center px-6 border-b border-gray-700">
+        <a href="index.html" title="Về Trang Chủ" class="h-16 flex items-center px-6 border-b border-gray-700 hover:bg-gray-700/50 transition-colors cursor-pointer">
             <span data-i18n="admin_os" class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">CoreVault OS</span>
-        </div>
+        </a>
+        
         <nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
             <a href="admin.html" class="flex items-center gap-3 px-4 py-3 bg-blue-600/20 text-blue-400 rounded-xl border border-blue-600/30 font-medium transition-all">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
@@ -30,11 +31,17 @@
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                 <span data-i18n="admin_orders">Orders</span>
             </a>
+<a href="admin-settings.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-700 rounded-xl transition-all">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                </svg>
+                <span data-i18n="admin_settings">Settings</span>
+            </a>
         </nav>
     </aside>
 
     <main class="flex-1 flex flex-col h-screen overflow-hidden relative">
-        
         <header class="h-16 bg-gray-900 border-b border-gray-800 flex items-center justify-between px-8">
             <div class="relative w-64">
                 <span class="absolute inset-y-0 left-0 flex items-center pl-3">
@@ -42,17 +49,16 @@
                 </span>
                 <input type="text" data-i18n="admin_search" class="w-full bg-gray-800 text-white border border-gray-700 rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:border-blue-500 transition-colors text-sm" placeholder="Search orders, users...">
             </div>
-
             <div class="flex items-center gap-4">
                 <button onclick="toggleLanguage()" class="text-gray-300 hover:text-white px-3 py-1.5 text-sm font-medium border border-gray-700 hover:border-gray-500 hover:bg-gray-800 rounded-lg transition-all flex items-center gap-1">
                     <span data-i18n="lang_btn">EN / VN</span>
                 </button>
                 <button class="text-gray-400 hover:text-white"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg></button>
-<div onclick="logoutAdmin()" title="Đăng Xuất (Logout)" class="w-9 h-9 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 flex items-center justify-center font-bold text-sm shadow-lg cursor-pointer hover:scale-110 transition-transform">LR</div>            </div>
+                <div onclick="logoutAdmin()" title="Đăng Xuất" class="w-9 h-9 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 flex items-center justify-center font-bold text-sm shadow-lg cursor-pointer hover:scale-110 transition-transform">LR</div>
+            </div>
         </header>
 
         <div class="flex-1 overflow-y-auto p-8">
-            
             <div class="flex justify-between items-end mb-8">
                 <div>
                     <h1 data-i18n="dash_overview" class="text-3xl font-bold text-white">Overview</h1>
@@ -69,24 +75,24 @@
                 <div class="bg-gray-800 border border-gray-700 p-6 rounded-2xl shadow-lg relative overflow-hidden">
                     <div class="flex items-center gap-2 mb-4">
                         <span class="w-3 h-3 bg-green-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(34,197,94,0.8)]"></span>
-                        <h3 data-i18n="dash_active" class="text-gray-400 font-medium text-sm">Active Now</h3>
+                        <h3 data-i18n="dash_active" class="text-gray-400 font-medium text-sm">Active Tools</h3>
                     </div>
-                    <p class="text-4xl font-bold text-white">124</p>
+                    <p id="stat-active" class="text-4xl font-bold text-white">0</p>
                 </div>
 
                 <div class="bg-gray-800 border border-gray-700 p-6 rounded-2xl shadow-lg">
-                    <h3 data-i18n="dash_visits" class="text-gray-400 font-medium text-sm mb-4">Total Visits</h3>
-                    <p class="text-4xl font-bold text-white">45.2K</p>
+                    <h3 data-i18n="dash_visits" class="text-gray-400 font-medium text-sm mb-4">Total Tools</h3>
+                    <p id="stat-total-tools" class="text-4xl font-bold text-white">0</p>
                 </div>
 
                 <div class="bg-gray-800 border border-gray-700 p-6 rounded-2xl shadow-lg">
-                    <h3 data-i18n="dash_new_users" class="text-gray-400 font-medium text-sm mb-4">New Users</h3>
-                    <p class="text-4xl font-bold text-white">892</p>
+                    <h3 data-i18n="dash_new_users" class="text-gray-400 font-medium text-sm mb-4">Total Orders</h3>
+                    <p id="stat-orders" class="text-4xl font-bold text-white">0</p>
                 </div>
 
                 <div class="bg-gray-800 border border-gray-700 p-6 rounded-2xl shadow-lg">
                      <h3 data-i18n="dash_revenue" class="text-gray-400 font-medium text-sm mb-4">Total Revenue</h3>
-                     <p data-price-value="2845" class="text-4xl font-bold text-white bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent"></p>
+                     <p id="stat-revenue" data-price-value="0" class="text-4xl font-bold text-white bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">$0</p>
                 </div>
             </div>
 
@@ -98,42 +104,93 @@
                     </div>
                 </div>
 
-                <div class="bg-gray-800 border border-gray-700 p-6 rounded-2xl shadow-lg">
+                <div class="bg-gray-800 border border-gray-700 p-6 rounded-2xl shadow-lg flex flex-col">
                     <h3 data-i18n="dash_sales" class="text-lg font-bold text-white mb-4">Recent Sales</h3>
-                    <div class="space-y-4">
-                        <div class="flex items-center justify-between pb-4 border-b border-gray-700/50">
-                            <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-lg bg-gray-700 flex items-center justify-center text-xl">🎮</div>
-                                <div>
-                                    <p class="text-sm font-bold text-white">Valorant Helper</p>
-                                    <p class="text-xs text-gray-400">user_abc123</p>
-                                </div>
-                            </div>
-                            <span class="text-green-400 font-bold text-sm flex items-center gap-1">+ <span data-price-value="15"></span></span>
-                        </div>
-                        <div class="flex items-center justify-between pb-4 border-b border-gray-700/50">
-                            <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-lg bg-gray-700 flex items-center justify-center text-xl">✨</div>
-                                <div>
-                                    <p class="text-sm font-bold text-white">Stream Overlay Pack</p>
-                                    <p class="text-xs text-gray-400">vtuber_xyz</p>
-                                </div>
-                            </div>
-                            <span class="text-green-400 font-bold text-sm flex items-center gap-1">+ <span data-price-value="19.99"></span></span>
-                        </div>
+                    <div id="recent-sales-list" class="space-y-4 overflow-y-auto flex-1 pr-2">
+                        <p class="text-gray-500 text-sm animate-pulse">Loading orders from Cloud...</p>
                     </div>
                 </div>
             </div>
-
         </div>
     </main>
 
     <script src="lang.js"></script>
     <script type="module" src="auth-guard.js"></script>
 
-    <script>
+    <script type="module">
+        import { db, collection, getDocs, addDoc } from './firebase.js';
+
+        async function loadDashboardData() {
+            try {
+                // 1. LẤY DỮ LIỆU SẢN PHẨM (Đếm tổng tool và tool đang hoạt động)
+                const prodSnap = await getDocs(collection(db, 'products'));
+                let totalTools = 0;
+                let activeTools = 0;
+                
+                prodSnap.forEach(doc => {
+                    totalTools++;
+                    if(doc.data().status === 'Active') activeTools++;
+                });
+
+                document.getElementById('stat-total-tools').innerText = totalTools;
+                document.getElementById('stat-active').innerText = activeTools;
+
+                // 2. LẤY DỮ LIỆU ĐƠN HÀNG
+                const orderSnap = await getDocs(collection(db, 'orders'));
+                
+                if (orderSnap.empty) {
+                    const dummyOrders = [
+                        { product: "Auto Recoil V2", user: "gamer_pro12", price: 19.99, date: new Date().getTime() },
+                        { product: "Neon Stream Pack", user: "vtuber_xyz", price: 25.00, date: new Date().getTime() },
+                        { product: "System Optimizer", user: "pc_master", price: 9.99, date: new Date().getTime() },
+                        { product: "Free Overlay", user: "newbie_stream", price: 0, date: new Date().getTime() }
+                    ];
+                    for (let order of dummyOrders) {
+                        await addDoc(collection(db, 'orders'), order);
+                    }
+                    window.location.reload();
+                    return;
+                }
+
+                let totalOrders = 0;
+                let totalRevenue = 0;
+                const salesList = document.getElementById('recent-sales-list');
+                salesList.innerHTML = '';
+
+                orderSnap.forEach(doc => {
+                    totalOrders++;
+                    const data = doc.data();
+                    totalRevenue += data.price;
+
+                    if (data.price > 0) {
+                        salesList.innerHTML += `
+                            <div class="flex items-center justify-between pb-4 border-b border-gray-700/50">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-lg bg-gray-700 flex items-center justify-center text-xl">🛒</div>
+                                    <div>
+                                        <p class="text-sm font-bold text-white">${data.product}</p>
+                                        <p class="text-xs text-gray-400">${data.user}</p>
+                                    </div>
+                                </div>
+                                <span class="text-green-400 font-bold text-sm flex items-center gap-1">+ <span data-price-value="${data.price}"></span></span>
+                            </div>
+                        `;
+                    }
+                });
+
+                document.getElementById('stat-orders').innerText = totalOrders;
+                document.getElementById('stat-revenue').setAttribute('data-price-value', totalRevenue);
+
+                if (typeof updateLanguage === 'function') updateLanguage();
+
+            } catch (error) {
+                console.error("Lỗi tải Dashboard:", error);
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", loadDashboardData);
+
         const ctx = document.getElementById('mainChart').getContext('2d');
-        
         let gradient = ctx.createLinearGradient(0, 0, 0, 400);
         gradient.addColorStop(0, 'rgba(59, 130, 246, 0.5)');
         gradient.addColorStop(1, 'rgba(59, 130, 246, 0)');
@@ -153,21 +210,11 @@
                 }]
             },
             options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: false }
-                },
+                responsive: true, maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
                 scales: {
-                    y: {
-                        beginAtZero: true,
-                        grid: { color: '#374151' },
-                        ticks: { color: '#9ca3af' }
-                    },
-                    x: {
-                        grid: { display: false },
-                        ticks: { color: '#9ca3af' }
-                    }
+                    y: { beginAtZero: true, grid: { color: '#374151' }, ticks: { color: '#9ca3af' } },
+                    x: { grid: { display: false }, ticks: { color: '#9ca3af' } }
                 }
             }
         });

@@ -7,7 +7,7 @@ const langData = {
         // ADMIN CHUNG & DASHBOARD
         "admin_os": "CoreVault OS", "admin_dashboard": "Dashboard", "admin_products": "Products", "admin_users": "Users", "admin_orders": "Orders", "admin_search": "Search...",
         "dash_overview": "Overview", "dash_welcome": "Welcome back. Here's what's happening with your platform.",
-        "dash_active": "Active Now", "dash_visits": "Total Visits", "dash_new_users": "New Users", "dash_revenue": "Total Revenue",
+        "dash_active": "Active Tools", "dash_visits": "Total Tools", "dash_new_users": "Total Orders", "dash_revenue": "Total Revenue",        
         "dash_chart": "Traffic & Revenue Overview", "dash_sales": "Recent Sales",
         "dash_today": "Today", "dash_week": "This Week", "dash_month": "This Month", "dash_revenue_val": "$2,845",
         
@@ -20,7 +20,9 @@ const langData = {
         "prod_th_info": "Product Info", "prod_th_cat": "Category", "prod_th_price": "Price", "prod_th_status": "Status", "prod_th_action": "Actions",
         "val_premium": "Premium", "val_active": "Active", "val_completed": "Completed", 
         "val_gaming": "Gaming", "val_price_15": "$15.00",
-        "btn_ban": "Ban", "btn_edit": "Edit",
+        
+        // ĐÃ THÊM btn_delete VÀO ĐÂY:
+        "btn_ban": "Ban", "btn_edit": "Edit", "btn_delete": "Delete",
         
         // TRANG AUTH
         "auth_subtitle_login": "Welcome back, gamer!", "auth_subtitle_reg": "Join CoreVault today.", "auth_subtitle_forgot": "Password Recovery",
@@ -37,7 +39,16 @@ const langData = {
         "modal_name": "Product Name *", "modal_cat": "Category *", "modal_price": "Price * (0 for Free)", "modal_status": "Status *",
         "modal_desc": "Description", "modal_icon": "Icon/Image (Optional)", "modal_file": "File .zip/.exe (Optional)", "modal_video": "Demo Video (Optional)",
         "modal_btn_cancel": "Cancel", "modal_btn_save": "Save Product",
-        "val_system": "System", "val_graphics": "Graphics", "val_maintenance": "Maintenance", "val_hidden": "Hidden", "val_free": "FREE"
+        "val_system": "System", "val_graphics": "Graphics", "val_maintenance": "Maintenance", "val_hidden": "Hidden", "val_free": "FREE",
+
+        // CÁC TEXT TRONG CARD SẢN PHẨM & TRANG CHỦ
+        "home_latest_title": "Latest Tools", "home_latest_desc": "Hand-picked premium & free resources for you.",
+        "home_fetching": "Fetching data from Cloud...", "home_no_tools": "Currently no tools available.",
+        "tool_desc_active": "Premium tool validated by CoreVault Security.", "tool_desc_maintenance": "Currently under maintenance.",
+        "btn_get_tool": "Get Tool", "footer_status": "Server Status: Online", "filter_all": "All",
+        "footer_copy": "© 2026 CoreVault Project. Developed by <span class='text-gray-300'>LunarRider0</span>. All rights reserved.",
+        "admin_settings": "Settings", "set_title": "Homepage Configuration", "set_desc": "Manage hero carousel and welcome texts.",
+        "set_hero_text": "Hero Texts", "set_hero_slides": "Carousel Slides (Image/GIF URLs)", "set_interval": "Slide Interval (seconds)", "btn_save_settings": "Save Changes"
     },
     vn: {
         // TRANG CHỦ
@@ -47,7 +58,7 @@ const langData = {
         // ADMIN CHUNG & DASHBOARD
         "admin_os": "Hệ Thống CoreVault", "admin_dashboard": "Bảng Điều Khiển", "admin_products": "Kho Sản Phẩm", "admin_users": "Khách Hàng", "admin_orders": "Đơn Hàng", "admin_search": "Tìm kiếm...",
         "dash_overview": "Tổng Quan", "dash_welcome": "Chào mừng trở lại. Dưới đây là tình hình nền tảng của bạn.",
-        "dash_active": "Đang Online", "dash_visits": "Lượt Truy Cập", "dash_new_users": "Khách Mới", "dash_revenue": "Tổng Doanh Thu",
+        "dash_active": "Công Cụ Hoạt Động", "dash_visits": "Tổng Công Cụ", "dash_new_users": "Tổng Đơn Hàng", "dash_revenue": "Tổng Doanh Thu",        
         "dash_chart": "Biểu đồ Truy cập & Doanh thu", "dash_sales": "Đơn Hàng Gần Đây",
         "dash_today": "Hôm nay", "dash_week": "Tuần này", "dash_month": "Tháng này", "dash_revenue_val": "72.500.000 ₫",
         
@@ -60,7 +71,9 @@ const langData = {
         "prod_th_info": "Thông tin SP", "prod_th_cat": "Danh Mục", "prod_th_price": "Giá Bán", "prod_th_status": "Trạng Thái", "prod_th_action": "Thao Tác",
         "val_premium": "Cao Cấp (Premium)", "val_active": "Hoạt Động", "val_completed": "Hoàn Thành",
         "val_gaming": "Tiện ích Game", "val_price_15": "380.000 ₫",
-        "btn_ban": "Khóa (Ban)", "btn_edit": "Chỉnh Sửa",
+        
+        // ĐÃ THÊM btn_delete VÀO ĐÂY:
+        "btn_ban": "Khóa (Ban)", "btn_edit": "Chỉnh Sửa", "btn_delete": "Xóa",
         
         // TRANG AUTH
         "auth_subtitle_login": "Chào mừng trở lại, gamer!", "auth_subtitle_reg": "Tham gia CoreVault ngay hôm nay.", "auth_subtitle_forgot": "Khôi phục mật khẩu",
@@ -77,14 +90,22 @@ const langData = {
         "modal_name": "Tên Sản Phẩm *", "modal_cat": "Danh Mục *", "modal_price": "Giá bán * (0 là Miễn phí)", "modal_status": "Trạng Thái *",
         "modal_desc": "Mô tả chi tiết", "modal_icon": "Ảnh/Icon (Tùy chọn)", "modal_file": "File phần mềm (Tùy chọn)", "modal_video": "Video Demo (Tùy chọn)",
         "modal_btn_cancel": "Hủy", "modal_btn_save": "Lưu Sản Phẩm",
-        "val_system": "Hệ Thống", "val_graphics": "Đồ Họa", "val_maintenance": "Bảo Trì", "val_hidden": "Đã Ẩn", "val_free": "Miễn Phí"
+        "val_system": "Hệ Thống", "val_graphics": "Đồ Họa", "val_maintenance": "Bảo Trì", "val_hidden": "Đã Ẩn", "val_free": "Miễn Phí",
+
+        // CÁC TEXT TRONG CARD SẢN PHẨM & TRANG CHỦ
+        "home_latest_title": "Công Cụ Mới Nhất", "home_latest_desc": "Tuyển tập tài nguyên cao cấp & miễn phí dành cho bạn.",
+        "home_fetching": "Đang tải dữ liệu từ Đám mây...", "home_no_tools": "Hiện chưa có công cụ nào.",
+        "tool_desc_active": "Công cụ cao cấp đã được CoreVault Security kiểm duyệt.", "tool_desc_maintenance": "Hệ thống đang được bảo trì.",
+        "btn_get_tool": "Tải Công Cụ", "footer_status": "Trạng thái Server: Online", "filter_all": "Tất Cả",
+        "footer_copy": "© 2026 Dự án CoreVault. Phát triển bởi <span class='text-gray-300'>LunarRider0</span>. Mọi quyền được bảo lưu.",
+        "admin_settings": "Cài Đặt", "set_title": "Cấu Hình Trang Chủ", "set_desc": "Quản lý ảnh bìa và lời chào.",
+        "set_hero_text": "Nội Dung Chào Mừng", "set_hero_slides": "Ảnh Slides (Link Ảnh/GIF)", "set_interval": "Thời gian chuyển ảnh (giây)", "btn_save_settings": "Lưu Cấu Hình"
     }
 };
 
 let currentLang = localStorage.getItem('site_language') || 'en';
 
 function updateLanguage() {
-    // 1. Dịch các text bằng từ điển
     const elements = document.querySelectorAll('[data-i18n]');
     elements.forEach(el => {
         const key = el.getAttribute('data-i18n'); 
@@ -92,33 +113,26 @@ function updateLanguage() {
             if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
                 el.placeholder = langData[currentLang][key];
             } else {
-                el.innerText = langData[currentLang][key];
+                el.innerHTML = langData[currentLang][key];
             }
         }
     });
 
-    // 2. DỊCH TIỀN TỆ CÓ NHÂN TỈ GIÁ (FIXED)
-    const EXCHANGE_RATE = 25000; // Tỉ giá: 1 USD = 25,000 VND
-    
+    const EXCHANGE_RATE = 25000; 
     const priceElements = document.querySelectorAll('[data-price-value]');
     priceElements.forEach(el => {
-        // Lấy giá gốc (Luôn coi giá trị nhập vào data-price-value là USD)
         const basePriceUSD = parseFloat(el.getAttribute('data-price-value'));
-        
         if (currentLang === 'vn') {
-            // Nếu là tiếng Việt -> Nhân với 25.000 và thêm chữ đ
             const priceVND = basePriceUSD * EXCHANGE_RATE;
-            el.innerText = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(priceVND);
+            el.innerHTML = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(priceVND);
         } else {
-            // Nếu là tiếng Anh -> Giữ nguyên và thêm dấu $
-            el.innerText = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(basePriceUSD);
+            el.innerHTML = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(basePriceUSD);
         }
     });
 
     localStorage.setItem('site_language', currentLang);
 }
 
-// HÀM BỊ THIẾU LÚC NÃY LÀ ĐÂY NÈ:
 function toggleLanguage() {
     currentLang = currentLang === 'en' ? 'vn' : 'en';
     updateLanguage();

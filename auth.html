@@ -148,8 +148,9 @@
     <script src="lang.js"></script>
     <script type="module">
         // Import đầy đủ đồ nghề từ firebase.js
+// Import đầy đủ đồ nghề từ firebase.js
         import { 
-            auth, 
+            auth, db, collection, getDocs, // <--- THÊM ĐỒ NGHỀ VÀO DÒNG NÀY
             createUserWithEmailAndPassword, 
             signInWithEmailAndPassword,
             setPersistence,
@@ -255,10 +256,25 @@
                 .then(() => {
                     return signInWithEmailAndPassword(auth, emailInput, pwdInput);
                 })
-                .then((userCredential) => {
+.then(async (userCredential) => {
                     const userEmail = userCredential.user.email;
                     
-                    // PHÂN LOẠI KHÁCH HÀNG:
+                    // SOÁT SỔ TAY FIRESTORE TRƯỚC KHI CHO VÀO NHÀ
+                    const usersSnap = await getDocs(collection(db, "users"));
+                    let isBanned = false;
+                    usersSnap.forEach(doc => {
+                        if(doc.data().email === userEmail && doc.data().status === 'Banned') {
+                            isBanned = true;
+                        }
+                    });
+
+                    // NẾU BỊ KHÓA -> BÁO LỖI VÀ TỰ ĐỘNG ĐĂNG XUẤT NGAY
+                    if (isBanned) {
+                        alert("LỖI: Tài khoản " + userEmail + " đã bị cấm khỏi hệ thống!");
+                        return auth.signOut(); // Đuổi ra ngoài
+                    }
+                    
+                    // NẾU QUA CỬA AN TOÀN -> PHÂN LOẠI KHÁCH HÀNG:
                     if (userEmail === "thaituan.28012020@gmail.com") {
                         alert("Welcome Back, Admin " + userEmail);
                         window.location.href = "admin.html"; // Ném vào trang Quản trị
