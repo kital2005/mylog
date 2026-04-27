@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tools Vault | CoreVault</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { extend: { colors: { primary: '#3b82f6', } } }
+        }
+    </script>
+</head>
+<body class="bg-gray-900 text-white min-h-screen flex flex-col">
+
+    <nav class="sticky top-0 z-50 w-full bg-gray-900/80 backdrop-blur-md border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent hover:scale-105 transition-transform inline-block">CoreVault</a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-2">
+                        <a href="index.html" data-i18n="nav_home" class="text-gray-300 px-4 py-2 rounded-lg border border-transparent hover:border-gray-600 hover:bg-gray-800 transition-all duration-200 text-sm font-medium">Home</a>
+                        <a href="tools.html" data-i18n="nav_tools" class="text-blue-400 px-4 py-2 rounded-lg border border-blue-500/30 bg-blue-600/10 transition-all duration-200 text-sm font-bold">Tools Vault</a>
+                        <a href="#" data-i18n="nav_about" class="text-gray-300 px-4 py-2 rounded-lg border border-transparent hover:border-gray-600 hover:bg-gray-800 transition-all duration-200 text-sm font-medium">About Me</a>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <button onclick="toggleLanguage()" class="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium border border-gray-700 hover:border-gray-500 hover:bg-gray-800 rounded-lg transition-all flex items-center gap-1">
+                        <span data-i18n="lang_btn">EN / VN</span>
+                    </button>
+                    <div id="header-auth" class="flex items-center gap-3 ml-2">
+                        <div class="w-8 h-8 rounded-full bg-gray-700 animate-pulse"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full flex-grow">
+        
+        <div class="mb-10 text-center md:text-left">
+            <h1 data-i18n="nav_tools" class="text-4xl md:text-5xl font-extrabold text-white mb-4 drop-shadow-md">Tools Vault</h1>
+            <p data-i18n="home_latest_desc" class="text-gray-400 text-lg">Hand-picked premium & free resources for you.</p>
+        </div>
+
+        <div class="bg-gray-800/50 border border-gray-700 rounded-2xl p-6 mb-10 backdrop-blur-sm flex flex-col md:flex-row gap-6 justify-between items-center shadow-lg">
+            
+            <div class="relative w-full md:w-96">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-gray-500">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                </span>
+                <input type="text" id="searchInput" data-i18n="search_tools" class="w-full bg-gray-900 border border-gray-600 rounded-xl pl-12 pr-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors shadow-inner" placeholder="Search for tools..." onkeyup="filterTools()">
+            </div>
+
+            <div class="flex items-center gap-3 overflow-x-auto w-full md:w-auto pb-2 md:pb-0">
+                <span data-i18n="filter_category" class="text-gray-400 text-sm font-bold whitespace-nowrap hidden lg:block">Filter by Category:</span>
+                <button onclick="setFilter('All', this)" data-i18n="filter_all" class="filter-btn px-5 py-2.5 rounded-xl font-bold text-sm bg-blue-600 text-white shadow-lg shadow-blue-500/30 transition-all whitespace-nowrap">All</button>
+                <button onclick="setFilter('Gaming', this)" data-i18n="val_gaming" class="filter-btn px-5 py-2.5 rounded-xl font-bold text-sm bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white transition-all whitespace-nowrap">Gaming</button>
+                <button onclick="setFilter('Graphics', this)" data-i18n="val_graphics" class="filter-btn px-5 py-2.5 rounded-xl font-bold text-sm bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white transition-all whitespace-nowrap">Graphics</button>
+                <button onclick="setFilter('System', this)" data-i18n="val_system" class="filter-btn px-5 py-2.5 rounded-xl font-bold text-sm bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white transition-all whitespace-nowrap">System</button>
+            </div>
+        </div>
+
+        <div id="tools-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
+            <div class="col-span-full text-center py-12">
+                <p data-i18n="home_fetching" class="text-gray-500 animate-pulse font-bold tracking-widest uppercase">Fetching data from Cloud...</p>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="bg-gray-900 border-t border-gray-800 pt-12 pb-8 w-full mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p data-i18n="footer_copy" class="text-gray-500 text-xs">
+                    © 2026 CoreVault Project. Developed by <span class="text-gray-300">LunarRider0</span>. All rights reserved.
+                </p>
+                <div class="flex items-center gap-6">
+                    <span class="flex items-center gap-2 text-xs text-gray-500">
+                        <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                        <span data-i18n="footer_status">Server Status: Online</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="lang.js"></script>
+    <script type="module">
+        import { db, collection, getDocs, auth } from './firebase.js';
+        import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+
+        // Mảng chứa toàn bộ dữ liệu tải từ máy chủ về 1 lần duy nhất
+        let allToolsData = [];
+        let currentCategory = 'All';
+
+        // 1. CHỨC NĂNG XỬ LÝ AUTH (Giống hệt trang chủ)
+        onAuthStateChanged(auth, async (user) => {
+            const authContainer = document.getElementById('header-auth');
+            if (user) {
+                try {
+                    const usersSnap = await getDocs(collection(db, "users"));
+                    let isBanned = false;
+                    usersSnap.forEach(doc => { if(doc.data().email === user.email && doc.data().status === 'Banned') isBanned = true; });
+                    if (isBanned) {
+                        alert("SECURITY ALERT: Tài khoản của bạn đã bị Admin khóa vĩnh viễn!");
+                        await signOut(auth); window.location.href = "index.html"; return; 
+                    }
+                } catch(error) { console.error(error); }
+
+                const isAdmin = user.email === "thaituan.28012020@gmail.com";
+                const adminLink = isAdmin ? `<a href="admin.html" class="text-xs font-bold text-purple-400 hover:text-purple-300 border border-purple-500/50 px-2 py-1 rounded transition-colors mr-2">Admin Panel</a>` : '';
+                const userInitials = user.email.substring(0, 2).toUpperCase();
+
+                authContainer.innerHTML = `
+                    ${adminLink}
+                    <div class="flex items-center gap-3">
+                        <div title="${user.email} (Bấm để xem Kho Đồ)" onclick="window.location.href='my-vault.html'" class="w-9 h-9 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 flex items-center justify-center font-bold text-sm text-white shadow-[0_0_15px_rgba(59,130,246,0.5)] cursor-pointer hover:scale-110 transition-transform">
+                            ${userInitials}
+                        </div>
+                        <button id="btn-logout-home" class="text-sm font-bold text-gray-400 hover:text-red-400 transition-colors">Logout</button>
+                    </div>
+                `;
+                document.getElementById('btn-logout-tools').addEventListener('click', () => {
+                    signOut(auth).then(() => { window.location.reload(); });
+                });
+            } else {
+                authContainer.innerHTML = `<a href="auth.html" data-i18n="nav_login" class="text-sm font-semibold text-white bg-blue-600 hover:bg-blue-500 px-5 py-2 rounded-lg transition-colors shadow-lg shadow-blue-500/20">Login</a>`;
+                if (typeof updateLanguage === 'function') updateLanguage();
+            }
+        });
+
+        // 2. TẢI TOÀN BỘ SẢN PHẨM TỪ FIREBASE
+        async function fetchAllTools() {
+            const container = document.getElementById('tools-container');
+            try {
+                const querySnapshot = await getDocs(collection(db, "products"));
+                
+                // Nạp dữ liệu vào mảng
+                querySnapshot.forEach((doc) => {
+                    let product = doc.data();
+                    product.id = doc.id; // Giữ lại ID để làm link qua trang Chi tiết
+                    allToolsData.push(product);
+                });
+
+                renderTools(allToolsData); // Vẽ ra màn hình
+
+            } catch (error) {
+                console.error("Lỗi:", error);
+                container.innerHTML = '<p class="col-span-full text-center text-red-500">Failed to connect to Firebase Server.</p>';
+            }
+        }
+
+        // 3. HÀM VẼ GIAO DIỆN SẢN PHẨM RA MÀN HÌNH
+        function renderTools(toolsArray) {
+            const container = document.getElementById('tools-container');
+            container.innerHTML = '';
+
+            if (toolsArray.length === 0) {
+                container.innerHTML = '<p data-i18n="home_no_tools" class="col-span-full text-center text-gray-500 py-10">Currently no tools available matching your search.</p>';
+                if (typeof updateLanguage === 'function') updateLanguage();
+                return;
+            }
+
+            toolsArray.forEach(data => {
+                // CHÚ Ý: Bỏ qua các Tool đang cài trạng thái 'Hidden' (Ẩn)
+                if (data.status === 'Hidden') return;
+
+                const catI18n = data.category === 'Gaming' ? 'val_gaming' : (data.category === 'Graphics' ? 'val_graphics' : 'val_system');
+                const descI18n = data.status === 'Active' ? 'tool_desc_active' : 'tool_desc_maintenance';
+                const defaultDesc = data.status === 'Active' ? 'Premium tool validated by CoreVault Security.' : 'Currently under maintenance.';
+                
+                let priceBadgeHTML = data.price === 0 
+                    ? `<div class="absolute top-4 right-4 px-3 py-1 bg-green-500 text-white text-xs font-bold rounded-full shadow-lg" data-i18n="val_free">FREE</div>`
+                    : `<div class="absolute top-4 right-4 px-3 py-1 bg-blue-600 text-white text-xs font-bold rounded-full shadow-lg" data-price-value="${data.price}"></div>`;
+
+                const card = document.createElement('div');
+                card.className = "group bg-gray-800/50 border border-gray-700 rounded-2xl overflow-hidden hover:border-blue-500/50 transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/10 flex flex-col";
+                
+                // URL DẪN SANG TRANG CHI TIẾT KÈM THEO ID
+                const detailUrl = `detail.html?id=${data.id}`;
+
+                card.innerHTML = `
+                    <div class="h-48 bg-gray-700 flex items-center justify-center relative overflow-hidden text-6xl cursor-pointer" onclick="window.location.href='${detailUrl}'">
+                        <div class="group-hover:scale-125 transition-transform duration-300">${data.icon}</div>
+                        ${priceBadgeHTML}
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col">
+                        <h3 class="text-xl font-bold mb-2 group-hover:text-blue-400 transition-colors cursor-pointer" onclick="window.location.href='${detailUrl}'">${data.name}</h3>
+                        <p data-i18n="${descI18n}" class="text-gray-400 text-sm mb-4 line-clamp-2 text-ellipsis overflow-hidden flex-grow">${defaultDesc}</p>
+                        <div class="flex items-center justify-between mt-auto">
+                            <span data-i18n="${catI18n}" class="text-gray-500 text-xs uppercase font-bold tracking-widest">${data.category}</span>
+                            <button onclick="window.location.href='${detailUrl}'" data-i18n="btn_get_tool" class="text-sm font-bold text-white bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded-lg transition-all shadow-lg shadow-blue-500/20 hover:scale-105">Get Tool</button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+
+            if (typeof updateLanguage === 'function') updateLanguage();
+        }
+
+        // 4. CHỨC NĂNG LỌC VÀ TÌM KIẾM
+        window.setFilter = function(category, btnElement) {
+            currentCategory = category;
+            
+            // Đổi màu nút Lọc
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.className = "filter-btn px-5 py-2.5 rounded-xl font-bold text-sm bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white transition-all whitespace-nowrap";
+            });
+            btnElement.className = "filter-btn px-5 py-2.5 rounded-xl font-bold text-sm bg-blue-600 text-white shadow-lg shadow-blue-500/30 transition-all whitespace-nowrap";
+            
+            filterTools(); // Gọi hàm lọc lại dữ liệu
+        }
+
+        window.filterTools = function() {
+            const searchText = document.getElementById('searchInput').value.toLowerCase();
+            
+            // Lọc dữ liệu trong mảng allToolsData
+            const filteredData = allToolsData.filter(tool => {
+                const matchCategory = (currentCategory === 'All' || tool.category === currentCategory);
+                const matchSearch = tool.name.toLowerCase().includes(searchText);
+                return matchCategory && matchSearch;
+            });
+
+            renderTools(filteredData); // Vẽ lại bảng dựa trên kết quả lọc
+        }
+
+        // CHẠY KHI TẢI TRANG XONG
+        document.addEventListener("DOMContentLoaded", fetchAllTools);
+    </script>
+</body>
+</html>

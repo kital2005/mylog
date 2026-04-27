@@ -30,7 +30,7 @@
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                 <span data-i18n="admin_orders">Orders</span>
             </a>
-<a href="admin-settings.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-700 rounded-xl transition-all">
+            <a href="admin-settings.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-700 rounded-xl transition-all">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -76,10 +76,11 @@
                             <th data-i18n="th_product" class="p-4 font-medium">Product</th>
                             <th data-i18n="th_amount" class="p-4 font-medium">Amount</th>
                             <th data-i18n="th_status" class="p-4 font-medium">Status</th>
+                            <th class="p-4 font-medium text-right">Actions</th>
                         </tr>
                     </thead>
                     <tbody id="orders-tbody" class="divide-y divide-gray-700/50">
-                        <tr><td colspan="4" class="text-center p-8 text-gray-500 animate-pulse">Loading orders from Cloud...</td></tr>
+                        <tr><td colspan="5" class="text-center p-8 text-gray-500 animate-pulse">Loading orders from Cloud...</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -90,38 +91,46 @@
     <script type="module" src="auth-guard.js"></script>
 
     <script type="module">
-        import { db, collection, getDocs } from './firebase.js';
+        import { db, collection, getDocs, doc, updateDoc } from './firebase.js'; // Đã thêm updateDoc
 
         async function loadOrders() {
             const tbody = document.getElementById('orders-tbody');
 
             try {
-                // Tải dữ liệu từ collection "orders"
                 const querySnapshot = await getDocs(collection(db, "orders"));
                 tbody.innerHTML = ''; 
 
                 if (querySnapshot.empty) {
-                    tbody.innerHTML = '<tr><td colspan="4" class="text-center p-8 text-gray-500">Chưa có giao dịch nào.</td></tr>';
+                    tbody.innerHTML = '<tr><td colspan="5" class="text-center p-8 text-gray-500">Chưa có giao dịch nào.</td></tr>';
                     return;
                 }
 
-                // Chạy vòng lặp vẽ từng đơn hàng ra
-                querySnapshot.forEach((doc) => {
-                    const data = doc.data();
+                querySnapshot.forEach((docSnap) => {
+                    const data = docSnap.data();
+                    const docId = docSnap.id;
+                    const shortId = data.orderId || docId.substring(0, 8).toUpperCase();
                     
-                    // Lấy 8 ký tự đầu của Firebase ID làm mã đơn hàng cho đẹp
-                    const shortId = doc.id.substring(0, 8).toUpperCase();
-                    
-                    // Xử lý hiển thị giá tiền
                     let priceDisplay = data.price === 0 
                         ? '<span data-i18n="val_free" class="text-green-400 font-bold text-sm">FREE</span>' 
                         : `<span data-price-value="${data.price}" class="text-white font-bold text-sm"></span>`;
+
+                    // ĐÃ THÊM: TÔ MÀU TRẠNG THÁI VÀ NÚT DUYỆT ĐƠN
+                    let statusDisplay = '';
+                    let actionBtn = '';
+
+                    if (data.status === 'Completed') {
+                        statusDisplay = `<span class="px-2.5 py-1 bg-green-500/20 text-green-400 border border-green-500/30 rounded-full text-xs font-bold">Completed</span>`;
+                        actionBtn = `<span class="text-gray-500 text-xs">No Action</span>`;
+                    } else {
+                        statusDisplay = `<span class="px-2.5 py-1 bg-yellow-500/20 text-yellow-500 border border-yellow-500/30 rounded-full text-xs font-bold animate-pulse">Pending</span>`;
+                        actionBtn = `<button onclick="approveOrder('${docId}')" class="bg-green-600 hover:bg-green-500 text-white text-xs font-bold px-4 py-2 rounded-lg transition-all shadow-lg">Duyệt Đơn</button>`;
+                    }
 
                     const newRow = document.createElement('tr');
                     newRow.className = "hover:bg-gray-700/20 transition-colors group";
                     
                     newRow.innerHTML = `
-                        <td class="p-4 font-mono text-sm text-blue-400">#ORD-${shortId}</td>
+                        <td class="p-4 font-mono text-sm text-blue-400">${shortId}</td>
                         <td class="p-4">
                             <p class="font-bold text-white">${data.product}</p>
                             <p class="text-xs text-gray-400 flex items-center gap-1">
@@ -130,22 +139,34 @@
                             </p>
                         </td>
                         <td class="p-4">${priceDisplay}</td>
-                        <td class="p-4"><span data-i18n="val_completed" class="px-2.5 py-1 bg-green-500/20 text-green-400 border border-green-500/30 rounded-full text-xs font-bold">Completed</span></td>
+                        <td class="p-4">${statusDisplay}</td>
+                        <td class="p-4 text-right">${actionBtn}</td>
                     `;
                     
-                    tbody.prepend(newRow); // Đưa đơn hàng lên bảng
+                    tbody.prepend(newRow); 
                 });
 
-                // Cập nhật dịch thuật và tỉ giá cho tiền tệ
                 if (typeof updateLanguage === 'function') updateLanguage();
 
             } catch (error) {
                 console.error("Lỗi tải đơn hàng:", error);
-                tbody.innerHTML = '<tr><td colspan="4" class="text-center p-8 text-red-500">Lỗi kết nối máy chủ!</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="5" class="text-center p-8 text-red-500">Lỗi kết nối máy chủ!</td></tr>';
             }
         }
 
-        // Tự động chạy khi load trang
+        // ĐÃ THÊM: HÀM DUYỆT ĐƠN
+        window.approveOrder = async function(docId) {
+            if(confirm("Bạn đã nhận được tiền và muốn duyệt đơn hàng này? Khách hàng sẽ nhận được link tải ngay lập tức.")) {
+                try {
+                    await updateDoc(doc(db, "orders", docId), { status: 'Completed' });
+                    alert("Đã duyệt đơn hàng thành công!");
+                    loadOrders(); // Tải lại bảng để mất nút Duyệt
+                } catch(error) {
+                    alert("Lỗi thao tác: " + error.message);
+                }
+            }
+        };
+
         document.addEventListener("DOMContentLoaded", loadOrders);
     </script>
 </body>

@@ -35,8 +35,8 @@
 
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-2">
-                        <a href="index.html" data-i18n="nav_home" class="text-gray-300 px-4 py-2 rounded-lg border border-transparent hover:border-gray-600 hover:bg-gray-800 transition-all duration-200 text-sm font-medium">Home</a>
-                        <a href="#" data-i18n="nav_tools" class="text-gray-300 px-4 py-2 rounded-lg border border-transparent hover:border-gray-600 hover:bg-gray-800 transition-all duration-200 text-sm font-medium">Tools Vault</a>
+                        <a href="index.html" data-i18n="nav_home" class="text-blue-400 px-4 py-2 rounded-lg border border-blue-500/30 bg-blue-600/10 transition-all duration-200 text-sm font-bold">Home</a>
+                        <a href="tools.html" data-i18n="nav_tools" class="text-gray-300 px-4 py-2 rounded-lg border border-transparent hover:border-gray-600 hover:bg-gray-800 transition-all duration-200 text-sm font-medium">Tools Vault</a>
                         <a href="#" data-i18n="nav_about" class="text-gray-300 px-4 py-2 rounded-lg border border-transparent hover:border-gray-600 hover:bg-gray-800 transition-all duration-200 text-sm font-medium">About Me</a>
                     </div>
                 </div>
@@ -49,7 +49,6 @@
                     <div id="header-auth" class="flex items-center gap-3 ml-2">
                         <div class="w-8 h-8 rounded-full bg-gray-700 animate-pulse"></div>
                     </div>
-
                 </div>
 
             </div>
@@ -57,55 +56,36 @@
     </nav>
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full flex-grow flex flex-col items-center justify-center">
-     <div class="relative w-full h-[500px] md:h-[600px] rounded-3xl overflow-hidden shadow-2xl border border-gray-700 mb-16 group cursor-pointer">
+        
+        <div class="relative w-full h-[500px] md:h-[600px] rounded-3xl overflow-hidden shadow-2xl border border-gray-700 mb-16 group cursor-pointer">
             
             <div id="carousel-bg-1" class="absolute inset-0 bg-cover bg-center transition-all duration-700 opacity-100 bg-gray-800 group-hover:scale-105 group-hover:brightness-50 group-hover:blur-[3px]"></div>
             <div id="carousel-bg-2" class="absolute inset-0 bg-cover bg-center transition-all duration-700 opacity-0 bg-gray-800 group-hover:scale-105 group-hover:brightness-50 group-hover:blur-[3px]"></div>
             <div id="carousel-bg-3" class="absolute inset-0 bg-cover bg-center transition-all duration-700 opacity-0 bg-gray-800 group-hover:scale-105 group-hover:brightness-50 group-hover:blur-[3px]"></div>
             
             <div class="absolute inset-0 flex flex-col items-center justify-center p-10 text-center transition-all duration-700">
-                
                 <h1 id="dynamic-hero-title" class="text-5xl md:text-7xl font-extrabold mb-6 text-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)] group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:via-indigo-400 group-hover:to-purple-500 group-hover:bg-clip-text group-hover:text-transparent transition-all duration-500">
                     Welcome to CoreVault!
                 </h1>
-                
                 <p id="dynamic-hero-desc" class="text-gray-100 text-lg md:text-xl mb-8 max-w-3xl leading-relaxed drop-shadow-[0_3px_3px_rgba(0,0,0,0.8)] font-medium transition-all duration-500">
                     Please wait while the system connects...
                 </p>
-                
-                <button data-i18n="hero_btn" class="px-8 py-3 bg-white hover:bg-gray-100 text-gray-900 transition-all duration-300 rounded-full font-bold shadow-[0_5px_15px_rgba(0,0,0,0.5)] group-hover:shadow-[0_0_30px_rgba(255,255,255,0.6)] group-hover:scale-110">
+                <button onclick="window.location.href='tools.html'" data-i18n="hero_btn" class="px-8 py-3 bg-white hover:bg-gray-100 text-gray-900 transition-all duration-300 rounded-full font-bold shadow-[0_5px_15px_rgba(0,0,0,0.5)] group-hover:shadow-[0_0_30px_rgba(255,255,255,0.6)] group-hover:scale-110">
                     Explore Now
                 </button>
             </div>
-        </div>   
-        <!-- <div class="relative w-full h-[500px] md:h-[600px] rounded-3xl overflow-hidden shadow-2xl border border-gray-700 mb-16 group cursor-pointer">
-            
-            <div id="carousel-bg-1" class="absolute inset-0 bg-cover bg-center transition-all duration-1000 opacity-100 bg-gray-800 group-hover:scale-105 group-hover:brightness-50 group-hover:blur-[2px]"></div>
-            <div id="carousel-bg-2" class="absolute inset-0 bg-cover bg-center transition-all duration-1000 opacity-0 bg-gray-800 group-hover:scale-105 group-hover:brightness-50 group-hover:blur-[2px]"></div>
-            <div id="carousel-bg-3" class="absolute inset-0 bg-cover bg-center transition-all duration-1000 opacity-0 bg-gray-800 group-hover:scale-105 group-hover:brightness-50 group-hover:blur-[2px]"></div>
-            
-            <div class="absolute inset-0 flex flex-col items-center justify-center p-10 text-center transition-all duration-500 opacity-80 group-hover:opacity-100">
-                <h1 id="dynamic-hero-title" class="text-5xl md:text-7xl font-extrabold mb-6 bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-500 bg-clip-text text-transparent drop-shadow-2xl translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                    Loading...
-                </h1>
-                <p id="dynamic-hero-desc" class="text-gray-200 text-lg md:text-xl mb-8 max-w-3xl leading-relaxed drop-shadow-md font-medium translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">
-                    Please wait while the system connects to the main frame.
-                </p>
-                <button data-i18n="hero_btn" class="px-8 py-3 bg-white/90 hover:bg-white text-gray-900 transition-all duration-300 rounded-full font-bold shadow-[0_0_30px_rgba(255,255,255,0.5)] hover:scale-110 translate-y-4 group-hover:translate-y-0 delay-150">
-                    Explore Now
-                </button>
-            </div>
-        </div> -->
+        </div>
 
         <div class="flex items-center justify-between mb-10 w-full">
             <div>
                 <h2 data-i18n="home_latest_title" class="text-3xl font-bold text-white">Latest Tools</h2>
                 <p data-i18n="home_latest_desc" class="text-gray-400 mt-1">Hand-picked premium & free resources for you.</p>
             </div>
+            <a href="tools.html" data-i18n="filter_all" class="text-blue-400 hover:text-blue-300 font-bold text-sm flex items-center gap-1 transition-colors">View All →</a>
         </div>
 
         <div id="products-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
-            <div class="col-span-1 md:col-span-2 lg:col-span-3 text-center py-12">
+            <div class="col-span-full text-center py-12">
                 <p data-i18n="home_fetching" class="text-gray-500 animate-pulse font-bold tracking-widest uppercase">Fetching data from Cloud...</p>
             </div>
         </div>
@@ -134,164 +114,115 @@
         import { db, collection, getDocs, auth, doc, getDoc } from './firebase.js';
         import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 
-        // ==========================================
-        // 1. HỆ THỐNG NHẬN DIỆN VÀ CHẶN TÀI KHOẢN BỊ BAN
-        // ==========================================
+        // 1. XỬ LÝ ĐĂNG NHẬP & CHẶN BAN
         onAuthStateChanged(auth, async (user) => {
             const authContainer = document.getElementById('header-auth');
-            
             if (user) {
                 try {
                     const usersSnap = await getDocs(collection(db, "users"));
                     let isBanned = false;
                     usersSnap.forEach(doc => {
-                        if(doc.data().email === user.email && doc.data().status === 'Banned') {
-                            isBanned = true;
-                        }
+                        if(doc.data().email === user.email && doc.data().status === 'Banned') isBanned = true;
                     });
-
                     if (isBanned) {
-                        alert("SECURITY ALERT: Tài khoản của bạn đã bị Admin khóa vĩnh viễn!");
-                        await signOut(auth); 
-                        window.location.reload();
-                        return; 
+                        alert("SECURITY ALERT: Tài khoản của bạn đã bị Admin khóa!");
+                        await signOut(auth); window.location.reload(); return; 
                     }
                 } catch(error) { console.error(error); }
 
                 const isAdmin = user.email === "thaituan.28012020@gmail.com";
-                const adminLink = isAdmin 
-                    ? `<a href="admin.html" class="text-xs font-bold text-purple-400 hover:text-purple-300 border border-purple-500/50 px-2 py-1 rounded transition-colors mr-2">Admin Panel</a>` 
-                    : '';
-
+                const adminLink = isAdmin ? `<a href="admin.html" class="text-xs font-bold text-purple-400 hover:text-purple-300 border border-purple-500/50 px-2 py-1 rounded transition-colors mr-2">Admin Panel</a>` : '';
                 const userInitials = user.email.substring(0, 2).toUpperCase();
 
                 authContainer.innerHTML = `
                     ${adminLink}
                     <div class="flex items-center gap-3">
-                        <div title="${user.email}" class="w-9 h-9 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 flex items-center justify-center font-bold text-sm text-white shadow-lg cursor-pointer">
+                        <div title="${user.email} (Bấm để xem Kho Đồ)" onclick="window.location.href='my-vault.html'" class="w-9 h-9 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 flex items-center justify-center font-bold text-sm text-white shadow-[0_0_15px_rgba(59,130,246,0.5)] cursor-pointer hover:scale-110 transition-transform">
                             ${userInitials}
                         </div>
                         <button id="btn-logout-home" class="text-sm font-bold text-gray-400 hover:text-red-400 transition-colors">Logout</button>
                     </div>
                 `;
-
                 document.getElementById('btn-logout-home').addEventListener('click', () => {
                     signOut(auth).then(() => { window.location.reload(); });
                 });
-
             } else {
-                authContainer.innerHTML = `
-                    <a href="auth.html" data-i18n="nav_login" class="text-sm font-semibold text-white bg-blue-600 hover:bg-blue-500 px-5 py-2 rounded-lg transition-colors shadow-lg shadow-blue-500/20">
-                        Login
-                    </a>
-                `;
+                authContainer.innerHTML = `<a href="auth.html" data-i18n="nav_login" class="text-sm font-semibold text-white bg-blue-600 hover:bg-blue-500 px-5 py-2 rounded-lg transition-colors shadow-lg shadow-blue-500/20">Login</a>`;
                 if (typeof updateLanguage === 'function') updateLanguage();
             }
         });
 
-        // ==========================================
-        // 2. HỆ THỐNG CAROUSEL ĐỘNG (LẤY DỮ LIỆU TỪ FIREBASE)
-        // ==========================================
+        // 2. HỆ THỐNG CAROUSEL ĐỘNG
         async function loadHeroConfig() {
             try {
                 const docSnap = await getDoc(doc(db, "settings", "hero"));
                 if (docSnap.exists()) {
                     const config = docSnap.data();
-                    
                     const curLang = localStorage.getItem('site_language') || 'en';
-                    document.getElementById('dynamic-hero-title').innerText = curLang === 'vn' ? config.titleVn : config.titleEn;
-                    document.getElementById('dynamic-hero-desc').innerText = curLang === 'vn' ? config.descVn : config.descEn;
+                    document.getElementById('dynamic-hero-title').innerText = curLang === 'vn' ? (config.titleVn || "") : (config.titleEn || ""); // có thể dùng để cài đặt thông báo web ở đây bằng tiếng  anh và tiếng việt
+                    document.getElementById('dynamic-hero-desc').innerText = curLang === 'vn' ? (config.descVn || "") : (config.descEn || "");
 
                     const slides = [config.slide1, config.slide2, config.slide3].filter(s => s); 
                     if(slides.length > 0) {
-                        const bg1 = document.getElementById('carousel-bg-1');
-                        const bg2 = document.getElementById('carousel-bg-2');
-                        const bg3 = document.getElementById('carousel-bg-3');
-                        const bgElements = [bg1, bg2, bg3];
-
-                        slides.forEach((url, index) => {
-                            if(bgElements[index]) bgElements[index].style.backgroundImage = `url('${url}')`;
-                        });
-
+                        const bgElements = [document.getElementById('carousel-bg-1'), document.getElementById('carousel-bg-2'), document.getElementById('carousel-bg-3')];
+                        slides.forEach((url, i) => { if(bgElements[i]) bgElements[i].style.backgroundImage = `url('${url}')`; });
                         if(slides.length > 1) {
-                            let currentSlide = 0;
-                            const interval = (config.interval || 5) * 1000;
-
+                            let current = 0;
                             setInterval(() => {
-                                bgElements[currentSlide].classList.replace('opacity-100', 'opacity-0');
-                                currentSlide = (currentSlide + 1) % slides.length; 
-                                bgElements[currentSlide].classList.replace('opacity-0', 'opacity-100'); 
-                            }, interval);
+                                bgElements[current].classList.replace('opacity-100', 'opacity-0');
+                                current = (current + 1) % slides.length; 
+                                bgElements[current].classList.replace('opacity-0', 'opacity-100'); 
+                            }, (config.interval || 5) * 1000);
                         }
                     }
                 }
-            } catch (e) { console.error("Lỗi Carousel:", e); }
+            } catch (e) { console.error(e); }
         }
 
-        // ==========================================
-        // 3. HỆ THỐNG TẢI SẢN PHẨM
-        // ==========================================
-        async function loadPublicProducts() {
+        // 3. TẢI 3 SẢN PHẨM MỚI NHẤT
+        async function loadLatestProducts() {
             const container = document.getElementById('products-container');
-            
             try {
                 const querySnapshot = await getDocs(collection(db, "products"));
                 container.innerHTML = ''; 
-
-                if (querySnapshot.empty) {
-                    container.innerHTML = '<p data-i18n="home_no_tools" class="col-span-full text-center text-gray-500">Currently no tools available.</p>';
-                    return;
-                }
-
+                let count = 0;
                 querySnapshot.forEach((doc) => {
+                    if (count >= 3 || doc.data().status === 'Hidden') return; 
+                    count++;
                     const data = doc.data();
-
+                    const docId = doc.id;
                     const catI18n = data.category === 'Gaming' ? 'val_gaming' : (data.category === 'Graphics' ? 'val_graphics' : 'val_system');
-                    
                     const descI18n = data.status === 'Active' ? 'tool_desc_active' : 'tool_desc_maintenance';
-                    const defaultDesc = data.status === 'Active' ? 'Premium tool validated by CoreVault Security.' : 'Currently under maintenance.';
                     
-                    let priceBadgeHTML = '';
-                    if (data.price === 0) {
-                        priceBadgeHTML = `<div class="absolute top-4 right-4 px-3 py-1 bg-green-500 text-white text-xs font-bold rounded-full shadow-lg" data-i18n="val_free">FREE</div>`;
-                    } else {
-                        priceBadgeHTML = `<div class="absolute top-4 right-4 px-3 py-1 bg-blue-600 text-white text-xs font-bold rounded-full shadow-lg" data-price-value="${data.price}"></div>`;
-                    }
+                    let priceBadge = data.price === 0 
+                        ? `<div class="absolute top-4 right-4 px-3 py-1 bg-green-500 text-white text-xs font-bold rounded-full shadow-lg" data-i18n="val_free">FREE</div>`
+                        : `<div class="absolute top-4 right-4 px-3 py-1 bg-blue-600 text-white text-xs font-bold rounded-full shadow-lg" data-price-value="${data.price}"></div>`;
 
                     const card = document.createElement('div');
-                    card.className = "group bg-gray-800/50 border border-gray-700 rounded-2xl overflow-hidden hover:border-blue-500/50 transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/10";
-                    
+                    card.className = "group bg-gray-800/50 border border-gray-700 rounded-2xl overflow-hidden hover:border-blue-500/50 transition-all duration-300 hover:shadow-2xl flex flex-col";
                     card.innerHTML = `
-                        <div class="h-48 bg-gray-700 flex items-center justify-center relative overflow-hidden text-6xl">
+                        <div class="h-48 bg-gray-700 flex items-center justify-center relative overflow-hidden text-6xl cursor-pointer" onclick="window.location.href='detail.html?id=${docId}'">
                             <div class="group-hover:scale-125 transition-transform duration-300">${data.icon}</div>
-                            ${priceBadgeHTML}
+                            ${priceBadge}
                         </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold mb-2 group-hover:text-blue-400 transition-colors">${data.name}</h3>
-                            <p data-i18n="${descI18n}" class="text-gray-400 text-sm mb-4 line-clamp-2 text-ellipsis overflow-hidden h-10">${defaultDesc}</p>
-                            <div class="flex items-center justify-between">
-                                <span data-i18n="${catI18n}" class="text-gray-500 text-xs uppercase font-bold tracking-widest">${data.category}</span>
-                                <button data-i18n="btn_get_tool" class="text-sm font-bold text-white bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded-lg transition-all shadow-lg shadow-blue-500/20 hover:scale-105">Get Tool</button>
+                        <div class="p-6 flex-grow flex flex-col">
+                            <h3 class="text-xl font-bold mb-2 group-hover:text-blue-400 cursor-pointer" onclick="window.location.href='detail.html?id=${docId}'">${data.name}</h3>
+                            <p data-i18n="${descI18n}" class="text-gray-400 text-sm mb-4 line-clamp-2 flex-grow h-10"></p>
+                            <div class="flex items-center justify-between mt-auto">
+                                <span data-i18n="${catI18n}" class="text-gray-500 text-xs uppercase font-bold tracking-widest"></span>
+                                <button onclick="window.location.href='detail.html?id=${docId}'" data-i18n="btn_get_tool" class="text-sm font-bold text-white bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded-lg transition-all shadow-lg hover:scale-105">Get Tool</button>
                             </div>
                         </div>
                     `;
                     container.appendChild(card);
                 });
-
                 if (typeof updateLanguage === 'function') updateLanguage();
-
-            } catch (error) {
-                console.error("Lỗi tải sản phẩm:", error);
-                container.innerHTML = '<p class="col-span-full text-center text-red-500">Failed to connect to Firebase Server.</p>';
-            }
+            } catch (error) { console.error(error); }
         }
 
-        // ==========================================
-        // 4. CHẠY KHI TẢI TRANG XONG
-        // ==========================================
         document.addEventListener("DOMContentLoaded", () => {
-            loadHeroConfig(); // Mở Carousel lên
-            loadPublicProducts(); // Tải kho sản phẩm
+            loadHeroConfig();
+            loadLatestProducts();
         });
     </script>
 </body>

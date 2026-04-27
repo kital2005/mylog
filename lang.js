@@ -48,7 +48,11 @@ const langData = {
         "btn_get_tool": "Get Tool", "footer_status": "Server Status: Online", "filter_all": "All",
         "footer_copy": "© 2026 CoreVault Project. Developed by <span class='text-gray-300'>LunarRider0</span>. All rights reserved.",
         "admin_settings": "Settings", "set_title": "Homepage Configuration", "set_desc": "Manage hero carousel and welcome texts.",
-        "set_hero_text": "Hero Texts", "set_hero_slides": "Carousel Slides (Image/GIF URLs)", "set_interval": "Slide Interval (seconds)", "btn_save_settings": "Save Changes"
+        "set_hero_text": "Hero Texts", "set_hero_slides": "Carousel Slides (Image/GIF URLs)", "set_interval": "Slide Interval (seconds)", "btn_save_settings": "Save Changes",
+        "search_tools": "Search for tools...", "filter_category": "Filter by Category:",
+        "detail_not_found": "Tool not found or has been removed.", "detail_btn_buy": "Purchase Tool", "detail_btn_download": "Download Now", "detail_features": "Key Features",
+        "modal_req_min": "Minimum Requirements (1 per line)", "modal_req_rec": "Recommended Specs (1 per line)",
+        "modal_pay_title": "Payment Checkout", "modal_pay_desc": "Scan the QR code with your banking app.", "modal_pay_btn": "I have paid", "msg_login_req": "Please login to continue!"
     },
     vn: {
         // TRANG CHỦ
@@ -99,7 +103,11 @@ const langData = {
         "btn_get_tool": "Tải Công Cụ", "footer_status": "Trạng thái Server: Online", "filter_all": "Tất Cả",
         "footer_copy": "© 2026 Dự án CoreVault. Phát triển bởi <span class='text-gray-300'>LunarRider0</span>. Mọi quyền được bảo lưu.",
         "admin_settings": "Cài Đặt", "set_title": "Cấu Hình Trang Chủ", "set_desc": "Quản lý ảnh bìa và lời chào.",
-        "set_hero_text": "Nội Dung Chào Mừng", "set_hero_slides": "Ảnh Slides (Link Ảnh/GIF)", "set_interval": "Thời gian chuyển ảnh (giây)", "btn_save_settings": "Lưu Cấu Hình"
+        "set_hero_text": "Nội Dung Chào Mừng", "set_hero_slides": "Ảnh Slides (Link Ảnh/GIF)", "set_interval": "Thời gian chuyển ảnh (giây)", "btn_save_settings": "Lưu Cấu Hình",
+        "search_tools": "Tìm kiếm công cụ...", "filter_category": "Lọc theo Danh mục:",
+        "detail_not_found": "Không tìm thấy công cụ hoặc đã bị xóa.", "detail_btn_buy": "Mua Công Cụ", "detail_btn_download": "Tải Xuống Ngay", "detail_features": "Tính Năng Nổi Bật",
+        "modal_req_min": "Cấu hình Tối thiểu (1 mục/dòng)", "modal_req_rec": "Cấu hình Đề nghị (1 mục/dòng)",
+        "modal_pay_title": "Thanh Toán Đơn Hàng", "modal_pay_desc": "Sử dụng App Ngân hàng để quét mã QR bên dưới.", "modal_pay_btn": "Tôi đã chuyển khoản", "msg_login_req": "Vui lòng đăng nhập để tiếp tục!"
     }
 };
 
