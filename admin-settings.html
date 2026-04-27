@@ -3,12 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Settings | CoreVault OS</title>
+    <title>CoreVault OS | Settings</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6', 
+                    },
+                    // 2. ÉP TAILWIND ƯU TIÊN DÙNG FONT INTER CHO TOÀN WEB
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
 </head>
 <body class="bg-gray-900 text-white font-sans flex h-screen overflow-hidden" style="display: none;">
 
-<aside class="w-64 bg-gray-800 border-r border-gray-700 flex flex-col">
+    <aside class="w-64 bg-gray-800 border-r border-gray-700 flex flex-col">
         <a href="index.html" title="Về Trang Chủ" class="h-16 flex items-center px-6 border-b border-gray-700 hover:bg-gray-700/50 transition-colors cursor-pointer">
             <span data-i18n="admin_os" class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">CoreVault OS</span>
         </a>
@@ -48,59 +70,67 @@
         </header>
 
         <div class="flex-1 overflow-y-auto p-8">
+            
             <div class="mb-8">
                 <h1 data-i18n="set_title" class="text-3xl font-bold">Homepage Configuration</h1>
                 <p data-i18n="set_desc" class="text-gray-400 mt-1">Manage hero carousel and welcome texts.</p>
             </div>
 
-            <div class="max-w-3xl bg-gray-800 rounded-2xl border border-gray-700 p-8 shadow-xl">
-                <form id="settingsForm" onsubmit="saveSettings(event)">
-                    
+            <div class="max-w-3xl bg-gray-800 rounded-2xl border border-gray-700 p-8 shadow-xl mb-12">
+                <form id="heroSettingsForm" onsubmit="saveHeroSettings(event)">
                     <h2 data-i18n="set_hero_text" class="text-xl font-bold text-blue-400 mb-4 border-b border-gray-700 pb-2">Hero Texts</h2>
                     <div class="space-y-4 mb-8">
-                        <div>
-                            <label class="block text-sm text-gray-400 mb-1">Title (EN)</label>
-                            <input type="text" id="titleEn" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-2 text-white focus:border-blue-500" placeholder="Welcome to CoreVault!">
-                        </div>
-                        <div>
-                            <label class="block text-sm text-gray-400 mb-1">Title (VN)</label>
-                            <input type="text" id="titleVn" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-2 text-white focus:border-blue-500" placeholder="Chào mừng đến CoreVault!">
-                        </div>
-                        <div>
-                            <label class="block text-sm text-gray-400 mb-1">Description (EN)</label>
-                            <input type="text" id="descEn" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-2 text-white focus:border-blue-500">
-                        </div>
-                        <div>
-                            <label class="block text-sm text-gray-400 mb-1">Description (VN)</label>
-                            <input type="text" id="descVn" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-2 text-white focus:border-blue-500">
-                        </div>
+                        <div><label class="block text-sm text-gray-400 mb-1">Title (EN)</label><input type="text" id="titleEn" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-2 text-white focus:border-blue-500"></div>
+                        <div><label class="block text-sm text-gray-400 mb-1">Title (VN)</label><input type="text" id="titleVn" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-2 text-white focus:border-blue-500"></div>
+                        <div><label class="block text-sm text-gray-400 mb-1">Description (EN)</label><input type="text" id="descEn" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-2 text-white focus:border-blue-500"></div>
+                        <div><label class="block text-sm text-gray-400 mb-1">Description (VN)</label><input type="text" id="descVn" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-2 text-white focus:border-blue-500"></div>
                     </div>
 
                     <h2 data-i18n="set_hero_slides" class="text-xl font-bold text-purple-400 mb-4 border-b border-gray-700 pb-2">Carousel Slides (Image URLs)</h2>
                     <div class="space-y-4 mb-8">
-                        <div>
-                            <label class="block text-sm text-gray-400 mb-1">Slide 1 Image Link</label>
-                            <input type="url" id="slide1" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-2 text-white focus:border-purple-500" placeholder="https://i.imgur.com/your-image.gif">
-                        </div>
-                        <div>
-                            <label class="block text-sm text-gray-400 mb-1">Slide 2 Image Link</label>
-                            <input type="url" id="slide2" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-2 text-white focus:border-purple-500">
-                        </div>
-                        <div>
-                            <label class="block text-sm text-gray-400 mb-1">Slide 3 Image Link</label>
-                            <input type="url" id="slide3" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-2 text-white focus:border-purple-500">
-                        </div>
-                        <div>
-                            <label data-i18n="set_interval" class="block text-sm text-gray-400 mb-1">Slide Interval (seconds)</label>
-                            <input type="number" id="interval" value="5" min="2" class="w-32 bg-gray-900 border border-gray-700 rounded-xl px-4 py-2 text-white focus:border-purple-500">
-                        </div>
+                        <div><label class="block text-sm text-gray-400 mb-1">Slide 1 Image Link</label><input type="url" id="slide1" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-2 text-white focus:border-purple-500"></div>
+                        <div><label class="block text-sm text-gray-400 mb-1">Slide 2 Image Link</label><input type="url" id="slide2" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-2 text-white focus:border-purple-500"></div>
+                        <div><label class="block text-sm text-gray-400 mb-1">Slide 3 Image Link</label><input type="url" id="slide3" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-2 text-white focus:border-purple-500"></div>
+                        <div><label data-i18n="set_interval" class="block text-sm text-gray-400 mb-1">Slide Interval (seconds)</label><input type="number" id="interval" value="5" min="2" class="w-32 bg-gray-900 border border-gray-700 rounded-xl px-4 py-2 text-white focus:border-purple-500"></div>
                     </div>
-
-                    <div class="flex justify-end">
-                        <button type="submit" data-i18n="btn_save_settings" class="bg-blue-600 hover:bg-blue-500 text-white px-8 py-3 rounded-xl font-bold shadow-lg transition-all">Save Changes</button>
-                    </div>
+                    <div class="flex justify-end"><button type="submit" data-i18n="btn_save_settings" class="bg-blue-600 hover:bg-blue-500 text-white px-8 py-3 rounded-xl font-bold shadow-lg transition-all">Save Changes</button></div>
                 </form>
             </div>
+
+            <div class="mb-8 border-t border-gray-800 pt-10">
+                <h1 class="text-3xl font-bold text-white">About Me Configuration</h1>
+                <p class="text-gray-400 mt-1">Manage your profile, avatar, bio, and social links.</p>
+            </div>
+
+            <div class="max-w-3xl bg-gray-800 rounded-2xl border border-gray-700 p-8 shadow-xl mb-12">
+                <form id="aboutSettingsForm" onsubmit="saveAboutSettings(event)">
+                    
+                    <h2 class="text-xl font-bold text-green-400 mb-4 border-b border-gray-700 pb-2">Profile Information</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                        <div class="md:col-span-2"><label class="block text-sm text-gray-400 mb-1">Avatar Image URL</label><input type="url" id="abAvatar" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-2 text-white focus:border-green-500" placeholder="Link ảnh đại diện..."></div>
+                        <div><label class="block text-sm text-gray-400 mb-1">Display Name</label><input type="text" id="abName" required class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-2 text-white focus:border-green-500" placeholder="LunarRider0"></div>
+                        <div><label class="block text-sm text-gray-400 mb-1">Hashtags (Comma separated)</label><input type="text" id="abTags" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-2 text-white focus:border-green-500" placeholder="#CTU, #AndroidDev, #RTX3070"></div>
+                        <div><label class="block text-sm text-gray-400 mb-1">Role / Subtitle (EN)</label><input type="text" id="abRoleEn" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-2 text-white focus:border-green-500" placeholder="IT Student | Developer"></div>
+                        <div><label class="block text-sm text-gray-400 mb-1">Role / Subtitle (VN)</label><input type="text" id="abRoleVn" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-2 text-white focus:border-green-500" placeholder="Sinh viên IT | Lập trình viên"></div>
+                    </div>
+
+                    <h2 class="text-xl font-bold text-yellow-400 mb-4 border-b border-gray-700 pb-2">Biography (Tiểu sử)</h2>
+                    <div class="space-y-4 mb-6">
+                        <div><label class="block text-sm text-gray-400 mb-1">Biography (EN)</label><textarea id="abBioEn" rows="4" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-2 text-white focus:border-yellow-500"></textarea></div>
+                        <div><label class="block text-sm text-gray-400 mb-1">Biography (VN)</label><textarea id="abBioVn" rows="4" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-2 text-white focus:border-yellow-500"></textarea></div>
+                    </div>
+
+                    <h2 class="text-xl font-bold text-pink-400 mb-4 border-b border-gray-700 pb-2">Social Links</h2>
+                    <div class="space-y-4 mb-8">
+                        <div><label class="block text-sm text-gray-400 mb-1">Twitch URL</label><input type="url" id="abTwitch" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-2 text-white focus:border-pink-500"></div>
+                        <div><label class="block text-sm text-gray-400 mb-1">TikTok URL</label><input type="url" id="abTiktok" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-2 text-white focus:border-pink-500"></div>
+                        <div><label class="block text-sm text-gray-400 mb-1">GitHub URL</label><input type="url" id="abGithub" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-2 text-white focus:border-pink-500"></div>
+                    </div>
+
+                    <div class="flex justify-end"><button type="submit" class="bg-blue-600 hover:bg-blue-500 text-white px-8 py-3 rounded-xl font-bold shadow-lg transition-all">Save About Me</button></div>
+                </form>
+            </div>
+
         </div>
     </main>
 
@@ -109,12 +139,12 @@
     <script type="module">
         import { db, doc, setDoc, getDoc } from './firebase.js';
 
-        // Tải thiết lập có sẵn
         async function loadSettings() {
+            // Tải dữ liệu Hero
             try {
-                const docSnap = await getDoc(doc(db, "settings", "hero"));
-                if (docSnap.exists()) {
-                    const data = docSnap.data();
+                const heroSnap = await getDoc(doc(db, "settings", "hero"));
+                if (heroSnap.exists()) {
+                    const data = heroSnap.data();
                     document.getElementById('titleEn').value = data.titleEn || "";
                     document.getElementById('titleVn').value = data.titleVn || "";
                     document.getElementById('descEn').value = data.descEn || "";
@@ -125,25 +155,55 @@
                     document.getElementById('interval').value = data.interval || 5;
                 }
             } catch (e) { console.error(e); }
+
+            // TẢI DỮ LIỆU ABOUT ME LÊN FORM
+            try {
+                const aboutSnap = await getDoc(doc(db, "settings", "about"));
+                if (aboutSnap.exists()) {
+                    const a = aboutSnap.data();
+                    document.getElementById('abAvatar').value = a.avatar || "";
+                    document.getElementById('abName').value = a.name || "";
+                    document.getElementById('abTags').value = a.tags || "";
+                    document.getElementById('abRoleEn').value = a.roleEn || "";
+                    document.getElementById('abRoleVn').value = a.roleVn || "";
+                    document.getElementById('abBioEn').value = a.bioEn || "";
+                    document.getElementById('abBioVn').value = a.bioVn || "";
+                    document.getElementById('abTwitch').value = a.twitch || "";
+                    document.getElementById('abTiktok').value = a.tiktok || "";
+                    document.getElementById('abGithub').value = a.github || "";
+                }
+            } catch (e) { console.error(e); }
         }
 
-        // Lưu thiết lập
-        window.saveSettings = async function(e) {
+        window.saveHeroSettings = async function(e) {
             e.preventDefault();
             const config = {
-                titleEn: document.getElementById('titleEn').value,
-                titleVn: document.getElementById('titleVn').value,
-                descEn: document.getElementById('descEn').value,
-                descVn: document.getElementById('descVn').value,
-                slide1: document.getElementById('slide1').value,
-                slide2: document.getElementById('slide2').value,
-                slide3: document.getElementById('slide3').value,
-                interval: parseInt(document.getElementById('interval').value)
+                titleEn: document.getElementById('titleEn').value, titleVn: document.getElementById('titleVn').value,
+                descEn: document.getElementById('descEn').value, descVn: document.getElementById('descVn').value,
+                slide1: document.getElementById('slide1').value, slide2: document.getElementById('slide2').value,
+                slide3: document.getElementById('slide3').value, interval: parseInt(document.getElementById('interval').value)
             };
+            try { await setDoc(doc(db, "settings", "hero"), config); alert("Đã lưu cấu hình Trang chủ!"); } catch (error) { alert("Lỗi: " + error.message); }
+        };
 
-            try {
-                await setDoc(doc(db, "settings", "hero"), config);
-                alert("Đã lưu cấu hình Trang chủ thành công!");
+        // LƯU DỮ LIỆU ABOUT ME XUỐNG FIREBASE
+        window.saveAboutSettings = async function(e) {
+            e.preventDefault();
+            const aboutData = {
+                avatar: document.getElementById('abAvatar').value,
+                name: document.getElementById('abName').value,
+                tags: document.getElementById('abTags').value,
+                roleEn: document.getElementById('abRoleEn').value,
+                roleVn: document.getElementById('abRoleVn').value,
+                bioEn: document.getElementById('abBioEn').value,
+                bioVn: document.getElementById('abBioVn').value,
+                twitch: document.getElementById('abTwitch').value,
+                tiktok: document.getElementById('abTiktok').value,
+                github: document.getElementById('abGithub').value
+            };
+            try { 
+                await setDoc(doc(db, "settings", "about"), aboutData); 
+                alert("Đã lưu cấu hình About Me thành công!"); 
             } catch (error) { alert("Lỗi: " + error.message); }
         };
 

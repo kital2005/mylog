@@ -52,7 +52,12 @@ const langData = {
         "search_tools": "Search for tools...", "filter_category": "Filter by Category:",
         "detail_not_found": "Tool not found or has been removed.", "detail_btn_buy": "Purchase Tool", "detail_btn_download": "Download Now", "detail_features": "Key Features",
         "modal_req_min": "Minimum Requirements (1 per line)", "modal_req_rec": "Recommended Specs (1 per line)",
-        "modal_pay_title": "Payment Checkout", "modal_pay_desc": "Scan the QR code with your banking app.", "modal_pay_btn": "I have paid", "msg_login_req": "Please login to continue!"
+        "modal_pay_title": "Payment Checkout", "modal_pay_desc": "Scan the QR code with your banking app.", "modal_pay_btn": "I have paid", "msg_login_req": "Please login to continue!",
+        "about_title": "About LunarRider0", 
+        "about_role": "IT Student | Developer | Content Creator", 
+        "about_bio_title": "My Journey",
+        "about_bio_text": "Hello! I'm an Information Technology student at Can Tho University (CTU) with a passion for software development, system administration, and gaming. When I'm not coding Android apps or configuring Linux servers, you can find me live streaming Valorant and Wuthering Waves on Twitch and TikTok Live. My current rig is powered by a Ryzen 5 5600X and an RTX 3070, optimized for both heavy development workloads and high-end gaming. Welcome to my CoreVault!",
+        "about_connect": "Connect with me"
     },
     vn: {
         // TRANG CHỦ
@@ -107,7 +112,13 @@ const langData = {
         "search_tools": "Tìm kiếm công cụ...", "filter_category": "Lọc theo Danh mục:",
         "detail_not_found": "Không tìm thấy công cụ hoặc đã bị xóa.", "detail_btn_buy": "Mua Công Cụ", "detail_btn_download": "Tải Xuống Ngay", "detail_features": "Tính Năng Nổi Bật",
         "modal_req_min": "Cấu hình Tối thiểu (1 mục/dòng)", "modal_req_rec": "Cấu hình Đề nghị (1 mục/dòng)",
-        "modal_pay_title": "Thanh Toán Đơn Hàng", "modal_pay_desc": "Sử dụng App Ngân hàng để quét mã QR bên dưới.", "modal_pay_btn": "Tôi đã chuyển khoản", "msg_login_req": "Vui lòng đăng nhập để tiếp tục!"
+        "modal_pay_title": "Thanh Toán Đơn Hàng", "modal_pay_desc": "Sử dụng App Ngân hàng để quét mã QR bên dưới.", "modal_pay_btn": "Tôi đã chuyển khoản", "msg_login_req": "Vui lòng đăng nhập để tiếp tục!",
+        "about_title": "Về LunarRider0", 
+        "about_role": "Sinh viên IT | Lập trình viên | Sáng tạo nội dung", 
+        "about_bio_title": "Hành trình của tôi",
+        "about_bio_text": "Xin chào! Mình là sinh viên Công nghệ Thông tin tại Đại học Cần Thơ (CTU) với niềm đam mê phát triển ứng dụng, quản trị hệ thống và game. Khi không gõ code Android hay cấu hình máy chủ Linux, bạn có thể thấy mình đang livestream Valorant và Wuthering Waves trên Twitch và TikTok Live. Cỗ máy chiến game hiện tại của mình chạy Ryzen 5 5600X và RTX 3070, được tối ưu hóa cho cả công việc lập trình lẫn gaming đỉnh cao. Chào mừng bạn đến với CoreVault!",
+        "about_connect": "Kết nối với mình"
+        
     }
 };
 

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoreVault | About Me</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6', 
+                    },
+                    // 2. ÉP TAILWIND ƯU TIÊN DÙNG FONT INTER CHO TOÀN WEB
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-900 text-white min-h-screen flex flex-col">
+
+    <nav class="sticky top-0 z-50 w-full bg-gray-900/80 backdrop-blur-md border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent hover:scale-105 transition-transform inline-block">CoreVault</a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-2">
+                        <a href="index.html" data-i18n="nav_home" class="text-gray-300 px-4 py-2 rounded-lg hover:bg-gray-800 transition-all text-sm font-medium">Home</a>
+                        <a href="tools.html" data-i18n="nav_tools" class="text-gray-300 px-4 py-2 rounded-lg hover:bg-gray-800 transition-all text-sm font-medium">Tools Vault</a>
+                        <a href="about.html" data-i18n="nav_about" class="text-blue-400 px-4 py-2 rounded-lg border border-blue-500/30 bg-blue-600/10 transition-all duration-200 text-sm font-bold">About Me</a>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <button onclick="toggleLanguage()" class="text-gray-300 hover:text-white px-3 py-2 text-sm border border-gray-700 rounded-lg">EN / VN</button>
+                    <div id="header-auth" class="flex items-center gap-3 ml-2"><div class="w-8 h-8 rounded-full bg-gray-700 animate-pulse"></div></div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full flex-grow">
+        
+        <div class="flex flex-col md:flex-row items-center gap-8 mb-16 bg-gray-800/30 p-8 rounded-3xl border border-gray-700/50 shadow-2xl">
+            <div class="relative group">
+                <div class="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full blur-lg opacity-50 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div id="about-avatar-container" class="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-gray-800 relative z-10 overflow-hidden bg-gray-700 flex items-center justify-center">
+                    <span class="text-5xl font-bold text-gray-400">LR</span>
+                </div>
+            </div>
+
+            <div class="text-center md:text-left">
+                <h1 id="about-name" class="text-4xl md:text-5xl font-extrabold text-white mb-2 drop-shadow-lg">LunarRider0</h1>
+                <p id="about-role" class="text-blue-400 text-lg font-mono font-bold mb-4 tracking-wide">IT Student | Developer | Content Creator</p>
+                <div id="about-tags-container" class="flex flex-wrap justify-center md:justify-start gap-3">
+                    <span class="px-3 py-1 bg-gray-800 border border-gray-700 rounded-full text-xs text-gray-300 font-bold">#CTU</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="md:col-span-2 bg-gray-800 rounded-3xl border border-gray-700 p-8 shadow-xl">
+                <h3 data-i18n="about_bio_title" class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                    <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    My Journey
+                </h3>
+                <p id="about-bio" class="text-gray-300 leading-relaxed text-lg whitespace-pre-line">
+                    Please configure About Me in Admin Settings.
+                </p>
+            </div>
+
+            <div class="flex flex-col gap-4">
+                <h3 data-i18n="about_connect" class="text-xl font-bold text-white mb-2 px-2">Connect with me</h3>
+                
+                <a id="link-twitch" href="#" target="_blank" class="flex items-center gap-4 bg-[#6441a5]/10 border border-[#6441a5]/50 hover:bg-[#6441a5]/20 p-4 rounded-2xl transition-colors group">
+                    <div class="w-10 h-10 rounded-full bg-[#6441a5] flex items-center justify-center text-white font-bold group-hover:scale-110 transition-transform">Tw</div>
+                    <div><p class="text-white font-bold">Twitch</p><p class="text-gray-400 text-xs">Live Streams</p></div>
+                </a>
+
+                <a id="link-tiktok" href="#" target="_blank" class="flex items-center gap-4 bg-pink-500/10 border border-pink-500/50 hover:bg-pink-500/20 p-4 rounded-2xl transition-colors group">
+                    <div class="w-10 h-10 rounded-full bg-pink-500 flex items-center justify-center text-white font-bold group-hover:scale-110 transition-transform">Tk</div>
+                    <div><p class="text-white font-bold">TikTok</p><p class="text-gray-400 text-xs">Shorts & Highlights</p></div>
+                </a>
+
+                <a id="link-github" href="#" target="_blank" class="flex items-center gap-4 bg-gray-700 border border-gray-600 hover:bg-gray-600 p-4 rounded-2xl transition-colors group">
+                    <div class="w-10 h-10 rounded-full bg-gray-900 flex items-center justify-center text-white font-bold group-hover:scale-110 transition-transform">Gh</div>
+                    <div><p class="text-white font-bold">GitHub</p><p class="text-gray-400 text-xs">Source Codes</p></div>
+                </a>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="bg-gray-900 border-t border-gray-800 pt-12 pb-8 w-full mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p data-i18n="footer_copy" class="text-gray-500 text-xs">© 2026 CoreVault Project.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="lang.js"></script>
+
+    <script type="module">
+        import { db, doc, getDoc, collection, getDocs, auth } from './firebase.js';
+        import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+
+        onAuthStateChanged(auth, async (user) => {
+            const authContainer = document.getElementById('header-auth');
+            if (user) {
+                try {
+                    const usersSnap = await getDocs(collection(db, "users"));
+                    let isBanned = false;
+                    usersSnap.forEach(d => { if(d.data().email === user.email && d.data().status === 'Banned') isBanned = true; });
+                    if (isBanned) {
+                        alert("SECURITY ALERT: Tài khoản của bạn đã bị khóa!");
+                        await signOut(auth); window.location.href = "index.html"; return; 
+                    }
+                } catch(error) { console.error(error); }
+
+                const isAdmin = user.email === "thaituan.28012020@gmail.com";
+                const adminLink = isAdmin ? `<a href="admin.html" class="text-xs font-bold text-purple-400 hover:text-purple-300 border border-purple-500/50 px-2 py-1 rounded transition-colors mr-2">Admin Panel</a>` : '';
+                const userInitials = user.email.substring(0, 2).toUpperCase();
+
+                authContainer.innerHTML = `
+                    ${adminLink}
+                    <div class="flex items-center gap-3">
+                        <div title="${user.email} (Bấm để xem Kho Đồ)" onclick="window.location.href='my-vault.html'" class="w-9 h-9 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 flex items-center justify-center font-bold text-sm text-white shadow-lg cursor-pointer hover:scale-110 transition-transform">${userInitials}</div>
+                        <button id="btn-logout-about" class="text-sm font-bold text-gray-400 hover:text-red-400 transition-colors">Logout</button>
+                    </div>
+                `;
+                document.getElementById('btn-logout-about').addEventListener('click', () => { signOut(auth).then(() => { window.location.reload(); }); });
+            } else {
+                authContainer.innerHTML = `<a href="auth.html" data-i18n="nav_login" class="text-sm font-semibold text-white bg-blue-600 hover:bg-blue-500 px-5 py-2 rounded-lg transition-colors shadow-lg">Login</a>`;
+                if (typeof updateLanguage === 'function') updateLanguage();
+            }
+        });
+
+        // TẢI DỮ LIỆU TỪ FIREBASE ĐỂ LẮP VÀO GIAO DIỆN
+        async function loadAboutData() {
+            try {
+                const snap = await getDoc(doc(db, "settings", "about"));
+                if(snap.exists()){
+                    const d = snap.data();
+                    const curLang = localStorage.getItem('site_language') || 'en';
+                    
+                    // Nạp Name, Role, Bio
+                    document.getElementById('about-name').innerText = d.name || 'LunarRider0';
+                    document.getElementById('about-role').innerText = curLang === 'vn' ? (d.roleVn || '') : (d.roleEn || '');
+                    document.getElementById('about-bio').innerText = curLang === 'vn' ? (d.bioVn || '') : (d.bioEn || '');
+
+                    // Nạp Avatar
+                    if(d.avatar && d.avatar.trim() !== '') {
+                        document.getElementById('about-avatar-container').innerHTML = `<img src="${d.avatar}" class="w-full h-full object-cover">`;
+                    }
+
+                    // Nạp Tags (tách bằng dấu phẩy)
+                    if(d.tags && d.tags.trim() !== '') {
+                        const tagsArr = d.tags.split(',');
+                        document.getElementById('about-tags-container').innerHTML = tagsArr.map(t => `<span class="px-3 py-1 bg-gray-800 border border-gray-700 rounded-full text-xs text-gray-300 font-bold">${t.trim()}</span>`).join('');
+                    }
+
+                    // Nạp Link Mạng Xã Hội
+                    if(d.twitch) document.getElementById('link-twitch').href = d.twitch;
+                    if(d.tiktok) document.getElementById('link-tiktok').href = d.tiktok;
+                    if(d.github) document.getElementById('link-github').href = d.github;
+                }
+            } catch(e) { console.error(e); }
+        }
+
+        // Lắng nghe sự thay đổi ngôn ngữ để đổi Role và Bio ngay lập tức
+        document.addEventListener('DOMContentLoaded', () => {
+            loadAboutData();
+            const btnLang = document.querySelector('[onclick="toggleLanguage()"]');
+            if(btnLang) {
+                btnLang.addEventListener('click', () => {
+                    setTimeout(() => { loadAboutData(); }, 50); // Đợi ngôn ngữ đổi xong rồi tải lại
+                });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -3,9 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LunarRider0's Tool Hub</title>
+    <title>CoreVault OS</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
@@ -14,6 +18,10 @@
                 extend: {
                     colors: {
                         primary: '#3b82f6', 
+                    },
+                    // ĐÃ THÊM: ÉP TOÀN BỘ WEB DÙNG FONT INTER THAY VÌ FONT MẶC ĐỊNH CỦA WINDOWS
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
                     }
                 }
             }
@@ -37,7 +45,7 @@
                     <div class="ml-10 flex items-baseline space-x-2">
                         <a href="index.html" data-i18n="nav_home" class="text-blue-400 px-4 py-2 rounded-lg border border-blue-500/30 bg-blue-600/10 transition-all duration-200 text-sm font-bold">Home</a>
                         <a href="tools.html" data-i18n="nav_tools" class="text-gray-300 px-4 py-2 rounded-lg border border-transparent hover:border-gray-600 hover:bg-gray-800 transition-all duration-200 text-sm font-medium">Tools Vault</a>
-                        <a href="#" data-i18n="nav_about" class="text-gray-300 px-4 py-2 rounded-lg border border-transparent hover:border-gray-600 hover:bg-gray-800 transition-all duration-200 text-sm font-medium">About Me</a>
+                        <a href="about.html" data-i18n="nav_about" class="text-gray-300 px-4 py-2 rounded-lg border border-transparent hover:border-gray-600 hover:bg-gray-800 transition-all duration-200 text-sm font-medium">About Me</a>
                     </div>
                 </div>
 
@@ -159,7 +167,7 @@
                 if (docSnap.exists()) {
                     const config = docSnap.data();
                     const curLang = localStorage.getItem('site_language') || 'en';
-                    document.getElementById('dynamic-hero-title').innerText = curLang === 'vn' ? (config.titleVn || "") : (config.titleEn || ""); // có thể dùng để cài đặt thông báo web ở đây bằng tiếng  anh và tiếng việt
+                    document.getElementById('dynamic-hero-title').innerText = curLang === 'vn' ? (config.titleVn || "") : (config.titleEn || "");
                     document.getElementById('dynamic-hero-desc').innerText = curLang === 'vn' ? (config.descVn || "") : (config.descEn || "");
 
                     const slides = [config.slide1, config.slide2, config.slide3].filter(s => s); 

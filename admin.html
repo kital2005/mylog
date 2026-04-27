@@ -3,17 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard | CoreVault</title>
+    <title>CoreVault OS | Dashboard</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6', 
+                    },
+                    // 2. ÉP TAILWIND ƯU TIÊN DÙNG FONT INTER CHO TOÀN WEB
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
 </head>
 <body class="bg-gray-900 text-white font-sans flex h-screen overflow-hidden" style="display: none;">
 
     <aside class="w-64 bg-gray-800 border-r border-gray-700 flex flex-col">
-        <a href="index.html" title="Về Trang Chủ" class="h-16 flex items-center px-6 border-b border-gray-700 hover:bg-gray-700/50 transition-colors cursor-pointer">
+        <a href="index.html" class="h-16 flex items-center px-6 border-b border-gray-700 hover:bg-gray-700/50 transition-colors">
             <span data-i18n="admin_os" class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">CoreVault OS</span>
         </a>
-        
         <nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
             <a href="admin.html" class="flex items-center gap-3 px-4 py-3 bg-blue-600/20 text-blue-400 rounded-xl border border-blue-600/30 font-medium transition-all">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
@@ -31,7 +51,7 @@
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                 <span data-i18n="admin_orders">Orders</span>
             </a>
-<a href="admin-settings.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-700 rounded-xl transition-all">
+            <a href="admin-settings.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-700 rounded-xl transition-all">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -44,17 +64,14 @@
     <main class="flex-1 flex flex-col h-screen overflow-hidden relative">
         <header class="h-16 bg-gray-900 border-b border-gray-800 flex items-center justify-between px-8">
             <div class="relative w-64">
-                <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-                    <svg class="w-5 h-5 text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                 </span>
-                <input type="text" data-i18n="admin_search" class="w-full bg-gray-800 text-white border border-gray-700 rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:border-blue-500 transition-colors text-sm" placeholder="Search orders, users...">
+                <input type="text" data-i18n="admin_search" class="w-full bg-gray-800 text-white border border-gray-700 rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:border-blue-500 text-sm" placeholder="Search...">
             </div>
             <div class="flex items-center gap-4">
-                <button onclick="toggleLanguage()" class="text-gray-300 hover:text-white px-3 py-1.5 text-sm font-medium border border-gray-700 hover:border-gray-500 hover:bg-gray-800 rounded-lg transition-all flex items-center gap-1">
-                    <span data-i18n="lang_btn">EN / VN</span>
-                </button>
-                <button class="text-gray-400 hover:text-white"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg></button>
-                <div onclick="logoutAdmin()" title="Đăng Xuất" class="w-9 h-9 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 flex items-center justify-center font-bold text-sm shadow-lg cursor-pointer hover:scale-110 transition-transform">LR</div>
+                <button onclick="toggleLanguage()" class="text-gray-300 hover:text-white px-3 py-1.5 text-sm border border-gray-700 rounded-lg">EN / VN</button>
+                <div onclick="logoutAdmin()" title="Đăng Xuất" class="w-9 h-9 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 flex items-center justify-center font-bold text-sm shadow-lg cursor-pointer">LR</div>
             </div>
         </header>
 
@@ -64,160 +81,178 @@
                     <h1 data-i18n="dash_overview" class="text-3xl font-bold text-white">Overview</h1>
                     <p data-i18n="dash_welcome" class="text-gray-400 mt-1">Welcome back. Here's what's happening with your platform.</p>
                 </div>
-            <div class="bg-gray-800 p-1 rounded-lg border border-gray-700 flex text-sm">
-                <button data-i18n="dash_today" class="px-4 py-1.5 text-gray-400 hover:text-white transition-colors">Today</button>
-                <button data-i18n="dash_week" class="px-4 py-1.5 bg-gray-700 text-white rounded shadow transition-colors">This Week</button>
-                <button data-i18n="dash_month" class="px-4 py-1.5 text-gray-400 hover:text-white transition-colors">This Month</button>
-            </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                <div class="bg-gray-800 border border-gray-700 p-6 rounded-2xl shadow-lg relative overflow-hidden">
-                    <div class="flex items-center gap-2 mb-4">
-                        <span class="w-3 h-3 bg-green-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(34,197,94,0.8)]"></span>
-                        <h3 data-i18n="dash_active" class="text-gray-400 font-medium text-sm">Active Tools</h3>
+                <div class="bg-gray-800 rounded-2xl p-6 border border-gray-700 shadow-lg">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <p class="text-gray-400 text-sm font-medium flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-green-500"></span><span data-i18n="dash_active">Active Tools</span>
+                            </p>
+                            <h3 id="stat-active-tools" class="text-3xl font-bold text-white mt-2">0</h3>
+                        </div>
                     </div>
-                    <p id="stat-active" class="text-4xl font-bold text-white">0</p>
                 </div>
-
-                <div class="bg-gray-800 border border-gray-700 p-6 rounded-2xl shadow-lg">
-                    <h3 data-i18n="dash_visits" class="text-gray-400 font-medium text-sm mb-4">Total Tools</h3>
-                    <p id="stat-total-tools" class="text-4xl font-bold text-white">0</p>
+                <div class="bg-gray-800 rounded-2xl p-6 border border-gray-700 shadow-lg">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <p class="text-gray-400 text-sm font-medium flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-blue-500"></span><span data-i18n="dash_visits">Total Tools</span>
+                            </p>
+                            <h3 id="stat-total-tools" class="text-3xl font-bold text-white mt-2">0</h3>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="bg-gray-800 border border-gray-700 p-6 rounded-2xl shadow-lg">
-                    <h3 data-i18n="dash_new_users" class="text-gray-400 font-medium text-sm mb-4">Total Orders</h3>
-                    <p id="stat-orders" class="text-4xl font-bold text-white">0</p>
+                <div class="bg-gray-800 rounded-2xl p-6 border border-gray-700 shadow-lg">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <p class="text-gray-400 text-sm font-medium flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-purple-500"></span><span data-i18n="dash_new_users">Total Orders</span>
+                            </p>
+                            <h3 id="stat-total-orders" class="text-3xl font-bold text-white mt-2">0</h3>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="bg-gray-800 border border-gray-700 p-6 rounded-2xl shadow-lg">
-                     <h3 data-i18n="dash_revenue" class="text-gray-400 font-medium text-sm mb-4">Total Revenue</h3>
-                     <p id="stat-revenue" data-price-value="0" class="text-4xl font-bold text-white bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">$0</p>
+                <div class="bg-gray-800 rounded-2xl p-6 border border-gray-700 shadow-lg">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <p class="text-gray-400 text-sm font-medium flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-yellow-500"></span><span data-i18n="dash_revenue">Total Revenue</span>
+                            </p>
+                            <h3 id="stat-total-revenue" class="text-3xl font-bold text-green-400 mt-2">$0</h3>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div class="lg:col-span-2 bg-gray-800 border border-gray-700 p-6 rounded-2xl shadow-lg">
-                    <h3 data-i18n="dash_chart" class="text-lg font-bold text-white mb-4">Traffic & Revenue Overview</h3>
-                    <div class="h-72 w-full">
-                        <canvas id="mainChart"></canvas>
+                
+                <div class="lg:col-span-2 bg-gray-800 rounded-2xl border border-gray-700 p-6 shadow-lg">
+                    <h3 data-i18n="dash_chart" class="text-lg font-bold text-white mb-6">Traffic & Revenue Overview</h3>
+                    <div class="h-64 w-full"><canvas id="revenueChart"></canvas></div>
+                </div>
+
+                <div class="bg-gray-800 rounded-2xl border border-gray-700 p-6 shadow-lg flex flex-col">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 data-i18n="dash_sales" class="text-lg font-bold text-white">Recent Sales</h3>
+                    </div>
+                    <div id="recent-sales-list" class="space-y-4 flex-grow overflow-y-auto">
+                        <p class="text-gray-500 text-center animate-pulse">Đang tải...</p>
                     </div>
                 </div>
 
-                <div class="bg-gray-800 border border-gray-700 p-6 rounded-2xl shadow-lg flex flex-col">
-                    <h3 data-i18n="dash_sales" class="text-lg font-bold text-white mb-4">Recent Sales</h3>
-                    <div id="recent-sales-list" class="space-y-4 overflow-y-auto flex-1 pr-2">
-                        <p class="text-gray-500 text-sm animate-pulse">Loading orders from Cloud...</p>
-                    </div>
-                </div>
             </div>
         </div>
     </main>
 
     <script src="lang.js"></script>
     <script type="module" src="auth-guard.js"></script>
-
+    
     <script type="module">
-        import { db, collection, getDocs, addDoc } from './firebase.js';
+        import { db, collection, getDocs } from './firebase.js';
 
-        async function loadDashboardData() {
+        async function loadDashboardStats() {
             try {
-                // 1. LẤY DỮ LIỆU SẢN PHẨM (Đếm tổng tool và tool đang hoạt động)
-                const prodSnap = await getDocs(collection(db, 'products'));
+                // 1. TÍNH TOÁN SẢN PHẨM
+                const productsSnap = await getDocs(collection(db, "products"));
                 let totalTools = 0;
                 let activeTools = 0;
-                
-                prodSnap.forEach(doc => {
+                productsSnap.forEach(doc => {
                     totalTools++;
                     if(doc.data().status === 'Active') activeTools++;
                 });
-
-                document.getElementById('stat-total-tools').innerText = totalTools;
-                document.getElementById('stat-active').innerText = activeTools;
-
-                // 2. LẤY DỮ LIỆU ĐƠN HÀNG
-                const orderSnap = await getDocs(collection(db, 'orders'));
                 
-                if (orderSnap.empty) {
-                    const dummyOrders = [
-                        { product: "Auto Recoil V2", user: "gamer_pro12", price: 19.99, date: new Date().getTime() },
-                        { product: "Neon Stream Pack", user: "vtuber_xyz", price: 25.00, date: new Date().getTime() },
-                        { product: "System Optimizer", user: "pc_master", price: 9.99, date: new Date().getTime() },
-                        { product: "Free Overlay", user: "newbie_stream", price: 0, date: new Date().getTime() }
-                    ];
-                    for (let order of dummyOrders) {
-                        await addDoc(collection(db, 'orders'), order);
-                    }
-                    window.location.reload();
-                    return;
-                }
+                document.getElementById('stat-total-tools').innerText = totalTools;
+                document.getElementById('stat-active-tools').innerText = activeTools;
 
+                // 2. TÍNH TOÁN ĐƠN HÀNG VÀ DOANH THU
+                const ordersSnap = await getDocs(collection(db, "orders"));
                 let totalOrders = 0;
-                let totalRevenue = 0;
-                const salesList = document.getElementById('recent-sales-list');
-                salesList.innerHTML = '';
+                let totalRevenueUSD = 0;
+                let recentSalesHTML = '';
+                
+                // Lấy dữ liệu và sắp xếp đơn hàng mới nhất lên đầu
+                let ordersArray = [];
+                ordersSnap.forEach(doc => ordersArray.push(doc.data()));
+                ordersArray.sort((a, b) => b.timestamp - a.timestamp);
 
-                orderSnap.forEach(doc => {
+                ordersArray.forEach((data, index) => {
                     totalOrders++;
-                    const data = doc.data();
-                    totalRevenue += data.price;
+                    
+                    // Chỉ cộng tiền những đơn hàng đã thanh toán xong (Completed)
+                    if(data.status === 'Completed') {
+                        totalRevenueUSD += parseFloat(data.price || 0);
+                    }
 
-                    if (data.price > 0) {
-                        salesList.innerHTML += `
-                            <div class="flex items-center justify-between pb-4 border-b border-gray-700/50">
+                    // Lấy 4 đơn hàng mới nhất để show ra cái bảng bên phải
+                    if (index < 4) {
+                        const priceColor = data.price > 0 ? 'text-green-400' : 'text-gray-400';
+                        const priceText = data.price > 0 
+                            ? `<span data-price-value="${data.price}"></span>` 
+                            : `<span data-i18n="val_free">FREE</span>`;
+
+                        recentSalesHTML += `
+                            <div class="flex items-center justify-between p-3 bg-gray-900/50 rounded-xl border border-gray-700/50">
                                 <div class="flex items-center gap-3">
-                                    <div class="w-10 h-10 rounded-lg bg-gray-700 flex items-center justify-center text-xl">🛒</div>
+                                    <div class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center border border-gray-700 text-gray-400">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                    </div>
                                     <div>
                                         <p class="text-sm font-bold text-white">${data.product}</p>
-                                        <p class="text-xs text-gray-400">${data.user}</p>
+                                        <p class="text-xs text-gray-500">${data.user.split('@')[0]}</p>
                                     </div>
                                 </div>
-                                <span class="text-green-400 font-bold text-sm flex items-center gap-1">+ <span data-price-value="${data.price}"></span></span>
+                                <div class="text-sm font-bold ${priceColor}">${priceText}</div>
                             </div>
                         `;
                     }
                 });
 
-                document.getElementById('stat-orders').innerText = totalOrders;
-                document.getElementById('stat-revenue').setAttribute('data-price-value', totalRevenue);
+                document.getElementById('stat-total-orders').innerText = totalOrders;
+                
+                // Set tiền vào thẻ để hàm updateLanguage tự động đổi tỷ giá
+                const revEl = document.getElementById('stat-total-revenue');
+                revEl.setAttribute('data-price-value', totalRevenueUSD);
+                
+                document.getElementById('recent-sales-list').innerHTML = recentSalesHTML || '<p class="text-gray-500 text-center text-sm">Chưa có giao dịch nào.</p>';
 
+                // 3. VẼ BIỂU ĐỒ DEMO (Sử dụng Chart.js)
+                const ctx = document.getElementById('revenueChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                        datasets: [{
+                            label: 'Revenue / Traffic',
+                            data: [1200, 1900, 1500, 2200, 2800, 3500, 3100],
+                            borderColor: '#3b82f6',
+                            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                            borderWidth: 3,
+                            tension: 0.4,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            y: { grid: { color: '#374151' }, ticks: { color: '#9ca3af' } },
+                            x: { grid: { display: false }, ticks: { color: '#9ca3af' } }
+                        }
+                    }
+                });
+
+                // Cập nhật lại ngôn ngữ và tiền tệ
                 if (typeof updateLanguage === 'function') updateLanguage();
 
             } catch (error) {
-                console.error("Lỗi tải Dashboard:", error);
+                console.error("Lỗi Dashboard:", error);
             }
         }
 
-        document.addEventListener("DOMContentLoaded", loadDashboardData);
-
-        const ctx = document.getElementById('mainChart').getContext('2d');
-        let gradient = ctx.createLinearGradient(0, 0, 0, 400);
-        gradient.addColorStop(0, 'rgba(59, 130, 246, 0.5)');
-        gradient.addColorStop(1, 'rgba(59, 130, 246, 0)');
-
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                datasets: [{
-                    label: 'Page Views',
-                    data: [1200, 1900, 1500, 2200, 2800, 3500, 3100],
-                    borderColor: '#3b82f6',
-                    backgroundColor: gradient,
-                    borderWidth: 3,
-                    tension: 0.4,
-                    fill: true
-                }]
-            },
-            options: {
-                responsive: true, maintainAspectRatio: false,
-                plugins: { legend: { display: false } },
-                scales: {
-                    y: { beginAtZero: true, grid: { color: '#374151' }, ticks: { color: '#9ca3af' } },
-                    x: { grid: { display: false }, ticks: { color: '#9ca3af' } }
-                }
-            }
-        });
+        document.addEventListener("DOMContentLoaded", loadDashboardStats);
     </script>
 </body>
 </html>
