@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CoreVault OS | Settings</title>
-    
+    <link rel="icon" type="image/svg+xml" href="logo.svg">
     <script src="https://cdn.tailwindcss.com"></script>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -133,8 +133,28 @@
                         </div>
 
                         <div class="flex justify-end"><button type="submit" class="w-full md:w-auto bg-blue-600 hover:bg-blue-500 text-white px-8 py-3 rounded-xl font-bold shadow-lg transition-all">Save About Me</button></div>
+
                     </form>
                 </div>
+                
+                <div class="mb-6 md:mb-8 border-t border-gray-800 pt-8 md:pt-10 mt-8">
+                    <h1 class="text-2xl md:text-3xl font-bold text-yellow-400">Google AdSense Control</h1>
+                    <p class="text-gray-400 text-sm md:text-base mt-1">Bật/Tắt hiển thị quảng cáo trên toàn bộ Website.</p>
+                </div>
+
+                <div class="max-w-3xl bg-gray-800 rounded-2xl border border-gray-700 p-5 md:p-8 shadow-xl mb-12">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h2 class="text-lg font-bold text-white">Hiển thị Quảng Cáo</h2>
+                            <p class="text-sm text-gray-400">Khách hàng sẽ nhìn thấy banner quảng cáo ở các trang.</p>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" id="adToggle" class="sr-only peer" onchange="toggleAds(this.checked)">
+                            <div class="w-14 h-7 bg-gray-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-green-500 shadow-inner"></div>
+                        </label>
+                    </div>
+                </div>
+
             </div>
         </main>
     </div>
@@ -155,6 +175,7 @@
         import { db, doc, setDoc, getDoc } from './firebase.js';
 
         async function loadSettings() {
+            // Tải cấu hình Hero
             try {
                 const heroSnap = await getDoc(doc(db, "settings", "hero"));
                 if (heroSnap.exists()) {
@@ -170,6 +191,7 @@
                 }
             } catch (e) { console.error(e); }
 
+            // Tải cấu hình About
             try {
                 const aboutSnap = await getDoc(doc(db, "settings", "about"));
                 if (aboutSnap.exists()) {
@@ -186,6 +208,14 @@
                     document.getElementById('abGithub').value = a.github || "";
                 }
             } catch (e) { console.error(e); }
+
+            // ĐÃ SỬA: ĐƯA VIỆC TẢI TRẠNG THÁI QUẢNG CÁO VÀO BÊN TRONG HÀM NÀY
+            try {
+                const adSnap = await getDoc(doc(db, "settings", "ads"));
+                if (adSnap.exists()) {
+                    document.getElementById('adToggle').checked = adSnap.data().isActive;
+                }
+            } catch (e) { console.error("Lỗi tải Ads:", e); }
         }
 
         window.saveHeroSettings = async function(e) {
@@ -217,6 +247,16 @@
                 await setDoc(doc(db, "settings", "about"), aboutData); 
                 alert("Đã lưu cấu hình About Me thành công!"); 
             } catch (error) { alert("Lỗi: " + error.message); }
+        };
+
+        // ĐÃ SỬA: HÀM LƯU QUẢNG CÁO ĐÃ ĐƯỢC CHUẨN HÓA
+        window.toggleAds = async function(isActive) {
+            try {
+                await setDoc(doc(db, "settings", "ads"), { isActive: isActive });
+                console.log("Trạng thái quảng cáo đã lưu:", isActive);
+            } catch (error) {
+                alert("Lỗi khi lưu trạng thái quảng cáo: " + error.message);
+            }
         };
 
         document.addEventListener("DOMContentLoaded", loadSettings);

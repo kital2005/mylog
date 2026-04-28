@@ -4,6 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CoreVault OS</title>
+    <link rel="icon" type="image/svg+xml" href="logo.svg">
+    <meta name="description" content="CoreVault OS - Hệ điều hành kho công cụ, tài nguyên tối ưu và ứng dụng công nghệ độc quyền dành cho Gamer và Developer.">
+    <meta name="keywords" content="CoreVault, LunarRider0, Gaming Tools, Optimization, Tech Resources, CTU IT">
+    <meta name="author" content="LunarRider0">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://corevaultos.com/">
+    <meta property="og:title" content="CoreVault OS | Premium Tools & Resources">
+    <meta property="og:description" content="Khám phá kho công cụ cao cấp, tài nguyên tối ưu và ứng dụng công nghệ độc quyền phát triển bởi LunarRider0.">
+    <meta property="og:image" content="https://imgur.com/example_thumbnail.png">
+
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://corevaultos.com/">
+    <meta property="twitter:title" content="CoreVault OS | Premium Tools & Resources">
+    <meta property="twitter:description" content="Khám phá kho công cụ cao cấp, tài nguyên tối ưu và ứng dụng công nghệ độc quyền phát triển bởi LunarRider0.">
+    <meta property="twitter:image" content="https://imgur.com/example_thumbnail.png">
     
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -19,7 +35,6 @@
                     colors: {
                         primary: '#3b82f6', 
                     },
-                    // ĐÃ THÊM: ÉP TOÀN BỘ WEB DÙNG FONT INTER THAY VÌ FONT MẶC ĐỊNH CỦA WINDOWS
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
                     }
@@ -36,8 +51,11 @@
             <div class="flex items-center justify-between h-16">
                 
                 <div class="flex-shrink-0">
-                    <a href="index.html" class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent hover:scale-105 transition-transform inline-block">
-                        CoreVault
+                    <a href="index.html" class="flex items-center gap-3 hover:scale-105 transition-transform">
+                        <img src="logo.svg" alt="CoreVault Logo" class="w-10 h-10 shadow-lg shadow-blue-500/20 rounded-xl">
+                        <span class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                            CoreVault
+                        </span>
                     </a>
                 </div>
 
@@ -81,6 +99,15 @@
                 <button onclick="window.location.href='tools.html'" data-i18n="hero_btn" class="px-8 py-3 bg-white hover:bg-gray-100 text-gray-900 transition-all duration-300 rounded-full font-bold shadow-[0_5px_15px_rgba(0,0,0,0.5)] group-hover:shadow-[0_0_30px_rgba(255,255,255,0.6)] group-hover:scale-110">
                     Explore Now
                 </button>
+            </div>
+        </div>
+
+        <div id="ad-container" class="w-full max-w-7xl mx-auto px-4 hidden mb-12">
+            <div class="bg-gray-800/50 border border-gray-700 border-dashed rounded-2xl flex flex-col items-center justify-center p-8 text-center relative overflow-hidden">
+                <span class="absolute top-2 right-3 text-[10px] text-gray-500 uppercase tracking-widest">Advertisement</span>
+                
+                <p class="text-gray-400 font-medium">Khu vực hiển thị Quảng Cáo Google</p>
+                <p class="text-gray-600 text-sm mt-2">(Đang chạy Demo. Script AdSense sẽ đặt ở đây)</p>
             </div>
         </div>
 
@@ -228,9 +255,22 @@
             } catch (error) { console.error(error); }
         }
 
+        // ĐÃ THÊM: 4. KIỂM TRA TRẠNG THÁI QUẢNG CÁO TỪ BẢNG ĐIỀU KHIỂN
+        async function checkAds() {
+            try {
+                const adSnap = await getDoc(doc(db, "settings", "ads"));
+                if (adSnap.exists() && adSnap.data().isActive === true) {
+                    document.getElementById('ad-container').classList.remove('hidden');
+                } else {
+                    document.getElementById('ad-container').classList.add('hidden');
+                }
+            } catch (e) { console.error("Lỗi tải cấu hình quảng cáo", e); }
+        }
+
         document.addEventListener("DOMContentLoaded", () => {
             loadHeroConfig();
             loadLatestProducts();
+            checkAds(); // Gọi hàm kiểm tra và bật/tắt quảng cáo
         });
     </script>
 </body>
