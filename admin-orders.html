@@ -16,104 +16,119 @@
             darkMode: 'class',
             theme: {
                 extend: {
-                    colors: {
-                        primary: '#3b82f6', 
-                    },
-                    // 2. ÉP TAILWIND ƯU TIÊN DÙNG FONT INTER CHO TOÀN WEB
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    }
+                    colors: { primary: '#3b82f6', },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], }
                 }
             }
         }
     </script>
 </head>
-<body class="bg-gray-900 text-white font-sans flex h-screen overflow-hidden" style="display: none;">
+<body class="bg-gray-900 text-white font-sans overflow-hidden" style="display: none;">
 
-    <aside class="w-64 bg-gray-800 border-r border-gray-700 flex flex-col">
-        <a href="index.html" title="Về Trang Chủ" class="h-16 flex items-center px-6 border-b border-gray-700 hover:bg-gray-700/50 transition-colors cursor-pointer">
-            <span data-i18n="admin_os" class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">CoreVault OS</span>
-        </a>
+    <div class="flex h-screen w-full relative">
+        <div id="sidebar-overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/60 z-40 hidden md:hidden backdrop-blur-sm transition-opacity"></div>
 
-        <nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
-            <a href="admin.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-700 rounded-xl transition-all">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
-                <span data-i18n="admin_dashboard">Dashboard</span>
-            </a>
-            <a href="admin-products.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-700 rounded-xl transition-all">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
-                <span data-i18n="admin_products">Products</span>
-            </a>
-            <a href="admin-users.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-700 rounded-xl transition-all">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                <span data-i18n="admin_users">Users</span>
-            </a>
-            <a href="admin-orders.html" class="flex items-center gap-3 px-4 py-3 bg-blue-600/20 text-blue-400 rounded-xl border border-blue-600/30 font-medium transition-all">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                <span data-i18n="admin_orders">Orders</span>
-            </a>
-            <a href="admin-settings.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-700 rounded-xl transition-all">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                </svg>
-                <span data-i18n="admin_settings">Settings</span>
-            </a>
-        </nav>
-    </aside>
-
-    <main class="flex-1 flex flex-col h-screen overflow-hidden relative">
-        <header class="h-16 bg-gray-900 border-b border-gray-800 flex items-center justify-between px-8">
-            <div class="relative w-64">
-                <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-                    <svg class="w-5 h-5 text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                </span>
-                <input type="text" data-i18n="admin_search" class="w-full bg-gray-800 text-white border border-gray-700 rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:border-blue-500 transition-colors text-sm" placeholder="Search...">
-            </div>
-            <div class="flex items-center gap-4">
-                <button onclick="toggleLanguage()" class="text-gray-300 hover:text-white px-3 py-1.5 text-sm font-medium border border-gray-700 hover:border-gray-500 hover:bg-gray-800 rounded-lg transition-all flex items-center gap-1">
-                    <span data-i18n="lang_btn">EN / VN</span>
+        <aside id="admin-sidebar" class="w-64 bg-gray-800 border-r border-gray-700 flex flex-col absolute inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 transition-transform duration-300 z-50 shadow-2xl md:shadow-none">
+            <div class="h-16 flex items-center justify-between px-6 border-b border-gray-700">
+                <a href="index.html" class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">CoreVault OS</a>
+                <button onclick="toggleSidebar()" class="md:hidden text-gray-400 hover:text-white">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </button>
-                <button class="text-gray-400 hover:text-white"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg></button>
-                <div onclick="logoutAdmin()" title="Đăng Xuất (Logout)" class="w-9 h-9 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 flex items-center justify-center font-bold text-sm shadow-lg cursor-pointer hover:scale-110 transition-transform">LR</div>
             </div>
-        </header>
 
-        <div class="flex-1 overflow-y-auto p-8">
-            <div class="flex justify-between items-end mb-8">
-                <div>
-                    <h1 data-i18n="order_title" class="text-3xl font-bold">Transactions</h1>
-                    <p data-i18n="order_desc" class="text-gray-400 mt-1">Track your revenue and order history.</p>
+            <nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
+                <a href="admin.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-700 rounded-xl transition-all">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                    <span data-i18n="admin_dashboard">Dashboard</span>
+                </a>
+                <a href="admin-products.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-700 rounded-xl transition-all">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+                    <span data-i18n="admin_products">Products</span>
+                </a>
+                <a href="admin-users.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-700 rounded-xl transition-all">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    <span data-i18n="admin_users">Users</span>
+                </a>
+                <a href="admin-orders.html" class="flex items-center gap-3 px-4 py-3 bg-blue-600/20 text-blue-400 rounded-xl border border-blue-600/30 font-medium transition-all">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    <span data-i18n="admin_orders">Orders</span>
+                </a>
+                <a href="admin-settings.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-700 rounded-xl transition-all">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    </svg>
+                    <span data-i18n="admin_settings">Settings</span>
+                </a>
+            </nav>
+        </aside>
+
+        <main class="flex-1 flex flex-col h-screen overflow-hidden relative">
+            <header class="h-16 bg-gray-900 border-b border-gray-800 flex items-center justify-between px-4 md:px-8">
+                <div class="flex items-center gap-3">
+                    <button onclick="toggleSidebar()" class="md:hidden text-gray-400 hover:text-white p-2 rounded-lg bg-gray-800 border border-gray-700">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                    </button>
+                    <div class="relative w-40 md:w-64 hidden sm:block">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                            <svg class="w-5 h-5 text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                        </span>
+                        <input type="text" data-i18n="admin_search" class="w-full bg-gray-800 text-white border border-gray-700 rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:border-blue-500 transition-colors text-sm" placeholder="Search...">
+                    </div>
                 </div>
-                <button class="bg-gray-800 border border-gray-700 hover:bg-gray-700 text-white px-6 py-2.5 rounded-xl font-bold shadow-lg">
-                    <span data-i18n="order_export">Export CSV</span>
-                </button>
-            </div>
+                <div class="flex items-center gap-3 md:gap-4">
+                    <button onclick="toggleLanguage()" class="text-gray-300 hover:text-white px-3 py-1.5 text-xs md:text-sm font-medium border border-gray-700 hover:border-gray-500 hover:bg-gray-800 rounded-lg transition-all flex items-center gap-1">
+                        <span data-i18n="lang_btn">EN / VN</span>
+                    </button>
+                    <div onclick="logoutAdmin()" title="Đăng Xuất (Logout)" class="w-8 h-8 md:w-9 md:h-9 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 flex items-center justify-center font-bold text-xs md:text-sm shadow-lg cursor-pointer hover:scale-110 transition-transform">LR</div>
+                </div>
+            </header>
 
-            <div class="bg-gray-800 rounded-xl border border-gray-700 overflow-hidden shadow-lg">
-                <table class="w-full text-left border-collapse">
-                    <thead class="bg-gray-900/50 text-gray-400 text-xs uppercase tracking-wider">
-                        <tr>
-                            <th data-i18n="th_order_id" class="p-4 font-medium">Order ID</th>
-                            <th data-i18n="th_product" class="p-4 font-medium">Product</th>
-                            <th data-i18n="th_amount" class="p-4 font-medium">Amount</th>
-                            <th data-i18n="th_status" class="p-4 font-medium">Status</th>
-                            <th class="p-4 font-medium text-right">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="orders-tbody" class="divide-y divide-gray-700/50">
-                        <tr><td colspan="5" class="text-center p-8 text-gray-500 animate-pulse">Loading orders from Cloud...</td></tr>
-                    </tbody>
-                </table>
+            <div class="flex-1 overflow-y-auto p-4 md:p-8">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-6 md:mb-8 gap-4">
+                    <div>
+                        <h1 data-i18n="order_title" class="text-2xl md:text-3xl font-bold">Transactions</h1>
+                        <p data-i18n="order_desc" class="text-gray-400 text-sm md:text-base mt-1">Track your revenue and order history.</p>
+                    </div>
+                    <button class="w-full md:w-auto bg-gray-800 border border-gray-700 hover:bg-gray-700 text-white px-6 py-2.5 rounded-xl font-bold shadow-lg">
+                        <span data-i18n="order_export">Export CSV</span>
+                    </button>
+                </div>
+
+                <div class="bg-gray-800 rounded-xl border border-gray-700 overflow-hidden shadow-lg overflow-x-auto">
+                    <table class="w-full min-w-[600px] text-left border-collapse">
+                        <thead class="bg-gray-900/50 text-gray-400 text-xs uppercase tracking-wider">
+                            <tr>
+                                <th data-i18n="th_order_id" class="p-4 font-medium">Order ID</th>
+                                <th data-i18n="th_product" class="p-4 font-medium">Product</th>
+                                <th data-i18n="th_amount" class="p-4 font-medium">Amount</th>
+                                <th data-i18n="th_status" class="p-4 font-medium">Status</th>
+                                <th class="p-4 font-medium text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="orders-tbody" class="divide-y divide-gray-700/50">
+                            <tr><td colspan="5" class="text-center p-8 text-gray-500 animate-pulse">Loading orders from Cloud...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
-    </main>
+        </main>
+    </div>
 
     <script src="lang.js"></script>
     <script type="module" src="auth-guard.js"></script>
+    
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('admin-sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            sidebar.classList.toggle('-translate-x-full');
+            overlay.classList.toggle('hidden');
+        }
+    </script>
 
     <script type="module">
-        import { db, collection, getDocs, doc, updateDoc } from './firebase.js'; // Đã thêm updateDoc
+        import { db, collection, getDocs, doc, updateDoc } from './firebase.js';
 
         async function loadOrders() {
             const tbody = document.getElementById('orders-tbody');
@@ -136,7 +151,6 @@
                         ? '<span data-i18n="val_free" class="text-green-400 font-bold text-sm">FREE</span>' 
                         : `<span data-price-value="${data.price}" class="text-white font-bold text-sm"></span>`;
 
-                    // ĐÃ THÊM: TÔ MÀU TRẠNG THÁI VÀ NÚT DUYỆT ĐƠN
                     let statusDisplay = '';
                     let actionBtn = '';
 
@@ -145,23 +159,23 @@
                         actionBtn = `<span class="text-gray-500 text-xs">No Action</span>`;
                     } else {
                         statusDisplay = `<span class="px-2.5 py-1 bg-yellow-500/20 text-yellow-500 border border-yellow-500/30 rounded-full text-xs font-bold animate-pulse">Pending</span>`;
-                        actionBtn = `<button onclick="approveOrder('${docId}')" class="bg-green-600 hover:bg-green-500 text-white text-xs font-bold px-4 py-2 rounded-lg transition-all shadow-lg">Duyệt Đơn</button>`;
+                        actionBtn = `<button onclick="approveOrder('${docId}')" class="bg-green-600 hover:bg-green-500 text-white text-xs font-bold px-3 md:px-4 py-2 rounded-lg transition-all shadow-lg whitespace-nowrap">Duyệt Đơn</button>`;
                     }
 
                     const newRow = document.createElement('tr');
                     newRow.className = "hover:bg-gray-700/20 transition-colors group";
                     
                     newRow.innerHTML = `
-                        <td class="p-4 font-mono text-sm text-blue-400">${shortId}</td>
-                        <td class="p-4">
-                            <p class="font-bold text-white">${data.product}</p>
-                            <p class="text-xs text-gray-400 flex items-center gap-1">
+                        <td class="p-4 font-mono text-xs md:text-sm text-blue-400 whitespace-nowrap">${shortId}</td>
+                        <td class="p-4 min-w-[200px]">
+                            <p class="font-bold text-white text-sm line-clamp-2">${data.product}</p>
+                            <p class="text-xs text-gray-400 flex items-center gap-1 mt-1">
                                 <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-                                ${data.user}
+                                <span class="truncate">${data.user}</span>
                             </p>
                         </td>
-                        <td class="p-4">${priceDisplay}</td>
-                        <td class="p-4">${statusDisplay}</td>
+                        <td class="p-4 whitespace-nowrap">${priceDisplay}</td>
+                        <td class="p-4 whitespace-nowrap">${statusDisplay}</td>
                         <td class="p-4 text-right">${actionBtn}</td>
                     `;
                     
@@ -176,13 +190,12 @@
             }
         }
 
-        // ĐÃ THÊM: HÀM DUYỆT ĐƠN
         window.approveOrder = async function(docId) {
             if(confirm("Bạn đã nhận được tiền và muốn duyệt đơn hàng này? Khách hàng sẽ nhận được link tải ngay lập tức.")) {
                 try {
                     await updateDoc(doc(db, "orders", docId), { status: 'Completed' });
                     alert("Đã duyệt đơn hàng thành công!");
-                    loadOrders(); // Tải lại bảng để mất nút Duyệt
+                    loadOrders(); 
                 } catch(error) {
                     alert("Lỗi thao tác: " + error.message);
                 }
