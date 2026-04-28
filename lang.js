@@ -21,7 +21,6 @@ const langData = {
         "val_premium": "Premium", "val_active": "Active", "val_completed": "Completed", 
         "val_gaming": "Gaming", "val_price_15": "$15.00",
         
-        // ĐÃ THÊM btn_delete VÀO ĐÂY:
         "btn_ban": "Ban", "btn_edit": "Edit", "btn_delete": "Delete",
         
         // TRANG AUTH
@@ -53,6 +52,11 @@ const langData = {
         "detail_not_found": "Tool not found or has been removed.", "detail_btn_buy": "Purchase Tool", "detail_btn_download": "Download Now", "detail_features": "Key Features",
         "modal_req_min": "Minimum Requirements (1 per line)", "modal_req_rec": "Recommended Specs (1 per line)",
         "modal_pay_title": "Payment Checkout", "modal_pay_desc": "Scan the QR code with your banking app.", "modal_pay_btn": "I have paid", "msg_login_req": "Please login to continue!",
+        
+        // ĐÃ BỔ SUNG TEXT CHO TRANG DETAIL (Minimum requirements, Verified...)
+        "detail_req_min_title": "Minimum Requirements", "detail_req_rec_title": "Recommended Specs",
+        "detail_license": "License / Access", "detail_verified": "Verified", "detail_instant": "Instant Delivery",
+
         "about_title": "About LunarRider0", 
         "about_role": "IT Student | Developer | Content Creator", 
         "about_bio_title": "My Journey",
@@ -81,7 +85,6 @@ const langData = {
         "val_premium": "Cao Cấp (Premium)", "val_active": "Hoạt Động", "val_completed": "Hoàn Thành",
         "val_gaming": "Tiện ích Game", "val_price_15": "380.000 ₫",
         
-        // ĐÃ THÊM btn_delete VÀO ĐÂY:
         "btn_ban": "Khóa (Ban)", "btn_edit": "Chỉnh Sửa", "btn_delete": "Xóa",
         
         // TRANG AUTH
@@ -113,6 +116,11 @@ const langData = {
         "detail_not_found": "Không tìm thấy công cụ hoặc đã bị xóa.", "detail_btn_buy": "Mua Công Cụ", "detail_btn_download": "Tải Xuống Ngay", "detail_features": "Tính Năng Nổi Bật",
         "modal_req_min": "Cấu hình Tối thiểu (1 mục/dòng)", "modal_req_rec": "Cấu hình Đề nghị (1 mục/dòng)",
         "modal_pay_title": "Thanh Toán Đơn Hàng", "modal_pay_desc": "Sử dụng App Ngân hàng để quét mã QR bên dưới.", "modal_pay_btn": "Tôi đã chuyển khoản", "msg_login_req": "Vui lòng đăng nhập để tiếp tục!",
+        
+        // ĐÃ BỔ SUNG TEXT CHO TRANG DETAIL (Minimum requirements, Verified...)
+        "detail_req_min_title": "Cấu Hình Tối Thiểu", "detail_req_rec_title": "Cấu Hình Khuyên Dùng",
+        "detail_license": "Bản Quyền / Truy Cập", "detail_verified": "Đã Kiểm Duyệt", "detail_instant": "Giao Hàng Tức Thì",
+
         "about_title": "Về LunarRider0", 
         "about_role": "Sinh viên IT | Lập trình viên | Sáng tạo nội dung", 
         "about_bio_title": "Hành trình của tôi",

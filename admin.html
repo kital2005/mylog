@@ -16,240 +16,204 @@
             darkMode: 'class',
             theme: {
                 extend: {
-                    colors: {
-                        primary: '#3b82f6', 
-                    },
-                    // 2. ÉP TAILWIND ƯU TIÊN DÙNG FONT INTER CHO TOÀN WEB
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    }
+                    colors: { primary: '#3b82f6', },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], }
                 }
             }
         }
     </script>
 </head>
-<body class="bg-gray-900 text-white font-sans flex h-screen overflow-hidden" style="display: none;">
+<body class="bg-gray-900 text-white font-sans overflow-hidden" style="display: none;">
 
-    <aside class="w-64 bg-gray-800 border-r border-gray-700 flex flex-col">
-        <a href="index.html" class="h-16 flex items-center px-6 border-b border-gray-700 hover:bg-gray-700/50 transition-colors">
-            <span data-i18n="admin_os" class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">CoreVault OS</span>
-        </a>
-        <nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
-            <a href="admin.html" class="flex items-center gap-3 px-4 py-3 bg-blue-600/20 text-blue-400 rounded-xl border border-blue-600/30 font-medium transition-all">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
-                <span data-i18n="admin_dashboard">Dashboard</span>
-            </a>
-            <a href="admin-products.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-700 rounded-xl transition-all">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
-                <span data-i18n="admin_products">Products</span>
-            </a>
-            <a href="admin-users.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-700 rounded-xl transition-all">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                <span data-i18n="admin_users">Users</span>
-            </a>
-            <a href="admin-orders.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-700 rounded-xl transition-all">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                <span data-i18n="admin_orders">Orders</span>
-            </a>
-            <a href="admin-settings.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-700 rounded-xl transition-all">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                </svg>
-                <span data-i18n="admin_settings">Settings</span>
-            </a>
-        </nav>
-    </aside>
+    <div class="flex h-screen w-full relative">
+        
+        <div id="sidebar-overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/60 z-40 hidden md:hidden backdrop-blur-sm transition-opacity"></div>
 
-    <main class="flex-1 flex flex-col h-screen overflow-hidden relative">
-        <header class="h-16 bg-gray-900 border-b border-gray-800 flex items-center justify-between px-8">
-            <div class="relative w-64">
-                <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                </span>
-                <input type="text" data-i18n="admin_search" class="w-full bg-gray-800 text-white border border-gray-700 rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:border-blue-500 text-sm" placeholder="Search...">
+        <aside id="admin-sidebar" class="w-64 bg-gray-800 border-r border-gray-700 flex flex-col absolute inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 transition-transform duration-300 z-50 shadow-2xl md:shadow-none">
+            <div class="h-16 flex items-center justify-between px-6 border-b border-gray-700">
+                <a href="index.html" class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">CoreVault OS</a>
+                <button onclick="toggleSidebar()" class="md:hidden text-gray-400 hover:text-white">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
             </div>
-            <div class="flex items-center gap-4">
-                <button onclick="toggleLanguage()" class="text-gray-300 hover:text-white px-3 py-1.5 text-sm border border-gray-700 rounded-lg">EN / VN</button>
-                <div onclick="logoutAdmin()" title="Đăng Xuất" class="w-9 h-9 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 flex items-center justify-center font-bold text-sm shadow-lg cursor-pointer">LR</div>
-            </div>
-        </header>
+            
+            <nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
+                <a href="admin.html" class="flex items-center gap-3 px-4 py-3 bg-blue-600/20 text-blue-400 rounded-xl border border-blue-600/30 font-medium transition-all">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                    <span data-i18n="admin_dashboard">Dashboard</span>
+                </a>
+                <a href="admin-products.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-700 rounded-xl transition-all">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+                    <span data-i18n="admin_products">Products</span>
+                </a>
+                <a href="admin-users.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-700 rounded-xl transition-all">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    <span data-i18n="admin_users">Users</span>
+                </a>
+                <a href="admin-orders.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-700 rounded-xl transition-all">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    <span data-i18n="admin_orders">Orders</span>
+                </a>
+                <a href="admin-settings.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-700 rounded-xl transition-all">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    </svg>
+                    <span data-i18n="admin_settings">Settings</span>
+                </a>
+            </nav>
+        </aside>
 
-        <div class="flex-1 overflow-y-auto p-8">
-            <div class="flex justify-between items-end mb-8">
-                <div>
-                    <h1 data-i18n="dash_overview" class="text-3xl font-bold text-white">Overview</h1>
-                    <p data-i18n="dash_welcome" class="text-gray-400 mt-1">Welcome back. Here's what's happening with your platform.</p>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                <div class="bg-gray-800 rounded-2xl p-6 border border-gray-700 shadow-lg">
-                    <div class="flex justify-between items-start mb-4">
-                        <div>
-                            <p class="text-gray-400 text-sm font-medium flex items-center gap-2">
-                                <span class="w-2 h-2 rounded-full bg-green-500"></span><span data-i18n="dash_active">Active Tools</span>
-                            </p>
-                            <h3 id="stat-active-tools" class="text-3xl font-bold text-white mt-2">0</h3>
-                        </div>
+        <main class="flex-1 flex flex-col h-screen overflow-hidden relative">
+            <header class="h-16 bg-gray-900 border-b border-gray-800 flex items-center justify-between px-4 md:px-8">
+                <div class="flex items-center gap-3">
+                    <button onclick="toggleSidebar()" class="md:hidden text-gray-400 hover:text-white p-2 rounded-lg bg-gray-800 border border-gray-700">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                    </button>
+                    <div class="relative w-40 md:w-64 hidden sm:block">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                        </span>
+                        <input type="text" data-i18n="admin_search" class="w-full bg-gray-800 text-white border border-gray-700 rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:border-blue-500 text-sm" placeholder="Search...">
                     </div>
                 </div>
-                <div class="bg-gray-800 rounded-2xl p-6 border border-gray-700 shadow-lg">
-                    <div class="flex justify-between items-start mb-4">
-                        <div>
-                            <p class="text-gray-400 text-sm font-medium flex items-center gap-2">
-                                <span class="w-2 h-2 rounded-full bg-blue-500"></span><span data-i18n="dash_visits">Total Tools</span>
-                            </p>
-                            <h3 id="stat-total-tools" class="text-3xl font-bold text-white mt-2">0</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-gray-800 rounded-2xl p-6 border border-gray-700 shadow-lg">
-                    <div class="flex justify-between items-start mb-4">
-                        <div>
-                            <p class="text-gray-400 text-sm font-medium flex items-center gap-2">
-                                <span class="w-2 h-2 rounded-full bg-purple-500"></span><span data-i18n="dash_new_users">Total Orders</span>
-                            </p>
-                            <h3 id="stat-total-orders" class="text-3xl font-bold text-white mt-2">0</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-gray-800 rounded-2xl p-6 border border-gray-700 shadow-lg">
-                    <div class="flex justify-between items-start mb-4">
-                        <div>
-                            <p class="text-gray-400 text-sm font-medium flex items-center gap-2">
-                                <span class="w-2 h-2 rounded-full bg-yellow-500"></span><span data-i18n="dash_revenue">Total Revenue</span>
-                            </p>
-                            <h3 id="stat-total-revenue" class="text-3xl font-bold text-green-400 mt-2">$0</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 
-                <div class="lg:col-span-2 bg-gray-800 rounded-2xl border border-gray-700 p-6 shadow-lg">
-                    <h3 data-i18n="dash_chart" class="text-lg font-bold text-white mb-6">Traffic & Revenue Overview</h3>
-                    <div class="h-64 w-full"><canvas id="revenueChart"></canvas></div>
+                <div class="flex items-center gap-3 md:gap-4">
+                    <button onclick="toggleLanguage()" class="text-gray-300 hover:text-white px-3 py-1.5 text-xs md:text-sm font-medium border border-gray-700 hover:border-gray-500 rounded-lg"><span data-i18n="lang_btn">EN / VN</span></button>
+                    <div onclick="logoutAdmin()" title="Đăng Xuất" class="w-8 h-8 md:w-9 md:h-9 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 flex items-center justify-center font-bold text-xs md:text-sm shadow-lg cursor-pointer">LR</div>
+                </div>
+            </header>
+
+            <div class="flex-1 overflow-y-auto p-4 md:p-8">
+                <div class="flex justify-between items-end mb-6 md:mb-8">
+                    <div>
+                        <h1 data-i18n="dash_overview" class="text-2xl md:text-3xl font-bold text-white">Overview</h1>
+                        <p data-i18n="dash_welcome" class="text-gray-400 text-sm md:text-base mt-1">Welcome back. Here's what's happening with your platform.</p>
+                    </div>
                 </div>
 
-                <div class="bg-gray-800 rounded-2xl border border-gray-700 p-6 shadow-lg flex flex-col">
-                    <div class="flex justify-between items-center mb-6">
-                        <h3 data-i18n="dash_sales" class="text-lg font-bold text-white">Recent Sales</h3>
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8">
+                    <div class="bg-gray-800 rounded-2xl p-4 md:p-6 border border-gray-700 shadow-lg">
+                        <p class="text-gray-400 text-xs md:text-sm font-medium flex items-center gap-2 mb-2">
+                            <span class="w-2 h-2 rounded-full bg-green-500"></span><span data-i18n="dash_active" class="truncate">Active Tools</span>
+                        </p>
+                        <h3 id="stat-active-tools" class="text-2xl md:text-3xl font-bold text-white">0</h3>
                     </div>
-                    <div id="recent-sales-list" class="space-y-4 flex-grow overflow-y-auto">
-                        <p class="text-gray-500 text-center animate-pulse">Đang tải...</p>
+                    <div class="bg-gray-800 rounded-2xl p-4 md:p-6 border border-gray-700 shadow-lg">
+                        <p class="text-gray-400 text-xs md:text-sm font-medium flex items-center gap-2 mb-2">
+                            <span class="w-2 h-2 rounded-full bg-blue-500"></span><span data-i18n="dash_visits" class="truncate">Total Tools</span>
+                        </p>
+                        <h3 id="stat-total-tools" class="text-2xl md:text-3xl font-bold text-white">0</h3>
+                    </div>
+                    <div class="bg-gray-800 rounded-2xl p-4 md:p-6 border border-gray-700 shadow-lg">
+                        <p class="text-gray-400 text-xs md:text-sm font-medium flex items-center gap-2 mb-2">
+                            <span class="w-2 h-2 rounded-full bg-purple-500"></span><span data-i18n="dash_new_users" class="truncate">Total Orders</span>
+                        </p>
+                        <h3 id="stat-total-orders" class="text-2xl md:text-3xl font-bold text-white">0</h3>
+                    </div>
+                    <div class="bg-gray-800 rounded-2xl p-4 md:p-6 border border-gray-700 shadow-lg">
+                        <p class="text-gray-400 text-xs md:text-sm font-medium flex items-center gap-2 mb-2">
+                            <span class="w-2 h-2 rounded-full bg-yellow-500"></span><span data-i18n="dash_revenue" class="truncate">Total Revenue</span>
+                        </p>
+                        <h3 id="stat-total-revenue" class="text-xl md:text-3xl font-bold text-green-400 truncate">$0</h3>
                     </div>
                 </div>
 
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div class="lg:col-span-2 bg-gray-800 rounded-2xl border border-gray-700 p-4 md:p-6 shadow-lg">
+                        <h3 data-i18n="dash_chart" class="text-base md:text-lg font-bold text-white mb-6">Traffic & Revenue Overview</h3>
+                        <div class="h-64 w-full"><canvas id="revenueChart"></canvas></div>
+                    </div>
+
+                    <div class="bg-gray-800 rounded-2xl border border-gray-700 p-4 md:p-6 shadow-lg flex flex-col">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 data-i18n="dash_sales" class="text-base md:text-lg font-bold text-white">Recent Sales</h3>
+                        </div>
+                        <div id="recent-sales-list" class="space-y-4 flex-grow overflow-y-auto">
+                            <p class="text-gray-500 text-center animate-pulse text-sm">Đang tải...</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </main>
+        </main>
+    </div>
 
     <script src="lang.js"></script>
     <script type="module" src="auth-guard.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
+    <script>
+        // HÀM ĐÓNG/MỞ MENU TRÊN MOBILE
+        function toggleSidebar() {
+            const sidebar = document.getElementById('admin-sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            sidebar.classList.toggle('-translate-x-full');
+            overlay.classList.toggle('hidden');
+        }
+    </script>
+
     <script type="module">
         import { db, collection, getDocs } from './firebase.js';
 
         async function loadDashboardStats() {
             try {
-                // 1. TÍNH TOÁN SẢN PHẨM
                 const productsSnap = await getDocs(collection(db, "products"));
-                let totalTools = 0;
-                let activeTools = 0;
-                productsSnap.forEach(doc => {
-                    totalTools++;
-                    if(doc.data().status === 'Active') activeTools++;
-                });
+                let totalTools = 0; let activeTools = 0;
+                productsSnap.forEach(doc => { totalTools++; if(doc.data().status === 'Active') activeTools++; });
                 
                 document.getElementById('stat-total-tools').innerText = totalTools;
                 document.getElementById('stat-active-tools').innerText = activeTools;
 
-                // 2. TÍNH TOÁN ĐƠN HÀNG VÀ DOANH THU
                 const ordersSnap = await getDocs(collection(db, "orders"));
-                let totalOrders = 0;
-                let totalRevenueUSD = 0;
-                let recentSalesHTML = '';
+                let totalOrders = 0; let totalRevenueUSD = 0; let recentSalesHTML = '';
                 
-                // Lấy dữ liệu và sắp xếp đơn hàng mới nhất lên đầu
                 let ordersArray = [];
                 ordersSnap.forEach(doc => ordersArray.push(doc.data()));
                 ordersArray.sort((a, b) => b.timestamp - a.timestamp);
 
                 ordersArray.forEach((data, index) => {
                     totalOrders++;
-                    
-                    // Chỉ cộng tiền những đơn hàng đã thanh toán xong (Completed)
-                    if(data.status === 'Completed') {
-                        totalRevenueUSD += parseFloat(data.price || 0);
-                    }
+                    if(data.status === 'Completed') totalRevenueUSD += parseFloat(data.price || 0);
 
-                    // Lấy 4 đơn hàng mới nhất để show ra cái bảng bên phải
                     if (index < 4) {
                         const priceColor = data.price > 0 ? 'text-green-400' : 'text-gray-400';
-                        const priceText = data.price > 0 
-                            ? `<span data-price-value="${data.price}"></span>` 
-                            : `<span data-i18n="val_free">FREE</span>`;
+                        const priceText = data.price > 0 ? `<span data-price-value="${data.price}"></span>` : `<span data-i18n="val_free">FREE</span>`;
 
                         recentSalesHTML += `
                             <div class="flex items-center justify-between p-3 bg-gray-900/50 rounded-xl border border-gray-700/50">
                                 <div class="flex items-center gap-3">
-                                    <div class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center border border-gray-700 text-gray-400">
-                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                    <div class="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-gray-800 flex items-center justify-center border border-gray-700 text-gray-400">
+                                        <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                                     </div>
                                     <div>
-                                        <p class="text-sm font-bold text-white">${data.product}</p>
-                                        <p class="text-xs text-gray-500">${data.user.split('@')[0]}</p>
+                                        <p class="text-xs md:text-sm font-bold text-white truncate max-w-[120px] md:max-w-[200px]">${data.product}</p>
+                                        <p class="text-[10px] md:text-xs text-gray-500">${data.user.split('@')[0]}</p>
                                     </div>
                                 </div>
-                                <div class="text-sm font-bold ${priceColor}">${priceText}</div>
+                                <div class="text-xs md:text-sm font-bold ${priceColor}">${priceText}</div>
                             </div>
                         `;
                     }
                 });
 
                 document.getElementById('stat-total-orders').innerText = totalOrders;
-                
-                // Set tiền vào thẻ để hàm updateLanguage tự động đổi tỷ giá
                 const revEl = document.getElementById('stat-total-revenue');
                 revEl.setAttribute('data-price-value', totalRevenueUSD);
-                
                 document.getElementById('recent-sales-list').innerHTML = recentSalesHTML || '<p class="text-gray-500 text-center text-sm">Chưa có giao dịch nào.</p>';
 
-                // 3. VẼ BIỂU ĐỒ DEMO (Sử dụng Chart.js)
                 const ctx = document.getElementById('revenueChart').getContext('2d');
                 new Chart(ctx, {
                     type: 'line',
                     data: {
                         labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                        datasets: [{
-                            label: 'Revenue / Traffic',
-                            data: [1200, 1900, 1500, 2200, 2800, 3500, 3100],
-                            borderColor: '#3b82f6',
-                            backgroundColor: 'rgba(59, 130, 246, 0.1)',
-                            borderWidth: 3,
-                            tension: 0.4,
-                            fill: true
-                        }]
+                        datasets: [{ label: 'Revenue', data: [1200, 1900, 1500, 2200, 2800, 3500, 3100], borderColor: '#3b82f6', backgroundColor: 'rgba(59, 130, 246, 0.1)', borderWidth: 3, tension: 0.4, fill: true }]
                     },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { legend: { display: false } },
-                        scales: {
-                            y: { grid: { color: '#374151' }, ticks: { color: '#9ca3af' } },
-                            x: { grid: { display: false }, ticks: { color: '#9ca3af' } }
-                        }
-                    }
+                    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { grid: { color: '#374151' }, ticks: { color: '#9ca3af' } }, x: { grid: { display: false }, ticks: { color: '#9ca3af' } } } }
                 });
 
-                // Cập nhật lại ngôn ngữ và tiền tệ
                 if (typeof updateLanguage === 'function') updateLanguage();
 
-            } catch (error) {
-                console.error("Lỗi Dashboard:", error);
-            }
+            } catch (error) { console.error("Lỗi Dashboard:", error); }
         }
 
         document.addEventListener("DOMContentLoaded", loadDashboardStats);
