@@ -29,7 +29,7 @@
     <div class="w-full max-w-md bg-gray-800/80 backdrop-blur-xl rounded-3xl border border-gray-700 shadow-2xl overflow-hidden relative z-10 m-4">
         
         <div class="pt-8 pb-4 px-8 text-center">
-            <h2 class="text-3xl font-extrabold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent inline-block mb-2">CoreVault</h2>
+            <h2 class="text-3xl font-extrabold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent inline-block mb-2 italic">CoreVault</h2>
             <p data-i18n="auth_subtitle_login" class="text-gray-400 text-sm" id="form-subtitle">Welcome back, gamer!</p>
         </div>
 
@@ -46,13 +46,13 @@
             <form id="form-login" class="fade-enter-active" onsubmit="return submitLogin(event)">
                 <div class="space-y-5">
                     <div>
-                        <label data-i18n="auth_user_email" class="block text-sm font-medium text-gray-400 mb-1">Username or Email</label>
-                        <input type="text" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500" placeholder="...">
+                        <label data-i18n="auth_user_email" class="block text-sm font-medium text-gray-400 mb-1">Email Address</label>
+                        <input type="email" required class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500" placeholder="name@example.com">
                     </div>
                     <div>
                         <label data-i18n="auth_pwd" class="block text-sm font-medium text-gray-400 mb-1">Password</label>
                         <div class="relative">
-                            <input type="password" id="login-pwd" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500" placeholder="••••••••">
+                            <input type="password" id="login-pwd" required class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500" placeholder="••••••••">
                             <button type="button" onclick="togglePassword('login-pwd')" class="absolute right-4 top-3.5 text-gray-500 hover:text-gray-300">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
                             </button>
@@ -84,7 +84,7 @@
                         <p id="err-user" data-i18n="auth_err_user" class="text-red-400 text-xs mt-1 hidden">This username is already taken.</p>
                     </div>
                     <div>
-                        <input type="email" data-i18n="auth_email" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500" placeholder="Email Address">
+                        <input type="email" required data-i18n="auth_email" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500" placeholder="Email Address">
                     </div>
                     <div>
                         <div class="relative">
@@ -157,7 +157,7 @@
             browserSessionPersistence
         } from './firebase.js';
 
-        // ĐÃ THÊM: Chèn thẳng hàm gửi mail từ Firebase để chắc chắn hoạt động
+        // ĐÃ THÊM: Import hàm quên mật khẩu
         import { sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 
         window.switchTab = function(tab) {
@@ -239,16 +239,22 @@
         }
 
         // ==========================================
-        // 1. HÀM XỬ LÝ ĐĂNG NHẬP
+        // 1. HÀM XỬ LÝ ĐĂNG NHẬP (ĐÃ CÓ .TRIM() VÀ FIX LỖI SAI MK)
         // ==========================================
         window.submitLogin = function(event) {
             event.preventDefault(); 
 
-            const emailInput = document.querySelector('#form-login input[type="text"]').value;
-            const pwdInput = document.getElementById('login-pwd').value;
+            // ĐÃ SỬA: Thêm .trim() và đổi selector cho chuẩn
+            const emailInput = document.querySelector('#form-login input[type="email"]').value.trim();
+            const pwdInput = document.getElementById('login-pwd').value.trim();
             
             const rememberMe = document.querySelector('#form-login input[type="checkbox"]').checked;
             const persistenceType = rememberMe ? browserLocalPersistence : browserSessionPersistence;
+
+            if (!emailInput.includes('@')) {
+                alert("Lỗi: Vui lòng nhập địa chỉ EMAIL để đăng nhập (Không dùng Username)!");
+                return;
+            }
 
             setPersistence(auth, persistenceType)
                 .then(() => {
@@ -256,42 +262,34 @@
                 })
                 .then(async (userCredential) => {
                     const userEmail = userCredential.user.email;
-                    
                     const usersSnap = await getDocs(collection(db, "users"));
                     let isBanned = false;
                     usersSnap.forEach(doc => {
-                        if(doc.data().email === userEmail && doc.data().status === 'Banned') {
-                            isBanned = true;
-                        }
+                        if(doc.data().email === userEmail && doc.data().status === 'Banned') isBanned = true;
                     });
 
                     if (isBanned) {
-                        alert("LỖI: Tài khoản " + userEmail + " đã bị cấm khỏi hệ thống!");
+                        alert("LỖI: Tài khoản của bạn đã bị cấm khỏi hệ thống!");
                         return auth.signOut();
                     }
                     
-                    if (userEmail === "thaituan.28012020@gmail.com") {
-                        alert("Welcome Back, Admin " + userEmail);
-                        window.location.href = "admin.html"; 
-                    } else {
-                        alert("Đăng nhập thành công! Chào mừng: " + userEmail);
-                        window.location.href = "index.html"; 
-                    }
+                    window.location.href = (userEmail === "thaituan.28012020@gmail.com") ? "admin.html" : "index.html";
                 })
                 .catch((error) => {
+                    console.error(error.code);
                     alert("Lỗi đăng nhập: Sai email hoặc mật khẩu!");
                 });
         }
 
         // ==========================================
-        // 2. HÀM XỬ LÝ TẠO TÀI KHOẢN
+        // 2. HÀM XỬ LÝ ĐĂNG KÝ (ĐÃ CÓ .TRIM())
         // ==========================================
         window.submitRegister = function(event) {
             event.preventDefault(); 
             
-            const email = document.querySelector('#form-register input[type="email"]').value; 
-            const pwd = document.getElementById('reg-pwd').value;
-            const confirmPwd = document.getElementById('reg-pwd-confirm').value;
+            const email = document.querySelector('#form-register input[type="email"]').value.trim(); 
+            const pwd = document.getElementById('reg-pwd').value.trim();
+            const confirmPwd = document.getElementById('reg-pwd-confirm').value.trim();
             
             if (pwd !== confirmPwd) {
                 window.checkPasswordMatch(); 
@@ -299,8 +297,16 @@
             }
 
             createUserWithEmailAndPassword(auth, email, pwd)
-                .then((userCredential) => {
-                    alert("Tạo tài khoản thành công cho Email: " + userCredential.user.email);
+                .then(async (userCredential) => {
+                    // Tự động ghi danh vào Database
+                    const { addDoc, collection } = await import('https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js');
+                    await addDoc(collection(db, "users"), {
+                        email: email,
+                        status: 'Active',
+                        plan: 'Free',
+                        createdAt: new Date()
+                    });
+                    alert("Tạo tài khoản thành công! Hãy dùng EMAIL vừa tạo để đăng nhập.");
                     window.switchTab('login'); 
                 })
                 .catch((error) => {
@@ -308,19 +314,8 @@
                 });
         }
 
-        document.getElementById('reg-user').addEventListener('blur', function(e) {
-            const err = document.getElementById('err-user');
-            if(e.target.value.toLowerCase() === 'admin') {
-                err.classList.remove('hidden');
-                e.target.classList.add('border-red-500');
-            } else {
-                err.classList.add('hidden');
-                e.target.classList.remove('border-red-500');
-            }
-        });
-
         // ==========================================
-        // 3. ĐÃ KÍCH HOẠT: HÀM XỬ LÝ QUÊN MẬT KHẨU
+        // 3. HÀM XỬ LÝ QUÊN MẬT KHẨU
         // ==========================================
         window.submitForgot = function(event) {
             event.preventDefault(); 
@@ -335,19 +330,25 @@
             sendPasswordResetEmail(auth, email)
                 .then(() => {
                     alert("Link khôi phục mật khẩu đã được gửi! Vui lòng kiểm tra Email của bạn (Cả hòm thư rác).");
-                    window.cancelForgot(); // Dùng hàm cancelForgot có sẵn để tự động lùi về Login
-                    emailInput.value = ''; // Xóa trắng ô nhập email
+                    window.cancelForgot();
+                    emailInput.value = '';
                 })
                 .catch((error) => {
-                    if (error.code === 'auth/user-not-found') {
-                        alert("Lỗi: Email này chưa được đăng ký trong hệ thống!");
-                    } else if (error.code === 'auth/invalid-email') {
-                        alert("Lỗi: Địa chỉ Email không hợp lệ!");
-                    } else {
-                        alert("Lỗi thao tác: " + error.message);
-                    }
+                    if (error.code === 'auth/user-not-found') alert("Lỗi: Email này chưa được đăng ký!");
+                    else alert("Lỗi thao tác: " + error.message);
                 });
         };
+
+        document.getElementById('reg-user').addEventListener('blur', function(e) {
+            const err = document.getElementById('err-user');
+            if(e.target.value.toLowerCase() === 'admin') {
+                err.classList.remove('hidden');
+                e.target.classList.add('border-red-500');
+            } else {
+                err.classList.add('hidden');
+                e.target.classList.remove('border-red-500');
+            }
+        });
     </script>
 </body>
 </html>
