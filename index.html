@@ -53,7 +53,7 @@
                 <div class="flex-shrink-0">
                     <a href="index.html" class="flex items-center gap-3 hover:scale-105 transition-transform">
                         <img src="logo.svg" alt="CoreVault Logo" class="w-10 h-10 shadow-lg shadow-blue-500/20 rounded-xl">
-                        <span class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                        <span class="text-xl md:text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
                             CoreVault
                         </span>
                     </a>
@@ -67,42 +67,52 @@
                     </div>
                 </div>
 
-                <div class="flex items-center space-x-3">
-                    <button onclick="toggleLanguage()" class="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium border border-gray-700 hover:border-gray-500 hover:bg-gray-800 rounded-lg transition-all flex items-center gap-1">
+                <div class="flex items-center space-x-2 md:space-x-3">
+                    <button onclick="toggleLanguage()" class="text-gray-300 hover:text-white px-2 md:px-3 py-1.5 md:py-2 text-xs md:text-sm font-medium border border-gray-700 hover:bg-gray-800 rounded-lg transition-all flex items-center gap-1">
                         <span data-i18n="lang_btn">EN / VN</span>
                     </button>
                     
-                    <div id="header-auth" class="flex items-center gap-3 ml-2">
+                    <div id="header-auth" class="flex items-center gap-2 md:gap-3 ml-1 md:ml-2">
                         <div class="w-8 h-8 rounded-full bg-gray-700 animate-pulse"></div>
                     </div>
+
+                    <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="md:hidden text-gray-400 hover:text-white p-1.5 ml-1 rounded-lg border border-gray-700 bg-gray-800 focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                    </button>
                 </div>
 
             </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-900 border-b border-gray-800 px-4 pt-2 pb-4 space-y-2 shadow-2xl absolute w-full left-0 top-16 z-40">
+            <a href="index.html" class="block px-4 py-3 rounded-xl text-blue-400 bg-blue-600/10 border border-blue-500/20 font-bold">Home</a>
+            <a href="tools.html" class="block px-4 py-3 rounded-xl text-gray-300 hover:bg-gray-800 hover:text-white font-medium transition-colors">Tools Vault</a>
+            <a href="about.html" class="block px-4 py-3 rounded-xl text-gray-300 hover:bg-gray-800 hover:text-white font-medium transition-colors">About Me</a>
         </div>
     </nav>
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full flex-grow flex flex-col items-center justify-center">
         
-        <div class="relative w-full h-[500px] md:h-[600px] rounded-3xl overflow-hidden shadow-2xl border border-gray-700 mb-16 group cursor-pointer">
+        <div class="relative w-full h-[400px] md:h-[600px] rounded-3xl overflow-hidden shadow-2xl border border-gray-700 mb-16 group cursor-pointer">
             
             <div id="carousel-bg-1" class="absolute inset-0 bg-cover bg-center transition-all duration-700 opacity-100 bg-gray-800 group-hover:scale-105 group-hover:brightness-50 group-hover:blur-[3px]"></div>
             <div id="carousel-bg-2" class="absolute inset-0 bg-cover bg-center transition-all duration-700 opacity-0 bg-gray-800 group-hover:scale-105 group-hover:brightness-50 group-hover:blur-[3px]"></div>
             <div id="carousel-bg-3" class="absolute inset-0 bg-cover bg-center transition-all duration-700 opacity-0 bg-gray-800 group-hover:scale-105 group-hover:brightness-50 group-hover:blur-[3px]"></div>
             
-            <div class="absolute inset-0 flex flex-col items-center justify-center p-10 text-center transition-all duration-700">
-                <h1 id="dynamic-hero-title" class="text-5xl md:text-7xl font-extrabold mb-6 text-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)] group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:via-indigo-400 group-hover:to-purple-500 group-hover:bg-clip-text group-hover:text-transparent transition-all duration-500">
+            <div class="absolute inset-0 flex flex-col items-center justify-center p-8 md:p-10 text-center transition-all duration-700 bg-black/30 group-hover:bg-black/50">
+                <h1 id="dynamic-hero-title" class="text-4xl md:text-7xl font-extrabold mb-6 text-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)] group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:via-indigo-400 group-hover:to-purple-500 group-hover:bg-clip-text group-hover:text-transparent transition-all duration-500">
                     Welcome to CoreVault!
                 </h1>
-                <p id="dynamic-hero-desc" class="text-gray-100 text-lg md:text-xl mb-8 max-w-3xl leading-relaxed drop-shadow-[0_3px_3px_rgba(0,0,0,0.8)] font-medium transition-all duration-500">
+                <p id="dynamic-hero-desc" class="text-gray-100 text-base md:text-xl mb-8 max-w-3xl leading-relaxed drop-shadow-[0_3px_3px_rgba(0,0,0,0.8)] font-medium transition-all duration-500">
                     Please wait while the system connects...
                 </p>
-                <button onclick="window.location.href='tools.html'" data-i18n="hero_btn" class="px-8 py-3 bg-white hover:bg-gray-100 text-gray-900 transition-all duration-300 rounded-full font-bold shadow-[0_5px_15px_rgba(0,0,0,0.5)] group-hover:shadow-[0_0_30px_rgba(255,255,255,0.6)] group-hover:scale-110">
+                <button onclick="window.location.href='tools.html'" data-i18n="hero_btn" class="px-6 md:px-8 py-3 bg-white hover:bg-gray-100 text-gray-900 transition-all duration-300 rounded-full font-bold shadow-[0_5px_15px_rgba(0,0,0,0.5)] group-hover:shadow-[0_0_30px_rgba(255,255,255,0.6)] group-hover:scale-110">
                     Explore Now
                 </button>
             </div>
         </div>
 
-        <div id="ad-container" class="w-full max-w-7xl mx-auto px-4 hidden mb-12">
+        <div id="ad-container" class="w-full max-w-7xl mx-auto px-0 md:px-4 hidden mb-12">
             <div class="bg-gray-800/50 border border-gray-700 border-dashed rounded-2xl flex flex-col items-center justify-center p-8 text-center relative overflow-hidden">
                 <span class="absolute top-2 right-3 text-[10px] text-gray-500 uppercase tracking-widest">Advertisement</span>
                 
@@ -113,13 +123,13 @@
 
         <div class="flex items-center justify-between mb-10 w-full">
             <div>
-                <h2 data-i18n="home_latest_title" class="text-3xl font-bold text-white">Latest Tools</h2>
-                <p data-i18n="home_latest_desc" class="text-gray-400 mt-1">Hand-picked premium & free resources for you.</p>
+                <h2 data-i18n="home_latest_title" class="text-2xl md:text-3xl font-bold text-white">Latest Tools</h2>
+                <p data-i18n="home_latest_desc" class="text-gray-400 mt-1 text-sm md:text-base">Hand-picked premium & free resources for you.</p>
             </div>
             <a href="tools.html" data-i18n="filter_all" class="text-blue-400 hover:text-blue-300 font-bold text-sm flex items-center gap-1 transition-colors">View All →</a>
         </div>
 
-        <div id="products-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
+        <div id="products-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 w-full">
             <div class="col-span-full text-center py-12">
                 <p data-i18n="home_fetching" class="text-gray-500 animate-pulse font-bold tracking-widest uppercase">Fetching data from Cloud...</p>
             </div>
@@ -127,17 +137,52 @@
 
     </main>
 
-    <footer class="bg-gray-900 border-t border-gray-800 pt-12 pb-8 w-full mt-auto">
+    <footer class="bg-gray-900 border-t border-gray-800 pt-16 pb-8 w-full mt-auto">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-12 mb-12">
+                
+                <div class="md:col-span-2">
+                    <a href="index.html" class="flex items-center gap-3 mb-4 hover:scale-105 transition-transform w-fit">
+                        <img src="logo.svg" alt="CoreVault Logo" class="w-10 h-10 shadow-lg shadow-blue-500/20 rounded-xl">
+                        <span class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                            CoreVault
+                        </span>
+                    </a>
+                    <p class="text-gray-400 text-sm leading-relaxed max-w-sm" data-i18n="hero_desc">
+                        Your premier destination for premium tools, optimized resources, and exclusive tech applications.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-bold mb-5 uppercase text-sm tracking-widest text-blue-400" data-i18n="footer_nav">Navigation</h4>
+                    <ul class="space-y-3 text-sm text-gray-400 font-medium">
+                        <li><a href="index.html" class="hover:text-white transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> <span data-i18n="nav_home">Home</span></a></li>
+                        <li><a href="tools.html" class="hover:text-white transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> <span data-i18n="nav_tools">Tools Vault</span></a></li>
+                        <li><a href="about.html" class="hover:text-white transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> <span data-i18n="nav_about">About Me</span></a></li>
+                        <li><a href="auth.html" class="hover:text-white transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> <span data-i18n="nav_login">Login / Register</span></a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-bold mb-5 uppercase text-sm tracking-widest text-purple-400" data-i18n="footer_legal">Legal & Support</h4>
+                    <ul class="space-y-3 text-sm text-gray-400 font-medium">
+                        <li><a href="#" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Contact Admin</a></li>
+                    </ul>
+                </div>
+            </div>
+            
             <div class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4">
                 <p data-i18n="footer_copy" class="text-gray-500 text-xs">
                     © 2026 CoreVault Project. Developed by <span class="text-gray-300">LunarRider0</span>. All rights reserved.
                 </p>
-                <div class="flex items-center gap-6">
-                    <span class="flex items-center gap-2 text-xs text-gray-500">
-                        <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                        <span data-i18n="footer_status">Server Status: Online</span>
+                <div class="flex items-center gap-3 bg-gray-800/50 px-4 py-2 rounded-full border border-gray-700 w-full md:w-auto justify-center">
+                    <span class="relative flex h-2.5 w-2.5">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
                     </span>
+                    <span data-i18n="footer_status" class="text-xs text-gray-400 font-bold uppercase tracking-wider">System Online</span>
                 </div>
             </div>
         </div>
@@ -166,23 +211,23 @@
                 } catch(error) { console.error(error); }
 
                 const isAdmin = user.email === "thaituan.28012020@gmail.com";
-                const adminLink = isAdmin ? `<a href="admin.html" class="text-xs font-bold text-purple-400 hover:text-purple-300 border border-purple-500/50 px-2 py-1 rounded transition-colors mr-2">Admin Panel</a>` : '';
+                const adminLink = isAdmin ? `<a href="admin.html" class="text-xs font-bold text-purple-400 hover:text-purple-300 border border-purple-500/50 px-2 py-1 rounded transition-colors mr-2 hidden md:block">Admin Panel</a>` : '';
                 const userInitials = user.email.substring(0, 2).toUpperCase();
 
                 authContainer.innerHTML = `
                     ${adminLink}
-                    <div class="flex items-center gap-3">
-                        <div title="${user.email} (Bấm để xem Kho Đồ)" onclick="window.location.href='my-vault.html'" class="w-9 h-9 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 flex items-center justify-center font-bold text-sm text-white shadow-[0_0_15px_rgba(59,130,246,0.5)] cursor-pointer hover:scale-110 transition-transform">
+                    <div class="flex items-center gap-2 md:gap-3">
+                        <div title="${user.email} (Bấm để xem Kho Đồ)" onclick="window.location.href='my-vault.html'" class="w-8 h-8 md:w-9 md:h-9 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 flex items-center justify-center font-bold text-xs md:text-sm text-white shadow-lg cursor-pointer hover:scale-110 transition-transform">
                             ${userInitials}
                         </div>
-                        <button id="btn-logout-home" class="text-sm font-bold text-gray-400 hover:text-red-400 transition-colors">Logout</button>
+                        <button id="btn-logout-home" class="text-xs md:text-sm font-bold text-gray-400 hover:text-red-400 transition-colors hidden md:block">Logout</button>
                     </div>
                 `;
-                document.getElementById('btn-logout-home').addEventListener('click', () => {
+                document.getElementById('btn-logout-home')?.addEventListener('click', () => {
                     signOut(auth).then(() => { window.location.reload(); });
                 });
             } else {
-                authContainer.innerHTML = `<a href="auth.html" data-i18n="nav_login" class="text-sm font-semibold text-white bg-blue-600 hover:bg-blue-500 px-5 py-2 rounded-lg transition-colors shadow-lg shadow-blue-500/20">Login</a>`;
+                authContainer.innerHTML = `<a href="auth.html" data-i18n="nav_login" class="text-xs md:text-sm font-semibold text-white bg-blue-600 hover:bg-blue-500 px-3 md:px-5 py-1.5 md:py-2 rounded-lg transition-colors shadow-lg shadow-blue-500/20">Login</a>`;
                 if (typeof updateLanguage === 'function') updateLanguage();
             }
         });
@@ -230,22 +275,22 @@
                     const descI18n = data.status === 'Active' ? 'tool_desc_active' : 'tool_desc_maintenance';
                     
                     let priceBadge = data.price === 0 
-                        ? `<div class="absolute top-4 right-4 px-3 py-1 bg-green-500 text-white text-xs font-bold rounded-full shadow-lg" data-i18n="val_free">FREE</div>`
-                        : `<div class="absolute top-4 right-4 px-3 py-1 bg-blue-600 text-white text-xs font-bold rounded-full shadow-lg" data-price-value="${data.price}"></div>`;
+                        ? `<div class="absolute top-3 right-3 px-3 py-1 bg-green-500 text-white text-xs font-bold rounded-full shadow-lg" data-i18n="val_free">FREE</div>`
+                        : `<div class="absolute top-3 right-3 px-3 py-1 bg-blue-600 text-white text-xs font-bold rounded-full shadow-lg" data-price-value="${data.price}"></div>`;
 
                     const card = document.createElement('div');
                     card.className = "group bg-gray-800/50 border border-gray-700 rounded-2xl overflow-hidden hover:border-blue-500/50 transition-all duration-300 hover:shadow-2xl flex flex-col";
                     card.innerHTML = `
-                        <div class="h-48 bg-gray-700 flex items-center justify-center relative overflow-hidden text-6xl cursor-pointer" onclick="window.location.href='detail.html?id=${docId}'">
+                        <div class="h-40 md:h-48 bg-gray-700 flex items-center justify-center relative overflow-hidden text-5xl md:text-6xl cursor-pointer" onclick="window.location.href='detail.html?id=${docId}'">
                             <div class="group-hover:scale-125 transition-transform duration-300">${data.icon}</div>
                             ${priceBadge}
                         </div>
-                        <div class="p-6 flex-grow flex flex-col">
-                            <h3 class="text-xl font-bold mb-2 group-hover:text-blue-400 cursor-pointer" onclick="window.location.href='detail.html?id=${docId}'">${data.name}</h3>
+                        <div class="p-5 md:p-6 flex-grow flex flex-col">
+                            <h3 class="text-lg md:text-xl font-bold mb-2 group-hover:text-blue-400 cursor-pointer" onclick="window.location.href='detail.html?id=${docId}'">${data.name}</h3>
                             <p data-i18n="${descI18n}" class="text-gray-400 text-sm mb-4 line-clamp-2 flex-grow h-10"></p>
                             <div class="flex items-center justify-between mt-auto">
                                 <span data-i18n="${catI18n}" class="text-gray-500 text-xs uppercase font-bold tracking-widest"></span>
-                                <button onclick="window.location.href='detail.html?id=${docId}'" data-i18n="btn_get_tool" class="text-sm font-bold text-white bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded-lg transition-all shadow-lg hover:scale-105">Get Tool</button>
+                                <button onclick="window.location.href='detail.html?id=${docId}'" data-i18n="btn_get_tool" class="text-xs md:text-sm font-bold text-white bg-blue-600 hover:bg-blue-500 px-3 md:px-4 py-2 rounded-lg transition-all shadow-lg hover:scale-105">Get Tool</button>
                             </div>
                         </div>
                     `;
@@ -255,7 +300,7 @@
             } catch (error) { console.error(error); }
         }
 
-        // ĐÃ THÊM: 4. KIỂM TRA TRẠNG THÁI QUẢNG CÁO TỪ BẢNG ĐIỀU KHIỂN
+        // 4. KIỂM TRA TRẠNG THÁI QUẢNG CÁO TỪ BẢNG ĐIỀU KHIỂN
         async function checkAds() {
             try {
                 const adSnap = await getDoc(doc(db, "settings", "ads"));
@@ -270,7 +315,7 @@
         document.addEventListener("DOMContentLoaded", () => {
             loadHeroConfig();
             loadLatestProducts();
-            checkAds(); // Gọi hàm kiểm tra và bật/tắt quảng cáo
+            checkAds(); 
         });
     </script>
 </body>

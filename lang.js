@@ -44,8 +44,12 @@ const langData = {
         "home_latest_title": "Latest Tools", "home_latest_desc": "Hand-picked premium & free resources for you.",
         "home_fetching": "Fetching data from Cloud...", "home_no_tools": "Currently no tools available.",
         "tool_desc_active": "Premium tool validated by CoreVault Security.", "tool_desc_maintenance": "Currently under maintenance.",
-        "btn_get_tool": "Get Tool", "footer_status": "Server Status: Online", "filter_all": "All",
+        "btn_get_tool": "Get Tool", "filter_all": "All",
+        
+        // TEXT FOOTER & SEO
+        "footer_nav": "Navigation", "footer_legal": "Legal & Support", "footer_status": "System Online",
         "footer_copy": "© 2026 CoreVault Project. Developed by <span class='text-gray-300'>LunarRider0</span>. All rights reserved.",
+        
         "admin_settings": "Settings", "set_title": "Homepage Configuration", "set_desc": "Manage hero carousel and welcome texts.",
         "set_hero_text": "Hero Texts", "set_hero_slides": "Carousel Slides (Image/GIF URLs)", "set_interval": "Slide Interval (seconds)", "btn_save_settings": "Save Changes",
         "search_tools": "Search for tools...", "filter_category": "Filter by Category:",
@@ -53,10 +57,11 @@ const langData = {
         "modal_req_min": "Minimum Requirements (1 per line)", "modal_req_rec": "Recommended Specs (1 per line)",
         "modal_pay_title": "Payment Checkout", "modal_pay_desc": "Scan the QR code with your banking app.", "modal_pay_btn": "I have paid", "msg_login_req": "Please login to continue!",
         
-        // ĐÃ BỔ SUNG TEXT CHO TRANG DETAIL (Minimum requirements, Verified...)
+        // TRANG DETAIL
         "detail_req_min_title": "Minimum Requirements", "detail_req_rec_title": "Recommended Specs",
         "detail_license": "License / Access", "detail_verified": "Verified", "detail_instant": "Instant Delivery",
 
+        // TRANG ABOUT ME
         "about_title": "About LunarRider0", 
         "about_role": "IT Student | Developer | Content Creator", 
         "about_bio_title": "My Journey",
@@ -102,14 +107,18 @@ const langData = {
         "modal_name": "Tên Sản Phẩm *", "modal_cat": "Danh Mục *", "modal_price": "Giá bán * (0 là Miễn phí)", "modal_status": "Trạng Thái *",
         "modal_desc": "Mô tả chi tiết", "modal_icon": "Ảnh/Icon (Tùy chọn)", "modal_file": "File phần mềm (Tùy chọn)", "modal_video": "Video Demo (Tùy chọn)",
         "modal_btn_cancel": "Hủy", "modal_btn_save": "Lưu Sản Phẩm",
-        "val_system": "Hệ Thống", "val_graphics": "Đồ Họa", "val_maintenance": "Bảo Trì", "val_hidden": "Đã Ẩn", "val_free": "Miễn Phí",
+        "val_system": "Hệ Thống", "val_graphics": "Đồ Họa", "val_maintenance": "Bảo Trì", "val_hidden": "Đã Ẩn", "val_free": "MIỄN PHÍ",
 
         // CÁC TEXT TRONG CARD SẢN PHẨM & TRANG CHỦ
         "home_latest_title": "Công Cụ Mới Nhất", "home_latest_desc": "Tuyển tập tài nguyên cao cấp & miễn phí dành cho bạn.",
         "home_fetching": "Đang tải dữ liệu từ Đám mây...", "home_no_tools": "Hiện chưa có công cụ nào.",
         "tool_desc_active": "Công cụ cao cấp đã được CoreVault Security kiểm duyệt.", "tool_desc_maintenance": "Hệ thống đang được bảo trì.",
-        "btn_get_tool": "Tải Công Cụ", "footer_status": "Trạng thái Server: Online", "filter_all": "Tất Cả",
+        "btn_get_tool": "Tải Công Cụ", "filter_all": "Tất Cả",
+        
+        // TEXT FOOTER & SEO
+        "footer_nav": "Điều hướng", "footer_legal": "Pháp lý & Hỗ trợ", "footer_status": "Hệ thống Online",
         "footer_copy": "© 2026 Dự án CoreVault. Phát triển bởi <span class='text-gray-300'>LunarRider0</span>. Mọi quyền được bảo lưu.",
+        
         "admin_settings": "Cài Đặt", "set_title": "Cấu Hình Trang Chủ", "set_desc": "Quản lý ảnh bìa và lời chào.",
         "set_hero_text": "Nội Dung Chào Mừng", "set_hero_slides": "Ảnh Slides (Link Ảnh/GIF)", "set_interval": "Thời gian chuyển ảnh (giây)", "btn_save_settings": "Lưu Cấu Hình",
         "search_tools": "Tìm kiếm công cụ...", "filter_category": "Lọc theo Danh mục:",
@@ -117,10 +126,11 @@ const langData = {
         "modal_req_min": "Cấu hình Tối thiểu (1 mục/dòng)", "modal_req_rec": "Cấu hình Đề nghị (1 mục/dòng)",
         "modal_pay_title": "Thanh Toán Đơn Hàng", "modal_pay_desc": "Sử dụng App Ngân hàng để quét mã QR bên dưới.", "modal_pay_btn": "Tôi đã chuyển khoản", "msg_login_req": "Vui lòng đăng nhập để tiếp tục!",
         
-        // ĐÃ BỔ SUNG TEXT CHO TRANG DETAIL (Minimum requirements, Verified...)
+        // TRANG DETAIL
         "detail_req_min_title": "Cấu Hình Tối Thiểu", "detail_req_rec_title": "Cấu Hình Khuyên Dùng",
         "detail_license": "Bản Quyền / Truy Cập", "detail_verified": "Đã Kiểm Duyệt", "detail_instant": "Giao Hàng Tức Thì",
 
+        // TRANG ABOUT ME
         "about_title": "Về LunarRider0", 
         "about_role": "Sinh viên IT | Lập trình viên | Sáng tạo nội dung", 
         "about_bio_title": "Hành trình của tôi",
