@@ -5,20 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CoreVault | About Me</title>
     <link rel="icon" type="image/svg+xml" href="logo.svg">
-    <meta name="description" content="Gặp gỡ LunarRider0 - Sinh viên IT, Lập trình viên và Content Creator">
+    <meta name="description" content="Gặp gỡ LunarRider0 - Sinh viên IT, Lập trình viên và Content Creator đứng sau CoreVault OS.">
     <meta name="keywords" content="CoreVault, LunarRider0, Gaming Tools, Optimization, Tech Resources, CTU IT">
     <meta name="author" content="LunarRider0">
 
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://corevaultos.com/">
-    <meta property="og:title" content="CoreVault OS | Premium Tools & Resources">
-    <meta property="og:description" content="Khám phá kho công cụ cao cấp, tài nguyên tối ưu và ứng dụng công nghệ độc quyền phát triển bởi LunarRider0.">
+    <meta property="og:url" content="https://corevaultos.com/about">
+    <meta property="og:title" content="CoreVault OS | About Me">
+    <meta property="og:description" content="Gặp gỡ LunarRider0 - Sinh viên IT, Lập trình viên và Content Creator đứng sau CoreVault OS.">
     <meta property="og:image" content="https://imgur.com/example_thumbnail.png">
 
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://corevaultos.com/">
-    <meta property="twitter:title" content="CoreVault OS | Premium Tools & Resources">
-    <meta property="twitter:description" content="Khám phá kho công cụ cao cấp, tài nguyên tối ưu và ứng dụng công nghệ độc quyền phát triển bởi LunarRider0.">
+    <meta property="twitter:url" content="https://corevaultos.com/about">
+    <meta property="twitter:title" content="CoreVault OS | About Me">
+    <meta property="twitter:description" content="Gặp gỡ LunarRider0 - Sinh viên IT, Lập trình viên và Content Creator đứng sau CoreVault OS.">
     <meta property="twitter:image" content="https://imgur.com/example_thumbnail.png">
     
     <script src="https://cdn.tailwindcss.com"></script>
@@ -35,7 +35,6 @@
                     colors: {
                         primary: '#3b82f6', 
                     },
-                    // 2. ÉP TAILWIND ƯU TIÊN DÙNG FONT INTER CHO TOÀN WEB
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
                     }
@@ -44,30 +43,50 @@
         }
     </script>
 </head>
-<body class="bg-gray-900 text-white min-h-screen flex flex-col">
+<body class="bg-gray-900 text-white min-h-screen flex flex-col w-full">
 
     <nav class="sticky top-0 z-50 w-full bg-gray-900/80 backdrop-blur-md border-b border-gray-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
+                
                 <div class="flex-shrink-0">
                     <a href="index.html" class="flex items-center gap-3 hover:scale-105 transition-transform">
                         <img src="logo.svg" alt="CoreVault Logo" class="w-10 h-10 shadow-lg shadow-blue-500/20 rounded-xl">
-                        <span class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                        <span class="text-xl md:text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
                             CoreVault
                         </span>
-                    </a>                </div>
+                    </a>
+                </div>
+
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-2">
-                        <a href="index.html" data-i18n="nav_home" class="text-gray-300 px-4 py-2 rounded-lg hover:bg-gray-800 transition-all text-sm font-medium">Home</a>
-                        <a href="tools.html" data-i18n="nav_tools" class="text-gray-300 px-4 py-2 rounded-lg hover:bg-gray-800 transition-all text-sm font-medium">Tools Vault</a>
+                        <a href="index.html" data-i18n="nav_home" class="text-gray-300 px-4 py-2 rounded-lg border border-transparent hover:border-gray-600 hover:bg-gray-800 transition-all duration-200 text-sm font-medium">Home</a>
+                        <a href="tools.html" data-i18n="nav_tools" class="text-gray-300 px-4 py-2 rounded-lg border border-transparent hover:border-gray-600 hover:bg-gray-800 transition-all duration-200 text-sm font-medium">Tools Vault</a>
                         <a href="about.html" data-i18n="nav_about" class="text-blue-400 px-4 py-2 rounded-lg border border-blue-500/30 bg-blue-600/10 transition-all duration-200 text-sm font-bold">About Me</a>
                     </div>
                 </div>
-                <div class="flex items-center space-x-3">
-                    <button onclick="toggleLanguage()" class="text-gray-300 hover:text-white px-3 py-2 text-sm border border-gray-700 rounded-lg">EN / VN</button>
-                    <div id="header-auth" class="flex items-center gap-3 ml-2"><div class="w-8 h-8 rounded-full bg-gray-700 animate-pulse"></div></div>
+
+                <div class="flex items-center space-x-2 md:space-x-3">
+                    <button onclick="toggleLanguage()" class="text-gray-300 hover:text-white px-2 md:px-3 py-1.5 md:py-2 text-xs md:text-sm font-medium border border-gray-700 hover:bg-gray-800 rounded-lg transition-all flex items-center gap-1">
+                        <span data-i18n="lang_btn">EN / VN</span>
+                    </button>
+                    
+                    <div id="header-auth" class="flex items-center gap-2 md:gap-3 ml-1 md:ml-2">
+                        <div class="w-8 h-8 rounded-full bg-gray-700 animate-pulse"></div>
+                    </div>
+
+                    <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="md:hidden text-gray-400 hover:text-white p-1.5 ml-1 rounded-lg border border-gray-700 bg-gray-800 focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                    </button>
                 </div>
+
             </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-900 border-b border-gray-800 px-4 pt-2 pb-4 space-y-2 shadow-2xl absolute w-full left-0 top-16 z-40">
+            <a href="index.html" class="block px-4 py-3 rounded-xl text-gray-300 hover:bg-gray-800 hover:text-white font-medium transition-colors">Home</a>
+            <a href="tools.html" class="block px-4 py-3 rounded-xl text-gray-300 hover:bg-gray-800 hover:text-white font-medium transition-colors">Tools Vault</a>
+            <a href="about.html" class="block px-4 py-3 rounded-xl text-blue-400 bg-blue-600/10 border border-blue-500/20 font-bold">About Me</a>
         </div>
     </nav>
 
@@ -90,7 +109,7 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
             <div class="md:col-span-2 bg-gray-800 rounded-3xl border border-gray-700 p-8 shadow-xl">
                 <h3 data-i18n="about_bio_title" class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
                     <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
@@ -105,28 +124,82 @@
                 <h3 data-i18n="about_connect" class="text-xl font-bold text-white mb-2 px-2">Connect with me</h3>
                 
                 <a id="link-twitch" href="#" target="_blank" class="flex items-center gap-4 bg-[#6441a5]/10 border border-[#6441a5]/50 hover:bg-[#6441a5]/20 p-4 rounded-2xl transition-colors group">
-                    <div class="w-10 h-10 rounded-full bg-[#6441a5] flex items-center justify-center text-white font-bold group-hover:scale-110 transition-transform">Tw</div>
+                    <div class="w-10 h-10 rounded-full bg-[#6441a5] flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/></svg>
+                    </div>
                     <div><p class="text-white font-bold">Twitch</p><p class="text-gray-400 text-xs">Live Streams</p></div>
                 </a>
 
                 <a id="link-tiktok" href="#" target="_blank" class="flex items-center gap-4 bg-pink-500/10 border border-pink-500/50 hover:bg-pink-500/20 p-4 rounded-2xl transition-colors group">
-                    <div class="w-10 h-10 rounded-full bg-pink-500 flex items-center justify-center text-white font-bold group-hover:scale-110 transition-transform">Tk</div>
+                    <div class="w-10 h-10 rounded-full bg-pink-500 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 2.22-1.15 4.35-2.9 5.75-1.76 1.4-4.21 1.9-6.42 1.34-2.22-.55-4.1-2.07-5.12-4.08-1.02-2.02-1.1-4.48-.21-6.58 1.05-2.45 3.51-4.25 6.22-4.42v4.06c-1.2.06-2.39.6-3.17 1.53-.78.93-1.12 2.22-.92 3.41.21 1.18.94 2.21 1.98 2.78 1.05.57 2.37.64 3.48.19 1.11-.45 1.97-1.35 2.35-2.48.38-1.12.33-2.38.1-3.52-.45-2.25-.92-4.49-1.39-6.73-.02-2.48-.03-4.97-.04-7.46Z"/></svg>
+                    </div>
                     <div><p class="text-white font-bold">TikTok</p><p class="text-gray-400 text-xs">Shorts & Highlights</p></div>
                 </a>
 
                 <a id="link-github" href="#" target="_blank" class="flex items-center gap-4 bg-gray-700 border border-gray-600 hover:bg-gray-600 p-4 rounded-2xl transition-colors group">
-                    <div class="w-10 h-10 rounded-full bg-gray-900 flex items-center justify-center text-white font-bold group-hover:scale-110 transition-transform">Gh</div>
+                    <div class="w-10 h-10 rounded-full bg-gray-900 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" /></svg>
+                    </div>
                     <div><p class="text-white font-bold">GitHub</p><p class="text-gray-400 text-xs">Source Codes</p></div>
                 </a>
             </div>
         </div>
 
+        <div id="ad-container" class="w-full hidden">
+            <div class="bg-gray-800/50 border border-gray-700 border-dashed rounded-2xl flex flex-col items-center justify-center p-8 text-center relative overflow-hidden">
+                <span class="absolute top-2 right-3 text-[10px] text-gray-500 uppercase tracking-widest">Advertisement</span>
+                <p class="text-gray-400 font-medium">Khu vực hiển thị Quảng Cáo Google</p>
+                <p class="text-gray-600 text-sm mt-2">(Đang chạy Demo. Script AdSense sẽ đặt ở đây)</p>
+            </div>
+        </div>
+
     </main>
 
-    <footer class="bg-gray-900 border-t border-gray-800 pt-12 pb-8 w-full mt-auto">
+    <footer class="bg-gray-900 border-t border-gray-800 pt-16 pb-8 w-full mt-auto text-left">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-12 mb-12">
+                <div class="md:col-span-2">
+                    <a href="index.html" class="flex items-center gap-3 mb-4 hover:scale-105 transition-transform w-fit">
+                        <img src="logo.svg" alt="CoreVault Logo" class="w-10 h-10 shadow-lg shadow-blue-500/20 rounded-xl">
+                        <span class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">CoreVault</span>
+                    </a>
+                    <p class="text-gray-400 text-sm leading-relaxed max-w-sm" data-i18n="hero_desc">
+                        Your premier destination for premium tools, optimized resources, and exclusive tech applications.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-bold mb-5 uppercase text-sm tracking-widest text-blue-400" data-i18n="footer_nav">Navigation</h4>
+                    <ul class="space-y-3 text-sm text-gray-400 font-medium">
+                        <li><a href="index.html" class="hover:text-white transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> <span data-i18n="nav_home">Home</span></a></li>
+                        <li><a href="tools.html" class="hover:text-white transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> <span data-i18n="nav_tools">Tools Vault</span></a></li>
+                        <li><a href="about.html" class="hover:text-white transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> <span data-i18n="nav_about">About Me</span></a></li>
+                        <li><a href="auth.html" class="hover:text-white transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> <span data-i18n="nav_login">Login / Register</span></a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-bold mb-5 uppercase text-sm tracking-widest text-purple-400" data-i18n="footer_legal">Legal & Support</h4>
+                    <ul class="space-y-3 text-sm text-gray-400 font-medium">
+                        <li><a href="#" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Contact Admin</a></li>
+                    </ul>
+                </div>
+            </div>
+            
             <div class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4">
-                <p data-i18n="footer_copy" class="text-gray-500 text-xs">© 2026 CoreVault Project.</p>
+                <p data-i18n="footer_copy" class="text-gray-500 text-xs">
+                    © 2026 CoreVault Project. Developed by LunarRider0. All rights reserved.
+                </p>
+                <div class="flex items-center gap-3 bg-gray-800/50 px-4 py-2 rounded-full border border-gray-700 w-full md:w-auto justify-center">
+                    <span class="relative flex h-2.5 w-2.5">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+                    </span>
+                    <span data-i18n="footer_status" class="text-xs text-gray-400 font-bold uppercase tracking-wider">System Online</span>
+                </div>
             </div>
         </div>
     </footer>
@@ -151,19 +224,19 @@
                 } catch(error) { console.error(error); }
 
                 const isAdmin = user.email === "thaituan.28012020@gmail.com";
-                const adminLink = isAdmin ? `<a href="admin.html" class="text-xs font-bold text-purple-400 hover:text-purple-300 border border-purple-500/50 px-2 py-1 rounded transition-colors mr-2">Admin Panel</a>` : '';
+                const adminLink = isAdmin ? `<a href="admin.html" class="text-xs font-bold text-purple-400 hover:text-purple-300 border border-purple-500/50 px-2 py-1 rounded transition-colors mr-2 hidden md:block">Admin Panel</a>` : '';
                 const userInitials = user.email.substring(0, 2).toUpperCase();
 
                 authContainer.innerHTML = `
                     ${adminLink}
-                    <div class="flex items-center gap-3">
-                        <div title="${user.email} (Bấm để xem Kho Đồ)" onclick="window.location.href='my-vault.html'" class="w-9 h-9 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 flex items-center justify-center font-bold text-sm text-white shadow-lg cursor-pointer hover:scale-110 transition-transform">${userInitials}</div>
-                        <button id="btn-logout-about" class="text-sm font-bold text-gray-400 hover:text-red-400 transition-colors">Logout</button>
+                    <div class="flex items-center gap-2 md:gap-3">
+                        <div title="${user.email} (Bấm để xem Kho Đồ)" onclick="window.location.href='my-vault.html'" class="w-8 h-8 md:w-9 md:h-9 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 flex items-center justify-center font-bold text-xs md:text-sm text-white shadow-lg cursor-pointer hover:scale-110 transition-transform">${userInitials}</div>
+                        <button id="btn-logout-about" class="text-xs md:text-sm font-bold text-gray-400 hover:text-red-400 transition-colors hidden md:block">Logout</button>
                     </div>
                 `;
-                document.getElementById('btn-logout-about').addEventListener('click', () => { signOut(auth).then(() => { window.location.reload(); }); });
+                document.getElementById('btn-logout-about')?.addEventListener('click', () => { signOut(auth).then(() => { window.location.reload(); }); });
             } else {
-                authContainer.innerHTML = `<a href="auth.html" data-i18n="nav_login" class="text-sm font-semibold text-white bg-blue-600 hover:bg-blue-500 px-5 py-2 rounded-lg transition-colors shadow-lg">Login</a>`;
+                authContainer.innerHTML = `<a href="auth.html" data-i18n="nav_login" class="text-xs md:text-sm font-semibold text-white bg-blue-600 hover:bg-blue-500 px-3 md:px-5 py-1.5 md:py-2 rounded-lg transition-colors shadow-lg">Login</a>`;
                 if (typeof updateLanguage === 'function') updateLanguage();
             }
         });
@@ -176,23 +249,19 @@
                     const d = snap.data();
                     const curLang = localStorage.getItem('site_language') || 'en';
                     
-                    // Nạp Name, Role, Bio
                     document.getElementById('about-name').innerText = d.name || 'LunarRider0';
                     document.getElementById('about-role').innerText = curLang === 'vn' ? (d.roleVn || '') : (d.roleEn || '');
                     document.getElementById('about-bio').innerText = curLang === 'vn' ? (d.bioVn || '') : (d.bioEn || '');
 
-                    // Nạp Avatar
                     if(d.avatar && d.avatar.trim() !== '') {
                         document.getElementById('about-avatar-container').innerHTML = `<img src="${d.avatar}" class="w-full h-full object-cover">`;
                     }
 
-                    // Nạp Tags (tách bằng dấu phẩy)
                     if(d.tags && d.tags.trim() !== '') {
                         const tagsArr = d.tags.split(',');
                         document.getElementById('about-tags-container').innerHTML = tagsArr.map(t => `<span class="px-3 py-1 bg-gray-800 border border-gray-700 rounded-full text-xs text-gray-300 font-bold">${t.trim()}</span>`).join('');
                     }
 
-                    // Nạp Link Mạng Xã Hội
                     if(d.twitch) document.getElementById('link-twitch').href = d.twitch;
                     if(d.tiktok) document.getElementById('link-tiktok').href = d.tiktok;
                     if(d.github) document.getElementById('link-github').href = d.github;
@@ -200,13 +269,25 @@
             } catch(e) { console.error(e); }
         }
 
-        // Lắng nghe sự thay đổi ngôn ngữ để đổi Role và Bio ngay lập tức
+        // TẢI ADSENSE
+        async function checkAds() {
+            try {
+                const adSnap = await getDoc(doc(db, "settings", "ads"));
+                if (adSnap.exists() && adSnap.data().isActive === true) {
+                    document.getElementById('ad-container').classList.remove('hidden');
+                } else {
+                    document.getElementById('ad-container').classList.add('hidden');
+                }
+            } catch (e) { console.error("Lỗi tải cấu hình quảng cáo", e); }
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             loadAboutData();
+            checkAds();
             const btnLang = document.querySelector('[onclick="toggleLanguage()"]');
             if(btnLang) {
                 btnLang.addEventListener('click', () => {
-                    setTimeout(() => { loadAboutData(); }, 50); // Đợi ngôn ngữ đổi xong rồi tải lại
+                    setTimeout(() => { loadAboutData(); }, 50); 
                 });
             }
         });
