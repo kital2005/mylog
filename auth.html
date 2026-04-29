@@ -115,12 +115,12 @@
                 </div>
             </form>
 
-            <form id="form-forgot" class="hidden-form">
+            <form id="form-forgot" class="hidden-form" onsubmit="submitForgot(event)">
                 <div class="space-y-5 text-center">
                     <p data-i18n="auth_forgot_desc" class="text-gray-400 text-sm">Enter your email address and we'll send you a link to reset your password.</p>
-                    <input type="email" data-i18n="auth_email" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 text-left" placeholder="Email Address">
+                    <input type="email" required data-i18n="auth_email" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 text-left" placeholder="Email Address">
                     
-                    <button type="button" data-i18n="auth_btn_reset" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-xl transition-all shadow-lg">Send Reset Link</button>
+                    <button type="submit" data-i18n="auth_btn_reset" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-xl transition-all shadow-lg">Send Reset Link</button>
                     
                     <button type="button" onclick="cancelForgot()" data-i18n="auth_cancel" class="text-gray-400 hover:text-white text-sm mt-4 font-medium">Cancel and return to Login</button>
                 </div>
@@ -148,16 +148,17 @@
 
     <script src="lang.js"></script>
     <script type="module">
-        // Import đầy đủ đồ nghề từ firebase.js
-// Import đầy đủ đồ nghề từ firebase.js
         import { 
-            auth, db, collection, getDocs, // <--- THÊM ĐỒ NGHỀ VÀO DÒNG NÀY
+            auth, db, collection, getDocs, 
             createUserWithEmailAndPassword, 
             signInWithEmailAndPassword,
             setPersistence,
             browserLocalPersistence,
             browserSessionPersistence
         } from './firebase.js';
+
+        // ĐÃ THÊM: Chèn thẳng hàm gửi mail từ Firebase để chắc chắn hoạt động
+        import { sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 
         window.switchTab = function(tab) {
             const formLogin = document.getElementById('form-login');
@@ -238,7 +239,7 @@
         }
 
         // ==========================================
-        // 1. HÀM XỬ LÝ ĐĂNG NHẬP (ĐÃ TÁCH RỜI)
+        // 1. HÀM XỬ LÝ ĐĂNG NHẬP
         // ==========================================
         window.submitLogin = function(event) {
             event.preventDefault(); 
@@ -246,21 +247,16 @@
             const emailInput = document.querySelector('#form-login input[type="text"]').value;
             const pwdInput = document.getElementById('login-pwd').value;
             
-            // Lấy trạng thái của ô Checkbox "Remember me"
             const rememberMe = document.querySelector('#form-login input[type="checkbox"]').checked;
-            
-            // Cài đặt bộ nhớ dựa theo Checkbox
             const persistenceType = rememberMe ? browserLocalPersistence : browserSessionPersistence;
 
-            // Áp dụng bộ nhớ -> Sau đó Đăng nhập
             setPersistence(auth, persistenceType)
                 .then(() => {
                     return signInWithEmailAndPassword(auth, emailInput, pwdInput);
                 })
-.then(async (userCredential) => {
+                .then(async (userCredential) => {
                     const userEmail = userCredential.user.email;
                     
-                    // SOÁT SỔ TAY FIRESTORE TRƯỚC KHI CHO VÀO NHÀ
                     const usersSnap = await getDocs(collection(db, "users"));
                     let isBanned = false;
                     usersSnap.forEach(doc => {
@@ -269,19 +265,17 @@
                         }
                     });
 
-                    // NẾU BỊ KHÓA -> BÁO LỖI VÀ TỰ ĐỘNG ĐĂNG XUẤT NGAY
                     if (isBanned) {
                         alert("LỖI: Tài khoản " + userEmail + " đã bị cấm khỏi hệ thống!");
-                        return auth.signOut(); // Đuổi ra ngoài
+                        return auth.signOut();
                     }
                     
-                    // NẾU QUA CỬA AN TOÀN -> PHÂN LOẠI KHÁCH HÀNG:
                     if (userEmail === "thaituan.28012020@gmail.com") {
                         alert("Welcome Back, Admin " + userEmail);
-                        window.location.href = "admin.html"; // Ném vào trang Quản trị
+                        window.location.href = "admin.html"; 
                     } else {
                         alert("Đăng nhập thành công! Chào mừng: " + userEmail);
-                        window.location.href = "index.html"; // Ném ra Trang Chủ mua sắm
+                        window.location.href = "index.html"; 
                     }
                 })
                 .catch((error) => {
@@ -290,7 +284,7 @@
         }
 
         // ==========================================
-        // 2. HÀM XỬ LÝ TẠO TÀI KHOẢN (ĐÃ TÁCH RỜI)
+        // 2. HÀM XỬ LÝ TẠO TÀI KHOẢN
         // ==========================================
         window.submitRegister = function(event) {
             event.preventDefault(); 
@@ -324,6 +318,36 @@
                 e.target.classList.remove('border-red-500');
             }
         });
+
+        // ==========================================
+        // 3. ĐÃ KÍCH HOẠT: HÀM XỬ LÝ QUÊN MẬT KHẨU
+        // ==========================================
+        window.submitForgot = function(event) {
+            event.preventDefault(); 
+            const emailInput = document.querySelector('#form-forgot input[type="email"]');
+            const email = emailInput.value.trim();
+
+            if (!email) {
+                alert("Vui lòng nhập địa chỉ Email!");
+                return;
+            }
+
+            sendPasswordResetEmail(auth, email)
+                .then(() => {
+                    alert("Link khôi phục mật khẩu đã được gửi! Vui lòng kiểm tra Email của bạn (Cả hòm thư rác).");
+                    window.cancelForgot(); // Dùng hàm cancelForgot có sẵn để tự động lùi về Login
+                    emailInput.value = ''; // Xóa trắng ô nhập email
+                })
+                .catch((error) => {
+                    if (error.code === 'auth/user-not-found') {
+                        alert("Lỗi: Email này chưa được đăng ký trong hệ thống!");
+                    } else if (error.code === 'auth/invalid-email') {
+                        alert("Lỗi: Địa chỉ Email không hợp lệ!");
+                    } else {
+                        alert("Lỗi thao tác: " + error.message);
+                    }
+                });
+        };
     </script>
 </body>
 </html>
