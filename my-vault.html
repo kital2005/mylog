@@ -6,26 +6,11 @@
     <title>CoreVault | My Vault</title>
     <link rel="icon" type="image/svg+xml" href="logo.svg">
     <script src="https://cdn.tailwindcss.com"></script>
-    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
     <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#3b82f6', 
-                    },
-                    // 2. ÉP TAILWIND ƯU TIÊN DÙNG FONT INTER CHO TOÀN WEB
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    }
-                }
-            }
-        }
+        tailwind.config = { theme: { extend: { colors: { primary: '#3b82f6', }, fontFamily: { sans: ['Inter', 'sans-serif'], } } } }
     </script>
 </head>
 <body class="bg-gray-900 text-white min-h-screen flex flex-col">
@@ -51,11 +36,32 @@
 
     <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full flex-grow">
         
-        <div class="mb-10 border-b border-gray-800 pb-6 flex items-center justify-between">
-            <div>
-                <h1 class="text-3xl font-bold text-white mb-2">My Vault</h1>
-                <p class="text-gray-400 text-sm">Quản lý các công cụ bạn đã sở hữu hoặc đang chờ duyệt.</p>
+        <!-- KHU VỰC HỒ SƠ CÁ NHÂN MỚI -->
+        <div class="bg-gray-800 rounded-3xl p-6 md:p-8 border border-gray-700 shadow-2xl mb-10 flex flex-col md:flex-row items-center md:items-start gap-6 relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-24 bg-gradient-to-r from-blue-600/20 to-purple-600/20"></div>
+            
+            <div class="relative group cursor-pointer mt-4 md:mt-0 z-10" onclick="document.getElementById('edit-avatar').click()" title="Đổi Ảnh Đại Diện">
+                <img id="profile-avatar" src="" class="w-24 h-24 md:w-32 md:h-32 rounded-full object-cover border-4 border-gray-800 bg-gray-900 group-hover:border-blue-500 transition-colors shadow-xl">
+                <div class="absolute inset-0 bg-black/60 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                </div>
+                <input type="file" id="edit-avatar" class="hidden" accept="image/*" onchange="uploadNewAvatar(event)">
             </div>
+            
+            <div class="flex-grow text-center md:text-left z-10 pt-2">
+                <div class="flex items-center justify-center md:justify-start gap-3 mb-1">
+                    <h2 id="profile-username" class="text-2xl md:text-3xl font-extrabold text-white">Loading...</h2>
+                    <button onclick="editUsername()" title="Đổi Tên hiển thị" class="text-gray-400 hover:text-blue-400 transition-colors bg-gray-900/50 p-1.5 rounded-lg border border-gray-700 hover:border-blue-500">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+                    </button>
+                </div>
+                <p id="profile-email" class="text-gray-400 text-sm mb-4"></p>
+                <span id="profile-plan" class="px-4 py-1.5 bg-gray-700 text-gray-300 rounded-full text-xs font-bold uppercase tracking-widest border border-gray-600 shadow-inner">Member</span>
+            </div>
+        </div>
+
+        <div class="mb-6 flex items-center justify-between border-b border-gray-800 pb-4">
+            <h2 class="text-xl font-bold text-white">Kho Đồ Của Tôi</h2>
         </div>
 
         <div id="inventory-container" class="space-y-4">
@@ -72,21 +78,49 @@
     </footer>
     
     <script type="module">
-        import { db, collection, getDocs, doc, getDoc, auth } from './firebase.js';
+        import { db, collection, getDocs, doc, getDoc, updateDoc, auth } from './firebase.js';
         import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 
         let currentUser = null;
+        let userDocRef = null;
 
         onAuthStateChanged(auth, async (user) => {
             const authContainer = document.getElementById('header-auth');
             if (user) {
                 currentUser = user;
-                const userInitials = user.email.substring(0, 2).toUpperCase();
+                userDocRef = doc(db, "users", user.uid);
+                
+                // LẤY DỮ LIỆU TỪ FIRESTORE THAY VÌ AUTH
+                const userSnap = await getDoc(userDocRef);
+                let username = user.email.split('@')[0];
+                let avatar = `https://api.dicebear.com/7.x/avataaars/svg?seed=${username}`;
+                let plan = "Free";
+
+                if (userSnap.exists()) {
+                    const data = userSnap.data();
+                    if (data.username) username = data.username;
+                    if (data.plan) plan = data.plan;
+                    if (data.avatar && data.avatar.trim() !== '') avatar = data.avatar;
+                }
+
+                // CẬP NHẬT HEADER (CÓ ẢNH VÀ LỜI CHÀO)
                 authContainer.innerHTML = `
-                    <div title="${user.email}" class="w-9 h-9 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 flex items-center justify-center font-bold text-sm text-white shadow-lg">${userInitials}</div>
-                    <button id="btn-logout" class="text-sm font-bold text-gray-400 hover:text-red-400 transition-colors">Logout</button>
+                    <span class="hidden md:block text-sm font-medium text-gray-300 mr-2">Welcome back, <b class="text-white">${username}</b></span>
+                    <div title="Tài khoản: ${user.email}" class="w-9 h-9 rounded-full bg-gray-800 flex items-center justify-center overflow-hidden border-2 border-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.3)]">
+                        <img src="${avatar}" class="w-full h-full object-cover">
+                    </div>
+                    <button id="btn-logout" class="text-sm font-bold text-gray-400 hover:text-red-400 transition-colors ml-3">Logout</button>
                 `;
                 document.getElementById('btn-logout').addEventListener('click', () => { signOut(auth).then(() => { window.location.href = "index.html"; }); });
+                
+                // CẬP NHẬT GIAO DIỆN HỒ SƠ BÊN TRONG TRANG
+                document.getElementById('profile-username').innerText = username;
+                document.getElementById('profile-email').innerText = user.email;
+                document.getElementById('profile-avatar').src = avatar;
+                document.getElementById('profile-plan').innerText = plan + " Plan";
+                if(plan === 'Premium') {
+                    document.getElementById('profile-plan').className = "px-4 py-1.5 bg-purple-500/20 text-purple-400 rounded-full text-xs font-bold uppercase tracking-widest border border-purple-500/50 shadow-inner";
+                }
                 
                 loadInventory();
             } else {
@@ -94,36 +128,59 @@
             }
         });
 
+        // HÀM ĐỔI TÊN
+        window.editUsername = async function() {
+            const currentName = document.getElementById('profile-username').innerText;
+            const newName = prompt("Nhập tên hiển thị mới của bạn:", currentName);
+            
+            if (newName && newName.trim() !== "" && newName !== currentName) {
+                try {
+                    await updateDoc(userDocRef, { username: newName.trim() });
+                    document.getElementById('profile-username').innerText = newName.trim();
+                    alert("Cập nhật tên thành công! Hãy tải lại trang để thấy tên mới trên thanh điều hướng.");
+                } catch (error) { alert("Lỗi cập nhật tên: " + error.message); }
+            }
+        };
+
+        // HÀM ĐỔI ẢNH AVATAR
+        window.uploadNewAvatar = function(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            if (file.size > 2 * 1024 * 1024) { alert("File ảnh quá lớn! Vui lòng chọn ảnh dưới 2MB."); return; }
+
+            const reader = new FileReader();
+            reader.onload = async function() {
+                const base64String = reader.result;
+                document.getElementById('profile-avatar').src = base64String;
+                try {
+                    await updateDoc(userDocRef, { avatar: base64String });
+                    alert("Cập nhật ảnh đại diện thành công! Tải lại trang để áp dụng toàn website.");
+                } catch (error) { alert("Lỗi cập nhật ảnh: " + error.message); }
+            };
+            reader.readAsDataURL(file);
+        };
+
         async function loadInventory() {
             const container = document.getElementById('inventory-container');
             try {
                 const querySnapshot = await getDocs(collection(db, "orders"));
                 container.innerHTML = ''; 
-
                 let hasItems = false;
-
                 for (const orderDoc of querySnapshot.docs) {
                     const data = orderDoc.data();
-                    
                     if (data.user === currentUser.email) {
                         hasItems = true;
-                        
                         const isCompleted = data.status === 'Completed';
                         const statusBadge = isCompleted 
                             ? `<span class="px-3 py-1 bg-green-500/20 text-green-400 border border-green-500/30 rounded-full text-xs font-bold">Đã Sở Hữu</span>`
                             : `<span class="px-3 py-1 bg-yellow-500/20 text-yellow-500 border border-yellow-500/30 rounded-full text-xs font-bold animate-pulse">Chờ Admin Duyệt</span>`;
-
                         let realDownloadLink = "#";
                         if (isCompleted && data.productId) {
                             try {
                                 const prodSnap = await getDoc(doc(db, "products", data.productId));
-                                if (prodSnap.exists()) {
-                                    realDownloadLink = prodSnap.data().downloadUrl || "#";
-                                }
-                            } catch(e) { console.error("Lỗi lấy link tải: ", e); }
+                                if (prodSnap.exists()) realDownloadLink = prodSnap.data().downloadUrl || "#";
+                            } catch(e) {}
                         }
-
-                        // ĐÃ CẬP NHẬT: XỬ LÝ LỖI KHI ADMIN QUÊN NHẬP LINK TẢI
                         let actionBtn = "";
                         if (isCompleted) {
                             if (realDownloadLink === "#" || realDownloadLink.trim() === "") {

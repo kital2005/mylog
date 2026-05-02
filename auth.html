@@ -202,7 +202,6 @@
             else { errMatch.classList.add('hidden'); confirmPwd.classList.remove('border-red-500'); }
         }
 
-        // CHỨC NĂNG ĐĂNG NHẬP HOÀN CHỈNH
         window.submitLogin = function(event) {
             event.preventDefault(); 
             const emailInput = document.querySelector('#form-login input[type="email"]').value.trim();
@@ -214,36 +213,39 @@
                 .then(() => { return signInWithEmailAndPassword(auth, emailInput, pwdInput); })
                 .then(async (userCredential) => {
                     const user = userCredential.user;
-                    // ĐÃ SỬA: Chỉ lấy duy nhất 1 Document của chính User này bằng UID
                     const userDoc = await getDoc(doc(db, "users", user.uid));
-                    
                     if (userDoc.exists() && userDoc.data().status === 'Banned') {
                         alert("LỖI: Tài khoản của bạn đã bị khóa!");
                         return auth.signOut();
                     }
-                    
                     window.location.href = (user.email === "thaituan.28012020@gmail.com") ? "admin.html" : "index.html";
                 })
                 .catch(() => { alert("Lỗi đăng nhập: Sai email hoặc mật khẩu!"); });
         }
 
-        // CHỨC NĂNG ĐĂNG KÝ HOÀN CHỈNH
+        // ĐÃ CHỈNH SỬA: LƯU THÊM AVATAR VÀ USERNAME VÀO FIRESTORE
         window.submitRegister = function(event) {
             event.preventDefault(); 
             const email = document.querySelector('#form-register input[type="email"]').value.trim(); 
             const pwd = document.getElementById('reg-pwd').value.trim();
             const confirmPwd = document.getElementById('reg-pwd-confirm').value.trim();
-            const username = document.getElementById('reg-user').value.trim();
+            
+            // Lấy Username và Avatar Base64
+            let username = document.getElementById('reg-user').value.trim();
+            let avatarSrc = document.getElementById('avatar-preview').src;
+            
+            if (!username) username = email.split('@')[0];
+            if (avatarSrc.includes('placeholder')) avatarSrc = ''; // Nếu là ảnh mặc định thì để trống
 
             if (pwd !== confirmPwd) { window.checkPasswordMatch(); return false; }
 
             createUserWithEmailAndPassword(auth, email, pwd)
                 .then(async (userCredential) => {
                     const user = userCredential.user;
-                    // ĐÃ SỬA: Lưu document vào Firestore dùng UID làm ID của Document luôn cho bảo mật
                     await setDoc(doc(db, "users", user.uid), {
                         username: username,
                         email: email,
+                        avatar: avatarSrc, // Lưu Avatar vào DB
                         status: 'Active',
                         plan: 'Free',
                         createdAt: new Date()
