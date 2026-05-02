@@ -15,28 +15,54 @@
 </head>
 <body class="bg-gray-900 text-white min-h-screen flex flex-col">
 
+    <!-- HEADER ĐÃ ĐỒNG BỘ VỚI TRANG CHỦ -->
     <nav class="sticky top-0 z-50 w-full bg-gray-900/80 backdrop-blur-md border-b border-gray-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
+                
                 <div class="flex-shrink-0">
-                    <a href="index.html" class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent hover:scale-105 transition-transform inline-block">CoreVault</a>
+                    <a href="index.html" class="flex items-center gap-3 hover:scale-105 transition-transform">
+                        <img src="logo.svg" alt="CoreVault Logo" class="w-10 h-10 shadow-lg shadow-blue-500/20 rounded-xl">
+                        <span class="text-xl md:text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                            CoreVault
+                        </span>
+                    </a>
                 </div>
+
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-2">
-                        <a href="index.html" class="text-gray-300 px-4 py-2 rounded-lg hover:bg-gray-800 transition-all text-sm font-medium">Home</a>
-                        <a href="tools.html" class="text-gray-300 px-4 py-2 rounded-lg hover:bg-gray-800 transition-all text-sm font-medium">Tools Vault</a>
+                        <a href="index.html" data-i18n="nav_home" class="text-gray-300 px-4 py-2 rounded-lg border border-transparent hover:border-gray-600 hover:bg-gray-800 transition-all duration-200 text-sm font-medium">Home</a>
+                        <a href="tools.html" data-i18n="nav_tools" class="text-gray-300 px-4 py-2 rounded-lg border border-transparent hover:border-gray-600 hover:bg-gray-800 transition-all duration-200 text-sm font-medium">Tools Vault</a>
+                        <a href="about.html" data-i18n="nav_about" class="text-gray-300 px-4 py-2 rounded-lg border border-transparent hover:border-gray-600 hover:bg-gray-800 transition-all duration-200 text-sm font-medium">About Me</a>
                     </div>
                 </div>
-                <div class="flex items-center space-x-3">
-                    <div id="header-auth" class="flex items-center gap-3 ml-2"></div>
+
+                <div class="flex items-center space-x-2 md:space-x-3">
+                    <button onclick="toggleLanguage()" class="text-gray-300 hover:text-white px-2 md:px-3 py-1.5 md:py-2 text-xs md:text-sm font-medium border border-gray-700 hover:bg-gray-800 rounded-lg transition-all flex items-center gap-1">
+                        <span data-i18n="lang_btn">EN / VN</span>
+                    </button>
+                    
+                    <div id="header-auth" class="flex items-center gap-2 md:gap-3 ml-1 md:ml-2">
+                        <div class="w-8 h-8 rounded-full bg-gray-700 animate-pulse"></div>
+                    </div>
+
+                    <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="md:hidden text-gray-400 hover:text-white p-1.5 ml-1 rounded-lg border border-gray-700 bg-gray-800 focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                    </button>
                 </div>
             </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-900 border-b border-gray-800 px-4 pt-2 pb-4 space-y-2 shadow-2xl absolute w-full left-0 top-16 z-40">
+            <a href="index.html" class="block px-4 py-3 rounded-xl text-gray-300 hover:bg-gray-800 hover:text-white font-medium transition-colors">Home</a>
+            <a href="tools.html" class="block px-4 py-3 rounded-xl text-gray-300 hover:bg-gray-800 hover:text-white font-medium transition-colors">Tools Vault</a>
+            <a href="about.html" class="block px-4 py-3 rounded-xl text-gray-300 hover:bg-gray-800 hover:text-white font-medium transition-colors">About Me</a>
         </div>
     </nav>
 
     <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full flex-grow">
         
-        <!-- KHU VỰC HỒ SƠ CÁ NHÂN MỚI -->
+        <!-- KHU VỰC HỒ SƠ CÁ NHÂN -->
         <div class="bg-gray-800 rounded-3xl p-6 md:p-8 border border-gray-700 shadow-2xl mb-10 flex flex-col md:flex-row items-center md:items-start gap-6 relative overflow-hidden">
             <div class="absolute top-0 left-0 w-full h-24 bg-gradient-to-r from-blue-600/20 to-purple-600/20"></div>
             
@@ -73,12 +99,62 @@
 
     </main>
 
-    <footer class="bg-gray-900 border-t border-gray-800 pt-8 pb-8 w-full mt-auto text-center">
-        <p class="text-gray-500 text-xs">© 2026 CoreVault Project.</p>
+    <!-- FOOTER ĐÃ ĐỒNG BỘ VỚI TRANG CHỦ -->
+    <footer class="bg-gray-900 border-t border-gray-800 pt-16 pb-8 w-full mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-12 mb-12">
+                
+                <div class="md:col-span-2">
+                    <a href="index.html" class="flex items-center gap-3 mb-4 hover:scale-105 transition-transform w-fit">
+                        <img src="logo.svg" alt="CoreVault Logo" class="w-10 h-10 shadow-lg shadow-blue-500/20 rounded-xl">
+                        <span class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                            CoreVault
+                        </span>
+                    </a>
+                    <p class="text-gray-400 text-sm leading-relaxed max-w-sm" data-i18n="hero_desc">
+                        Your premier destination for premium tools, optimized resources, and exclusive tech applications.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-bold mb-5 uppercase text-sm tracking-widest text-blue-400" data-i18n="footer_nav">Navigation</h4>
+                    <ul class="space-y-3 text-sm text-gray-400 font-medium">
+                        <li><a href="index.html" class="hover:text-white transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> <span data-i18n="nav_home">Home</span></a></li>
+                        <li><a href="tools.html" class="hover:text-white transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> <span data-i18n="nav_tools">Tools Vault</span></a></li>
+                        <li><a href="about.html" class="hover:text-white transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> <span data-i18n="nav_about">About Me</span></a></li>
+                        <li><a href="auth.html" class="hover:text-white transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> <span data-i18n="nav_login">Login / Register</span></a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-bold mb-5 uppercase text-sm tracking-widest text-purple-400" data-i18n="footer_legal">Legal & Support</h4>
+                    <ul class="space-y-3 text-sm text-gray-400 font-medium">
+                        <li><a href="#" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Contact Admin</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p data-i18n="footer_copy" class="text-gray-500 text-xs">
+                    © 2026 CoreVault Project. Developed by <span class="text-gray-300">LunarRider0</span>. All rights reserved.
+                </p>
+                <div class="flex items-center gap-3 bg-gray-800/50 px-4 py-2 rounded-full border border-gray-700 w-full md:w-auto justify-center">
+                    <span class="relative flex h-2.5 w-2.5">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+                    </span>
+                    <span data-i18n="footer_status" class="text-xs text-gray-400 font-bold uppercase tracking-wider">System Online</span>
+                </div>
+            </div>
+        </div>
     </footer>
     
+    <script src="lang.js"></script>
+
     <script type="module">
-        import { db, collection, getDocs, doc, getDoc, updateDoc, auth } from './firebase.js';
+        import { db, collection, getDocs, doc, getDoc, setDoc, query, where, auth } from './firebase.js';
         import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 
         let currentUser = null;
@@ -90,7 +166,6 @@
                 currentUser = user;
                 userDocRef = doc(db, "users", user.uid);
                 
-                // LẤY DỮ LIỆU TỪ FIRESTORE THAY VÌ AUTH
                 const userSnap = await getDoc(userDocRef);
                 let username = user.email.split('@')[0];
                 let avatar = `https://api.dicebear.com/7.x/avataaars/svg?seed=${username}`;
@@ -100,20 +175,25 @@
                     const data = userSnap.data();
                     if (data.username) username = data.username;
                     if (data.plan) plan = data.plan;
-                    if (data.avatar && data.avatar.trim() !== '') avatar = data.avatar;
+                    if (data.avatar && data.avatar.trim() !== '' && !data.avatar.includes('placeholder')) {
+                        avatar = data.avatar;
+                    }
                 }
 
-                // CẬP NHẬT HEADER (CÓ ẢNH VÀ LỜI CHÀO)
+                // CẬP NHẬT HEADER CHUẨN XỊN (Có nút Admin nếu là Giám đốc)
+                const isAdmin = user.email === "thaituan.28012020@gmail.com";
+                const adminLink = isAdmin ? `<a href="admin.html" class="text-xs font-bold text-purple-400 hover:text-purple-300 border border-purple-500/50 px-2 py-1 rounded transition-colors mr-2 hidden md:block">Admin Panel</a>` : '';
+
                 authContainer.innerHTML = `
+                    ${adminLink}
                     <span class="hidden md:block text-sm font-medium text-gray-300 mr-2">Welcome back, <b class="text-white">${username}</b></span>
-                    <div title="Tài khoản: ${user.email}" class="w-9 h-9 rounded-full bg-gray-800 flex items-center justify-center overflow-hidden border-2 border-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.3)]">
+                    <div title="Tài khoản: ${user.email}" class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gray-800 flex items-center justify-center overflow-hidden border-2 border-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.3)]">
                         <img src="${avatar}" class="w-full h-full object-cover">
                     </div>
-                    <button id="btn-logout" class="text-sm font-bold text-gray-400 hover:text-red-400 transition-colors ml-3">Logout</button>
+                    <button id="btn-logout" class="text-xs md:text-sm font-bold text-gray-400 hover:text-red-400 transition-colors ml-2 md:ml-3">Logout</button>
                 `;
                 document.getElementById('btn-logout').addEventListener('click', () => { signOut(auth).then(() => { window.location.href = "index.html"; }); });
                 
-                // CẬP NHẬT GIAO DIỆN HỒ SƠ BÊN TRONG TRANG
                 document.getElementById('profile-username').innerText = username;
                 document.getElementById('profile-email').innerText = user.email;
                 document.getElementById('profile-avatar').src = avatar;
@@ -128,21 +208,19 @@
             }
         });
 
-        // HÀM ĐỔI TÊN
         window.editUsername = async function() {
             const currentName = document.getElementById('profile-username').innerText;
             const newName = prompt("Nhập tên hiển thị mới của bạn:", currentName);
             
             if (newName && newName.trim() !== "" && newName !== currentName) {
                 try {
-                    await updateDoc(userDocRef, { username: newName.trim() });
+                    await setDoc(userDocRef, { username: newName.trim() }, { merge: true });
                     document.getElementById('profile-username').innerText = newName.trim();
                     alert("Cập nhật tên thành công! Hãy tải lại trang để thấy tên mới trên thanh điều hướng.");
                 } catch (error) { alert("Lỗi cập nhật tên: " + error.message); }
             }
         };
 
-        // HÀM ĐỔI ẢNH AVATAR
         window.uploadNewAvatar = function(event) {
             const file = event.target.files[0];
             if (!file) return;
@@ -153,7 +231,7 @@
                 const base64String = reader.result;
                 document.getElementById('profile-avatar').src = base64String;
                 try {
-                    await updateDoc(userDocRef, { avatar: base64String });
+                    await setDoc(userDocRef, { avatar: base64String }, { merge: true });
                     alert("Cập nhật ảnh đại diện thành công! Tải lại trang để áp dụng toàn website.");
                 } catch (error) { alert("Lỗi cập nhật ảnh: " + error.message); }
             };
@@ -163,58 +241,60 @@
         async function loadInventory() {
             const container = document.getElementById('inventory-container');
             try {
-                const querySnapshot = await getDocs(collection(db, "orders"));
+                const q = query(collection(db, "orders"), where("user", "==", currentUser.email));
+                const querySnapshot = await getDocs(q);
+                
                 container.innerHTML = ''; 
-                let hasItems = false;
-                for (const orderDoc of querySnapshot.docs) {
-                    const data = orderDoc.data();
-                    if (data.user === currentUser.email) {
-                        hasItems = true;
-                        const isCompleted = data.status === 'Completed';
-                        const statusBadge = isCompleted 
-                            ? `<span class="px-3 py-1 bg-green-500/20 text-green-400 border border-green-500/30 rounded-full text-xs font-bold">Đã Sở Hữu</span>`
-                            : `<span class="px-3 py-1 bg-yellow-500/20 text-yellow-500 border border-yellow-500/30 rounded-full text-xs font-bold animate-pulse">Chờ Admin Duyệt</span>`;
-                        let realDownloadLink = "#";
-                        if (isCompleted && data.productId) {
-                            try {
-                                const prodSnap = await getDoc(doc(db, "products", data.productId));
-                                if (prodSnap.exists()) realDownloadLink = prodSnap.data().downloadUrl || "#";
-                            } catch(e) {}
-                        }
-                        let actionBtn = "";
-                        if (isCompleted) {
-                            if (realDownloadLink === "#" || realDownloadLink.trim() === "") {
-                                actionBtn = `<button onclick="alert('LỖI: Admin chưa cập nhật Link tải cho công cụ này!')" class="bg-red-600 hover:bg-red-500 text-white px-5 py-2 rounded-xl text-sm font-bold shadow-lg transition-all flex items-center gap-2"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg> Link Lỗi</button>`;
-                            } else {
-                                actionBtn = `<a href="${realDownloadLink}" target="_blank" class="bg-blue-600 hover:bg-blue-500 text-white px-5 py-2 rounded-xl text-sm font-bold shadow-lg transition-all flex items-center gap-2"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg> Download File</a>`;
-                            }
-                        } else {
-                            actionBtn = `<button disabled class="bg-gray-700 text-gray-500 px-5 py-2 rounded-xl text-sm font-bold cursor-not-allowed">Chưa khả dụng</button>`;
-                        }
 
-                        const card = document.createElement('div');
-                        card.className = "bg-gray-800 border border-gray-700 rounded-2xl p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 hover:border-gray-500 transition-colors";
-                        card.innerHTML = `
-                            <div>
-                                <h3 class="text-xl font-bold text-white mb-1">${data.product}</h3>
-                                <p class="text-sm text-gray-400 font-mono">Mã đơn: ${data.orderId}</p>
-                            </div>
-                            <div class="flex items-center gap-4 w-full md:w-auto justify-between md:justify-end">
-                                ${statusBadge}
-                                ${actionBtn}
-                            </div>
-                        `;
-                        container.appendChild(card);
-                    }
-                }
-
-                if (!hasItems) {
+                if (querySnapshot.empty) {
                     container.innerHTML = `
                         <div class="text-center py-16 bg-gray-800/50 rounded-3xl border border-gray-700 border-dashed">
                             <p class="text-gray-400 mb-4">Kho đồ của bạn đang trống trơn.</p>
                             <a href="tools.html" class="text-blue-400 font-bold hover:text-blue-300">Dạo quanh Siêu thị ngay →</a>
                         </div>
                     `;
+                    return;
+                }
+
+                for (const orderDoc of querySnapshot.docs) {
+                    const data = orderDoc.data();
+                    const isCompleted = data.status === 'Completed';
+                    const statusBadge = isCompleted 
+                        ? `<span class="px-3 py-1 bg-green-500/20 text-green-400 border border-green-500/30 rounded-full text-xs font-bold">Đã Sở Hữu</span>`
+                        : `<span class="px-3 py-1 bg-yellow-500/20 text-yellow-500 border border-yellow-500/30 rounded-full text-xs font-bold animate-pulse">Chờ Admin Duyệt</span>`;
+                    
+                    let realDownloadLink = "#";
+                    if (isCompleted && data.productId) {
+                        try {
+                            const prodSnap = await getDoc(doc(db, "products", data.productId));
+                            if (prodSnap.exists()) realDownloadLink = prodSnap.data().downloadUrl || "#";
+                        } catch(e) {}
+                    }
+                    
+                    let actionBtn = "";
+                    if (isCompleted) {
+                        if (realDownloadLink === "#" || realDownloadLink.trim() === "") {
+                            actionBtn = `<button onclick="alert('LỖI: Admin chưa cập nhật Link tải cho công cụ này!')" class="bg-red-600 hover:bg-red-500 text-white px-5 py-2 rounded-xl text-sm font-bold shadow-lg transition-all flex items-center gap-2"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg> Link Lỗi</button>`;
+                        } else {
+                            actionBtn = `<a href="${realDownloadLink}" target="_blank" class="bg-blue-600 hover:bg-blue-500 text-white px-5 py-2 rounded-xl text-sm font-bold shadow-lg transition-all flex items-center gap-2"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg> Download File</a>`;
+                        }
+                    } else {
+                        actionBtn = `<button disabled class="bg-gray-700 text-gray-500 px-5 py-2 rounded-xl text-sm font-bold cursor-not-allowed">Chưa khả dụng</button>`;
+                    }
+
+                    const card = document.createElement('div');
+                    card.className = "bg-gray-800 border border-gray-700 rounded-2xl p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 hover:border-gray-500 transition-colors";
+                    card.innerHTML = `
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-1">${data.product}</h3>
+                            <p class="text-sm text-gray-400 font-mono">Mã đơn: ${data.orderId}</p>
+                        </div>
+                        <div class="flex items-center gap-4 w-full md:w-auto justify-between md:justify-end">
+                            ${statusBadge}
+                            ${actionBtn}
+                        </div>
+                    `;
+                    container.appendChild(card);
                 }
 
             } catch (error) {
