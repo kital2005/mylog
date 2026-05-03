@@ -6,27 +6,16 @@
     <title>CoreVault OS | Dashboard</title>
     <link rel="icon" type="image/svg+xml" href="logo.svg">
     <script src="https://cdn.tailwindcss.com"></script>
-    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
     <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: { primary: '#3b82f6', },
-                    fontFamily: { sans: ['Inter', 'sans-serif'], }
-                }
-            }
-        }
+        tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#3b82f6', }, fontFamily: { sans: ['Inter', 'sans-serif'], } } } }
     </script>
 </head>
 <body class="bg-gray-900 text-white font-sans overflow-hidden" style="display: none;">
 
     <div class="flex h-screen w-full relative">
-        
         <div id="sidebar-overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/60 z-40 hidden md:hidden backdrop-blur-sm transition-opacity"></div>
 
         <aside id="admin-sidebar" class="w-64 bg-gray-800 border-r border-gray-700 flex flex-col absolute inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 transition-transform duration-300 z-50 shadow-2xl md:shadow-none">
@@ -55,10 +44,7 @@
                     <span data-i18n="admin_orders">Orders</span>
                 </a>
                 <a href="admin-settings.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-700 rounded-xl transition-all">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                    </svg>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                     <span data-i18n="admin_settings">Settings</span>
                 </a>
             </nav>
@@ -67,20 +53,22 @@
         <main class="flex-1 flex flex-col h-screen overflow-hidden relative">
             <header class="h-16 bg-gray-900 border-b border-gray-800 flex items-center justify-between px-4 md:px-8">
                 <div class="flex items-center gap-3">
-                    <button onclick="toggleSidebar()" class="md:hidden text-gray-400 hover:text-white p-2 rounded-lg bg-gray-800 border border-gray-700">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-                    </button>
+                    <button onclick="toggleSidebar()" class="md:hidden text-gray-400 hover:text-white p-2 rounded-lg bg-gray-800 border border-gray-700"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg></button>
                     <div class="relative w-40 md:w-64 hidden sm:block">
-                        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                        </span>
-                        <input type="text" data-i18n="admin_search" class="w-full bg-gray-800 text-white border border-gray-700 rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:border-blue-500 text-sm" placeholder="Search...">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></span>
+                        <input type="text" data-i18n="admin_search" class="w-full bg-gray-800 text-white border border-gray-700 rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:border-blue-500 transition-colors text-sm" placeholder="Search...">
                     </div>
                 </div>
                 
                 <div class="flex items-center gap-3 md:gap-4">
-                    <button onclick="toggleLanguage()" class="text-gray-300 hover:text-white px-3 py-1.5 text-xs md:text-sm font-medium border border-gray-700 hover:border-gray-500 rounded-lg"><span data-i18n="lang_btn">EN / VN</span></button>
-                    <div onclick="logoutAdmin()" title="Đăng Xuất" class="w-8 h-8 md:w-9 md:h-9 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 flex items-center justify-center font-bold text-xs md:text-sm shadow-lg cursor-pointer">LR</div>
+                    <button onclick="toggleLanguage()" class="text-gray-300 hover:text-white px-3 py-1.5 text-xs md:text-sm font-medium border border-gray-700 hover:border-gray-500 hover:bg-gray-800 rounded-lg transition-all flex items-center gap-1">
+                        <span data-i18n="lang_btn">EN / VN</span>
+                    </button>
+                    <!-- ĐỒNG BỘ GIAO DIỆN HEADER ADMIN Ở ĐÂY -->
+                    <div class="flex items-center gap-2">
+                        <span id="admin-username-display" class="hidden md:block text-sm font-bold text-gray-300">Admin</span>
+                        <div id="admin-profile-btn" onclick="logoutAdmin()" title="Đăng Xuất (Logout)" class="w-8 h-8 md:w-9 md:h-9 rounded-full bg-gray-800 flex items-center justify-center font-bold text-xs md:text-sm shadow-lg cursor-pointer hover:scale-110 transition-transform overflow-hidden border border-gray-600">LR</div>
+                    </div>
                 </div>
             </header>
 
@@ -94,27 +82,19 @@
 
                 <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8">
                     <div class="bg-gray-800 rounded-2xl p-4 md:p-6 border border-gray-700 shadow-lg">
-                        <p class="text-gray-400 text-xs md:text-sm font-medium flex items-center gap-2 mb-2">
-                            <span class="w-2 h-2 rounded-full bg-green-500"></span><span data-i18n="dash_active" class="truncate">Active Tools</span>
-                        </p>
+                        <p class="text-gray-400 text-xs md:text-sm font-medium flex items-center gap-2 mb-2"><span class="w-2 h-2 rounded-full bg-green-500"></span><span data-i18n="dash_active" class="truncate">Active Tools</span></p>
                         <h3 id="stat-active-tools" class="text-2xl md:text-3xl font-bold text-white">0</h3>
                     </div>
                     <div class="bg-gray-800 rounded-2xl p-4 md:p-6 border border-gray-700 shadow-lg">
-                        <p class="text-gray-400 text-xs md:text-sm font-medium flex items-center gap-2 mb-2">
-                            <span class="w-2 h-2 rounded-full bg-blue-500"></span><span data-i18n="dash_visits" class="truncate">Total Tools</span>
-                        </p>
+                        <p class="text-gray-400 text-xs md:text-sm font-medium flex items-center gap-2 mb-2"><span class="w-2 h-2 rounded-full bg-blue-500"></span><span data-i18n="dash_visits" class="truncate">Total Tools</span></p>
                         <h3 id="stat-total-tools" class="text-2xl md:text-3xl font-bold text-white">0</h3>
                     </div>
                     <div class="bg-gray-800 rounded-2xl p-4 md:p-6 border border-gray-700 shadow-lg">
-                        <p class="text-gray-400 text-xs md:text-sm font-medium flex items-center gap-2 mb-2">
-                            <span class="w-2 h-2 rounded-full bg-purple-500"></span><span data-i18n="dash_new_users" class="truncate">Total Orders</span>
-                        </p>
+                        <p class="text-gray-400 text-xs md:text-sm font-medium flex items-center gap-2 mb-2"><span class="w-2 h-2 rounded-full bg-purple-500"></span><span data-i18n="dash_new_users" class="truncate">Total Orders</span></p>
                         <h3 id="stat-total-orders" class="text-2xl md:text-3xl font-bold text-white">0</h3>
                     </div>
                     <div class="bg-gray-800 rounded-2xl p-4 md:p-6 border border-gray-700 shadow-lg">
-                        <p class="text-gray-400 text-xs md:text-sm font-medium flex items-center gap-2 mb-2">
-                            <span class="w-2 h-2 rounded-full bg-yellow-500"></span><span data-i18n="dash_revenue" class="truncate">Total Revenue</span>
-                        </p>
+                        <p class="text-gray-400 text-xs md:text-sm font-medium flex items-center gap-2 mb-2"><span class="w-2 h-2 rounded-full bg-yellow-500"></span><span data-i18n="dash_revenue" class="truncate">Total Revenue</span></p>
                         <h3 id="stat-total-revenue" class="text-xl md:text-3xl font-bold text-green-400 truncate">$0</h3>
                     </div>
                 </div>
@@ -124,7 +104,6 @@
                         <h3 data-i18n="dash_chart" class="text-base md:text-lg font-bold text-white mb-6">Traffic & Revenue Overview</h3>
                         <div class="h-64 w-full"><canvas id="revenueChart"></canvas></div>
                     </div>
-
                     <div class="bg-gray-800 rounded-2xl border border-gray-700 p-4 md:p-6 shadow-lg flex flex-col">
                         <div class="flex justify-between items-center mb-6">
                             <h3 data-i18n="dash_sales" class="text-base md:text-lg font-bold text-white">Recent Sales</h3>
@@ -141,17 +120,7 @@
     <script src="lang.js"></script>
     <script type="module" src="auth-guard.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
-    <script>
-        // HÀM ĐÓNG/MỞ MENU TRÊN MOBILE
-        function toggleSidebar() {
-            const sidebar = document.getElementById('admin-sidebar');
-            const overlay = document.getElementById('sidebar-overlay');
-            sidebar.classList.toggle('-translate-x-full');
-            overlay.classList.toggle('hidden');
-        }
-    </script>
-
+    <script>function toggleSidebar() { document.getElementById('admin-sidebar').classList.toggle('-translate-x-full'); document.getElementById('sidebar-overlay').classList.toggle('hidden'); }</script>
     <script type="module">
         import { db, collection, getDocs } from './firebase.js';
 
@@ -174,21 +143,14 @@
                 ordersArray.forEach((data, index) => {
                     totalOrders++;
                     if(data.status === 'Completed') totalRevenueUSD += parseFloat(data.price || 0);
-
                     if (index < 4) {
                         const priceColor = data.price > 0 ? 'text-green-400' : 'text-gray-400';
                         const priceText = data.price > 0 ? `<span data-price-value="${data.price}"></span>` : `<span data-i18n="val_free">FREE</span>`;
-
                         recentSalesHTML += `
                             <div class="flex items-center justify-between p-3 bg-gray-900/50 rounded-xl border border-gray-700/50">
                                 <div class="flex items-center gap-3">
-                                    <div class="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-gray-800 flex items-center justify-center border border-gray-700 text-gray-400">
-                                        <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                                    </div>
-                                    <div>
-                                        <p class="text-xs md:text-sm font-bold text-white truncate max-w-[120px] md:max-w-[200px]">${data.product}</p>
-                                        <p class="text-[10px] md:text-xs text-gray-500">${data.user.split('@')[0]}</p>
-                                    </div>
+                                    <div class="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-gray-800 flex items-center justify-center border border-gray-700 text-gray-400"><svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg></div>
+                                    <div><p class="text-xs md:text-sm font-bold text-white truncate max-w-[120px] md:max-w-[200px]">${data.product}</p><p class="text-[10px] md:text-xs text-gray-500">${data.user.split('@')[0]}</p></div>
                                 </div>
                                 <div class="text-xs md:text-sm font-bold ${priceColor}">${priceText}</div>
                             </div>
@@ -202,20 +164,10 @@
                 document.getElementById('recent-sales-list').innerHTML = recentSalesHTML || '<p class="text-gray-500 text-center text-sm">Chưa có giao dịch nào.</p>';
 
                 const ctx = document.getElementById('revenueChart').getContext('2d');
-                new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                        datasets: [{ label: 'Revenue', data: [1200, 1900, 1500, 2200, 2800, 3500, 3100], borderColor: '#3b82f6', backgroundColor: 'rgba(59, 130, 246, 0.1)', borderWidth: 3, tension: 0.4, fill: true }]
-                    },
-                    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { grid: { color: '#374151' }, ticks: { color: '#9ca3af' } }, x: { grid: { display: false }, ticks: { color: '#9ca3af' } } } }
-                });
-
+                new Chart(ctx, { type: 'line', data: { labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'], datasets: [{ label: 'Revenue', data: [1200, 1900, 1500, 2200, 2800, 3500, 3100], borderColor: '#3b82f6', backgroundColor: 'rgba(59, 130, 246, 0.1)', borderWidth: 3, tension: 0.4, fill: true }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { grid: { color: '#374151' }, ticks: { color: '#9ca3af' } }, x: { grid: { display: false }, ticks: { color: '#9ca3af' } } } } });
                 if (typeof updateLanguage === 'function') updateLanguage();
-
             } catch (error) { console.error("Lỗi Dashboard:", error); }
         }
-
         document.addEventListener("DOMContentLoaded", loadDashboardStats);
     </script>
 </body>

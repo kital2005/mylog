@@ -6,34 +6,21 @@
     <title>CoreVault OS | Settings</title>
     <link rel="icon" type="image/svg+xml" href="logo.svg">
     <script src="https://cdn.tailwindcss.com"></script>
-    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
     <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: { primary: '#3b82f6', },
-                    fontFamily: { sans: ['Inter', 'sans-serif'], }
-                }
-            }
-        }
+        tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#3b82f6', }, fontFamily: { sans: ['Inter', 'sans-serif'], } } } }
     </script>
 </head>
 <body class="bg-gray-900 text-white font-sans overflow-hidden" style="display: none;">
 
     <div class="flex h-screen w-full relative">
         <div id="sidebar-overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/60 z-40 hidden md:hidden backdrop-blur-sm transition-opacity"></div>
-
         <aside id="admin-sidebar" class="w-64 bg-gray-800 border-r border-gray-700 flex flex-col absolute inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 transition-transform duration-300 z-50 shadow-2xl md:shadow-none">
             <div class="h-16 flex items-center justify-between px-6 border-b border-gray-700">
                 <a href="index.html" class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">CoreVault OS</a>
-                <button onclick="toggleSidebar()" class="md:hidden text-gray-400 hover:text-white">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                </button>
+                <button onclick="toggleSidebar()" class="md:hidden text-gray-400 hover:text-white"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
             </div>
             <nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
                 <a href="admin.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-700 rounded-xl transition-all">
@@ -49,14 +36,11 @@
                     <span data-i18n="admin_users">Users</span>
                 </a>
                 <a href="admin-orders.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-700 rounded-xl transition-all">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                     <span data-i18n="admin_orders">Orders</span>
                 </a>
                 <a href="admin-settings.html" class="flex items-center gap-3 px-4 py-3 bg-blue-600/20 text-blue-400 rounded-xl border border-blue-600/30 font-medium transition-all">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                    </svg>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                     <span data-i18n="admin_settings">Settings</span>
                 </a>
             </nav>
@@ -65,14 +49,16 @@
         <main class="flex-1 flex flex-col h-screen overflow-hidden relative">
             <header class="h-16 bg-gray-900 border-b border-gray-800 flex items-center justify-between px-4 md:px-8">
                 <div class="flex items-center gap-3">
-                    <button onclick="toggleSidebar()" class="md:hidden text-gray-400 hover:text-white p-2 rounded-lg bg-gray-800 border border-gray-700">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-                    </button>
+                    <button onclick="toggleSidebar()" class="md:hidden text-gray-400 hover:text-white p-2 rounded-lg bg-gray-800 border border-gray-700"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg></button>
                     <h2 class="text-lg font-bold text-gray-400 hidden sm:block" data-i18n="admin_settings">Settings</h2>
                 </div>
                 <div class="flex items-center gap-3 md:gap-4">
-                    <button onclick="toggleLanguage()" class="text-gray-300 hover:text-white px-3 py-1.5 text-xs md:text-sm font-medium border border-gray-700 hover:border-gray-500 rounded-lg"><span data-i18n="lang_btn">EN / VN</span></button>
-                    <div onclick="logoutAdmin()" class="w-8 h-8 md:w-9 md:h-9 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 flex items-center justify-center font-bold text-xs md:text-sm shadow-lg cursor-pointer">LR</div>
+                    <button onclick="toggleLanguage()" class="text-gray-300 hover:text-white px-3 py-1.5 text-xs md:text-sm font-medium border border-gray-700 hover:border-gray-500 hover:bg-gray-800 rounded-lg transition-all flex items-center gap-1"><span data-i18n="lang_btn">EN / VN</span></button>
+                    <!-- ĐỒNG BỘ GIAO DIỆN HEADER ADMIN Ở ĐÂY -->
+                    <div class="flex items-center gap-2">
+                        <span id="admin-username-display" class="hidden md:block text-sm font-bold text-gray-300">Admin</span>
+                        <div id="admin-profile-btn" onclick="logoutAdmin()" title="Đăng Xuất (Logout)" class="w-8 h-8 md:w-9 md:h-9 rounded-full bg-gray-800 flex items-center justify-center font-bold text-xs md:text-sm shadow-lg cursor-pointer hover:scale-110 transition-transform overflow-hidden border border-gray-600">LR</div>
+                    </div>
                 </div>
             </header>
 
@@ -131,9 +117,7 @@
                             <div><label class="block text-xs md:text-sm text-gray-400 mb-1">TikTok URL</label><input type="url" id="abTiktok" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-2 text-white focus:border-pink-500 text-sm"></div>
                             <div><label class="block text-xs md:text-sm text-gray-400 mb-1">GitHub URL</label><input type="url" id="abGithub" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-2 text-white focus:border-pink-500 text-sm"></div>
                         </div>
-
                         <div class="flex justify-end"><button type="submit" class="w-full md:w-auto bg-blue-600 hover:bg-blue-500 text-white px-8 py-3 rounded-xl font-bold shadow-lg transition-all">Save About Me</button></div>
-
                     </form>
                 </div>
                 
@@ -154,109 +138,60 @@
                         </label>
                     </div>
                 </div>
-
             </div>
         </main>
     </div>
 
     <script src="lang.js"></script>
     <script type="module" src="auth-guard.js"></script>
-
-    <script>
-        function toggleSidebar() {
-            const sidebar = document.getElementById('admin-sidebar');
-            const overlay = document.getElementById('sidebar-overlay');
-            sidebar.classList.toggle('-translate-x-full');
-            overlay.classList.toggle('hidden');
-        }
-    </script>
-
+    <script>function toggleSidebar() { document.getElementById('admin-sidebar').classList.toggle('-translate-x-full'); document.getElementById('sidebar-overlay').classList.toggle('hidden'); }</script>
     <script type="module">
         import { db, doc, setDoc, getDoc } from './firebase.js';
 
         async function loadSettings() {
-            // Tải cấu hình Hero
             try {
                 const heroSnap = await getDoc(doc(db, "settings", "hero"));
                 if (heroSnap.exists()) {
                     const data = heroSnap.data();
-                    document.getElementById('titleEn').value = data.titleEn || "";
-                    document.getElementById('titleVn').value = data.titleVn || "";
-                    document.getElementById('descEn').value = data.descEn || "";
-                    document.getElementById('descVn').value = data.descVn || "";
-                    document.getElementById('slide1').value = data.slide1 || "";
-                    document.getElementById('slide2').value = data.slide2 || "";
-                    document.getElementById('slide3').value = data.slide3 || "";
-                    document.getElementById('interval').value = data.interval || 5;
+                    document.getElementById('titleEn').value = data.titleEn || ""; document.getElementById('titleVn').value = data.titleVn || "";
+                    document.getElementById('descEn').value = data.descEn || ""; document.getElementById('descVn').value = data.descVn || "";
+                    document.getElementById('slide1').value = data.slide1 || ""; document.getElementById('slide2').value = data.slide2 || "";
+                    document.getElementById('slide3').value = data.slide3 || ""; document.getElementById('interval').value = data.interval || 5;
                 }
-            } catch (e) { console.error(e); }
+            } catch (e) {}
 
-            // Tải cấu hình About
             try {
                 const aboutSnap = await getDoc(doc(db, "settings", "about"));
                 if (aboutSnap.exists()) {
                     const a = aboutSnap.data();
-                    document.getElementById('abAvatar').value = a.avatar || "";
-                    document.getElementById('abName').value = a.name || "";
-                    document.getElementById('abTags').value = a.tags || "";
-                    document.getElementById('abRoleEn').value = a.roleEn || "";
-                    document.getElementById('abRoleVn').value = a.roleVn || "";
-                    document.getElementById('abBioEn').value = a.bioEn || "";
-                    document.getElementById('abBioVn').value = a.bioVn || "";
-                    document.getElementById('abTwitch').value = a.twitch || "";
-                    document.getElementById('abTiktok').value = a.tiktok || "";
-                    document.getElementById('abGithub').value = a.github || "";
+                    document.getElementById('abAvatar').value = a.avatar || ""; document.getElementById('abName').value = a.name || "";
+                    document.getElementById('abTags').value = a.tags || ""; document.getElementById('abRoleEn').value = a.roleEn || ""; document.getElementById('abRoleVn').value = a.roleVn || "";
+                    document.getElementById('abBioEn').value = a.bioEn || ""; document.getElementById('abBioVn').value = a.bioVn || "";
+                    document.getElementById('abTwitch').value = a.twitch || ""; document.getElementById('abTiktok').value = a.tiktok || ""; document.getElementById('abGithub').value = a.github || "";
                 }
-            } catch (e) { console.error(e); }
+            } catch (e) {}
 
-            // ĐÃ SỬA: ĐƯA VIỆC TẢI TRẠNG THÁI QUẢNG CÁO VÀO BÊN TRONG HÀM NÀY
             try {
                 const adSnap = await getDoc(doc(db, "settings", "ads"));
-                if (adSnap.exists()) {
-                    document.getElementById('adToggle').checked = adSnap.data().isActive;
-                }
-            } catch (e) { console.error("Lỗi tải Ads:", e); }
+                if (adSnap.exists()) { document.getElementById('adToggle').checked = adSnap.data().isActive; }
+            } catch (e) {}
         }
 
         window.saveHeroSettings = async function(e) {
             e.preventDefault();
-            const config = {
-                titleEn: document.getElementById('titleEn').value, titleVn: document.getElementById('titleVn').value,
-                descEn: document.getElementById('descEn').value, descVn: document.getElementById('descVn').value,
-                slide1: document.getElementById('slide1').value, slide2: document.getElementById('slide2').value,
-                slide3: document.getElementById('slide3').value, interval: parseInt(document.getElementById('interval').value)
-            };
+            const config = { titleEn: document.getElementById('titleEn').value, titleVn: document.getElementById('titleVn').value, descEn: document.getElementById('descEn').value, descVn: document.getElementById('descVn').value, slide1: document.getElementById('slide1').value, slide2: document.getElementById('slide2').value, slide3: document.getElementById('slide3').value, interval: parseInt(document.getElementById('interval').value) };
             try { await setDoc(doc(db, "settings", "hero"), config); alert("Đã lưu cấu hình Trang chủ!"); } catch (error) { alert("Lỗi: " + error.message); }
         };
 
         window.saveAboutSettings = async function(e) {
             e.preventDefault();
-            const aboutData = {
-                avatar: document.getElementById('abAvatar').value,
-                name: document.getElementById('abName').value,
-                tags: document.getElementById('abTags').value,
-                roleEn: document.getElementById('abRoleEn').value,
-                roleVn: document.getElementById('abRoleVn').value,
-                bioEn: document.getElementById('abBioEn').value,
-                bioVn: document.getElementById('abBioVn').value,
-                twitch: document.getElementById('abTwitch').value,
-                tiktok: document.getElementById('abTiktok').value,
-                github: document.getElementById('abGithub').value
-            };
-            try { 
-                await setDoc(doc(db, "settings", "about"), aboutData); 
-                alert("Đã lưu cấu hình About Me thành công!"); 
-            } catch (error) { alert("Lỗi: " + error.message); }
+            const aboutData = { avatar: document.getElementById('abAvatar').value, name: document.getElementById('abName').value, tags: document.getElementById('abTags').value, roleEn: document.getElementById('abRoleEn').value, roleVn: document.getElementById('abRoleVn').value, bioEn: document.getElementById('abBioEn').value, bioVn: document.getElementById('abBioVn').value, twitch: document.getElementById('abTwitch').value, tiktok: document.getElementById('abTiktok').value, github: document.getElementById('abGithub').value };
+            try { await setDoc(doc(db, "settings", "about"), aboutData); alert("Đã lưu cấu hình About Me thành công!"); } catch (error) { alert("Lỗi: " + error.message); }
         };
 
-        // ĐÃ SỬA: HÀM LƯU QUẢNG CÁO ĐÃ ĐƯỢC CHUẨN HÓA
         window.toggleAds = async function(isActive) {
-            try {
-                await setDoc(doc(db, "settings", "ads"), { isActive: isActive });
-                console.log("Trạng thái quảng cáo đã lưu:", isActive);
-            } catch (error) {
-                alert("Lỗi khi lưu trạng thái quảng cáo: " + error.message);
-            }
+            try { await setDoc(doc(db, "settings", "ads"), { isActive: isActive }); console.log("Trạng thái quảng cáo đã lưu:", isActive); } 
+            catch (error) { alert("Lỗi khi lưu trạng thái quảng cáo: " + error.message); }
         };
 
         document.addEventListener("DOMContentLoaded", loadSettings);

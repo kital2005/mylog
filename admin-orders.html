@@ -6,34 +6,21 @@
     <title>CoreVault OS | Orders</title>
     <link rel="icon" type="image/svg+xml" href="logo.svg">
     <script src="https://cdn.tailwindcss.com"></script>
-    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
     <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: { primary: '#3b82f6', },
-                    fontFamily: { sans: ['Inter', 'sans-serif'], }
-                }
-            }
-        }
+        tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#3b82f6', }, fontFamily: { sans: ['Inter', 'sans-serif'], } } } }
     </script>
 </head>
 <body class="bg-gray-900 text-white font-sans overflow-hidden" style="display: none;">
 
     <div class="flex h-screen w-full relative">
         <div id="sidebar-overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/60 z-40 hidden md:hidden backdrop-blur-sm transition-opacity"></div>
-
         <aside id="admin-sidebar" class="w-64 bg-gray-800 border-r border-gray-700 flex flex-col absolute inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 transition-transform duration-300 z-50 shadow-2xl md:shadow-none">
             <div class="h-16 flex items-center justify-between px-6 border-b border-gray-700">
                 <a href="index.html" class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">CoreVault OS</a>
-                <button onclick="toggleSidebar()" class="md:hidden text-gray-400 hover:text-white">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                </button>
+                <button onclick="toggleSidebar()" class="md:hidden text-gray-400 hover:text-white"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
             </div>
 
             <nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
@@ -50,14 +37,11 @@
                     <span data-i18n="admin_users">Users</span>
                 </a>
                 <a href="admin-orders.html" class="flex items-center gap-3 px-4 py-3 bg-blue-600/20 text-blue-400 rounded-xl border border-blue-600/30 font-medium transition-all">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                     <span data-i18n="admin_orders">Orders</span>
                 </a>
                 <a href="admin-settings.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-700 rounded-xl transition-all">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                    </svg>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                     <span data-i18n="admin_settings">Settings</span>
                 </a>
             </nav>
@@ -66,21 +50,19 @@
         <main class="flex-1 flex flex-col h-screen overflow-hidden relative">
             <header class="h-16 bg-gray-900 border-b border-gray-800 flex items-center justify-between px-4 md:px-8">
                 <div class="flex items-center gap-3">
-                    <button onclick="toggleSidebar()" class="md:hidden text-gray-400 hover:text-white p-2 rounded-lg bg-gray-800 border border-gray-700">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-                    </button>
+                    <button onclick="toggleSidebar()" class="md:hidden text-gray-400 hover:text-white p-2 rounded-lg bg-gray-800 border border-gray-700"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg></button>
                     <div class="relative w-40 md:w-64 hidden sm:block">
-                        <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-                            <svg class="w-5 h-5 text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                        </span>
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3"><svg class="w-5 h-5 text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></span>
                         <input type="text" data-i18n="admin_search" class="w-full bg-gray-800 text-white border border-gray-700 rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:border-blue-500 transition-colors text-sm" placeholder="Search...">
                     </div>
                 </div>
                 <div class="flex items-center gap-3 md:gap-4">
-                    <button onclick="toggleLanguage()" class="text-gray-300 hover:text-white px-3 py-1.5 text-xs md:text-sm font-medium border border-gray-700 hover:border-gray-500 hover:bg-gray-800 rounded-lg transition-all flex items-center gap-1">
-                        <span data-i18n="lang_btn">EN / VN</span>
-                    </button>
-                    <div onclick="logoutAdmin()" title="Đăng Xuất (Logout)" class="w-8 h-8 md:w-9 md:h-9 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 flex items-center justify-center font-bold text-xs md:text-sm shadow-lg cursor-pointer hover:scale-110 transition-transform">LR</div>
+                    <button onclick="toggleLanguage()" class="text-gray-300 hover:text-white px-3 py-1.5 text-xs md:text-sm font-medium border border-gray-700 hover:border-gray-500 hover:bg-gray-800 rounded-lg transition-all flex items-center gap-1"><span data-i18n="lang_btn">EN / VN</span></button>
+                    <!-- ĐỒNG BỘ GIAO DIỆN HEADER ADMIN Ở ĐÂY -->
+                    <div class="flex items-center gap-2">
+                        <span id="admin-username-display" class="hidden md:block text-sm font-bold text-gray-300">Admin</span>
+                        <div id="admin-profile-btn" onclick="logoutAdmin()" title="Đăng Xuất (Logout)" class="w-8 h-8 md:w-9 md:h-9 rounded-full bg-gray-800 flex items-center justify-center font-bold text-xs md:text-sm shadow-lg cursor-pointer hover:scale-110 transition-transform overflow-hidden border border-gray-600">LR</div>
+                    </div>
                 </div>
             </header>
 
@@ -117,43 +99,23 @@
 
     <script src="lang.js"></script>
     <script type="module" src="auth-guard.js"></script>
-    
-    <script>
-        function toggleSidebar() {
-            const sidebar = document.getElementById('admin-sidebar');
-            const overlay = document.getElementById('sidebar-overlay');
-            sidebar.classList.toggle('-translate-x-full');
-            overlay.classList.toggle('hidden');
-        }
-    </script>
-
+    <script>function toggleSidebar() { document.getElementById('admin-sidebar').classList.toggle('-translate-x-full'); document.getElementById('sidebar-overlay').classList.toggle('hidden'); }</script>
     <script type="module">
         import { db, collection, getDocs, doc, updateDoc } from './firebase.js';
 
         async function loadOrders() {
             const tbody = document.getElementById('orders-tbody');
-
             try {
                 const querySnapshot = await getDocs(collection(db, "orders"));
                 tbody.innerHTML = ''; 
-
-                if (querySnapshot.empty) {
-                    tbody.innerHTML = '<tr><td colspan="5" class="text-center p-8 text-gray-500">Chưa có giao dịch nào.</td></tr>';
-                    return;
-                }
+                if (querySnapshot.empty) { tbody.innerHTML = '<tr><td colspan="5" class="text-center p-8 text-gray-500">Chưa có giao dịch nào.</td></tr>'; return; }
 
                 querySnapshot.forEach((docSnap) => {
-                    const data = docSnap.data();
-                    const docId = docSnap.id;
+                    const data = docSnap.data(); const docId = docSnap.id;
                     const shortId = data.orderId || docId.substring(0, 8).toUpperCase();
+                    let priceDisplay = data.price === 0 ? '<span data-i18n="val_free" class="text-green-400 font-bold text-sm">FREE</span>' : `<span data-price-value="${data.price}" class="text-white font-bold text-sm"></span>`;
                     
-                    let priceDisplay = data.price === 0 
-                        ? '<span data-i18n="val_free" class="text-green-400 font-bold text-sm">FREE</span>' 
-                        : `<span data-price-value="${data.price}" class="text-white font-bold text-sm"></span>`;
-
-                    let statusDisplay = '';
-                    let actionBtn = '';
-
+                    let statusDisplay = ''; let actionBtn = '';
                     if (data.status === 'Completed') {
                         statusDisplay = `<span class="px-2.5 py-1 bg-green-500/20 text-green-400 border border-green-500/30 rounded-full text-xs font-bold">Completed</span>`;
                         actionBtn = `<span class="text-gray-500 text-xs">No Action</span>`;
@@ -164,41 +126,23 @@
 
                     const newRow = document.createElement('tr');
                     newRow.className = "hover:bg-gray-700/20 transition-colors group";
-                    
                     newRow.innerHTML = `
                         <td class="p-4 font-mono text-xs md:text-sm text-blue-400 whitespace-nowrap">${shortId}</td>
-                        <td class="p-4 min-w-[200px]">
-                            <p class="font-bold text-white text-sm line-clamp-2">${data.product}</p>
-                            <p class="text-xs text-gray-400 flex items-center gap-1 mt-1">
-                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-                                <span class="truncate">${data.user}</span>
-                            </p>
-                        </td>
+                        <td class="p-4 min-w-[200px]"><p class="font-bold text-white text-sm line-clamp-2">${data.product}</p><p class="text-xs text-gray-400 flex items-center gap-1 mt-1"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg><span class="truncate">${data.user}</span></p></td>
                         <td class="p-4 whitespace-nowrap">${priceDisplay}</td>
                         <td class="p-4 whitespace-nowrap">${statusDisplay}</td>
                         <td class="p-4 text-right">${actionBtn}</td>
                     `;
-                    
                     tbody.prepend(newRow); 
                 });
-
                 if (typeof updateLanguage === 'function') updateLanguage();
-
-            } catch (error) {
-                console.error("Lỗi tải đơn hàng:", error);
-                tbody.innerHTML = '<tr><td colspan="5" class="text-center p-8 text-red-500">Lỗi kết nối máy chủ!</td></tr>';
-            }
+            } catch (error) { tbody.innerHTML = '<tr><td colspan="5" class="text-center p-8 text-red-500">Lỗi kết nối máy chủ!</td></tr>'; }
         }
 
         window.approveOrder = async function(docId) {
             if(confirm("Bạn đã nhận được tiền và muốn duyệt đơn hàng này? Khách hàng sẽ nhận được link tải ngay lập tức.")) {
-                try {
-                    await updateDoc(doc(db, "orders", docId), { status: 'Completed' });
-                    alert("Đã duyệt đơn hàng thành công!");
-                    loadOrders(); 
-                } catch(error) {
-                    alert("Lỗi thao tác: " + error.message);
-                }
+                try { await updateDoc(doc(db, "orders", docId), { status: 'Completed' }); alert("Đã duyệt đơn hàng thành công!"); loadOrders(); } 
+                catch(error) { alert("Lỗi thao tác: " + error.message); }
             }
         };
 
