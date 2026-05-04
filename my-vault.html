@@ -10,7 +10,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script>
-        tailwind.config = { theme: { extend: { colors: { primary: '#3b82f6', }, fontFamily: { sans: ['Inter', 'sans-serif'], } } } }
+        tailwind.config = { 
+            theme: { 
+                extend: { 
+                    colors: { primary: '#3b82f6', }, 
+                    fontFamily: { sans: ['Inter', 'sans-serif'], } 
+                } 
+            } 
+        }
     </script>
 </head>
 <body class="bg-gray-900 text-white min-h-screen flex flex-col">
@@ -46,17 +53,17 @@
                         <div class="w-8 h-8 rounded-full bg-gray-700 animate-pulse"></div>
                     </div>
 
-                    <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="md:hidden text-gray-400 hover:text-white p-1.5 ml-1 rounded-lg border border-gray-700 bg-gray-800 focus:outline-none">
+                    <button onclick="toggleMobileMenu()" class="md:hidden text-gray-400 hover:text-white p-1.5 ml-1 rounded-lg border border-gray-700 bg-gray-800 focus:outline-none transition-colors">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                     </button>
                 </div>
             </div>
         </div>
 
-        <div id="mobile-menu" class="hidden md:hidden bg-gray-900 border-b border-gray-800 px-4 pt-2 pb-4 space-y-2 shadow-2xl absolute w-full left-0 top-16 z-40">
-            <a href="index.html" class="block px-4 py-3 rounded-xl text-gray-300 hover:bg-gray-800 hover:text-white font-medium transition-colors">Home</a>
-            <a href="tools.html" class="block px-4 py-3 rounded-xl text-gray-300 hover:bg-gray-800 hover:text-white font-medium transition-colors">Tools Vault</a>
-            <a href="about.html" class="block px-4 py-3 rounded-xl text-gray-300 hover:bg-gray-800 hover:text-white font-medium transition-colors">About Me</a>
+        <div id="mobile-menu" class="md:hidden bg-gray-900 border-b border-gray-800 px-4 pt-2 pb-3 space-y-1 shadow-2xl absolute w-full left-0 top-16 z-40 transition-all duration-300 ease-out transform -translate-y-4 opacity-0 pointer-events-none origin-top">
+            <a href="index.html" class="block px-4 py-2.5 rounded-xl text-gray-300 hover:bg-gray-800 hover:text-white font-medium transition-colors">Home</a>
+            <a href="tools.html" class="block px-4 py-2.5 rounded-xl text-gray-300 hover:bg-gray-800 hover:text-white font-medium transition-colors">Tools Vault</a>
+            <a href="about.html" class="block px-4 py-2.5 rounded-xl text-gray-300 hover:bg-gray-800 hover:text-white font-medium transition-colors">About Me</a>
         </div>
     </nav>
 
@@ -99,7 +106,6 @@
 
     </main>
 
-    <!-- FOOTER ĐÃ ĐỒNG BỘ VỚI TRANG CHỦ -->
     <footer class="bg-gray-900 border-t border-gray-800 pt-16 pb-8 w-full mt-auto">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-12 mb-12">
@@ -152,6 +158,19 @@
     </footer>
     
     <script src="lang.js"></script>
+    
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu.classList.contains('opacity-0')) {
+                menu.classList.remove('opacity-0', '-translate-y-4', 'pointer-events-none');
+                menu.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
+            } else {
+                menu.classList.add('opacity-0', '-translate-y-4', 'pointer-events-none');
+                menu.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
+            }
+        }
+    </script>
 
     <script type="module">
         import { db, collection, getDocs, doc, getDoc, setDoc, query, where, auth } from './firebase.js';
@@ -192,12 +211,16 @@
                     </div>
                     <button id="btn-logout" class="text-xs md:text-sm font-bold text-gray-400 hover:text-red-400 transition-colors ml-2 md:ml-3">Logout</button>
                 `;
-                document.getElementById('btn-logout').addEventListener('click', () => { signOut(auth).then(() => { window.location.href = "index.html"; }); });
+                
+                document.getElementById('btn-logout').addEventListener('click', () => { 
+                    signOut(auth).then(() => { window.location.href = "index.html"; }); 
+                });
                 
                 document.getElementById('profile-username').innerText = username;
                 document.getElementById('profile-email').innerText = user.email;
                 document.getElementById('profile-avatar').src = avatar;
                 document.getElementById('profile-plan').innerText = plan + " Plan";
+                
                 if(plan === 'Premium') {
                     document.getElementById('profile-plan').className = "px-4 py-1.5 bg-purple-500/20 text-purple-400 rounded-full text-xs font-bold uppercase tracking-widest border border-purple-500/50 shadow-inner";
                 }
@@ -217,14 +240,19 @@
                     await setDoc(userDocRef, { username: newName.trim() }, { merge: true });
                     document.getElementById('profile-username').innerText = newName.trim();
                     alert("Cập nhật tên thành công! Hãy tải lại trang để thấy tên mới trên thanh điều hướng.");
-                } catch (error) { alert("Lỗi cập nhật tên: " + error.message); }
+                } catch (error) { 
+                    alert("Lỗi cập nhật tên: " + error.message); 
+                }
             }
         };
 
         window.uploadNewAvatar = function(event) {
             const file = event.target.files[0];
             if (!file) return;
-            if (file.size > 2 * 1024 * 1024) { alert("File ảnh quá lớn! Vui lòng chọn ảnh dưới 2MB."); return; }
+            if (file.size > 2 * 1024 * 1024) { 
+                alert("File ảnh quá lớn! Vui lòng chọn ảnh dưới 2MB."); 
+                return; 
+            }
 
             const reader = new FileReader();
             reader.onload = async function() {
@@ -233,7 +261,9 @@
                 try {
                     await setDoc(userDocRef, { avatar: base64String }, { merge: true });
                     alert("Cập nhật ảnh đại diện thành công! Tải lại trang để áp dụng toàn website.");
-                } catch (error) { alert("Lỗi cập nhật ảnh: " + error.message); }
+                } catch (error) { 
+                    alert("Lỗi cập nhật ảnh: " + error.message); 
+                }
             };
             reader.readAsDataURL(file);
         };
@@ -268,7 +298,9 @@
                         try {
                             const prodSnap = await getDoc(doc(db, "products", data.productId));
                             if (prodSnap.exists()) realDownloadLink = prodSnap.data().downloadUrl || "#";
-                        } catch(e) {}
+                        } catch(e) {
+                            console.error(e);
+                        }
                     }
                     
                     let actionBtn = "";

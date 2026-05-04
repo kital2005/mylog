@@ -76,7 +76,7 @@
                         <div class="w-8 h-8 rounded-full bg-gray-700 animate-pulse"></div>
                     </div>
 
-                    <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="md:hidden text-gray-400 hover:text-white p-1.5 ml-1 rounded-lg border border-gray-700 bg-gray-800 focus:outline-none">
+                    <button onclick="toggleMobileMenu()" class="md:hidden text-gray-400 hover:text-white p-1.5 ml-1 rounded-lg border border-gray-700 bg-gray-800 focus:outline-none transition-colors">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                     </button>
                 </div>
@@ -84,10 +84,10 @@
             </div>
         </div>
 
-        <div id="mobile-menu" class="hidden md:hidden bg-gray-900 border-b border-gray-800 px-4 pt-2 pb-4 space-y-2 shadow-2xl absolute w-full left-0 top-16 z-40">
-            <a href="index.html" class="block px-4 py-3 rounded-xl text-blue-400 bg-blue-600/10 border border-blue-500/20 font-bold">Home</a>
-            <a href="tools.html" class="block px-4 py-3 rounded-xl text-gray-300 hover:bg-gray-800 hover:text-white font-medium transition-colors">Tools Vault</a>
-            <a href="about.html" class="block px-4 py-3 rounded-xl text-gray-300 hover:bg-gray-800 hover:text-white font-medium transition-colors">About Me</a>
+        <div id="mobile-menu" class="md:hidden bg-gray-900 border-b border-gray-800 px-4 pt-2 pb-3 space-y-1 shadow-2xl absolute w-full left-0 top-16 z-40 transition-all duration-300 ease-out transform -translate-y-4 opacity-0 pointer-events-none origin-top">
+            <a href="index.html" class="block px-4 py-2.5 rounded-xl text-blue-400 bg-blue-600/10 border border-blue-500/20 font-bold">Home</a>
+            <a href="tools.html" class="block px-4 py-2.5 rounded-xl text-gray-300 hover:bg-gray-800 hover:text-white font-medium transition-colors">Tools Vault</a>
+            <a href="about.html" class="block px-4 py-2.5 rounded-xl text-gray-300 hover:bg-gray-800 hover:text-white font-medium transition-colors">About Me</a>
         </div>
     </nav>
 
@@ -190,6 +190,19 @@
     
     <script src="lang.js"></script>
 
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu.classList.contains('opacity-0')) {
+                menu.classList.remove('opacity-0', '-translate-y-4', 'pointer-events-none');
+                menu.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
+            } else {
+                menu.classList.add('opacity-0', '-translate-y-4', 'pointer-events-none');
+                menu.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
+            }
+        }
+    </script>
+
     <script type="module">
         import { db, collection, getDocs, auth, doc, getDoc } from './firebase.js';
         import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
@@ -208,7 +221,9 @@
                         const data = userDoc.data();
                         if (data.status === 'Banned') {
                             alert("SECURITY ALERT: Tài khoản của bạn đã bị khóa!");
-                            await signOut(auth); window.location.href = "index.html"; return; 
+                            await signOut(auth);
+                            window.location.href = "index.html";
+                            return; 
                         }
                         if (data.username) username = data.username;
                         if (data.avatar && data.avatar.trim() !== '') avatar = data.avatar;
@@ -228,9 +243,13 @@
                             <button id="btn-logout-home" class="text-xs md:text-sm font-bold text-gray-400 hover:text-red-400 transition-colors hidden md:block">Logout</button>
                         </div>
                     `;
-                    document.getElementById('btn-logout-home')?.addEventListener('click', () => { signOut(auth).then(() => { window.location.reload(); }); });
+                    document.getElementById('btn-logout-home')?.addEventListener('click', () => { 
+                        signOut(auth).then(() => { window.location.reload(); }); 
+                    });
 
-                } catch(error) { console.error(error); }
+                } catch(error) { 
+                    console.error(error); 
+                }
             } else {
                 authContainer.innerHTML = `<a href="auth.html" data-i18n="nav_login" class="text-xs md:text-sm font-semibold text-white bg-blue-600 hover:bg-blue-500 px-3 md:px-5 py-1.5 md:py-2 rounded-lg transition-colors shadow-lg shadow-blue-500/20">Login</a>`;
                 if (typeof updateLanguage === 'function') updateLanguage();
@@ -250,7 +269,10 @@
                     const slides = [config.slide1, config.slide2, config.slide3].filter(s => s); 
                     if(slides.length > 0) {
                         const bgElements = [document.getElementById('carousel-bg-1'), document.getElementById('carousel-bg-2'), document.getElementById('carousel-bg-3')];
-                        slides.forEach((url, i) => { if(bgElements[i]) bgElements[i].style.backgroundImage = `url('${url}')`; });
+                        slides.forEach((url, i) => { 
+                            if(bgElements[i]) bgElements[i].style.backgroundImage = `url('${url}')`; 
+                        });
+                        
                         if(slides.length > 1) {
                             let current = 0;
                             setInterval(() => {
@@ -261,7 +283,9 @@
                         }
                     }
                 }
-            } catch (e) { console.error(e); }
+            } catch (e) { 
+                console.error(e); 
+            }
         }
 
         // 3. TẢI 3 SẢN PHẨM MỚI NHẤT
@@ -271,9 +295,11 @@
                 const querySnapshot = await getDocs(collection(db, "products"));
                 container.innerHTML = ''; 
                 let count = 0;
+                
                 querySnapshot.forEach((doc) => {
                     if (count >= 3 || doc.data().status === 'Hidden') return; 
                     count++;
+                    
                     const data = doc.data();
                     const docId = doc.id;
                     const catI18n = data.category === 'Gaming' ? 'val_gaming' : (data.category === 'Graphics' ? 'val_graphics' : 'val_system');
@@ -302,7 +328,9 @@
                     container.appendChild(card);
                 });
                 if (typeof updateLanguage === 'function') updateLanguage();
-            } catch (error) { console.error(error); }
+            } catch (error) { 
+                console.error(error); 
+            }
         }
 
         // 4. KIỂM TRA TRẠNG THÁI QUẢNG CÁO TỪ BẢNG ĐIỀU KHIỂN
@@ -314,7 +342,9 @@
                 } else {
                     document.getElementById('ad-container').classList.add('hidden');
                 }
-            } catch (e) { console.error("Lỗi tải cấu hình quảng cáo", e); }
+            } catch (e) { 
+                console.error("Lỗi tải cấu hình quảng cáo", e); 
+            }
         }
 
         document.addEventListener("DOMContentLoaded", () => {
