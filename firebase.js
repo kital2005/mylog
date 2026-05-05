@@ -1,4 +1,3 @@
-// firebase.js - Bản hoàn chỉnh đã bổ sung Query & Where
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
 import { 
     getAuth, 
@@ -11,8 +10,13 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 
 import { 
-    getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, getDoc, setDoc, query, where 
+    getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, getDoc, setDoc, query, where, orderBy, onSnapshot 
 } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+// ĐÃ THÊM: THƯ VIỆN ĐỂ UPLOAD FILE TRỰC TIẾP LÊN FIREBASE
+import { 
+    getStorage, ref, uploadBytesResumable, getDownloadURL 
+} from "https://www.gstatic.com/firebasejs/10.8.1/firebase-storage.js";
 
 const firebaseConfig = { 
   apiKey: "AIzaSyC20Dw4N_QKc7AyFg_LW1lSvPXikIDCZGE", 
@@ -26,10 +30,12 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
+const storage = getStorage(app); // Khởi tạo Storage
 
 export { 
-    auth, db, getDoc, setDoc, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, query, where,
-    createUserWithEmailAndPassword, signInWithEmailAndPassword, setPersistence, browserLocalPersistence, browserSessionPersistence, sendPasswordResetEmail
+    auth, db, storage, getDoc, setDoc, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, query, where, orderBy, onSnapshot,
+    createUserWithEmailAndPassword, signInWithEmailAndPassword, setPersistence, browserLocalPersistence, browserSessionPersistence, sendPasswordResetEmail,
+    ref, uploadBytesResumable, getDownloadURL // Xuất thư viện Storage
 };
 
 

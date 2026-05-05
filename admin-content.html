@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>CoreVault OS | Content Hub</title><link rel="icon" type="image/svg+xml" href="logo.svg"><script src="https://cdn.tailwindcss.com"></script><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><script>tailwind.config={theme:{extend:{colors:{primary:'#3b82f6'},fontFamily:{sans:['Inter','sans-serif']}}}}</script>
+</head>
+<body class="bg-gray-900 text-white font-sans min-h-screen flex p-4 md:p-8 justify-center">
+    
+    <div class="max-w-4xl w-full bg-gray-800 rounded-3xl border border-gray-700 shadow-2xl p-6 md:p-10 flex flex-col">
+        <div class="flex items-center justify-between mb-8 pb-4 border-b border-gray-700">
+            <div><h1 class="text-2xl font-bold text-white">Content Management Hub</h1><p class="text-sm text-gray-400 mt-1">Manage Community, Videos and OS Resources.</p></div>
+            <a href="admin.html" class="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg text-sm font-bold transition-colors">Back to Dashboard</a>
+        </div>
+
+        <div class="flex gap-2 mb-8 bg-gray-900 p-2 rounded-xl">
+            <button onclick="switchTab('tab-posts')" id="btn-posts" class="flex-1 py-2 rounded-lg bg-blue-600 font-bold text-sm transition-colors">Community Posts</button>
+            <button onclick="switchTab('tab-vids')" id="btn-vids" class="flex-1 py-2 rounded-lg text-gray-400 hover:text-white font-bold text-sm transition-colors">Videos Upload</button>
+            <button onclick="switchTab('tab-res')" id="btn-res" class="flex-1 py-2 rounded-lg text-gray-400 hover:text-white font-bold text-sm transition-colors">OS Resources</button>
+        </div>
+
+        <!-- Tab: Posts -->
+        <div id="tab-posts" class="space-y-4 overflow-y-auto max-h-[60vh] pr-2"></div>
+
+        <!-- Tab: Videos -->
+        <div id="tab-vids" class="hidden flex-col gap-6">
+            <div id="admin-vids-list" class="space-y-3 overflow-y-auto max-h-[60vh] pr-2"></div>
+        </div>
+
+        <!-- Tab: Resources -->
+        <div id="tab-res" class="hidden flex-col gap-6">
+            <div id="admin-res-list" class="space-y-3 overflow-y-auto max-h-[60vh] pr-2"></div>
+        </div>
+    </div>
+
+    <script type="module" src="auth-guard.js"></script>
+    <script type="module">
+        import { db, collection, getDocs, deleteDoc, doc, query, orderBy } from './firebase.js';
+
+        window.switchTab = function(tabId) {
+            ['tab-posts', 'tab-vids', 'tab-res'].forEach(id => document.getElementById(id).classList.add('hidden'));
+            ['btn-posts', 'btn-vids', 'btn-res'].forEach(id => document.getElementById(id).className = "flex-1 py-2 rounded-lg text-gray-400 hover:text-white font-bold text-sm transition-colors");
+            document.getElementById(tabId).classList.remove('hidden'); document.getElementById(tabId).classList.add('flex');
+            
+            const btnMap = {'tab-posts':'btn-posts', 'tab-vids':'btn-vids', 'tab-res':'btn-res'};
+            const colorMap = {'tab-posts':'bg-blue-600 text-white', 'tab-vids':'bg-rose-600 text-white', 'tab-res':'bg-emerald-600 text-white'};
+            document.getElementById(btnMap[tabId]).className = `flex-1 py-2 rounded-lg font-bold text-sm transition-colors ${colorMap[tabId]}`;
+            
+            if(tabId==='tab-posts') loadPosts(); if(tabId==='tab-vids') loadVids(); if(tabId==='tab-res') loadRes();
+        }
+
+        async function loadPosts() {
+            const el = document.getElementById('tab-posts');
+            const snap = await getDocs(query(collection(db, "posts"), orderBy("timestamp", "desc")));
+            el.innerHTML = ''; snap.forEach(d => {
+                el.innerHTML += `<div class="bg-gray-900 p-4 rounded-xl border border-gray-700 flex justify-between items-center"><div class="line-clamp-2 pr-4"><b class="${d.data().isAdmin?'text-red-400':'text-blue-400'}">${d.data().authorName}</b>: ${d.data().content}</div><button onclick="delDoc('posts','${d.id}')" class="bg-red-500/20 text-red-500 hover:bg-red-500 hover:text-white px-3 py-1 rounded text-sm font-bold shrink-0 transition-colors">Delete</button></div>`;
+            });
+        }
+        
+        async function loadVids() {
+            const el = document.getElementById('admin-vids-list');
+            const snap = await getDocs(query(collection(db, "videos"), orderBy("timestamp", "desc")));
+            el.innerHTML = ''; snap.forEach(d => {
+                el.innerHTML += `<div class="bg-gray-900 p-4 rounded-xl border border-gray-700 flex justify-between items-center"><div class="pr-4"><b class="text-white">${d.data().title}</b> <span class="text-xs text-gray-500">by ${d.data().authorName}</span></div><button onclick="delDoc('videos','${d.id}')" class="bg-red-500/20 text-red-500 hover:bg-red-500 hover:text-white px-3 py-1 rounded text-sm font-bold shrink-0 transition-colors">Delete</button></div>`;
+            });
+        }
+
+        async function loadRes() {
+            const el = document.getElementById('admin-res-list');
+            const snap = await getDocs(query(collection(db, "resources"), orderBy("timestamp", "desc")));
+            el.innerHTML = ''; snap.forEach(d => {
+                el.innerHTML += `<div class="bg-gray-900 p-4 rounded-xl border border-gray-700 flex justify-between items-center"><div class="pr-4"><b class="text-white">${d.data().title}</b> <span class="text-xs text-gray-500">by ${d.data().authorName}</span></div><button onclick="delDoc('resources','${d.id}')" class="bg-red-500/20 text-red-500 hover:bg-red-500 hover:text-white px-3 py-1 rounded text-sm font-bold shrink-0 transition-colors">Delete</button></div>`;
+            });
+        }
+
+        window.delDoc = async function(coll, id) { if(confirm("Xóa vĩnh viễn nội dung này?")) { await deleteDoc(doc(db, coll, id)); if(coll==='posts')loadPosts(); if(coll==='videos')loadVids(); if(coll==='resources')loadRes(); } }
+        document.addEventListener("DOMContentLoaded", loadPosts);
+    </script>
+</body>
+</html>

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoreVault | Community</title>
+    <link rel="icon" type="image/svg+xml" href="logo.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = { theme: { extend: { colors: { primary: '#3b82f6', }, fontFamily: { sans: ['Inter', 'sans-serif'], } } } }
+    </script>
+</head>
+<body class="bg-gray-900 text-white min-h-screen flex flex-col">
+
+    <nav class="sticky top-0 z-50 w-full bg-gray-900/80 backdrop-blur-md border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2 hover:text-indigo-400 transition-colors">
+                <svg class="w-6 h-6 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                <span class="font-bold text-lg hidden md:block">Back to Hub</span>
+            </a>
+            <div class="flex items-center gap-4">
+                <button onclick="toggleLanguage()" class="text-xs font-bold border border-gray-700 px-3 py-1.5 rounded-lg hover:bg-gray-800" data-i18n="lang_btn">EN / VN</button>
+                <div id="header-auth" class="flex items-center gap-2"></div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto px-4 py-8 w-full flex-grow flex flex-col md:flex-row gap-8">
+        
+        <aside class="w-full md:w-72 shrink-0">
+            <div class="bg-gray-800 rounded-3xl p-5 border border-gray-700 shadow-xl sticky top-24">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 data-i18n="com_channels" class="text-sm font-bold text-gray-400 uppercase tracking-widest">Rooms</h3>
+                    <button onclick="createRoom()" class="text-indigo-400 hover:text-indigo-300 text-sm font-bold bg-indigo-500/10 px-3 py-1 rounded-lg" data-i18n="com_create_room">+ New Room</button>
+                </div>
+                
+                <div id="room-list" class="space-y-2 mb-6 max-h-[50vh] overflow-y-auto pr-2 custom-scrollbar"></div>
+
+                <button onclick="joinPrivateRoom()" class="w-full bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 rounded-xl text-sm transition-colors border border-gray-600 shadow-lg" data-i18n="com_join_room">Join Private Room</button>
+            </div>
+        </aside>
+
+        <div class="flex-grow flex flex-col gap-6">
+            <div class="bg-gray-800 rounded-3xl p-5 border border-gray-700 shadow-xl">
+                <div class="flex items-center justify-between mb-4 pb-3 border-b border-gray-700">
+                    <h2 id="current-room-title" class="text-xl font-bold text-indigo-400">🌐 General Chat</h2>
+                    <span id="room-status-badge" class="bg-green-500/20 text-green-400 text-xs font-bold px-3 py-1 rounded-full">Public</span>
+                </div>
+                
+                <div class="flex gap-4">
+                    <img id="my-avatar" src="" class="w-12 h-12 rounded-full border-2 border-indigo-500 object-cover shrink-0 bg-gray-900">
+                    <div class="flex-grow">
+                        <textarea id="post-content" data-i18n="com_placeholder" rows="3" class="w-full bg-gray-900 border border-gray-700 rounded-2xl p-4 text-white focus:outline-none focus:border-indigo-500 transition-colors resize-none text-sm placeholder-gray-500 shadow-inner"></textarea>
+                        <div class="flex justify-end mt-3">
+                            <button onclick="submitPost()" data-i18n="com_post_btn" class="bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-2.5 rounded-xl font-bold text-sm shadow-lg shadow-indigo-500/30 transition-transform hover:scale-105">Post to Community</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="posts-container" class="space-y-6">
+                <p class="text-center text-gray-500 animate-pulse py-10 font-bold tracking-widest">LOADING DISCUSSIONS...</p>
+            </div>
+        </div>
+    </main>
+
+    <style>
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 10px; }
+    </style>
+
+    <script src="lang.js"></script>
+    <script type="module">
+        import { db, collection, addDoc, getDocs, doc, getDoc, updateDoc, deleteDoc, query, orderBy, where, auth } from './firebase.js';
+        import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+
+        let currentProfile = { uid: null, name: 'Guest', avatar: '' };
+        let isAdmin = false;
+        let currentRoomId = 'general';
+        let currentRoomCreator = 'system';
+
+        onAuthStateChanged(auth, async (user) => {
+            if (!user) { window.location.replace("auth.html"); return; }
+            
+            currentProfile.uid = user.uid; 
+            isAdmin = user.email === "thaituan.28012020@gmail.com";
+
+            // KIỂM TRA BẢO TRÌ
+            try {
+                const maintSnap = await getDoc(doc(db, "settings", "maintenance"));
+                if (maintSnap.exists() && maintSnap.data().communityLocked && !isAdmin) {
+                    alert(localStorage.getItem('site_language') === 'vn' ? "Trang Cộng Đồng hiện đang được bảo trì!" : "Community page is under maintenance!");
+                    window.location.replace("index.html"); return;
+                }
+            } catch(e) {}
+            
+            const snap = await getDoc(doc(db, "users", user.uid));
+            let username = user.email.split('@')[0]; 
+            let avatar = `https://api.dicebear.com/7.x/avataaars/svg?seed=${username}`;
+            
+            if (snap.exists()) {
+                if (snap.data().status === 'Banned') { await signOut(auth); window.location.replace("auth.html"); return; }
+                username = snap.data().username || username; 
+                if(snap.data().avatar && !snap.data().avatar.includes('placeholder')) avatar = snap.data().avatar;
+            }
+            currentProfile.name = username; currentProfile.avatar = avatar;
+            
+            let adminHeaderBadge = isAdmin ? `<span class="bg-red-600 text-white text-[10px] px-2 py-0.5 rounded shadow-lg">ADMIN</span>` : '';
+            document.getElementById('header-auth').innerHTML = `
+                <div class="flex flex-col items-end hidden md:flex">
+                    <span class="text-sm font-bold text-gray-300">${username}</span>
+                    ${adminHeaderBadge}
+                </div>
+                <img src="${avatar}" onclick="window.location.href='my-vault.html'" title="My Vault" class="w-10 h-10 rounded-full border-2 ${isAdmin ? 'border-red-500' : 'border-indigo-500'} cursor-pointer object-cover bg-gray-800 hover:scale-110 transition-transform">
+            `;
+            document.getElementById('my-avatar').src = avatar;
+            if(isAdmin) document.getElementById('my-avatar').classList.replace('border-indigo-500', 'border-red-500');
+
+            loadPublicRooms(); loadPosts();
+        });
+
+        window.createRoom = async function() {
+            const name = prompt("Nhập tên phòng muốn tạo (VD: Tán gẫu Anime):");
+            if(!name) return;
+            const isPrivate = confirm("Bạn muốn cài mật khẩu cho phòng này? (OK = Có, Cancel = Public)");
+            let key = "";
+            if(isPrivate) key = prompt("Nhập mã bí mật cho phòng (Dùng để mời bạn bè):");
+
+            try {
+                const newRoomRef = await addDoc(collection(db, "rooms"), { name: name, isPrivate: isPrivate, key: key, createdBy: currentProfile.uid, timestamp: new Date().getTime() });
+                alert("Tạo phòng thành công!"); switchRoom(newRoomRef.id, `💬 ${name}`, currentProfile.uid, isPrivate);
+            } catch(e) { alert("Lỗi tạo phòng: " + e.message); }
+        }
+
+        window.delRoom = async function(roomId, event) {
+            event.stopPropagation();
+            if(confirm("Xóa phòng này sẽ mất tất cả bài viết bên trong. Bạn chắc chứ?")) {
+                try {
+                    await deleteDoc(doc(db, "rooms", roomId));
+                    if(currentRoomId === roomId) switchRoom('general', '🌐 General Chat', 'system', false);
+                    else loadPublicRooms();
+                } catch(e) { alert("Lỗi: " + e.message); }
+            }
+        }
+
+        async function loadPublicRooms() {
+            const container = document.getElementById('room-list');
+            try {
+                const q = query(collection(db, "rooms"), orderBy("timestamp", "desc"));
+                const snap = await getDocs(q);
+                let html = `<button onclick="switchRoom('general', '🌐 General Chat', 'system', false)" class="w-full text-left px-4 py-3 rounded-xl ${currentRoomId === 'general' ? 'bg-indigo-600/20 text-indigo-400 font-bold border border-indigo-500/30' : 'text-gray-300 hover:bg-gray-700 font-medium'} transition-colors">🌐 General Chat</button>`;
+                
+                snap.forEach(d => {
+                    const data = d.data();
+                    if(!data.isPrivate || data.createdBy === currentProfile.uid || isAdmin) {
+                        const activeClass = currentRoomId === d.id ? 'bg-indigo-600/20 text-indigo-400 font-bold border border-indigo-500/30' : 'text-gray-300 hover:bg-gray-700 font-medium';
+                        const icon = data.isPrivate ? '🔒' : '💬';
+                        let delBtn = (isAdmin || data.createdBy === currentProfile.uid) 
+                            ? `<button onclick="delRoom('${d.id}', event)" class="text-red-500 hover:text-red-400 hover:bg-red-500/20 p-1.5 rounded-lg transition-colors ml-2" title="Xóa phòng"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>` : '';
+
+                        html += `<div class="flex items-center w-full mt-2"><button onclick="switchRoom('${d.id}', '${icon} ${data.name}', '${data.createdBy}', ${data.isPrivate})" class="flex-grow text-left px-4 py-3 rounded-xl ${activeClass} transition-colors truncate">${icon} ${data.name}</button>${delBtn}</div>`;
+                    }
+                });
+                container.innerHTML = html;
+            } catch(e) { console.error(e); }
+        }
+
+        window.joinPrivateRoom = async function() {
+            const name = prompt("Nhập Tên Phòng kín:");
+            const key = prompt("Nhập Mã bí mật (Key):");
+            if(!name || !key) return;
+            try {
+                const q = query(collection(db, "rooms"), where("name", "==", name), where("key", "==", key));
+                const snap = await getDocs(q);
+                if(snap.empty) { alert("Tên phòng hoặc mã bí mật không đúng!"); return; }
+                const roomDoc = snap.docs[0];
+                switchRoom(roomDoc.id, `🔒 ${roomDoc.data().name}`, roomDoc.data().createdBy, true);
+            } catch(e) { alert("Lỗi: " + e.message); }
+        }
+
+        window.switchRoom = function(id, name, creatorUid, isPrivate) {
+            currentRoomId = id; currentRoomCreator = creatorUid;
+            document.getElementById('current-room-title').innerText = name;
+            const badge = document.getElementById('room-status-badge');
+            if (isPrivate) { badge.className = "bg-rose-500/20 text-rose-400 text-xs font-bold px-3 py-1 rounded-full border border-rose-500/30"; badge.innerText = "Private"; } 
+            else { badge.className = "bg-green-500/20 text-green-400 text-xs font-bold px-3 py-1 rounded-full border border-green-500/30"; badge.innerText = "Public"; }
+            loadPublicRooms(); loadPosts();
+        }
+
+        window.submitPost = async function() {
+            const content = document.getElementById('post-content').value;
+            if (!content.trim()) return;
+            try {
+                await addDoc(collection(db, "posts"), { 
+                    roomId: currentRoomId, uid: currentProfile.uid, authorName: currentProfile.name, authorAvatar: currentProfile.avatar, 
+                    isAdmin: isAdmin,
+                    content: content, likes: [], replies: [], timestamp: new Date().getTime() 
+                });
+                document.getElementById('post-content').value = ''; loadPosts();
+            } catch (error) { alert("Lỗi đăng bài: " + error.message); }
+        };
+
+        window.likePost = async function(postId) {
+            try {
+                const ref = doc(db, "posts", postId); const snap = await getDoc(ref);
+                if(snap.exists()){
+                    let likes = snap.data().likes || [];
+                    if(likes.includes(currentProfile.uid)) likes = likes.filter(u => u !== currentProfile.uid);
+                    else likes.push(currentProfile.uid);
+                    await updateDoc(ref, { likes: likes }); loadPosts();
+                }
+            } catch (e) { console.error(e); }
+        };
+
+        window.replyPost = async function(postId) {
+            const input = document.getElementById(`reply-input-${postId}`);
+            if(!input.value.trim()) return;
+            try {
+                const ref = doc(db, "posts", postId); const snap = await getDoc(ref);
+                if(snap.exists()){
+                    let replies = snap.data().replies || [];
+                    replies.push({ 
+                        uid: currentProfile.uid, name: currentProfile.name, avatar: currentProfile.avatar, 
+                        isAdmin: isAdmin,
+                        text: input.value, timestamp: new Date().getTime()
+                    });
+                    await updateDoc(ref, { replies: replies }); loadPosts();
+                }
+            } catch(e) { alert("Lỗi bình luận: " + e.message); }
+        };
+
+        window.delPost = async function(postId) {
+            if(confirm("Bạn có chắc chắn muốn xóa bài viết này vĩnh viễn?")) {
+                try { await deleteDoc(doc(db, "posts", postId)); loadPosts(); } 
+                catch(e) { alert("Lỗi: Bạn không có quyền xóa bài này!"); }
+            }
+        };
+
+        async function loadPosts() {
+            const container = document.getElementById('posts-container');
+            try {
+                const q = query(collection(db, "posts"), where("roomId", "==", currentRoomId));
+                const snap = await getDocs(q); container.innerHTML = '';
+                if(snap.empty) { container.innerHTML = '<div class="text-center py-16 bg-gray-800/30 rounded-3xl border border-gray-700 border-dashed"><p class="text-gray-500 font-medium">Phòng này chưa có ai trò chuyện. Hãy mở bát nhé!</p></div>'; return; }
+                
+                let postsArray = []; snap.forEach(d => postsArray.push({id: d.id, ...d.data()}));
+                postsArray.sort((a,b) => b.timestamp - a.timestamp); 
+
+                postsArray.forEach(data => {
+                    const date = new Date(data.timestamp).toLocaleString('vi-VN');
+                    const likesCount = (data.likes || []).length;
+                    const isLiked = (data.likes || []).includes(currentProfile.uid) ? 'text-rose-500 fill-rose-500' : 'text-gray-400';
+                    const repliesCount = (data.replies || []).length;
+                    
+                    let delBtn = (isAdmin || currentProfile.uid === data.uid) ? `<button onclick="delPost('${data.id}')" class="text-red-500 hover:text-white hover:bg-red-600 text-xs font-bold px-3 py-1.5 rounded-lg border border-red-500/30 transition-colors">Xóa</button>` : '';
+                    
+                    let hostBadge = (data.uid === currentRoomCreator && currentRoomCreator !== 'system') ? `<span class="bg-yellow-500/20 text-yellow-500 text-[10px] px-2 py-0.5 rounded-md border border-yellow-500/30 ml-2">👑 Host</span>` : '';
+                    let adminBadge = data.isAdmin ? `<span class="bg-red-600 text-white text-[10px] px-2 py-0.5 rounded-md border border-red-500/50 shadow-lg ml-2 tracking-widest">ADMIN</span>` : '';
+                    let nameColor = data.isAdmin ? 'text-red-400 font-extrabold drop-shadow-[0_0_8px_rgba(239,68,68,0.5)]' : 'text-white font-bold';
+                    let avatarBorder = data.isAdmin ? 'border-red-500' : 'border-gray-600';
+
+                    let repliesHtml = (data.replies || []).map(r => {
+                        let rAdminBadge = r.isAdmin ? `<span class="bg-red-600 text-white text-[9px] px-1.5 py-0.5 rounded border border-red-500/50 ml-2">ADMIN</span>` : '';
+                        let rNameColor = r.isAdmin ? 'text-red-400 font-extrabold' : 'text-indigo-300 font-bold';
+                        return `
+                        <div class="flex gap-3 bg-gray-900/80 p-3 rounded-xl border border-gray-700/50 mt-2">
+                            <img src="${r.avatar}" class="w-8 h-8 rounded-full border ${r.isAdmin?'border-red-500':'border-gray-600'} shrink-0 object-cover bg-gray-800">
+                            <div class="flex-grow">
+                                <div class="flex items-center mb-1">
+                                    <p class="text-xs ${rNameColor}">${r.name}</p> ${rAdminBadge}
+                                    ${(r.uid === currentRoomCreator && currentRoomCreator !== 'system') ? `<span class="text-yellow-500 text-[10px] ml-1">👑</span>` : ''}
+                                </div>
+                                <p class="text-sm text-gray-300 leading-relaxed">${r.text}</p>
+                            </div>
+                        </div>`
+                    }).join('');
+
+                    container.innerHTML += `
+                        <div class="bg-gray-800 rounded-3xl p-5 md:p-6 border ${data.isAdmin ? 'border-red-500/30 shadow-[0_0_20px_rgba(239,68,68,0.1)]' : 'border-gray-700 shadow-xl'}">
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="flex items-center gap-3">
+                                    <img src="${data.authorAvatar}" class="w-12 h-12 rounded-full border-2 ${avatarBorder} object-cover bg-gray-900">
+                                    <div><h4 class="${nameColor} flex items-center">${data.authorName} ${adminBadge} ${hostBadge}</h4><p class="text-xs text-gray-500">${date}</p></div>
+                                </div>
+                                ${delBtn}
+                            </div>
+                            <p class="text-gray-100 text-sm md:text-base whitespace-pre-line leading-relaxed mb-4">${data.content}</p>
+                            
+                            <div class="flex items-center gap-6 border-y border-gray-700 py-3 mb-4">
+                                <button onclick="likePost('${data.id}')" class="flex items-center gap-2 ${isLiked} hover:text-rose-500 transition-colors"><svg class="w-5 h-5 transition-transform hover:scale-110" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg> <span class="font-bold text-sm" data-i18n="com_like">Like</span> <span class="bg-gray-900 px-2 py-0.5 rounded-md text-xs">${likesCount}</span></button>
+                                <button onclick="document.getElementById('reply-input-${data.id}').focus()" class="flex items-center gap-2 text-gray-400 hover:text-indigo-400 transition-colors"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg> <span class="font-bold text-sm" data-i18n="com_reply">Reply</span> <span class="bg-gray-900 px-2 py-0.5 rounded-md text-xs">${repliesCount}</span></button>
+                            </div>
+                            
+                            ${repliesCount > 0 ? `<div class="space-y-1 mb-4 bg-gray-900/50 p-3 rounded-2xl border border-gray-700/50">${repliesHtml}</div>` : ''}
+                            
+                            <div class="flex gap-3">
+                                <img src="${currentProfile.avatar}" class="w-10 h-10 rounded-full border ${isAdmin?'border-red-500':'border-gray-600'} shrink-0 object-cover bg-gray-900 hidden sm:block">
+                                <div class="relative flex-grow">
+                                    <input type="text" id="reply-input-${data.id}" placeholder="Viết bình luận..." class="w-full bg-gray-900 border border-gray-700 rounded-full pl-4 pr-20 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500 transition-colors">
+                                    <button onclick="replyPost('${data.id}')" class="absolute right-1.5 top-1.5 bg-indigo-600 hover:bg-indigo-500 px-4 py-1.5 rounded-full text-white font-bold text-xs transition-colors shadow-lg shadow-indigo-500/30">Gửi</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            } catch(error) { container.innerHTML = '<p class="text-red-500 text-center font-bold">Lỗi tải dữ liệu.</p>'; }
+        }
+    </script>
+</body>
+</html>

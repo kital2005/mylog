@@ -1,17 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CoreVault OS | Settings</title>
-    <link rel="icon" type="image/svg+xml" href="logo.svg">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#3b82f6', }, fontFamily: { sans: ['Inter', 'sans-serif'], } } } }
-    </script>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>CoreVault OS | Settings</title><link rel="icon" type="image/svg+xml" href="logo.svg"><script src="https://cdn.tailwindcss.com"></script><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"><script>tailwind.config={theme:{extend:{colors:{primary:'#3b82f6'},fontFamily:{sans:['Inter','sans-serif']}}}}</script>
 </head>
 <body class="bg-gray-900 text-white font-sans overflow-hidden" style="display: none;">
 
@@ -23,26 +13,12 @@
                 <button onclick="toggleSidebar()" class="md:hidden text-gray-400 hover:text-white"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
             </div>
             <nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
-                <a href="admin.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-700 rounded-xl transition-all">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
-                    <span data-i18n="admin_dashboard">Dashboard</span>
-                </a>
-                <a href="admin-products.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-700 rounded-xl transition-all">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
-                    <span data-i18n="admin_products">Products</span>
-                </a>
-                <a href="admin-users.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-700 rounded-xl transition-all">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                    <span data-i18n="admin_users">Users</span>
-                </a>
-                <a href="admin-orders.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-700 rounded-xl transition-all">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                    <span data-i18n="admin_orders">Orders</span>
-                </a>
-                <a href="admin-settings.html" class="flex items-center gap-3 px-4 py-3 bg-blue-600/20 text-blue-400 rounded-xl border border-blue-600/30 font-medium transition-all">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                    <span data-i18n="admin_settings">Settings</span>
-                </a>
+                <a href="admin.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-700 rounded-xl transition-all"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg><span data-i18n="admin_dashboard">Dashboard</span></a>
+                <a href="admin-products.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-700 rounded-xl transition-all"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg><span data-i18n="admin_products">Products</span></a>
+                <a href="admin-users.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-700 rounded-xl transition-all"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg><span data-i18n="admin_users">Users</span></a>
+                <a href="admin-orders.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-700 rounded-xl transition-all"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg><span data-i18n="admin_orders">Orders</span></a>
+                <a href="admin-settings.html" class="flex items-center gap-3 px-4 py-3 bg-blue-600/20 text-blue-400 rounded-xl border border-blue-600/30 font-medium transition-all"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg><span data-i18n="admin_settings">Settings</span></a>
+                <a href="admin-content.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-700 rounded-xl transition-all"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg> Content Hub</a>
             </nav>
         </aside>
 
@@ -54,16 +30,46 @@
                 </div>
                 <div class="flex items-center gap-3 md:gap-4">
                     <button onclick="toggleLanguage()" class="text-gray-300 hover:text-white px-3 py-1.5 text-xs md:text-sm font-medium border border-gray-700 hover:border-gray-500 hover:bg-gray-800 rounded-lg transition-all flex items-center gap-1"><span data-i18n="lang_btn">EN / VN</span></button>
-                    <!-- ĐỒNG BỘ GIAO DIỆN HEADER ADMIN Ở ĐÂY -->
                     <div class="flex items-center gap-2">
                         <span id="admin-username-display" class="hidden md:block text-sm font-bold text-gray-300">Admin</span>
-                        <div id="admin-profile-btn" onclick="logoutAdmin()" title="Đăng Xuất (Logout)" class="w-8 h-8 md:w-9 md:h-9 rounded-full bg-gray-800 flex items-center justify-center font-bold text-xs md:text-sm shadow-lg cursor-pointer hover:scale-110 transition-transform overflow-hidden border border-gray-600">LR</div>
+                        <div id="admin-profile-btn" onclick="logoutAdmin()" title="Đăng Xuất" class="w-8 h-8 md:w-9 md:h-9 rounded-full bg-gray-800 flex items-center justify-center font-bold text-xs md:text-sm shadow-lg cursor-pointer hover:scale-110 transition-transform overflow-hidden border border-gray-600">LR</div>
                     </div>
                 </div>
             </header>
 
             <div class="flex-1 overflow-y-auto p-4 md:p-8">
+                
+                <!-- BẢNG ĐIỀU KHIỂN BẢO TRÌ (MỚI THÊM) -->
                 <div class="mb-6 md:mb-8">
+                    <h1 class="text-2xl md:text-3xl font-bold text-orange-400" data-i18n="set_maint_title">Maintenance Mode</h1>
+                    <p class="text-gray-400 text-sm md:text-base mt-1" data-i18n="set_maint_desc">Lock pages for regular users.</p>
+                </div>
+
+                <div class="max-w-3xl bg-gray-800 rounded-2xl border border-gray-700 p-5 md:p-8 shadow-xl mb-12 space-y-6">
+                    <div class="flex items-center justify-between">
+                        <div><h2 class="text-lg font-bold text-white" data-i18n="set_lock_com">Lock Community Page</h2></div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" id="lockCom" class="sr-only peer" onchange="toggleLock('communityLocked', this.checked)">
+                            <div class="w-14 h-7 bg-gray-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-orange-500 shadow-inner"></div>
+                        </label>
+                    </div>
+                    <div class="flex items-center justify-between border-t border-gray-700 pt-6">
+                        <div><h2 class="text-lg font-bold text-white" data-i18n="set_lock_vid">Lock Videos Hub</h2></div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" id="lockVid" class="sr-only peer" onchange="toggleLock('videosLocked', this.checked)">
+                            <div class="w-14 h-7 bg-gray-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-orange-500 shadow-inner"></div>
+                        </label>
+                    </div>
+                    <div class="flex items-center justify-between border-t border-gray-700 pt-6">
+                        <div><h2 class="text-lg font-bold text-white" data-i18n="set_lock_res">Lock OS & Resources</h2></div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" id="lockRes" class="sr-only peer" onchange="toggleLock('resourcesLocked', this.checked)">
+                            <div class="w-14 h-7 bg-gray-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-orange-500 shadow-inner"></div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="mb-6 md:mb-8 border-t border-gray-800 pt-8 md:pt-10">
                     <h1 data-i18n="set_title" class="text-2xl md:text-3xl font-bold">Homepage Configuration</h1>
                     <p data-i18n="set_desc" class="text-gray-400 text-sm md:text-base mt-1">Manage hero carousel and welcome texts.</p>
                 </div>
@@ -123,14 +129,12 @@
                 
                 <div class="mb-6 md:mb-8 border-t border-gray-800 pt-8 md:pt-10 mt-8">
                     <h1 class="text-2xl md:text-3xl font-bold text-yellow-400">Google AdSense Control</h1>
-                    <p class="text-gray-400 text-sm md:text-base mt-1">Bật/Tắt hiển thị quảng cáo trên toàn bộ Website.</p>
                 </div>
 
                 <div class="max-w-3xl bg-gray-800 rounded-2xl border border-gray-700 p-5 md:p-8 shadow-xl mb-12">
                     <div class="flex items-center justify-between">
                         <div>
                             <h2 class="text-lg font-bold text-white">Hiển thị Quảng Cáo</h2>
-                            <p class="text-sm text-gray-400">Khách hàng sẽ nhìn thấy banner quảng cáo ở các trang.</p>
                         </div>
                         <label class="relative inline-flex items-center cursor-pointer">
                             <input type="checkbox" id="adToggle" class="sr-only peer" onchange="toggleAds(this.checked)">
@@ -161,6 +165,15 @@
             } catch (e) {}
 
             try {
+                const maintSnap = await getDoc(doc(db, "settings", "maintenance"));
+                if (maintSnap.exists()) {
+                    document.getElementById('lockCom').checked = maintSnap.data().communityLocked || false;
+                    document.getElementById('lockVid').checked = maintSnap.data().videosLocked || false;
+                    document.getElementById('lockRes').checked = maintSnap.data().resourcesLocked || false;
+                }
+            } catch (e) {}
+
+            try {
                 const aboutSnap = await getDoc(doc(db, "settings", "about"));
                 if (aboutSnap.exists()) {
                     const a = aboutSnap.data();
@@ -183,6 +196,12 @@
             try { await setDoc(doc(db, "settings", "hero"), config); alert("Đã lưu cấu hình Trang chủ!"); } catch (error) { alert("Lỗi: " + error.message); }
         };
 
+        window.toggleLock = async function(field, isLocked) {
+            try {
+                await setDoc(doc(db, "settings", "maintenance"), { [field]: isLocked }, { merge: true });
+            } catch (error) { alert("Lỗi lưu trạng thái: " + error.message); }
+        }
+
         window.saveAboutSettings = async function(e) {
             e.preventDefault();
             const aboutData = { avatar: document.getElementById('abAvatar').value, name: document.getElementById('abName').value, tags: document.getElementById('abTags').value, roleEn: document.getElementById('abRoleEn').value, roleVn: document.getElementById('abRoleVn').value, bioEn: document.getElementById('abBioEn').value, bioVn: document.getElementById('abBioVn').value, twitch: document.getElementById('abTwitch').value, tiktok: document.getElementById('abTiktok').value, github: document.getElementById('abGithub').value };
@@ -190,7 +209,7 @@
         };
 
         window.toggleAds = async function(isActive) {
-            try { await setDoc(doc(db, "settings", "ads"), { isActive: isActive }); console.log("Trạng thái quảng cáo đã lưu:", isActive); } 
+            try { await setDoc(doc(db, "settings", "ads"), { isActive: isActive }); } 
             catch (error) { alert("Lỗi khi lưu trạng thái quảng cáo: " + error.message); }
         };
 

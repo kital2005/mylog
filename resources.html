@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>CoreVault | OS Resources</title><link rel="icon" type="image/svg+xml" href="logo.svg"><script src="https://cdn.tailwindcss.com"></script><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"><script>tailwind.config={theme:{extend:{colors:{primary:'#3b82f6'},fontFamily:{sans:['Inter','sans-serif']}}}}</script>
+</head>
+<body class="bg-gray-900 text-white min-h-screen flex flex-col">
+
+    <nav class="sticky top-0 z-50 w-full bg-gray-900/80 backdrop-blur-md border-b border-gray-800">
+        <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2 hover:text-emerald-400 transition-colors">
+                <svg class="w-6 h-6 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                <span class="font-bold text-lg hidden md:block">Back to Hub</span>
+            </a>
+            <div class="flex items-center gap-4">
+                <button onclick="document.getElementById('upload-modal').classList.remove('hidden')" class="bg-emerald-600 hover:bg-emerald-500 px-5 py-2 rounded-xl text-sm font-bold shadow-lg shadow-emerald-500/30 transition-all flex items-center gap-2" data-i18n="res_upload_btn">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4"></path></svg> Share File
+                </button>
+                <div id="header-auth" class="flex items-center gap-2"></div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 py-12 w-full flex-grow">
+        <div class="mb-12 text-center md:text-left">
+            <h1 data-i18n="res_title" class="text-4xl font-extrabold text-white mb-3 tracking-tight">OS & Custom Tweaks</h1>
+            <p data-i18n="res_desc" class="text-gray-400">Discover and share exclusive system builds, ISOs, and optimization tools.</p>
+        </div>
+        <div id="res-list" class="space-y-5"><p class="text-center text-gray-500 animate-pulse font-bold tracking-widest">LOADING CLOUD DRIVE...</p></div>
+    </main>
+
+    <div id="upload-modal" class="fixed inset-0 bg-black/90 z-50 hidden flex items-center justify-center p-4 backdrop-blur-md">
+        <div class="bg-gray-900 border border-gray-700 rounded-3xl p-6 md:p-8 w-full max-w-md shadow-2xl relative">
+            <button type="button" onclick="document.getElementById('upload-modal').classList.add('hidden')" class="absolute top-4 right-4 text-gray-400 hover:text-white bg-gray-800 p-2 rounded-full"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+            <h2 class="text-2xl font-extrabold mb-2 text-white text-center" data-i18n="res_modal_title">Share to Cloud</h2>
+            <p class="text-center text-gray-400 text-sm mb-6">Paste your Drive, Fshare, or MediaFire link here.</p>
+            <form onsubmit="submitRes(event)" class="space-y-4">
+                <input type="text" id="rTitle" required placeholder="File Name (e.g., Win 10 Ghost Spectre)" class="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-emerald-500 text-white placeholder-gray-500">
+                <input type="text" id="rSize" placeholder="File Size (e.g., 3.2 GB)" class="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-emerald-500 text-white placeholder-gray-500">
+                <textarea id="rDesc" placeholder="Description & Notes" rows="3" class="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-emerald-500 resize-none text-white placeholder-gray-500"></textarea>
+                <input type="url" id="rLink" required placeholder="Direct download link here" class="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-emerald-500 text-white placeholder-gray-500">
+                <div class="flex gap-3 mt-8">
+                    <button type="button" onclick="document.getElementById('upload-modal').classList.add('hidden')" class="flex-1 bg-gray-800 hover:bg-gray-700 py-3 rounded-xl font-bold text-gray-300 transition-colors">Cancel</button>
+                    <button type="submit" class="flex-1 bg-emerald-600 hover:bg-emerald-500 py-3 rounded-xl font-bold text-white shadow-lg shadow-emerald-500/30 transition-all">Publish File</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="lang.js"></script>
+    <script type="module">
+        import { db, collection, addDoc, getDocs, doc, getDoc, deleteDoc, query, orderBy, auth } from './firebase.js';
+        import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+
+        let currentProfile = { uid: null, name: 'Guest', avatar: '' }; 
+        let isAdmin = false;
+        
+        onAuthStateChanged(auth, async (user) => {
+            if (!user) { window.location.replace("auth.html"); return; }
+            currentProfile.uid = user.uid; 
+            isAdmin = user.email === "thaituan.28012020@gmail.com";
+            
+            // KIỂM TRA BẢO TRÌ
+            try {
+                const maintSnap = await getDoc(doc(db, "settings", "maintenance"));
+                if (maintSnap.exists() && maintSnap.data().resourcesLocked && !isAdmin) {
+                    alert(localStorage.getItem('site_language') === 'vn' ? "Kho tài liệu đang bảo trì!" : "Resources is under maintenance!");
+                    window.location.replace("index.html"); return;
+                }
+            } catch(e) {}
+
+            const snap = await getDoc(doc(db, "users", user.uid));
+            let username = user.email.split('@')[0]; 
+            let avatar = `https://api.dicebear.com/7.x/avataaars/svg?seed=${username}`;
+            if (snap.exists()) { 
+                if (snap.data().status === 'Banned') { window.location.replace("auth.html"); return; }
+                username = snap.data().username || username; 
+                if(snap.data().avatar && !snap.data().avatar.includes('placeholder')) avatar = snap.data().avatar;
+            }
+            currentProfile.name = username; currentProfile.avatar = avatar;
+            
+            let adminHeaderBadge = isAdmin ? `<span class="bg-red-600 text-white text-[10px] px-2 py-0.5 rounded shadow-[0_0_8px_rgba(220,38,38,0.8)] border border-red-400">ADMIN</span>` : '';
+            document.getElementById('header-auth').innerHTML = `
+                <div class="flex flex-col items-end hidden md:flex">
+                    <span class="${isAdmin ? 'text-red-400 font-extrabold' : 'text-gray-300 font-bold'} text-sm">${username}</span>
+                    ${adminHeaderBadge}
+                </div>
+                <img src="${avatar}" onclick="window.location.href='my-vault.html'" class="w-10 h-10 rounded-full border-2 ${isAdmin?'border-red-500 shadow-[0_0_10px_rgba(220,38,38,0.6)]':'border-emerald-500'} object-cover bg-gray-800 cursor-pointer hover:scale-110 transition-transform">
+            `;
+            loadResources();
+        });
+
+        window.submitRes = async function(e) {
+            e.preventDefault();
+            try {
+                await addDoc(collection(db, "resources"), { 
+                    uid: currentProfile.uid, authorName: currentProfile.name, authorAvatar: currentProfile.avatar, 
+                    isAdmin: isAdmin, 
+                    title: document.getElementById('rTitle').value, size: document.getElementById('rSize').value, desc: document.getElementById('rDesc').value, url: document.getElementById('rLink').value, timestamp: new Date().getTime() 
+                });
+                document.getElementById('upload-modal').classList.add('hidden'); e.target.reset(); loadResources();
+            } catch (error) { alert("Lỗi tải lên: " + error.message); }
+        };
+
+        window.delRes = async function(id) { if(confirm("Xóa Link File này?")) { try { await deleteDoc(doc(db, "resources", id)); loadResources(); } catch(e) { alert("Lỗi quyền!"); } } };
+
+        async function loadResources() {
+            const container = document.getElementById('res-list');
+            try {
+                const q = query(collection(db, "resources"), orderBy("timestamp", "desc"));
+                const snap = await getDocs(q); container.innerHTML = '';
+                if(snap.empty) { container.innerHTML = '<p class="col-span-full text-center text-gray-500 font-bold">Chưa có file nào được chia sẻ.</p>'; return; }
+
+                snap.forEach(d => {
+                    const data = d.data();
+                    const postIsAdmin = data.isAdmin || data.authorName === 'admin' || data.authorName === 'thaituan.28012020';
+                    let delBtn = (isAdmin || currentProfile.uid === data.uid) ? `<button onclick="delRes('${d.id}')" class="text-red-500 hover:text-white hover:bg-red-600 text-xs font-bold px-3 py-1.5 rounded-lg border border-red-500/30 transition-colors ml-4">Xóa</button>` : '';
+                    let adminBadge = postIsAdmin ? `<span class="bg-red-600 text-white text-[9px] px-1.5 py-0.5 rounded border border-red-500 shadow-lg ml-1 tracking-widest">ADMIN</span>` : '';
+                    let nameColor = postIsAdmin ? 'text-red-400 font-extrabold drop-shadow-[0_0_5px_rgba(220,38,38,0.5)]' : 'text-gray-200 font-bold';
+                    let avatarBorder = postIsAdmin ? 'border-red-500 shadow-[0_0_10px_rgba(220,38,38,0.5)]' : 'border-gray-600';
+
+                    container.innerHTML += `
+                        <div class="bg-gray-800 rounded-3xl p-6 border ${postIsAdmin ? 'border-red-500/30 shadow-[0_0_20px_rgba(239,68,68,0.15)]' : 'border-gray-700 shadow-xl'} hover:border-emerald-500/50 transition-all group">
+                            <div class="flex items-start gap-5">
+                                <div class="w-14 h-14 bg-gray-900 rounded-2xl border border-gray-600 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform shadow-inner"><svg class="w-7 h-7 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg></div>
+                                <div class="flex-grow">
+                                    <div class="flex justify-between items-start">
+                                        <h3 class="text-xl font-extrabold text-white mb-1 line-clamp-1 pr-4">${data.title}</h3>
+                                        <span class="bg-gray-900 text-emerald-400 font-mono text-xs px-3 py-1 rounded-full border border-gray-700 shrink-0 shadow-inner">${data.size || 'ZIP File'}</span>
+                                    </div>
+                                    <p class="text-gray-400 text-sm mb-6 leading-relaxed whitespace-pre-line">${data.desc || 'No description provided.'}</p>
+                                    
+                                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-t border-gray-700/50 pt-4">
+                                        <div class="flex items-center gap-3">
+                                            <img src="${data.authorAvatar}" class="w-8 h-8 rounded-full object-cover border-2 ${avatarBorder}">
+                                            <span class="text-xs text-gray-400">Shared by <b class="${nameColor}">${data.authorName}</b> ${adminBadge}</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <a href="${data.url}" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-6 py-2.5 rounded-xl text-sm transition-all shadow-lg shadow-emerald-500/20 flex items-center gap-2"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg> Download Link</a>
+                                            ${delBtn}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            } catch(e) { console.error(e); }
+        }
+    </script>
+</body>
+</html>
