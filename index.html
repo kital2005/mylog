@@ -22,7 +22,6 @@
     <meta property="twitter:image" content="https://imgur.com/example_thumbnail.png">
     
     <script src="https://cdn.tailwindcss.com"></script>
-    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -30,32 +29,20 @@
     <script>
         tailwind.config = {
             darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#3b82f6', 
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    }
-                }
-            }
+            theme: { extend: { colors: { primary: '#3b82f6', }, fontFamily: { sans: ['Inter', 'sans-serif'], } } }
         }
     </script>
 </head>
-
 <body class="bg-gray-900 text-white min-h-screen flex flex-col items-center justify-center">
 
-    <nav class="sticky top-0 z-50 w-full bg-gray-900/80 backdrop-blur-md border-b border-gray-800">
+    <nav id="main-nav" class="sticky top-0 z-50 w-full bg-gray-900/80 backdrop-blur-md border-b border-gray-800 transition-transform duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 
                 <div class="flex-shrink-0">
                     <a href="index.html" class="flex items-center gap-3 hover:scale-105 transition-transform">
                         <img src="logo.svg" alt="CoreVault Logo" class="w-10 h-10 shadow-lg shadow-blue-500/20 rounded-xl">
-                        <span class="text-xl md:text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-                            CoreVault
-                        </span>
+                        <span class="text-xl md:text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">CoreVault</span>
                     </a>
                 </div>
 
@@ -71,16 +58,13 @@
                     <button onclick="toggleLanguage()" class="text-gray-300 hover:text-white px-2 md:px-3 py-1.5 md:py-2 text-xs md:text-sm font-medium border border-gray-700 hover:bg-gray-800 rounded-lg transition-all flex items-center gap-1">
                         <span data-i18n="lang_btn">EN / VN</span>
                     </button>
-                    
                     <div id="header-auth" class="flex items-center gap-2 md:gap-3 ml-1 md:ml-2">
                         <div class="w-8 h-8 rounded-full bg-gray-700 animate-pulse"></div>
                     </div>
-
                     <button onclick="toggleMobileMenu()" class="md:hidden text-gray-400 hover:text-white p-1.5 ml-1 rounded-lg border border-gray-700 bg-gray-800 focus:outline-none transition-colors">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                     </button>
                 </div>
-
             </div>
         </div>
 
@@ -94,28 +78,19 @@
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full flex-grow flex flex-col items-center justify-center">
         
         <div class="relative w-full h-[400px] md:h-[600px] rounded-3xl overflow-hidden shadow-2xl border border-gray-700 mb-16 group cursor-pointer">
-            
             <div id="carousel-bg-1" class="absolute inset-0 bg-cover bg-center transition-all duration-700 opacity-100 bg-gray-800 group-hover:scale-105 group-hover:brightness-50 group-hover:blur-[3px]"></div>
             <div id="carousel-bg-2" class="absolute inset-0 bg-cover bg-center transition-all duration-700 opacity-0 bg-gray-800 group-hover:scale-105 group-hover:brightness-50 group-hover:blur-[3px]"></div>
             <div id="carousel-bg-3" class="absolute inset-0 bg-cover bg-center transition-all duration-700 opacity-0 bg-gray-800 group-hover:scale-105 group-hover:brightness-50 group-hover:blur-[3px]"></div>
-            
             <div class="absolute inset-0 flex flex-col items-center justify-center p-8 md:p-10 text-center transition-all duration-700 bg-black/30 group-hover:bg-black/50">
-                <h1 id="dynamic-hero-title" class="text-4xl md:text-7xl font-extrabold mb-6 text-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)] group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:via-indigo-400 group-hover:to-purple-500 group-hover:bg-clip-text group-hover:text-transparent transition-all duration-500">
-                    Welcome to CoreVault!
-                </h1>
-                <p id="dynamic-hero-desc" class="text-gray-100 text-base md:text-xl mb-8 max-w-3xl leading-relaxed drop-shadow-[0_3px_3px_rgba(0,0,0,0.8)] font-medium transition-all duration-500">
-                    Please wait while the system connects...
-                </p>
-                <button onclick="window.location.href='tools.html'" data-i18n="hero_btn" class="px-6 md:px-8 py-3 bg-white hover:bg-gray-100 text-gray-900 transition-all duration-300 rounded-full font-bold shadow-[0_5px_15px_rgba(0,0,0,0.5)] group-hover:shadow-[0_0_30px_rgba(255,255,255,0.6)] group-hover:scale-110">
-                    Explore Now
-                </button>
+                <h1 id="dynamic-hero-title" class="text-4xl md:text-7xl font-extrabold mb-6 text-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)] group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:via-indigo-400 group-hover:to-purple-500 group-hover:bg-clip-text group-hover:text-transparent transition-all duration-500">Welcome to CoreVault!</h1>
+                <p id="dynamic-hero-desc" class="text-gray-100 text-base md:text-xl mb-8 max-w-3xl leading-relaxed drop-shadow-[0_3px_3px_rgba(0,0,0,0.8)] font-medium transition-all duration-500">Please wait while the system connects...</p>
+                <button onclick="window.location.href='tools.html'" data-i18n="hero_btn" class="px-6 md:px-8 py-3 bg-white hover:bg-gray-100 text-gray-900 transition-all duration-300 rounded-full font-bold shadow-[0_5px_15px_rgba(0,0,0,0.5)] group-hover:shadow-[0_0_30px_rgba(255,255,255,0.6)] group-hover:scale-110">Explore Now</button>
             </div>
         </div>
 
         <div id="ad-container" class="w-full max-w-7xl mx-auto px-0 md:px-4 hidden mb-12">
             <div class="bg-gray-800/50 border border-gray-700 border-dashed rounded-2xl flex flex-col items-center justify-center p-8 text-center relative overflow-hidden">
                 <span class="absolute top-2 right-3 text-[10px] text-gray-500 uppercase tracking-widest">Advertisement</span>
-                
                 <p class="text-gray-400 font-medium">Khu vực hiển thị Quảng Cáo Google</p>
                 <p class="text-gray-600 text-sm mt-2">(Đang chạy Demo. Script AdSense sẽ đặt ở đây)</p>
             </div>
@@ -130,29 +105,17 @@
         </div>
 
         <div id="products-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 w-full">
-            <div class="col-span-full text-center py-12">
-                <p data-i18n="home_fetching" class="text-gray-500 animate-pulse font-bold tracking-widest uppercase">Fetching data from Cloud...</p>
-            </div>
+            <div class="col-span-full text-center py-12"><p data-i18n="home_fetching" class="text-gray-500 animate-pulse font-bold tracking-widest uppercase">Fetching data from Cloud...</p></div>
         </div>
-
     </main>
 
-    <footer class="bg-gray-900 border-t border-gray-800 pt-16 pb-8 w-full mt-auto">
+    <footer class="bg-gray-900 border-t border-gray-800 pt-16 pb-8 w-full mt-auto text-left">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-12 mb-12">
-                
                 <div class="md:col-span-2">
-                    <a href="index.html" class="flex items-center gap-3 mb-4 hover:scale-105 transition-transform w-fit">
-                        <img src="logo.svg" alt="CoreVault Logo" class="w-10 h-10 shadow-lg shadow-blue-500/20 rounded-xl">
-                        <span class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-                            CoreVault
-                        </span>
-                    </a>
-                    <p class="text-gray-400 text-sm leading-relaxed max-w-sm" data-i18n="hero_desc">
-                        Your premier destination for premium tools, optimized resources, and exclusive tech applications.
-                    </p>
+                    <a href="index.html" class="flex items-center gap-3 mb-4 hover:scale-105 transition-transform w-fit"><img src="logo.svg" alt="CoreVault Logo" class="w-10 h-10 shadow-lg shadow-blue-500/20 rounded-xl"><span class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">CoreVault</span></a>
+                    <p class="text-gray-400 text-sm leading-relaxed max-w-sm" data-i18n="hero_desc">Your premier destination for premium tools, optimized resources, and exclusive tech applications.</p>
                 </div>
-                
                 <div>
                     <h4 class="text-white font-bold mb-5 uppercase text-sm tracking-widest text-blue-400" data-i18n="footer_nav">Navigation</h4>
                     <ul class="space-y-3 text-sm text-gray-400 font-medium">
@@ -162,7 +125,6 @@
                         <li><a href="auth.html" class="hover:text-white transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> <span data-i18n="nav_login">Login / Register</span></a></li>
                     </ul>
                 </div>
-                
                 <div>
                     <h4 class="text-white font-bold mb-5 uppercase text-sm tracking-widest text-purple-400" data-i18n="footer_legal">Legal & Support</h4>
                     <ul class="space-y-3 text-sm text-gray-400 font-medium">
@@ -172,23 +134,27 @@
                     </ul>
                 </div>
             </div>
-            
             <div class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4">
-                <p data-i18n="footer_copy" class="text-gray-500 text-xs">
-                    © 2026 CoreVault Project. Developed by <span class="text-gray-300">LunarRider0</span>. All rights reserved.
-                </p>
+                <p data-i18n="footer_copy" class="text-gray-500 text-xs">© 2026 CoreVault Project. Developed by <span class="text-gray-300">LunarRider0</span>. All rights reserved.</p>
                 <div class="flex items-center gap-3 bg-gray-800/50 px-4 py-2 rounded-full border border-gray-700 w-full md:w-auto justify-center">
-                    <span class="relative flex h-2.5 w-2.5">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
-                    </span>
+                    <span class="relative flex h-2.5 w-2.5"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span></span>
                     <span data-i18n="footer_status" class="text-xs text-gray-400 font-bold uppercase tracking-wider">System Online</span>
                 </div>
             </div>
         </div>
     </footer>
-    
-    <script src="lang.js"></script>
+
+    <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3 pointer-events-none">
+        <div id="fab-menu" class="flex flex-col gap-3 transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] transform translate-y-10 opacity-0 pointer-events-none origin-bottom mr-1">
+            <a href="community.html" class="pointer-events-auto group flex items-center justify-end gap-3"><span class="bg-gray-800 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity" data-i18n="nav_community">Community</span><div class="w-12 h-12 rounded-full bg-indigo-600 text-white flex items-center justify-center shadow-[0_0_15px_rgba(79,70,229,0.5)] hover:scale-110 transition-transform"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"></path></svg></div></a>
+            <a href="videos.html" class="pointer-events-auto group flex items-center justify-end gap-3"><span class="bg-gray-800 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity" data-i18n="nav_videos">Anime & Donghua</span><div class="w-12 h-12 rounded-full bg-rose-600 text-white flex items-center justify-center shadow-[0_0_15px_rgba(225,29,72,0.5)] hover:scale-110 transition-transform"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg></div></a>
+            <a href="resources.html" class="pointer-events-auto group flex items-center justify-end gap-3"><span class="bg-gray-800 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity" data-i18n="nav_resources">OS & Resources</span><div class="w-12 h-12 rounded-full bg-emerald-600 text-white flex items-center justify-center shadow-[0_0_15px_rgba(5,150,105,0.5)] hover:scale-110 transition-transform"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg></div></a>
+        </div>
+        <div class="flex items-center gap-3 pointer-events-auto">
+            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" id="btn-totop" class="w-12 h-12 rounded-full bg-gray-800 border border-gray-700 text-gray-400 flex items-center justify-center shadow-lg hover:text-white transition-all opacity-0 pointer-events-none transform translate-y-4"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 15l7-7 7 7"></path></svg></button>
+            <button onclick="toggleFAB()" class="w-14 h-14 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-[0_0_20px_rgba(59,130,246,0.6)] hover:bg-blue-500 transition-colors relative z-10"><svg id="fab-icon" class="w-6 h-6 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg></button>
+        </div>
+    </div>
 
     <script>
         function toggleMobileMenu() {
@@ -201,217 +167,116 @@
                 menu.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
             }
         }
-    </script>
+        function toggleFAB() {
+            const menu = document.getElementById('fab-menu'); const icon = document.getElementById('fab-icon');
+            if(menu.classList.contains('opacity-0')) {
+                menu.classList.remove('opacity-0', 'translate-y-10', 'pointer-events-none'); menu.classList.add('opacity-100', 'translate-y-0'); icon.classList.add('rotate-45');
+            } else {
+                menu.classList.add('opacity-0', 'translate-y-10', 'pointer-events-none'); menu.classList.remove('opacity-100', 'translate-y-0'); icon.classList.remove('rotate-45');
+            }
+        }
 
+        let lastScrollY = window.scrollY;
+        window.addEventListener('scroll', () => {
+            const btnToTop = document.getElementById('btn-totop');
+            const navbar = document.getElementById('main-nav');
+
+            // Xử lý nút cuộn lên đầu trang
+            if (btnToTop) {
+                if (window.scrollY > 300) {
+                    btnToTop.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+                    btnToTop.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
+                } else {
+                    btnToTop.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+                    btnToTop.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
+                }
+            }
+
+            // Xử lý ẩn/hiện Navbar mượt mà
+            if (navbar) {
+                if (window.scrollY > lastScrollY && window.scrollY > 80) {
+                    // Người dùng cuộn xuống -> Ẩn thanh Navbar
+                    navbar.classList.add('-translate-y-full'); 
+                } else {
+                    // Người dùng cuộn lên -> Hiện thanh Navbar
+                    navbar.classList.remove('-translate-y-full'); 
+                }
+            }
+            lastScrollY = window.scrollY;
+        });
+    </script>
+    
+    <script src="lang.js"></script>
     <script type="module">
         import { db, collection, getDocs, auth, doc, getDoc } from './firebase.js';
         import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 
-        // 1. XỬ LÝ ĐĂNG NHẬP & CHẶN BAN
         onAuthStateChanged(auth, async (user) => {
             const authContainer = document.getElementById('header-auth');
             if (user) {
                 try {
-                    // Gọi dữ liệu từ Database để lấy Tên và Avatar
                     const userDoc = await getDoc(doc(db, "users", user.uid));
-                    let username = user.email.split('@')[0];
-                    let avatar = `https://api.dicebear.com/7.x/avataaars/svg?seed=${username}`;
-
+                    let username = user.email.split('@')[0]; let avatar = `https://api.dicebear.com/7.x/avataaars/svg?seed=${username}`;
                     if (userDoc.exists()) {
                         const data = userDoc.data();
-                        if (data.status === 'Banned') {
-                            alert("SECURITY ALERT: Tài khoản của bạn đã bị khóa!");
-                            await signOut(auth);
-                            window.location.href = "index.html";
-                            return; 
-                        }
+                        if (data.status === 'Banned') { await signOut(auth); window.location.href = "index.html"; return; }
                         if (data.username) username = data.username;
                         if (data.avatar && data.avatar.trim() !== '') avatar = data.avatar;
                     }
-
                     const isAdmin = user.email === "thaituan.28012020@gmail.com";
                     const adminLink = isAdmin ? `<a href="admin.html" class="text-xs font-bold text-purple-400 hover:text-purple-300 border border-purple-500/50 px-2 py-1 rounded transition-colors mr-2 hidden md:block">Admin Panel</a>` : '';
-
-                    // Cập nhật Header với Lời chào và Ảnh đại diện
-                    authContainer.innerHTML = `
-                        ${adminLink}
-                        <span class="hidden md:block text-sm font-medium text-gray-300 mr-3">Welcome back, <b class="text-white">${username}</b></span>
-                        <div class="flex items-center gap-2 md:gap-3">
-                            <div title="Kho đồ của ${username}" onclick="window.location.href='my-vault.html'" class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gray-800 flex items-center justify-center overflow-hidden border-2 border-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.5)] cursor-pointer hover:scale-110 transition-transform">
-                                <img src="${avatar}" class="w-full h-full object-cover">
-                            </div>
-                            <button id="btn-logout-home" class="text-xs md:text-sm font-bold text-gray-400 hover:text-red-400 transition-colors hidden md:block">Logout</button>
-                        </div>
-                    `;
-                    document.getElementById('btn-logout-home')?.addEventListener('click', () => { 
-                        signOut(auth).then(() => { window.location.reload(); }); 
-                    });
-
-                } catch(error) { 
-                    console.error(error); 
-                }
+                    authContainer.innerHTML = `${adminLink}<span class="hidden md:block text-sm font-medium text-gray-300 mr-3">Welcome back, <b class="text-white">${username}</b></span><div class="flex items-center gap-2 md:gap-3"><div title="Kho đồ của ${username}" onclick="window.location.href='my-vault.html'" class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gray-800 flex items-center justify-center overflow-hidden border-2 border-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.5)] cursor-pointer hover:scale-110 transition-transform"><img src="${avatar}" class="w-full h-full object-cover"></div><button id="btn-logout-home" class="text-xs md:text-sm font-bold text-gray-400 hover:text-red-400 transition-colors hidden md:block">Logout</button></div>`;
+                    document.getElementById('btn-logout-home')?.addEventListener('click', () => { signOut(auth).then(() => { window.location.reload(); }); });
+                } catch(error) {}
             } else {
                 authContainer.innerHTML = `<a href="auth.html" data-i18n="nav_login" class="text-xs md:text-sm font-semibold text-white bg-blue-600 hover:bg-blue-500 px-3 md:px-5 py-1.5 md:py-2 rounded-lg transition-colors shadow-lg shadow-blue-500/20">Login</a>`;
                 if (typeof updateLanguage === 'function') updateLanguage();
             }
         });
 
-        // 2. HỆ THỐNG CAROUSEL ĐỘNG
         async function loadHeroConfig() {
             try {
                 const docSnap = await getDoc(doc(db, "settings", "hero"));
                 if (docSnap.exists()) {
-                    const config = docSnap.data();
-                    const curLang = localStorage.getItem('site_language') || 'en';
+                    const config = docSnap.data(); const curLang = localStorage.getItem('site_language') || 'en';
                     document.getElementById('dynamic-hero-title').innerText = curLang === 'vn' ? (config.titleVn || "") : (config.titleEn || "");
                     document.getElementById('dynamic-hero-desc').innerText = curLang === 'vn' ? (config.descVn || "") : (config.descEn || "");
-
                     const slides = [config.slide1, config.slide2, config.slide3].filter(s => s); 
                     if(slides.length > 0) {
                         const bgElements = [document.getElementById('carousel-bg-1'), document.getElementById('carousel-bg-2'), document.getElementById('carousel-bg-3')];
-                        slides.forEach((url, i) => { 
-                            if(bgElements[i]) bgElements[i].style.backgroundImage = `url('${url}')`; 
-                        });
-                        
-                        if(slides.length > 1) {
-                            let current = 0;
-                            setInterval(() => {
-                                bgElements[current].classList.replace('opacity-100', 'opacity-0');
-                                current = (current + 1) % slides.length; 
-                                bgElements[current].classList.replace('opacity-0', 'opacity-100'); 
-                            }, (config.interval || 5) * 1000);
-                        }
+                        slides.forEach((url, i) => { if(bgElements[i]) bgElements[i].style.backgroundImage = `url('${url}')`; });
+                        if(slides.length > 1) { let current = 0; setInterval(() => { bgElements[current].classList.replace('opacity-100', 'opacity-0'); current = (current + 1) % slides.length; bgElements[current].classList.replace('opacity-0', 'opacity-100'); }, (config.interval || 5) * 1000); }
                     }
                 }
-            } catch (e) { 
-                console.error(e); 
-            }
+            } catch (e) {}
         }
 
-        // 3. TẢI 3 SẢN PHẨM MỚI NHẤT
         async function loadLatestProducts() {
             const container = document.getElementById('products-container');
             try {
-                const querySnapshot = await getDocs(collection(db, "products"));
-                container.innerHTML = ''; 
-                let count = 0;
-                
+                const querySnapshot = await getDocs(collection(db, "products")); container.innerHTML = ''; let count = 0;
                 querySnapshot.forEach((doc) => {
-                    if (count >= 3 || doc.data().status === 'Hidden') return; 
-                    count++;
-                    
-                    const data = doc.data();
-                    const docId = doc.id;
+                    if (count >= 3 || doc.data().status === 'Hidden') return; count++;
+                    const data = doc.data(); const docId = doc.id;
                     const catI18n = data.category === 'Gaming' ? 'val_gaming' : (data.category === 'Graphics' ? 'val_graphics' : 'val_system');
                     const descI18n = data.status === 'Active' ? 'tool_desc_active' : 'tool_desc_maintenance';
-                    
-                    let priceBadge = data.price === 0 
-                        ? `<div class="absolute top-3 right-3 px-3 py-1 bg-green-500 text-white text-xs font-bold rounded-full shadow-lg" data-i18n="val_free">FREE</div>`
-                        : `<div class="absolute top-3 right-3 px-3 py-1 bg-blue-600 text-white text-xs font-bold rounded-full shadow-lg" data-price-value="${data.price}"></div>`;
-
-                    const card = document.createElement('div');
-                    card.className = "group bg-gray-800/50 border border-gray-700 rounded-2xl overflow-hidden hover:border-blue-500/50 transition-all duration-300 hover:shadow-2xl flex flex-col";
-                    card.innerHTML = `
-                        <div class="h-40 md:h-48 bg-gray-700 flex items-center justify-center relative overflow-hidden text-5xl md:text-6xl cursor-pointer" onclick="window.location.href='detail.html?id=${docId}'">
-                            <div class="group-hover:scale-125 transition-transform duration-300">${data.icon}</div>
-                            ${priceBadge}
-                        </div>
-                        <div class="p-5 md:p-6 flex-grow flex flex-col">
-                            <h3 class="text-lg md:text-xl font-bold mb-2 group-hover:text-blue-400 cursor-pointer" onclick="window.location.href='detail.html?id=${docId}'">${data.name}</h3>
-                            <p data-i18n="${descI18n}" class="text-gray-400 text-sm mb-4 line-clamp-2 flex-grow h-10"></p>
-                            <div class="flex items-center justify-between mt-auto">
-                                <span data-i18n="${catI18n}" class="text-gray-500 text-xs uppercase font-bold tracking-widest"></span>
-                                <button onclick="window.location.href='detail.html?id=${docId}'" data-i18n="btn_get_tool" class="text-xs md:text-sm font-bold text-white bg-blue-600 hover:bg-blue-500 px-3 md:px-4 py-2 rounded-lg transition-all shadow-lg hover:scale-105">Get Tool</button>
-                            </div>
-                        </div>
-                    `;
+                    let priceBadge = data.price === 0 ? `<div class="absolute top-3 right-3 px-3 py-1 bg-green-500 text-white text-xs font-bold rounded-full shadow-lg" data-i18n="val_free">FREE</div>` : `<div class="absolute top-3 right-3 px-3 py-1 bg-blue-600 text-white text-xs font-bold rounded-full shadow-lg" data-price-value="${data.price}"></div>`;
+                    const card = document.createElement('div'); card.className = "group bg-gray-800/50 border border-gray-700 rounded-2xl overflow-hidden hover:border-blue-500/50 transition-all duration-300 hover:shadow-2xl flex flex-col";
+                    card.innerHTML = `<div class="h-40 md:h-48 bg-gray-700 flex items-center justify-center relative overflow-hidden text-5xl md:text-6xl cursor-pointer" onclick="window.location.href='detail.html?id=${docId}'"><div class="group-hover:scale-125 transition-transform duration-300">${data.icon}</div>${priceBadge}</div><div class="p-5 md:p-6 flex-grow flex flex-col"><h3 class="text-lg md:text-xl font-bold mb-2 group-hover:text-blue-400 cursor-pointer" onclick="window.location.href='detail.html?id=${docId}'">${data.name}</h3><p data-i18n="${descI18n}" class="text-gray-400 text-sm mb-4 line-clamp-2 flex-grow h-10"></p><div class="flex items-center justify-between mt-auto"><span data-i18n="${catI18n}" class="text-gray-500 text-xs uppercase font-bold tracking-widest"></span><button onclick="window.location.href='detail.html?id=${docId}'" data-i18n="btn_get_tool" class="text-xs md:text-sm font-bold text-white bg-blue-600 hover:bg-blue-500 px-3 md:px-4 py-2 rounded-lg transition-all shadow-lg hover:scale-105">Get Tool</button></div></div>`;
                     container.appendChild(card);
                 });
                 if (typeof updateLanguage === 'function') updateLanguage();
-            } catch (error) { 
-                console.error(error); 
-            }
+            } catch (error) { console.error(error); }
         }
 
-        // 4. KIỂM TRA TRẠNG THÁI QUẢNG CÁO TỪ BẢNG ĐIỀU KHIỂN
         async function checkAds() {
             try {
                 const adSnap = await getDoc(doc(db, "settings", "ads"));
-                if (adSnap.exists() && adSnap.data().isActive === true) {
-                    document.getElementById('ad-container').classList.remove('hidden');
-                } else {
-                    document.getElementById('ad-container').classList.add('hidden');
-                }
-            } catch (e) { 
-                console.error("Lỗi tải cấu hình quảng cáo", e); 
-            }
+                if (adSnap.exists() && adSnap.data().isActive === true) { document.getElementById('ad-container').classList.remove('hidden'); } else { document.getElementById('ad-container').classList.add('hidden'); }
+            } catch (e) { console.error("Lỗi tải cấu hình quảng cáo", e); }
         }
 
-        document.addEventListener("DOMContentLoaded", () => {
-            loadHeroConfig();
-            loadLatestProducts();
-            checkAds(); 
-        });
-    </script>
-    <!-- NÚT CÔNG CỤ NỔI (FAB) - CHUẨN IOS -->
-    <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3 pointer-events-none">
-        <!-- 3 Nút Menu thả xuống -->
-        <div id="fab-menu" class="flex flex-col gap-3 transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] transform translate-y-10 opacity-0 pointer-events-none origin-bottom mr-1">
-            
-            <a href="community.html" class="pointer-events-auto group flex items-center justify-end gap-3">
-                <span class="bg-gray-800 text-white text-xs font-bold px-3 py-1.5 rounded-lg border border-gray-700 shadow-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap" data-i18n="nav_community">Cộng Đồng</span>
-                <div class="w-12 h-12 rounded-full bg-indigo-600 text-white flex items-center justify-center shadow-[0_0_15px_rgba(79,70,229,0.5)] hover:scale-110 transition-transform">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"></path></svg>
-                </div>
-            </a>
-            
-            <a href="videos.html" class="pointer-events-auto group flex items-center justify-end gap-3">
-                <span class="bg-gray-800 text-white text-xs font-bold px-3 py-1.5 rounded-lg border border-gray-700 shadow-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap" data-i18n="nav_videos">Anime & Donghua</span>
-                <div class="w-12 h-12 rounded-full bg-rose-600 text-white flex items-center justify-center shadow-[0_0_15px_rgba(225,29,72,0.5)] hover:scale-110 transition-transform">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
-                </div>
-            </a>
-            
-            <a href="resources.html" class="pointer-events-auto group flex items-center justify-end gap-3">
-                <span class="bg-gray-800 text-white text-xs font-bold px-3 py-1.5 rounded-lg border border-gray-700 shadow-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap" data-i18n="nav_resources">Bản Win & Tài Liệu</span>
-                <div class="w-12 h-12 rounded-full bg-emerald-600 text-white flex items-center justify-center shadow-[0_0_15px_rgba(5,150,105,0.5)] hover:scale-110 transition-transform">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg>
-                </div>
-            </a>
-            
-        </div>
-
-        <!-- Nút cuộn lên đầu & Nút Menu chính -->
-        <div class="flex items-center gap-3 pointer-events-auto">
-            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" id="btn-totop" class="w-12 h-12 rounded-full bg-gray-800 border border-gray-700 text-gray-400 flex items-center justify-center shadow-lg hover:text-white transition-all opacity-0 pointer-events-none transform translate-y-4">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 15l7-7 7 7"></path></svg>
-            </button>
-            
-            <button onclick="toggleFAB()" class="w-14 h-14 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-[0_0_20px_rgba(59,130,246,0.6)] hover:bg-blue-500 transition-colors relative z-10">
-                <svg id="fab-icon" class="w-6 h-6 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
-            </button>
-        </div>
-    </div>
-
-    <script>
-        function toggleFAB() {
-            const menu = document.getElementById('fab-menu');
-            const icon = document.getElementById('fab-icon');
-            if(menu.classList.contains('opacity-0')) {
-                menu.classList.remove('opacity-0', 'translate-y-10', 'pointer-events-none');
-                menu.classList.add('opacity-100', 'translate-y-0');
-                icon.classList.add('rotate-45');
-            } else {
-                menu.classList.add('opacity-0', 'translate-y-10', 'pointer-events-none');
-                menu.classList.remove('opacity-100', 'translate-y-0');
-                icon.classList.remove('rotate-45');
-            }
-        }
-        window.addEventListener('scroll', () => {
-            const btn = document.getElementById('btn-totop');
-            if (window.scrollY > 300) { btn.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none'); btn.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto'); }
-            else { btn.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none'); btn.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto'); }
-        });
+        document.addEventListener("DOMContentLoaded", () => { loadHeroConfig(); loadLatestProducts(); checkAds(); });
     </script>
 </body>
 </html>
