@@ -17,7 +17,7 @@
     <div class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-blue-600/20 rounded-full blur-[100px]"></div>
     <div class="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-purple-600/20 rounded-full blur-[100px]"></div>
 
-    <a href="index.html" class="absolute top-6 left-6 text-gray-400 hover:text-white flex items-center gap-2 transition-colors z-20">
+    <a id="btn-back" href="index.html" class="absolute top-6 left-6 text-gray-400 hover:text-white flex items-center gap-2 transition-colors z-20">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
         <span data-i18n="auth_back">Back to Home</span>
     </a>
@@ -131,6 +131,15 @@
             setPersistence, browserLocalPersistence, browserSessionPersistence, sendPasswordResetEmail
         } from './firebase.js';
 
+        const urlParams = new URLSearchParams(window.location.search);
+        const redirectUrl = urlParams.get('return');
+
+        document.addEventListener("DOMContentLoaded", () => {
+            if (redirectUrl) {
+                document.getElementById('btn-back').href = redirectUrl;
+            }
+        });
+
         window.switchTab = function(tab) {
             const formLogin = document.getElementById('form-login');
             const formRegister = document.getElementById('form-register');
@@ -151,7 +160,7 @@
                 tabLogin.className = "flex-1 py-4 text-center font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-300 transition-all";
                 subtitle.setAttribute('data-i18n', 'auth_subtitle_reg');
             }
-            updateLanguage();
+            if (typeof updateLanguage === 'function') updateLanguage();
         }
 
         window.showForgot = function() {
@@ -159,7 +168,7 @@
             document.getElementById('main-tabs').style.display = 'none';
             document.getElementById('form-forgot').classList.replace('hidden-form', 'fade-enter-active');
             document.getElementById('form-subtitle').setAttribute('data-i18n', 'auth_subtitle_forgot');
-            updateLanguage();
+            if (typeof updateLanguage === 'function') updateLanguage();
         }
 
         window.cancelForgot = function() {
@@ -167,7 +176,7 @@
             document.getElementById('main-tabs').style.display = 'flex';
             document.getElementById('form-login').classList.replace('hidden-form', 'fade-enter-active');
             document.getElementById('form-subtitle').setAttribute('data-i18n', 'auth_subtitle_login');
-            updateLanguage();
+            if (typeof updateLanguage === 'function') updateLanguage();
         }
 
         window.togglePassword = function(inputId) {
@@ -218,24 +227,29 @@
                         alert("LỖI: Tài khoản của bạn đã bị khóa!");
                         return auth.signOut();
                     }
-                    window.location.href = (user.email === "thaituan.28012020@gmail.com") ? "admin.html" : "index.html";
+                    
+                    if (user.email === "thaituan.28012020@gmail.com") {
+                        window.location.href = "admin.html";
+                    } else if (redirectUrl) {
+                        window.location.href = redirectUrl;
+                    } else {
+                        window.location.href = "index.html";
+                    }
                 })
                 .catch(() => { alert("Lỗi đăng nhập: Sai email hoặc mật khẩu!"); });
         }
 
-        // ĐÃ CHỈNH SỬA: LƯU THÊM AVATAR VÀ USERNAME VÀO FIRESTORE
         window.submitRegister = function(event) {
             event.preventDefault(); 
             const email = document.querySelector('#form-register input[type="email"]').value.trim(); 
             const pwd = document.getElementById('reg-pwd').value.trim();
             const confirmPwd = document.getElementById('reg-pwd-confirm').value.trim();
             
-            // Lấy Username và Avatar Base64
             let username = document.getElementById('reg-user').value.trim();
             let avatarSrc = document.getElementById('avatar-preview').src;
             
             if (!username) username = email.split('@')[0];
-            if (avatarSrc.includes('placeholder')) avatarSrc = ''; // Nếu là ảnh mặc định thì để trống
+            if (avatarSrc.includes('placeholder')) avatarSrc = '';
 
             if (pwd !== confirmPwd) { window.checkPasswordMatch(); return false; }
 
@@ -245,7 +259,7 @@
                     await setDoc(doc(db, "users", user.uid), {
                         username: username,
                         email: email,
-                        avatar: avatarSrc, // Lưu Avatar vào DB
+                        avatar: avatarSrc,
                         status: 'Active',
                         plan: 'Free',
                         createdAt: new Date()

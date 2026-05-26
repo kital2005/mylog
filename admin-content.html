@@ -7,44 +7,58 @@
     
     <div class="max-w-4xl w-full bg-gray-800 rounded-3xl border border-gray-700 shadow-2xl p-6 md:p-10 flex flex-col">
         <div class="flex items-center justify-between mb-8 pb-4 border-b border-gray-700">
-            <div><h1 class="text-2xl font-bold text-white">Content Management Hub</h1><p class="text-sm text-gray-400 mt-1">Manage Community, Videos and OS Resources.</p></div>
+            <div><h1 class="text-2xl font-bold text-white">Content Management Hub</h1><p class="text-sm text-gray-400 mt-1">Manage Community, Videos, OS Resources and ASMR.</p></div>
             <a href="admin.html" class="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg text-sm font-bold transition-colors">Back to Dashboard</a>
         </div>
 
-        <div class="flex gap-2 mb-8 bg-gray-900 p-2 rounded-xl">
-            <button onclick="switchTab('tab-posts')" id="btn-posts" class="flex-1 py-2 rounded-lg bg-blue-600 font-bold text-sm transition-colors">Community Posts</button>
-            <button onclick="switchTab('tab-vids')" id="btn-vids" class="flex-1 py-2 rounded-lg text-gray-400 hover:text-white font-bold text-sm transition-colors">Videos Upload</button>
-            <button onclick="switchTab('tab-res')" id="btn-res" class="flex-1 py-2 rounded-lg text-gray-400 hover:text-white font-bold text-sm transition-colors">OS Resources</button>
+        <div class="flex flex-wrap gap-2 mb-8 bg-gray-900 p-2 rounded-xl">
+            <button onclick="switchTab('tab-posts')" id="btn-posts" class="flex-1 py-2 rounded-lg bg-blue-600 font-bold text-sm transition-colors">Community</button>
+            <button onclick="switchTab('tab-vids')" id="btn-vids" class="flex-1 py-2 rounded-lg text-gray-400 hover:text-white font-bold text-sm transition-colors">Shorts Hub</button>
+            <button onclick="switchTab('tab-res')" id="btn-res" class="flex-1 py-2 rounded-lg text-gray-400 hover:text-white font-bold text-sm transition-colors">OS Builds</button>
+            <button onclick="switchTab('tab-asmr')" id="btn-asmr" class="flex-1 py-2 rounded-lg text-gray-400 hover:text-white font-bold text-sm transition-colors">ASMR Station</button>
         </div>
 
-        <!-- Tab: Posts -->
         <div id="tab-posts" class="space-y-4 overflow-y-auto max-h-[60vh] pr-2"></div>
 
-        <!-- Tab: Videos -->
-        <div id="tab-vids" class="hidden flex-col gap-6">
-            <div id="admin-vids-list" class="space-y-3 overflow-y-auto max-h-[60vh] pr-2"></div>
-        </div>
+        <div id="tab-vids" class="hidden flex-col gap-6"><div id="admin-vids-list" class="space-y-3 overflow-y-auto max-h-[60vh] pr-2"></div></div>
 
-        <!-- Tab: Resources -->
-        <div id="tab-res" class="hidden flex-col gap-6">
-            <div id="admin-res-list" class="space-y-3 overflow-y-auto max-h-[60vh] pr-2"></div>
+        <div id="tab-res" class="hidden flex-col gap-6"><div id="admin-res-list" class="space-y-3 overflow-y-auto max-h-[60vh] pr-2"></div></div>
+
+        <div id="tab-asmr" class="hidden flex-col gap-6">
+            <form onsubmit="submitAsmrVideo(event)" class="bg-gray-900 p-5 rounded-2xl border border-gray-700 space-y-4">
+                <h3 class="font-bold text-indigo-400 text-sm uppercase">Upload New ASMR Session</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <input type="text" id="asmrTitle" required placeholder="Session Title" class="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-2.5 text-sm">
+                    <input type="text" id="asmrQuality" placeholder="Audio Tag (e.g. Binaural 3D, Binaural)" class="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-2.5 text-sm">
+                    <input type="url" id="asmrUrl" required placeholder="Backblaze MP4 Video URL" class="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-2.5 text-sm md:col-span-2">
+                    <input type="url" id="asmrThumb" placeholder="Thumbnail Cover Image URL" class="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-2.5 text-sm md:col-span-2">
+                    <textarea id="asmrDesc" placeholder="Session Description Notes..." rows="2" class="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-2.5 text-sm md:col-span-2 resize-none"></textarea>
+                </div>
+                <div class="flex items-center justify-between pt-2">
+                    <label class="flex items-center gap-2 text-sm text-gray-400 cursor-pointer">
+                        <input type="checkbox" id="asmrIsLimited" class="w-4 h-4 rounded bg-gray-800 border-gray-700 text-indigo-600"> Lock this video with Premium Key
+                    </label>
+                    <button type="submit" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-6 py-2 rounded-xl text-sm transition-colors">Publish Track</button>
+                </div>
+            </form>
+            <div id="admin-asmr-list" class="space-y-3 overflow-y-auto max-h-[40vh] pr-2"></div>
         </div>
     </div>
 
     <script type="module" src="auth-guard.js"></script>
     <script type="module">
-        import { db, collection, getDocs, deleteDoc, doc, query, orderBy } from './firebase.js';
+        import { db, collection, getDocs, deleteDoc, doc, query, orderBy, addDoc } from './firebase.js';
 
         window.switchTab = function(tabId) {
-            ['tab-posts', 'tab-vids', 'tab-res'].forEach(id => document.getElementById(id).classList.add('hidden'));
-            ['btn-posts', 'btn-vids', 'btn-res'].forEach(id => document.getElementById(id).className = "flex-1 py-2 rounded-lg text-gray-400 hover:text-white font-bold text-sm transition-colors");
+            ['tab-posts', 'tab-vids', 'tab-res', 'tab-asmr'].forEach(id => document.getElementById(id).classList.add('hidden'));
+            ['btn-posts', 'btn-vids', 'btn-res', 'btn-asmr'].forEach(id => document.getElementById(id).className = "flex-1 py-2 rounded-lg text-gray-400 hover:text-white font-bold text-sm transition-colors");
             document.getElementById(tabId).classList.remove('hidden'); document.getElementById(tabId).classList.add('flex');
             
-            const btnMap = {'tab-posts':'btn-posts', 'tab-vids':'btn-vids', 'tab-res':'btn-res'};
-            const colorMap = {'tab-posts':'bg-blue-600 text-white', 'tab-vids':'bg-rose-600 text-white', 'tab-res':'bg-emerald-600 text-white'};
+            const btnMap = {'tab-posts':'btn-posts', 'tab-vids':'btn-vids', 'tab-res':'btn-res', 'tab-asmr':'btn-asmr'};
+            const colorMap = {'tab-posts':'bg-blue-600 text-white', 'tab-vids':'bg-rose-600 text-white', 'tab-res':'bg-emerald-600 text-white', 'tab-asmr':'bg-indigo-600 text-white'};
             document.getElementById(btnMap[tabId]).className = `flex-1 py-2 rounded-lg font-bold text-sm transition-colors ${colorMap[tabId]}`;
             
-            if(tabId==='tab-posts') loadPosts(); if(tabId==='tab-vids') loadVids(); if(tabId==='tab-res') loadRes();
+            if(tabId==='tab-posts') loadPosts(); if(tabId==='tab-vids') loadVids(); if(tabId==='tab-res') loadRes(); if(tabId==='tab-asmr') loadAsmr();
         }
 
         async function loadPosts() {
@@ -71,7 +85,33 @@
             });
         }
 
-        window.delDoc = async function(coll, id) { if(confirm("Xóa vĩnh viễn nội dung này?")) { await deleteDoc(doc(db, coll, id)); if(coll==='posts')loadPosts(); if(coll==='videos')loadVids(); if(coll==='resources')loadRes(); } }
+        // ĐỒNG BỘ DỮ LIỆU SANG LOCK GATEWAY CỦA ASMR STATION
+        async function loadAsmr() {
+            const el = document.getElementById('admin-asmr-list');
+            const snap = await getDocs(query(collection(db, "asmr_videos"), orderBy("timestamp", "desc")));
+            el.innerHTML = ''; snap.forEach(d => {
+                const badge = d.data().isLimited ? `<span class="text-red-400 text-xs ml-2 font-bold">[LOCKED]</span>` : `<span class="text-green-400 text-xs ml-2">[FREE]</span>`;
+                el.innerHTML += `<div class="bg-gray-900 p-4 rounded-xl border border-gray-700 flex justify-between items-center"><div class="pr-4"><b class="text-white">${d.data().title}</b> ${badge}</div><button onclick="delDoc('asmr_videos','${d.id}')" class="bg-red-500/20 text-red-500 hover:bg-red-500 hover:text-white px-3 py-1 rounded text-sm font-bold shrink-0 transition-colors">Delete</button></div>`;
+            });
+        }
+
+        window.submitAsmrVideo = async function(e) {
+            e.preventDefault();
+            try {
+                await addDoc(collection(db, "asmr_videos"), {
+                    title: document.getElementById('asmrTitle').value,
+                    quality: document.getElementById('asmrQuality').value,
+                    url: document.getElementById('asmrUrl').value,
+                    thumbnail: document.getElementById('asmrThumb').value,
+                    desc: document.getElementById('asmrDesc').value,
+                    isLimited: document.getElementById('asmrIsLimited').checked,
+                    timestamp: new Date().getTime()
+                });
+                alert("Published successfully!"); e.target.reset(); loadAsmr();
+            } catch(error) { alert("Error writing to Firestore: " + error.message); }
+        }
+
+        window.delDoc = async function(coll, id) { if(confirm("Xóa vĩnh viễn nội dung này?")) { await deleteDoc(doc(db, coll, id)); if(coll==='posts')loadPosts(); if(coll==='videos')loadVids(); if(coll==='resources')loadRes(); if(coll==='asmr_videos')loadAsmr(); } }
         document.addEventListener("DOMContentLoaded", loadPosts);
     </script>
 </body>
