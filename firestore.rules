@@ -1,0 +1,133 @@
+rules_version = '2';
+// ============================================================================
+//  FIRESTORE SECURITY RULES — CoreVault
+//  Dán toàn bộ file này vào: Firebase Console → Firestore Database → Rules → Publish
+//  TRƯỚC KHI DÁN: chạy "Chuyển dữ liệu" trong Admin → Settings (xem README-HUONG-DAN.md)
+//  Nếu đổi email admin, nhớ sửa ở hàm isAdmin() bên dưới và trong config.js.
+// ============================================================================
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ---------- Hàm tiện ích ----------
+    function signedIn() { return request.auth != null; }
+    function isAdmin() { return signedIn() && request.auth.token.email in ['thaituan.28012020@gmail.com']; }
+    function isOwner(uid) { return signedIn() && request.auth.uid == uid; }
+    function userPath(uid) { return /databases/$(database)/documents/users/$(uid); }
+    function notBanned() {
+      return signedIn() && (!exists(userPath(request.auth.uid)) ||
+        get(userPath(request.auth.uid)).data.get('status', 'Active') != 'Banned');
+    }
+    function smallAvatar(d) { return !('avatar' in d) || (d.avatar is string && d.avatar.size() < 200000); }
+
+    // ---------- Cài đặt (hero, about, ads, bảo trì, danh sách admin) ----------
+    match /settings/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // ---------- Hồ sơ người dùng ----------
+    match /users/{uid} {
+      allow read: if isOwner(uid) || isAdmin();
+      allow create: if isAdmin() || (isOwner(uid) && request.resource.data.status == 'Active'
+                        && request.resource.data.plan == 'Free' && smallAvatar(request.resource.data));
+      // Người dùng không tự đổi được status / plan / email
+      allow update: if isAdmin() || (isOwner(uid) && smallAvatar(request.resource.data)
+                        && !request.resource.data.diff(resource.data).affectedKeys().hasAny(['status', 'plan', 'email', 'createdAt']));
+      allow delete: if isAdmin();
+    }
+
+    // ---------- Tên người dùng duy nhất ----------
+    match /usernames/{name} {
+      allow get: if true;
+      allow list: if false;
+      allow create: if signedIn() && request.resource.data.uid == request.auth.uid;
+      allow update: if false;
+      allow delete: if isAdmin() || (signedIn() && resource.data.uid == request.auth.uid);
+    }
+
+    // ---------- Sản phẩm ----------
+    match /products/{pid} {
+      allow read: if resource.data.status != 'Hidden' || isAdmin();
+      allow write: if isAdmin();
+
+      // Link tải: chỉ admin hoặc người có đơn "Completed" mới đọc được
+      match /private/{docId} {
+        allow read: if isAdmin() || hasPurchased(pid);
+        allow write: if isAdmin();
+      }
+    }
+    function orderPath(pid) { return /databases/$(database)/documents/orders/$(request.auth.uid + '_' + pid); }
+    function hasPurchased(pid) {
+      return notBanned() && exists(orderPath(pid)) && get(orderPath(pid)).data.status == 'Completed';
+    }
+
+    // ---------- Đơn hàng (ID = uid_productId) ----------
+    match /orders/{oid} {
+      allow read: if isAdmin() || (signedIn() && resource.data.uid == request.auth.uid);
+      allow create: if isAdmin() || (
+        notBanned()
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.user == request.auth.token.email
+        && oid == request.auth.uid + '_' + request.resource.data.productId
+        && request.resource.data.price == get(/databases/$(database)/documents/products/$(request.resource.data.productId)).data.price
+        && (request.resource.data.status == 'Pending'
+            || (request.resource.data.status == 'Completed'
+                && get(/databases/$(database)/documents/products/$(request.resource.data.productId)).data.price == 0))
+      );
+      allow update, delete: if isAdmin();
+    }
+
+    // ---------- Cộng đồng ----------
+    match /rooms/{rid} {
+      allow read: if signedIn();
+      allow create: if notBanned() && request.resource.data.createdBy == request.auth.uid;
+      allow update: if false;
+      allow delete: if isAdmin() || (signedIn() && resource.data.createdBy == request.auth.uid);
+    }
+    match /posts/{id} {
+      allow read: if signedIn();
+      allow create: if notBanned() && request.resource.data.uid == request.auth.uid
+                    && request.resource.data.content is string && request.resource.data.content.size() <= 2000;
+      // Ai cũng thả tim / bình luận được, nhưng không sửa được nội dung bài
+      allow update: if notBanned() && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['likes', 'replies']);
+      allow delete: if isAdmin() || isOwner(resource.data.uid)
+                    || (resource.data.roomId != 'general'
+                        && get(/databases/$(database)/documents/rooms/$(resource.data.roomId)).data.createdBy == request.auth.uid);
+    }
+
+    // ---------- Video & Tài nguyên do thành viên chia sẻ ----------
+    match /videos/{id} {
+      allow read: if signedIn();
+      allow create: if notBanned() && request.resource.data.uid == request.auth.uid;
+      allow update: if false;
+      allow delete: if isAdmin() || isOwner(resource.data.uid);
+    }
+    match /resources/{id} {
+      allow read: if signedIn();
+      allow create: if notBanned() && request.resource.data.uid == request.auth.uid;
+      allow update: if false;
+      allow delete: if isAdmin() || isOwner(resource.data.uid);
+    }
+
+    // ---------- ASMR ----------
+    match /asmr_videos/{vid} {
+      allow read: if true;
+      allow write: if isAdmin();
+      match /private/{docId} {
+        allow read: if isAdmin() || (notBanned() && exists(/databases/$(database)/documents/asmr_unlocks/$(request.auth.uid + '_' + vid)));
+        allow write: if isAdmin();
+      }
+    }
+    match /asmr_keys/{key} {
+      allow get: if signedIn();   // chỉ đọc được khi đoán đúng mã, không liệt kê được
+      allow list, write: if isAdmin();
+    }
+    match /asmr_unlocks/{uid_vid} {
+      allow read: if isAdmin() || (signedIn() && resource.data.uid == request.auth.uid);
+      allow create: if notBanned() && request.resource.data.uid == request.auth.uid
+                    && uid_vid == request.auth.uid + '_' + request.resource.data.videoId
+                    && exists(/databases/$(database)/documents/asmr_keys/$(request.resource.data.key));
+      allow update, delete: if isAdmin();
+    }
+  }
+}

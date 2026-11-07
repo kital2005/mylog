@@ -41,39 +41,364 @@ const langData = {
     }
 };
 
-let currentLang = localStorage.getItem('site_language') || 'en';
+
+// ---- Từ điển bổ sung (thêm cho các tính năng mới) ----
+Object.assign(langData.en, {
+ "about_bio_text": "Hello! I'm an IT student passionate about building tools, optimizing systems and sharing what I learn. CoreVault is where I collect everything I make.",
+ "ad_label": "Advertisement",
+ "admin_denied": "You do not have permission to access the admin area.",
+ "admin_panel_title": "Administration",
+ "admin_view_site": "View website",
+ "asmr_audio_mode": "Audio-only mode active",
+ "asmr_audio_off": "👁️ Turn off display",
+ "asmr_audio_on": "👁️ Turn on display",
+ "asmr_autopause": "Autopause in",
+ "asmr_back": "Go Back",
+ "asmr_back_station": "Back to ASMR Station",
+ "asmr_bad_key": "Invalid unlock key.",
+ "asmr_donate": "Donate",
+ "asmr_empty": "No sessions available at the moment.",
+ "asmr_key_desc": "This exclusive session requires an unlock key. Enter your key to continue.",
+ "asmr_key_ph": "Enter your unlock key…",
+ "asmr_key_title": "Limited Premium Session",
+ "asmr_limited": "LIMITED KEY",
+ "asmr_limited_short": "LIMITED",
+ "asmr_media_err": "⚠️ This media can't be played: the link is broken or the server blocked streaming.",
+ "asmr_off": "Off",
+ "asmr_paused": "Paused.",
+ "asmr_paypal": "Send Support via PayPal",
+ "asmr_recommended": "Recommended Sessions",
+ "asmr_search": "Search sessions…",
+ "asmr_sleep": "Sleep",
+ "asmr_sub": "Exclusive high-fidelity audio sessions to help you relax, focus, and sleep.",
+ "asmr_support_desc": "All full-length sessions are free. Your donation helps me stay independent and improve my audio equipment!",
+ "asmr_support_title": "Support My Work",
+ "asmr_title": "Ambient & ASMR Station",
+ "asmr_unlock": "Unlock",
+ "auth_read": "Read",
+ "back_hub": "Back to Hub",
+ "back_to_vault": "Back to Tools Vault",
+ "btn_cancel": "Cancel",
+ "btn_publish": "Publish",
+ "btn_retry": "Retry",
+ "com_bad_room": "Wrong room name or secret key.",
+ "com_confirm_del_post": "Delete this post permanently?",
+ "com_confirm_del_room": "Deleting this room also deletes all its posts. Are you sure?",
+ "com_create": "Create",
+ "com_create_room_title": "Create a room",
+ "com_delete": "Delete",
+ "com_empty": "Nobody has posted here yet. Be the first!",
+ "com_host": "Host",
+ "com_join": "Join",
+ "com_join_title": "Join a private room",
+ "com_key_short": "The secret key must be at least 4 characters.",
+ "com_private": "Private",
+ "com_public": "Public",
+ "com_reply_limit": "This post has reached the reply limit.",
+ "com_room_key": "Secret key (share it with friends)",
+ "com_room_name": "Room name",
+ "com_room_private": "Password-protect this room",
+ "com_show_more": "Show more",
+ "com_wait": "Please wait a few seconds before posting again.",
+ "detail_btn_pending": "Awaiting approval — view My Vault",
+ "detail_btn_vault": "Open in My Vault",
+ "err_agree": "Please accept the Terms of Service to continue.",
+ "err_email": "Invalid email address.",
+ "err_email_used": "This email is already registered.",
+ "err_fill": "Please fill in all required fields.",
+ "err_generic": "Something went wrong. Please try again.",
+ "err_image": "Could not use this image. Please choose another one.",
+ "err_link_expired": "This link has expired. Please request a new one.",
+ "err_link_invalid": "This link is invalid or has already been used.",
+ "err_load": "Could not load data. Please try again.",
+ "err_login": "Wrong email or password.",
+ "err_network": "Network error. Check your connection.",
+ "err_perm": "You don't have permission to do this.",
+ "err_too_many": "Too many attempts. Please try again later.",
+ "err_url": "Please enter a valid http(s) link.",
+ "err_user_invalid": "Username must be 3–20 characters (letters, numbers, space, . _ -).",
+ "err_user_reserved": "This username is reserved.",
+ "err_weak": "Password needs 8+ characters with an uppercase letter, a number and a special character.",
+ "home_view_all": "View All →",
+ "legal_contact": "Contact Admin",
+ "legal_contact_desc": "Questions, payment issues or takedown requests? Email us:",
+ "legal_privacy": "Privacy Policy",
+ "legal_terms": "Terms of Service",
+ "legal_title": "Legal & Support",
+ "maint_desc": "This section is temporarily locked. Please come back later.",
+ "maint_title": "Under maintenance",
+ "msg_avatar_ok": "Avatar updated!",
+ "msg_banned": "Your account has been locked.",
+ "msg_copied": "Copied!",
+ "msg_got_tool": "Tool added! Opening My Vault…",
+ "msg_name_ok": "Display name updated!",
+ "msg_order_fail": "Could not process the order. Please try again.",
+ "msg_pay_sent": "Payment confirmation sent! The admin will verify it soon.",
+ "msg_published": "Published!",
+ "msg_reset_sent": "Password reset link sent! Please check your email.",
+ "nav_asmr": "ASMR Station",
+ "nav_login_reg": "Login / Register",
+ "nav_logout": "Logout",
+ "nav_vault": "My Vault",
+ "no_match": "No tools match your search.",
+ "not_specified": "Not specified",
+ "pay_account": "Account:",
+ "pay_amount": "Amount:",
+ "pay_copy": "Copy",
+ "pay_memo": "Transfer note:",
+ "pay_note": "After transferring, press the button below. The admin will verify your payment and unlock your download.",
+ "plan_free": "Free Plan",
+ "plan_premium": "Premium Plan",
+ "res_by": "Shared by",
+ "res_confirm_del": "Delete this link?",
+ "res_empty": "No files have been shared yet.",
+ "res_modal_desc": "Paste your Drive, Fshare or MediaFire link.",
+ "res_no_desc": "No description.",
+ "res_ph_desc": "Description & notes",
+ "res_ph_size": "File size (e.g. 3.2 GB)",
+ "res_ph_title": "File name (e.g. Win 10 Lite)",
+ "res_search": "Search files…",
+ "reset_back_login": "Back to Login",
+ "reset_btn": "Update password",
+ "reset_hint": "At least 8 characters, with 1 uppercase letter, 1 number and 1 special character.",
+ "reset_new": "New password",
+ "reset_ok_desc": "Your password has been changed.",
+ "reset_ok_title": "Success!",
+ "reset_sub": "Please enter a new password for your account.",
+ "reset_title": "Create a new password",
+ "rule_len": "At least 8 characters",
+ "rule_num": "1 number",
+ "rule_spec": "1 special character (@$!%*?&)",
+ "rule_upper": "1 uppercase letter",
+ "sort_name": "Name A–Z",
+ "sort_newest": "Newest",
+ "sort_price_asc": "Price: low to high",
+ "sort_price_desc": "Price: high to low",
+ "tools_count": "{n} tools",
+ "vault_browse": "Browse tools →",
+ "vault_download": "Download File",
+ "vault_edit_name": "Change display name",
+ "vault_empty": "Your vault is empty.",
+ "vault_no_link": "Download link missing — contact admin",
+ "vault_order_id": "Order ID",
+ "vault_owned": "Owned",
+ "vault_owned_count": "tools owned",
+ "vault_pending": "Awaiting approval",
+ "vault_prompt_name": "Enter your new display name:",
+ "vault_removed": "Tool removed",
+ "vault_title": "My Vault",
+ "vault_unavailable": "Not available yet",
+ "vid_confirm_del": "Delete this video?",
+ "vid_empty": "No videos yet. Be the first!",
+ "vid_err": "This video can't be played here. Use the ↗ button to open the source.",
+ "vid_modal_desc": "Paste a YouTube or direct .mp4 link.",
+ "vid_ph_title": "Video title & caption",
+ "welcome_back": "Welcome back,"
+});
+Object.assign(langData.vn, {
+ "about_bio_text": "Xin chào! Mình là sinh viên IT yêu thích làm công cụ, tối ưu hệ thống và chia sẻ những gì mình học được. CoreVault là nơi mình lưu giữ mọi sản phẩm của mình.",
+ "ad_label": "Quảng cáo",
+ "admin_denied": "Bạn không có quyền truy cập khu vực quản trị.",
+ "admin_panel_title": "Quản trị",
+ "admin_view_site": "Xem website",
+ "asmr_audio_mode": "Đang ở chế độ chỉ nghe",
+ "asmr_audio_off": "👁️ Tắt màn hình",
+ "asmr_audio_on": "👁️ Bật màn hình",
+ "asmr_autopause": "Tự dừng sau",
+ "asmr_back": "Quay lại",
+ "asmr_back_station": "Về Trạm ASMR",
+ "asmr_bad_key": "Mã mở khóa không đúng.",
+ "asmr_donate": "Ủng hộ",
+ "asmr_empty": "Hiện chưa có phiên nào.",
+ "asmr_key_desc": "Phiên độc quyền này cần mã mở khóa. Nhập mã của bạn để tiếp tục.",
+ "asmr_key_ph": "Nhập mã mở khóa…",
+ "asmr_key_title": "Phiên Premium giới hạn",
+ "asmr_limited": "CẦN MÃ",
+ "asmr_limited_short": "GIỚI HẠN",
+ "asmr_media_err": "⚠️ Không phát được file này: link hỏng hoặc máy chủ chặn stream.",
+ "asmr_off": "Tắt",
+ "asmr_paused": "Đã dừng.",
+ "asmr_paypal": "Ủng hộ qua PayPal",
+ "asmr_recommended": "Phiên gợi ý",
+ "asmr_search": "Tìm phiên ASMR…",
+ "asmr_sleep": "Hẹn giờ",
+ "asmr_sub": "Âm thanh chất lượng cao giúp bạn thư giãn, tập trung và dễ ngủ.",
+ "asmr_support_desc": "Mọi phiên đầy đủ đều miễn phí. Sự ủng hộ của bạn giúp mình duy trì và nâng cấp thiết bị thu âm!",
+ "asmr_support_title": "Ủng hộ mình nhé",
+ "asmr_title": "Trạm ASMR & Âm thanh thư giãn",
+ "asmr_unlock": "Mở khóa",
+ "auth_read": "Đọc",
+ "back_hub": "Về Trang Chủ",
+ "back_to_vault": "Về Kho Công Cụ",
+ "btn_cancel": "Hủy",
+ "btn_publish": "Đăng",
+ "btn_retry": "Thử lại",
+ "com_bad_room": "Sai tên phòng hoặc mã bí mật.",
+ "com_confirm_del_post": "Xóa vĩnh viễn bài viết này?",
+ "com_confirm_del_room": "Xóa phòng sẽ xóa luôn mọi bài viết bên trong. Bạn chắc chứ?",
+ "com_create": "Tạo",
+ "com_create_room_title": "Tạo phòng mới",
+ "com_delete": "Xóa",
+ "com_empty": "Phòng này chưa có ai trò chuyện. Hãy mở bát nhé!",
+ "com_host": "Chủ phòng",
+ "com_join": "Vào",
+ "com_join_title": "Vào phòng kín",
+ "com_key_short": "Mã bí mật phải có ít nhất 4 ký tự.",
+ "com_private": "Riêng tư",
+ "com_public": "Công khai",
+ "com_reply_limit": "Bài viết này đã đạt giới hạn bình luận.",
+ "com_room_key": "Mã bí mật (gửi cho bạn bè)",
+ "com_room_name": "Tên phòng",
+ "com_room_private": "Đặt mật khẩu cho phòng",
+ "com_show_more": "Xem thêm",
+ "com_wait": "Vui lòng đợi vài giây trước khi đăng tiếp.",
+ "detail_btn_pending": "Đang chờ duyệt — xem Kho đồ",
+ "detail_btn_vault": "Mở trong Kho đồ",
+ "err_agree": "Vui lòng đồng ý Điều khoản dịch vụ để tiếp tục.",
+ "err_email": "Email không hợp lệ.",
+ "err_email_used": "Email này đã được đăng ký.",
+ "err_fill": "Vui lòng điền đầy đủ thông tin bắt buộc.",
+ "err_generic": "Có lỗi xảy ra. Vui lòng thử lại.",
+ "err_image": "Không dùng được ảnh này. Vui lòng chọn ảnh khác.",
+ "err_link_expired": "Liên kết đã hết hạn. Vui lòng yêu cầu link mới.",
+ "err_link_invalid": "Liên kết không hợp lệ hoặc đã được sử dụng.",
+ "err_load": "Không tải được dữ liệu. Vui lòng thử lại.",
+ "err_login": "Sai email hoặc mật khẩu.",
+ "err_network": "Lỗi mạng. Hãy kiểm tra kết nối.",
+ "err_perm": "Bạn không có quyền thực hiện thao tác này.",
+ "err_too_many": "Thử quá nhiều lần. Vui lòng thử lại sau.",
+ "err_url": "Vui lòng nhập link http(s) hợp lệ.",
+ "err_user_invalid": "Tên phải dài 3–20 ký tự (chữ, số, khoảng trắng, . _ -).",
+ "err_user_reserved": "Tên này đã được giữ chỗ.",
+ "err_weak": "Mật khẩu cần từ 8 ký tự, có chữ hoa, chữ số và ký tự đặc biệt.",
+ "home_view_all": "Xem tất cả →",
+ "legal_contact": "Liên hệ Admin",
+ "legal_contact_desc": "Thắc mắc, sự cố thanh toán hoặc yêu cầu gỡ nội dung? Hãy gửi email:",
+ "legal_privacy": "Chính sách bảo mật",
+ "legal_terms": "Điều khoản dịch vụ",
+ "legal_title": "Pháp lý & Hỗ trợ",
+ "maint_desc": "Khu vực này đang tạm khóa. Vui lòng quay lại sau.",
+ "maint_title": "Đang bảo trì",
+ "msg_avatar_ok": "Đã cập nhật ảnh đại diện!",
+ "msg_banned": "Tài khoản của bạn đã bị khóa.",
+ "msg_copied": "Đã sao chép!",
+ "msg_got_tool": "Đã nhận công cụ! Đang mở Kho đồ…",
+ "msg_name_ok": "Đã cập nhật tên hiển thị!",
+ "msg_order_fail": "Không xử lý được đơn hàng. Vui lòng thử lại.",
+ "msg_pay_sent": "Đã gửi xác nhận thanh toán! Admin sẽ kiểm tra sớm.",
+ "msg_published": "Đã đăng!",
+ "msg_reset_sent": "Đã gửi link đặt lại mật khẩu! Hãy kiểm tra email.",
+ "nav_asmr": "Trạm ASMR",
+ "nav_login_reg": "Đăng nhập / Đăng ký",
+ "nav_logout": "Đăng xuất",
+ "nav_vault": "Kho đồ của tôi",
+ "no_match": "Không có công cụ nào khớp.",
+ "not_specified": "Chưa cập nhật",
+ "pay_account": "Tài khoản:",
+ "pay_amount": "Số tiền:",
+ "pay_copy": "Sao chép",
+ "pay_memo": "Nội dung CK:",
+ "pay_note": "Sau khi chuyển khoản, bấm nút bên dưới. Admin sẽ kiểm tra và mở khóa link tải cho bạn.",
+ "plan_free": "Gói Miễn phí",
+ "plan_premium": "Gói Premium",
+ "res_by": "Chia sẻ bởi",
+ "res_confirm_del": "Xóa link này?",
+ "res_empty": "Chưa có file nào được chia sẻ.",
+ "res_modal_desc": "Dán link Drive, Fshare hoặc MediaFire của bạn.",
+ "res_no_desc": "Chưa có mô tả.",
+ "res_ph_desc": "Mô tả & ghi chú",
+ "res_ph_size": "Dung lượng (VD: 3.2 GB)",
+ "res_ph_title": "Tên file (VD: Win 10 Lite)",
+ "res_search": "Tìm file…",
+ "reset_back_login": "Quay lại Đăng nhập",
+ "reset_btn": "Cập nhật mật khẩu",
+ "reset_hint": "Tối thiểu 8 ký tự, gồm 1 chữ hoa, 1 chữ số và 1 ký tự đặc biệt.",
+ "reset_new": "Mật khẩu mới",
+ "reset_ok_desc": "Mật khẩu của bạn đã được thay đổi.",
+ "reset_ok_title": "Thành công!",
+ "reset_sub": "Vui lòng nhập mật khẩu mới cho tài khoản của bạn.",
+ "reset_title": "Tạo mật khẩu mới",
+ "rule_len": "Ít nhất 8 ký tự",
+ "rule_num": "1 chữ số",
+ "rule_spec": "1 ký tự đặc biệt (@$!%*?&)",
+ "rule_upper": "1 chữ hoa",
+ "sort_name": "Tên A–Z",
+ "sort_newest": "Mới nhất",
+ "sort_price_asc": "Giá: thấp đến cao",
+ "sort_price_desc": "Giá: cao đến thấp",
+ "tools_count": "{n} công cụ",
+ "vault_browse": "Dạo kho công cụ →",
+ "vault_download": "Tải file",
+ "vault_edit_name": "Đổi tên hiển thị",
+ "vault_empty": "Kho đồ của bạn đang trống.",
+ "vault_no_link": "Thiếu link tải — hãy liên hệ admin",
+ "vault_order_id": "Mã đơn",
+ "vault_owned": "Đã sở hữu",
+ "vault_owned_count": "công cụ đã sở hữu",
+ "vault_pending": "Chờ admin duyệt",
+ "vault_prompt_name": "Nhập tên hiển thị mới của bạn:",
+ "vault_removed": "Công cụ đã bị gỡ",
+ "vault_title": "Kho đồ của tôi",
+ "vault_unavailable": "Chưa khả dụng",
+ "vid_confirm_del": "Xóa video này?",
+ "vid_empty": "Chưa có video nào. Hãy là người đầu tiên!",
+ "vid_err": "Video này không phát được ở đây. Bấm nút ↗ để mở nguồn.",
+ "vid_modal_desc": "Dán link YouTube hoặc link .mp4 trực tiếp.",
+ "vid_ph_title": "Tiêu đề & chú thích video",
+ "welcome_back": "Chào mừng trở lại,"
+});
+
+// ---- Bộ máy đa ngôn ngữ ----
+// Tỉ giá hiển thị USD → VND (giữ giống EXCHANGE_RATE trong config.js)
+const EXCHANGE_RATE = 25000;
+
+function detectLang() {
+    const saved = localStorage.getItem('site_language');
+    if (saved === 'en' || saved === 'vn') return saved;
+    // Lần đầu truy cập: tự chọn theo ngôn ngữ trình duyệt
+    return (navigator.language || 'en').toLowerCase().startsWith('vi') ? 'vn' : 'en';
+}
+let currentLang = detectLang();
+localStorage.setItem('site_language', currentLang);
+
+/** Lấy chuỗi dịch. t('tools_count', {n: 5}) */
+window.t = function (key, vars) {
+    let s = (langData[currentLang] && langData[currentLang][key]);
+    if (s === undefined) s = langData.en[key];
+    if (s === undefined) s = key;
+    if (vars) Object.keys(vars).forEach(k => { s = s.split('{' + k + '}').join(vars[k]); });
+    return s;
+};
 
 function updateLanguage() {
-    const elements = document.querySelectorAll('[data-i18n]');
-    elements.forEach(el => {
-        const key = el.getAttribute('data-i18n'); 
-        if (langData[currentLang][key]) {
-            if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-                el.placeholder = langData[currentLang][key];
-            } else {
-                el.innerHTML = langData[currentLang][key];
-            }
-        }
+    document.documentElement.lang = currentLang === 'vn' ? 'vi' : 'en';
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        const val = langData[currentLang][key];
+        if (val === undefined) return;
+        if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.placeholder = val;
+        else el.innerHTML = val;
     });
-
-    const EXCHANGE_RATE = 25000; 
-    const priceElements = document.querySelectorAll('[data-price-value]');
-    priceElements.forEach(el => {
-        const basePriceUSD = parseFloat(el.getAttribute('data-price-value'));
-        if (currentLang === 'vn') {
-            const priceVND = basePriceUSD * EXCHANGE_RATE;
-            el.innerHTML = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(priceVND);
-        } else {
-            el.innerHTML = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(basePriceUSD);
-        }
+    document.querySelectorAll('[data-i18n-title]').forEach(el => {
+        const val = langData[currentLang][el.getAttribute('data-i18n-title')];
+        if (val !== undefined) { el.title = val; el.setAttribute('aria-label', val); }
     });
-
-    localStorage.setItem('site_language', currentLang);
+    document.querySelectorAll('[data-price-value]').forEach(el => {
+        const usd = parseFloat(el.getAttribute('data-price-value')) || 0;
+        el.textContent = currentLang === 'vn'
+            ? new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(usd * EXCHANGE_RATE)
+            : new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(usd);
+    });
 }
+window.updateLanguage = updateLanguage;
 
-window.toggleLanguage = function() {
+window.toggleLanguage = function () {
     currentLang = currentLang === 'en' ? 'vn' : 'en';
+    localStorage.setItem('site_language', currentLang);
     updateLanguage();
-}
+    // Các trang vẽ nội dung động sẽ lắng nghe sự kiện này để vẽ lại
+    document.dispatchEvent(new CustomEvent('languagechange', { detail: currentLang }));
+};
 
-document.addEventListener('DOMContentLoaded', updateLanguage);
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', updateLanguage);
+else updateLanguage();

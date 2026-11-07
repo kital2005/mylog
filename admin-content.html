@@ -1,118 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>CoreVault OS | Content Hub</title><link rel="icon" type="image/svg+xml" href="logo.svg"><script src="https://cdn.tailwindcss.com"></script><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><script>tailwind.config={theme:{extend:{colors:{primary:'#3b82f6'},fontFamily:{sans:['Inter','sans-serif']}}}}</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Content Hub | CoreVault Admin</title>
+<meta name="description" content="Admin">
+<meta name="theme-color" content="#111827">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="logo.svg">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#3b82f6' }, fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] } } } }</script>
+<style>
+  body { font-family: Inter, system-ui, sans-serif; }
+  .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+  .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+  .custom-scrollbar::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 10px; }
+  .no-scrollbar::-webkit-scrollbar { display: none; } .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  @media (prefers-reduced-motion: reduce) { * { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+</style>
 </head>
-<body class="bg-gray-900 text-white font-sans min-h-screen flex p-4 md:p-8 justify-center">
-    
-    <div class="max-w-4xl w-full bg-gray-800 rounded-3xl border border-gray-700 shadow-2xl p-6 md:p-10 flex flex-col">
-        <div class="flex items-center justify-between mb-8 pb-4 border-b border-gray-700">
-            <div><h1 class="text-2xl font-bold text-white">Content Management Hub</h1><p class="text-sm text-gray-400 mt-1">Manage Community, Videos, OS Resources and ASMR.</p></div>
-            <a href="admin.html" class="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg text-sm font-bold transition-colors">Back to Dashboard</a>
-        </div>
+<body class="bg-gray-900 text-white font-sans" style="visibility:hidden">
+<div id="admin-page" data-active="content">
+  <div class="mb-6"><h1 class="text-2xl md:text-3xl font-bold">Quản lý nội dung</h1><p class="text-gray-400 text-sm mt-1">Cộng đồng, Video, OS & Tài nguyên, ASMR.</p></div>
+  <div class="flex flex-wrap gap-2 mb-6 bg-gray-800 p-2 rounded-xl border border-gray-700" id="tabs"></div>
 
-        <div class="flex flex-wrap gap-2 mb-8 bg-gray-900 p-2 rounded-xl">
-            <button onclick="switchTab('tab-posts')" id="btn-posts" class="flex-1 py-2 rounded-lg bg-blue-600 font-bold text-sm transition-colors">Community</button>
-            <button onclick="switchTab('tab-vids')" id="btn-vids" class="flex-1 py-2 rounded-lg text-gray-400 hover:text-white font-bold text-sm transition-colors">Shorts Hub</button>
-            <button onclick="switchTab('tab-res')" id="btn-res" class="flex-1 py-2 rounded-lg text-gray-400 hover:text-white font-bold text-sm transition-colors">OS Builds</button>
-            <button onclick="switchTab('tab-asmr')" id="btn-asmr" class="flex-1 py-2 rounded-lg text-gray-400 hover:text-white font-bold text-sm transition-colors">ASMR Station</button>
-        </div>
+  <div id="list" class="space-y-3"></div>
 
-        <div id="tab-posts" class="space-y-4 overflow-y-auto max-h-[60vh] pr-2"></div>
-
-        <div id="tab-vids" class="hidden flex-col gap-6"><div id="admin-vids-list" class="space-y-3 overflow-y-auto max-h-[60vh] pr-2"></div></div>
-
-        <div id="tab-res" class="hidden flex-col gap-6"><div id="admin-res-list" class="space-y-3 overflow-y-auto max-h-[60vh] pr-2"></div></div>
-
-        <div id="tab-asmr" class="hidden flex-col gap-6">
-            <form onsubmit="submitAsmrVideo(event)" class="bg-gray-900 p-5 rounded-2xl border border-gray-700 space-y-4">
-                <h3 class="font-bold text-indigo-400 text-sm uppercase">Upload New ASMR Session</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <input type="text" id="asmrTitle" required placeholder="Session Title" class="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-2.5 text-sm">
-                    <input type="text" id="asmrQuality" placeholder="Audio Tag (e.g. Binaural 3D, Binaural)" class="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-2.5 text-sm">
-                    <input type="url" id="asmrUrl" required placeholder="Backblaze MP4 Video URL" class="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-2.5 text-sm md:col-span-2">
-                    <input type="url" id="asmrThumb" placeholder="Thumbnail Cover Image URL" class="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-2.5 text-sm md:col-span-2">
-                    <textarea id="asmrDesc" placeholder="Session Description Notes..." rows="2" class="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-2.5 text-sm md:col-span-2 resize-none"></textarea>
-                </div>
-                <div class="flex items-center justify-between pt-2">
-                    <label class="flex items-center gap-2 text-sm text-gray-400 cursor-pointer">
-                        <input type="checkbox" id="asmrIsLimited" class="w-4 h-4 rounded bg-gray-800 border-gray-700 text-indigo-600"> Lock this video with Premium Key
-                    </label>
-                    <button type="submit" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-6 py-2 rounded-xl text-sm transition-colors">Publish Track</button>
-                </div>
-            </form>
-            <div id="admin-asmr-list" class="space-y-3 overflow-y-auto max-h-[40vh] pr-2"></div>
-        </div>
+  <div id="asmr-admin" class="hidden space-y-6">
+    <form id="asmr-form" class="bg-gray-800 p-5 rounded-2xl border border-gray-700 space-y-4">
+      <h3 class="font-bold text-indigo-400 text-sm uppercase">Đăng phiên ASMR mới</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <input id="a-title" required maxlength="120" placeholder="Tiêu đề" class="bg-gray-900 border border-gray-700 rounded-xl px-4 py-2.5 text-sm">
+        <input id="a-quality" maxlength="40" placeholder="Nhãn âm thanh (VD: Binaural 3D)" class="bg-gray-900 border border-gray-700 rounded-xl px-4 py-2.5 text-sm">
+        <input id="a-url" type="url" required placeholder="Link video MP4 (Backblaze…)" class="bg-gray-900 border border-gray-700 rounded-xl px-4 py-2.5 text-sm md:col-span-2">
+        <input id="a-thumb" type="url" placeholder="Link ảnh bìa (tuỳ chọn)" class="bg-gray-900 border border-gray-700 rounded-xl px-4 py-2.5 text-sm md:col-span-2">
+        <textarea id="a-desc" rows="2" placeholder="Mô tả" class="bg-gray-900 border border-gray-700 rounded-xl px-4 py-2.5 text-sm md:col-span-2 resize-none"></textarea>
+      </div>
+      <div class="flex items-center justify-between flex-wrap gap-3">
+        <label class="flex items-center gap-2 text-sm text-gray-300 cursor-pointer"><input type="checkbox" id="a-limited" class="w-4 h-4 rounded"> Khóa bằng mã mở khóa (Premium Key)</label>
+        <button class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-6 py-2 rounded-xl text-sm">Đăng</button>
+      </div>
+    </form>
+    <div class="bg-gray-800 p-5 rounded-2xl border border-gray-700">
+      <h3 class="font-bold text-yellow-400 text-sm uppercase mb-3">Mã mở khóa</h3>
+      <form id="key-form" class="flex gap-2 mb-4"><input id="k-new" maxlength="30" placeholder="Mã mới (VD: SUMMER25)" class="flex-1 bg-gray-900 border border-gray-700 rounded-xl px-4 py-2.5 text-sm uppercase font-mono"><button class="bg-yellow-600 hover:bg-yellow-500 text-gray-900 font-bold px-5 rounded-xl text-sm">Thêm</button></form>
+      <div id="keys" class="flex flex-wrap gap-2"></div>
     </div>
+    <div id="asmr-list" class="space-y-3"></div>
+  </div>
+</div>
+<script src="lang.js"></script>
+<script type="module">
+import { adminReady } from './auth-guard.js';
+import { db, collection, getDocs, deleteDoc, doc, setDoc, addDoc, writeBatch, query, where, orderBy, limit } from './firebase.js';
+import { esc, safeUrl, tsOf, fmtDate, toast, getAdminUids, isAdminAuthor, $ } from './common.js';
+await adminReady;
+const adminUids = await getAdminUids();
 
-    <script type="module" src="auth-guard.js"></script>
-    <script type="module">
-        import { db, collection, getDocs, deleteDoc, doc, query, orderBy, addDoc } from './firebase.js';
+const TABS = [['posts', 'Cộng đồng', 'blue'], ['rooms', 'Phòng chat', 'cyan'], ['videos', 'Video', 'rose'], ['resources', 'OS & File', 'emerald'], ['asmr_videos', 'ASMR', 'indigo']];
+let tab = 'posts';
+function renderTabs() {
+  $('#tabs').innerHTML = TABS.map(([k, l, c]) => `<button data-tab="${k}" class="flex-1 min-w-[90px] py-2 rounded-lg font-bold text-sm transition-colors ${tab === k ? `bg-${c}-600 text-white` : 'text-gray-400 hover:text-white'}">${l}</button>`).join('');
+}
+const row = (id, left, coll) => `<div class="bg-gray-800 p-4 rounded-xl border border-gray-700 flex justify-between items-center gap-4"><div class="min-w-0 text-sm break-words line-clamp-3">${left}</div><button data-del="${esc(id)}" data-coll="${coll}" class="bg-red-500/20 text-red-400 hover:bg-red-500 hover:text-white px-3 py-1 rounded text-sm font-bold shrink-0 transition-colors">Xóa</button></div>`;
+const who = (d) => `<b class="${isAdminAuthor(d, adminUids) ? 'text-red-400' : 'text-blue-400'}">${esc(d.authorName || d.name || '?')}</b>`;
 
-        window.switchTab = function(tabId) {
-            ['tab-posts', 'tab-vids', 'tab-res', 'tab-asmr'].forEach(id => document.getElementById(id).classList.add('hidden'));
-            ['btn-posts', 'btn-vids', 'btn-res', 'btn-asmr'].forEach(id => document.getElementById(id).className = "flex-1 py-2 rounded-lg text-gray-400 hover:text-white font-bold text-sm transition-colors");
-            document.getElementById(tabId).classList.remove('hidden'); document.getElementById(tabId).classList.add('flex');
-            
-            const btnMap = {'tab-posts':'btn-posts', 'tab-vids':'btn-vids', 'tab-res':'btn-res', 'tab-asmr':'btn-asmr'};
-            const colorMap = {'tab-posts':'bg-blue-600 text-white', 'tab-vids':'bg-rose-600 text-white', 'tab-res':'bg-emerald-600 text-white', 'tab-asmr':'bg-indigo-600 text-white'};
-            document.getElementById(btnMap[tabId]).className = `flex-1 py-2 rounded-lg font-bold text-sm transition-colors ${colorMap[tabId]}`;
-            
-            if(tabId==='tab-posts') loadPosts(); if(tabId==='tab-vids') loadVids(); if(tabId==='tab-res') loadRes(); if(tabId==='tab-asmr') loadAsmr();
-        }
+async function load() {
+  renderTabs();
+  $('#asmr-admin').classList.toggle('hidden', tab !== 'asmr_videos');
+  const box = $('#list'); box.classList.toggle('hidden', tab === 'asmr_videos');
+  const target = tab === 'asmr_videos' ? $('#asmr-list') : box;
+  target.innerHTML = '<div class="h-16 rounded-xl bg-gray-800 animate-pulse"></div>';
+  try {
+    const snap = await getDocs(query(collection(db, tab), orderBy('timestamp', 'desc'), limit(100)));
+    const rows = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+    const html = rows.map((d) => {
+      if (tab === 'posts') return row(d.id, `${who(d)} <span class="text-xs text-gray-500">[${esc(d.roomId)}] ${esc(fmtDate(d.timestamp))}</span><br>${esc(d.content)}`, tab);
+      if (tab === 'rooms') return row(d.id, `<b>${d.isPrivate ? '🔒' : '💬'} ${esc(d.name)}</b> <span class="text-xs text-gray-500">${esc(fmtDate(d.timestamp))}</span>`, tab);
+      if (tab === 'videos') return row(d.id, `<b>${esc(d.title)}</b> <span class="text-xs text-gray-500">bởi ${esc(d.authorName)}</span><br><a class="text-xs text-blue-400 underline" href="${esc(safeUrl(d.url))}" target="_blank" rel="noopener noreferrer">${esc(d.url)}</a>`, tab);
+      if (tab === 'resources') return row(d.id, `<b>${esc(d.title)}</b> <span class="text-xs text-gray-500">bởi ${esc(d.authorName)}</span><br><a class="text-xs text-blue-400 underline" href="${esc(safeUrl(d.url))}" target="_blank" rel="noopener noreferrer">${esc(d.url)}</a>`, tab);
+      return row(d.id, `<b>${esc(d.title)}</b> ${d.isLimited ? '<span class="text-red-400 text-xs font-bold">[LOCKED]</span>' : '<span class="text-green-400 text-xs">[FREE]</span>'}`, tab);
+    }).join('') || '<p class="text-gray-500 text-sm text-center py-8">Trống.</p>';
+    target.innerHTML = html;
+    if (tab === 'asmr_videos') loadKeys();
+  } catch (e) { console.error(e); target.innerHTML = '<p class="text-red-400 text-sm">Lỗi tải dữ liệu: ' + esc(e.message) + '</p>'; }
+}
+$('#tabs').addEventListener('click', (e) => { const b = e.target.closest('[data-tab]'); if (b) { tab = b.dataset.tab; load(); } });
+document.addEventListener('click', async (e) => {
+  const b = e.target.closest('[data-del]'); if (!b) return;
+  if (!confirm('Xóa vĩnh viễn nội dung này?')) return;
+  try {
+    const coll = b.dataset.coll, id = b.dataset.del;
+    if (coll === 'asmr_videos') { try { await deleteDoc(doc(db, 'asmr_videos', id, 'private', 'media')); } catch (e2) { /* ignore */ } }
+    if (coll === 'rooms') { const ps = await getDocs(query(collection(db, 'posts'), where('roomId', '==', id))); for (let i = 0; i < ps.docs.length; i += 400) { const bt = writeBatch(db); ps.docs.slice(i, i + 400).forEach((p) => bt.delete(p.ref)); await bt.commit(); } }
+    await deleteDoc(doc(db, coll, id)); toast('Đã xóa.', 'success'); load();
+  } catch (err) { toast('Lỗi: ' + err.message, 'error'); }
+});
 
-        async function loadPosts() {
-            const el = document.getElementById('tab-posts');
-            const snap = await getDocs(query(collection(db, "posts"), orderBy("timestamp", "desc")));
-            el.innerHTML = ''; snap.forEach(d => {
-                el.innerHTML += `<div class="bg-gray-900 p-4 rounded-xl border border-gray-700 flex justify-between items-center"><div class="line-clamp-2 pr-4"><b class="${d.data().isAdmin?'text-red-400':'text-blue-400'}">${d.data().authorName}</b>: ${d.data().content}</div><button onclick="delDoc('posts','${d.id}')" class="bg-red-500/20 text-red-500 hover:bg-red-500 hover:text-white px-3 py-1 rounded text-sm font-bold shrink-0 transition-colors">Delete</button></div>`;
-            });
-        }
-        
-        async function loadVids() {
-            const el = document.getElementById('admin-vids-list');
-            const snap = await getDocs(query(collection(db, "videos"), orderBy("timestamp", "desc")));
-            el.innerHTML = ''; snap.forEach(d => {
-                el.innerHTML += `<div class="bg-gray-900 p-4 rounded-xl border border-gray-700 flex justify-between items-center"><div class="pr-4"><b class="text-white">${d.data().title}</b> <span class="text-xs text-gray-500">by ${d.data().authorName}</span></div><button onclick="delDoc('videos','${d.id}')" class="bg-red-500/20 text-red-500 hover:bg-red-500 hover:text-white px-3 py-1 rounded text-sm font-bold shrink-0 transition-colors">Delete</button></div>`;
-            });
-        }
-
-        async function loadRes() {
-            const el = document.getElementById('admin-res-list');
-            const snap = await getDocs(query(collection(db, "resources"), orderBy("timestamp", "desc")));
-            el.innerHTML = ''; snap.forEach(d => {
-                el.innerHTML += `<div class="bg-gray-900 p-4 rounded-xl border border-gray-700 flex justify-between items-center"><div class="pr-4"><b class="text-white">${d.data().title}</b> <span class="text-xs text-gray-500">by ${d.data().authorName}</span></div><button onclick="delDoc('resources','${d.id}')" class="bg-red-500/20 text-red-500 hover:bg-red-500 hover:text-white px-3 py-1 rounded text-sm font-bold shrink-0 transition-colors">Delete</button></div>`;
-            });
-        }
-
-        // ĐỒNG BỘ DỮ LIỆU SANG LOCK GATEWAY CỦA ASMR STATION
-        async function loadAsmr() {
-            const el = document.getElementById('admin-asmr-list');
-            const snap = await getDocs(query(collection(db, "asmr_videos"), orderBy("timestamp", "desc")));
-            el.innerHTML = ''; snap.forEach(d => {
-                const badge = d.data().isLimited ? `<span class="text-red-400 text-xs ml-2 font-bold">[LOCKED]</span>` : `<span class="text-green-400 text-xs ml-2">[FREE]</span>`;
-                el.innerHTML += `<div class="bg-gray-900 p-4 rounded-xl border border-gray-700 flex justify-between items-center"><div class="pr-4"><b class="text-white">${d.data().title}</b> ${badge}</div><button onclick="delDoc('asmr_videos','${d.id}')" class="bg-red-500/20 text-red-500 hover:bg-red-500 hover:text-white px-3 py-1 rounded text-sm font-bold shrink-0 transition-colors">Delete</button></div>`;
-            });
-        }
-
-        window.submitAsmrVideo = async function(e) {
-            e.preventDefault();
-            try {
-                await addDoc(collection(db, "asmr_videos"), {
-                    title: document.getElementById('asmrTitle').value,
-                    quality: document.getElementById('asmrQuality').value,
-                    url: document.getElementById('asmrUrl').value,
-                    thumbnail: document.getElementById('asmrThumb').value,
-                    desc: document.getElementById('asmrDesc').value,
-                    isLimited: document.getElementById('asmrIsLimited').checked,
-                    timestamp: new Date().getTime()
-                });
-                alert("Published successfully!"); e.target.reset(); loadAsmr();
-            } catch(error) { alert("Error writing to Firestore: " + error.message); }
-        }
-
-        window.delDoc = async function(coll, id) { if(confirm("Xóa vĩnh viễn nội dung này?")) { await deleteDoc(doc(db, coll, id)); if(coll==='posts')loadPosts(); if(coll==='videos')loadVids(); if(coll==='resources')loadRes(); if(coll==='asmr_videos')loadAsmr(); } }
-        document.addEventListener("DOMContentLoaded", loadPosts);
-    </script>
+// ----- ASMR -----
+$('#asmr-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const url = safeUrl($('#a-url').value); if (!url) return toast('Link video không hợp lệ.', 'error');
+  const limited = $('#a-limited').checked;
+  const data = { title: $('#a-title').value.trim(), quality: $('#a-quality').value.trim(), thumbnail: safeUrl($('#a-thumb').value), desc: $('#a-desc').value.trim(), isLimited: limited, timestamp: Date.now() };
+  if (!limited) data.url = url;
+  try {
+    const ref = await addDoc(collection(db, 'asmr_videos'), data);
+    if (limited) await setDoc(doc(db, 'asmr_videos', ref.id, 'private', 'media'), { url });
+    toast('Đã đăng.', 'success'); e.target.reset(); load();
+  } catch (err) { toast('Lỗi: ' + err.message, 'error'); }
+});
+async function loadKeys() {
+  try {
+    const ks = await getDocs(collection(db, 'asmr_keys'));
+    $('#keys').innerHTML = ks.docs.map((k) => `<span class="inline-flex items-center gap-2 bg-gray-900 border border-gray-700 rounded-lg px-3 py-1.5 text-sm font-mono">${esc(k.id)}<button data-key="${esc(k.id)}" class="text-red-400 hover:text-red-300" aria-label="Xóa">✕</button></span>`).join('') || '<span class="text-gray-500 text-sm">Chưa có mã nào — video LIMITED sẽ không mở khóa được.</span>';
+  } catch (e) { $('#keys').textContent = 'Lỗi: ' + e.message; }
+}
+$('#key-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const k = $('#k-new').value.trim().toUpperCase().replace(/[\/\s]/g, ''); if (!k) return;
+  try { await setDoc(doc(db, 'asmr_keys', k), { createdAt: Date.now() }); $('#k-new').value = ''; loadKeys(); } catch (err) { toast('Lỗi: ' + err.message, 'error'); }
+});
+$('#keys').addEventListener('click', async (e) => { const b = e.target.closest('[data-key]'); if (!b || !confirm('Xóa mã ' + b.dataset.key + '?')) return; await deleteDoc(doc(db, 'asmr_keys', b.dataset.key)); loadKeys(); });
+load();
+</script>
 </body>
 </html>

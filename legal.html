@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Legal & Support | CoreVault</title>
+<meta name="description" content="Chính sách bảo mật, điều khoản dịch vụ và liên hệ CoreVault.">
+<meta name="theme-color" content="#111827">
+<link rel="icon" type="image/svg+xml" href="logo.svg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CoreVault OS">
+<meta property="og:title" content="Legal & Support | CoreVault">
+<meta property="og:description" content="Chính sách bảo mật, điều khoản dịch vụ và liên hệ CoreVault.">
+<meta property="og:image" content="https://www.corevaultos.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Legal & Support | CoreVault">
+<meta name="twitter:description" content="Chính sách bảo mật, điều khoản dịch vụ và liên hệ CoreVault.">
+<meta name="twitter:image" content="https://www.corevaultos.com/og-image.png">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#3b82f6' }, fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] } } } }</script>
+<style>
+  body { font-family: Inter, system-ui, sans-serif; }
+  .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+  .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+  .custom-scrollbar::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 10px; }
+  .no-scrollbar::-webkit-scrollbar { display: none; } .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  @media (prefers-reduced-motion: reduce) { * { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+</style>
+</head>
+<body class="bg-gray-900 text-white min-h-screen flex flex-col" data-page="" data-fab="off">
+<div id="site-header"></div>
+<main class="max-w-3xl mx-auto px-4 sm:px-6 py-12 w-full flex-grow">
+  <h1 class="text-3xl md:text-4xl font-extrabold mb-10" data-i18n="legal_title">Legal & Support</h1>
+
+  <section id="privacy" class="mb-12 scroll-mt-24">
+    <h2 class="text-2xl font-bold text-blue-400 mb-4" data-i18n="legal_privacy">Privacy Policy</h2>
+    <div class="space-y-3 text-gray-300 text-sm leading-relaxed" id="privacy-body"></div>
+  </section>
+  <section id="terms" class="mb-12 scroll-mt-24">
+    <h2 class="text-2xl font-bold text-purple-400 mb-4" data-i18n="legal_terms">Terms of Service</h2>
+    <div class="space-y-3 text-gray-300 text-sm leading-relaxed" id="terms-body"></div>
+  </section>
+  <section id="contact" class="mb-12 scroll-mt-24">
+    <h2 class="text-2xl font-bold text-green-400 mb-4" data-i18n="legal_contact">Contact Admin</h2>
+    <p class="text-gray-300 text-sm mb-3" data-i18n="legal_contact_desc">Questions, payment issues or takedown requests? Email us:</p>
+    <a id="contact-mail" class="text-blue-400 hover:text-blue-300 font-bold underline break-all"></a>
+  </section>
+</main>
+<div id="site-footer"></div>
+<script src="layout.js"></script>
+<script src="lang.js"></script>
+<script type="module">
+import { onUser, renderHeaderAuth, esc, lang, $ } from './common.js';
+import { CONTACT_EMAIL } from './config.js';
+onUser((u, p) => renderHeaderAuth(p));
+$('#contact-mail').textContent = CONTACT_EMAIL; $('#contact-mail').href = 'mailto:' + CONTACT_EMAIL;
+
+// Nội dung mẫu — hãy đọc lại và chỉnh theo thực tế hoạt động của bạn.
+const TXT = {
+  en: {
+    privacy: [
+      'We collect only what is needed to run the site: your email, display name, optional avatar, and your order history.',
+      'Authentication is handled by Google Firebase. Your password is never stored by us in readable form.',
+      'Posts you publish in Community, Videos and Resources are visible to other signed-in members.',
+      'We do not sell your personal data. You can ask us to delete your account and data at any time via the contact email below.'
+    ],
+    terms: [
+      'By creating an account you agree to use CoreVault lawfully and respectfully.',
+      'Digital products are delivered after payment is verified by the admin. Because products are digital, purchases are generally non-refundable unless the product is not as described.',
+      'Do not share links to illegal, malicious or copyrighted content you have no right to distribute. We may remove content and suspend accounts that break these rules.',
+      'The service is provided “as is”. Features, prices and availability may change without notice.'
+    ]
+  },
+  vn: {
+    privacy: [
+      'Chúng tôi chỉ thu thập thông tin cần thiết để vận hành website: email, tên hiển thị, ảnh đại diện (tùy chọn) và lịch sử đơn hàng.',
+      'Việc xác thực tài khoản do Google Firebase xử lý. Chúng tôi không lưu mật khẩu của bạn ở dạng đọc được.',
+      'Bài viết bạn đăng ở Cộng đồng, Video và Tài nguyên sẽ hiển thị với các thành viên đã đăng nhập khác.',
+      'Chúng tôi không bán dữ liệu cá nhân của bạn. Bạn có thể yêu cầu xóa tài khoản và dữ liệu bất cứ lúc nào qua email liên hệ bên dưới.'
+    ],
+    terms: [
+      'Khi tạo tài khoản, bạn đồng ý sử dụng CoreVault đúng pháp luật và tôn trọng người khác.',
+      'Sản phẩm số được giao sau khi admin xác nhận thanh toán. Do là sản phẩm số nên đơn hàng thường không hoàn tiền, trừ khi sản phẩm không đúng mô tả.',
+      'Không chia sẻ liên kết đến nội dung bất hợp pháp, độc hại hoặc vi phạm bản quyền. Chúng tôi có quyền gỡ nội dung và khóa tài khoản vi phạm.',
+      'Dịch vụ được cung cấp “nguyên trạng”. Tính năng, giá và tình trạng sản phẩm có thể thay đổi mà không báo trước.'
+    ]
+  }
+};
+function render() {
+  const l = lang() === 'vn' ? 'vn' : 'en';
+  for (const k of ['privacy', 'terms']) $('#' + k + '-body').innerHTML = TXT[l][k].map((x) => `<p>${esc(x)}</p>`).join('');
+}
+document.addEventListener('languagechange', render); render();
+</script>
+</body>
+</html>

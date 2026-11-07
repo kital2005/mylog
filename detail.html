@@ -1,398 +1,246 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CoreVault | Detail Products</title>
-    <link rel="icon" type="image/svg+xml" href="logo.svg">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
-    <script>
-        tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#3b82f6', }, fontFamily: { sans: ['Inter', 'sans-serif'], } } } }
-    </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Tool Details | CoreVault</title>
+<meta name="description" content="Chi tiết công cụ, cấu hình yêu cầu và tải về tại CoreVault.">
+<meta name="theme-color" content="#111827">
+<link rel="icon" type="image/svg+xml" href="logo.svg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CoreVault OS">
+<meta property="og:title" content="Tool Details | CoreVault">
+<meta property="og:description" content="Chi tiết công cụ, cấu hình yêu cầu và tải về tại CoreVault.">
+<meta property="og:image" content="https://www.corevaultos.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tool Details | CoreVault">
+<meta name="twitter:description" content="Chi tiết công cụ, cấu hình yêu cầu và tải về tại CoreVault.">
+<meta name="twitter:image" content="https://www.corevaultos.com/og-image.png">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#3b82f6' }, fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] } } } }</script>
+<style>
+  body { font-family: Inter, system-ui, sans-serif; }
+  .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+  .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+  .custom-scrollbar::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 10px; }
+  .no-scrollbar::-webkit-scrollbar { display: none; } .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  @media (prefers-reduced-motion: reduce) { * { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+</style>
 </head>
-<body class="bg-gray-900 text-white min-h-screen flex flex-col">
+<body class="bg-gray-900 text-white min-h-screen flex flex-col" data-page="tools">
+<div id="site-header"></div>
 
-    <nav id="main-nav" class="sticky top-0 z-50 w-full bg-gray-900/80 backdrop-blur-md border-b border-gray-800 transition-transform duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                
-                <div class="flex-shrink-0">
-                    <a href="index.html" class="flex items-center gap-3 hover:scale-105 transition-transform">
-                        <img src="logo.svg" alt="CoreVault Logo" class="w-10 h-10 shadow-lg shadow-blue-500/20 rounded-xl">
-                        <span class="text-xl md:text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">CoreVault</span>
-                    </a>
-                </div>
+<main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-12 w-full flex-grow">
+  <a href="tools.html" class="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-white mb-6 transition-colors"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg><span data-i18n="back_to_vault">Back to Tools Vault</span></a>
 
-                <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-2">
-                        <a href="index.html" data-i18n="nav_home" class="text-gray-300 px-4 py-2 rounded-lg border border-transparent hover:border-gray-600 hover:bg-gray-800 transition-all duration-200 text-sm font-medium">Home</a>
-                        <a href="tools.html" data-i18n="nav_tools" class="text-gray-300 px-4 py-2 rounded-lg border border-transparent hover:border-gray-600 hover:bg-gray-800 transition-all duration-200 text-sm font-medium">Tools Vault</a>
-                        <a href="about.html" data-i18n="nav_about" class="text-gray-300 px-4 py-2 rounded-lg border border-transparent hover:border-gray-600 hover:bg-gray-800 transition-all duration-200 text-sm font-medium">About Me</a>
-                    </div>
-                </div>
+  <div id="loading-state" class="w-full py-20 text-center"><div class="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div></div>
+  <div id="error-state" class="hidden w-full py-20 text-center">
+    <h2 data-i18n="detail_not_found" class="text-2xl font-bold text-red-500 mb-4">Tool not found or has been removed.</h2>
+    <a href="tools.html" data-i18n="back_to_vault" class="text-blue-400 hover:text-blue-300 font-bold underline">Back to Tools Vault</a>
+  </div>
 
-                <div class="flex items-center space-x-2 md:space-x-3">
-                    <button onclick="toggleLanguage()" class="text-gray-300 hover:text-white px-2 md:px-3 py-1.5 md:py-2 text-xs md:text-sm font-medium border border-gray-700 hover:bg-gray-800 rounded-lg transition-all flex items-center gap-1">
-                        <span data-i18n="lang_btn">EN / VN</span>
-                    </button>
-                    <div id="header-auth" class="flex items-center gap-2 md:gap-3 ml-1 md:ml-2"><div class="w-8 h-8 rounded-full bg-gray-700 animate-pulse"></div></div>
-                    <button onclick="toggleMobileMenu()" class="md:hidden text-gray-400 hover:text-white p-1.5 ml-1 rounded-lg border border-gray-700 bg-gray-800 focus:outline-none transition-colors">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-                    </button>
-                </div>
-            </div>
+  <div id="product-content" class="hidden w-full space-y-8">
+    <div class="bg-gray-800 rounded-3xl border border-gray-700 overflow-hidden shadow-2xl relative">
+      <div class="absolute top-0 right-0 m-4 md:m-6 flex gap-2 z-10">
+        <span id="detail-cat" class="px-3 py-1 bg-gray-900/80 backdrop-blur-sm text-gray-300 rounded-full text-xs font-bold uppercase tracking-widest border border-gray-600"></span>
+        <span id="detail-status" class="px-3 py-1 backdrop-blur-sm rounded-full text-xs font-bold uppercase tracking-widest border"></span>
+      </div>
+      <div class="flex flex-col md:flex-row">
+        <div id="detail-image-container" class="w-full md:w-2/5 h-64 md:h-auto md:min-h-[320px] bg-gray-700 flex items-center justify-center shrink-0 relative overflow-hidden">
+          <img id="detail-image" alt="" class="hidden absolute inset-0 w-full h-full object-cover opacity-70">
+          <span id="detail-icon" class="relative z-10 text-6xl md:text-7xl drop-shadow-2xl"></span>
         </div>
-        <div id="mobile-menu" class="md:hidden bg-gray-900 border-b border-gray-800 px-4 pt-2 pb-3 space-y-1 shadow-2xl absolute w-full left-0 top-16 z-40 transition-all duration-300 ease-out transform -translate-y-4 opacity-0 pointer-events-none origin-top">
-            <a href="index.html" class="block px-4 py-2.5 rounded-xl text-gray-300 hover:bg-gray-800 hover:text-white font-medium transition-colors">Home</a>
-            <a href="tools.html" class="block px-4 py-2.5 rounded-xl text-gray-300 hover:bg-gray-800 hover:text-white font-medium transition-colors">Tools Vault</a>
-            <a href="about.html" class="block px-4 py-2.5 rounded-xl text-gray-300 hover:bg-gray-800 hover:text-white font-medium transition-colors">About Me</a>
+        <div class="w-full md:w-3/5 p-6 md:p-8 flex flex-col justify-between gap-6">
+          <div>
+            <h1 id="detail-name" class="text-3xl md:text-4xl font-extrabold text-white mb-3 leading-tight pr-0 md:pr-40 break-words"></h1>
+            <p id="detail-desc" class="text-gray-400 text-sm md:text-base leading-relaxed whitespace-pre-line break-words"></p>
+          </div>
+          <div class="bg-gray-900/50 rounded-2xl p-5 border border-gray-700/50 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="text-center sm:text-left">
+              <p class="text-xs text-gray-500 font-bold uppercase tracking-widest mb-1" data-i18n="detail_license">License / Access</p>
+              <div id="detail-price" class="text-2xl md:text-3xl font-black text-green-400"></div>
+            </div>
+            <button id="btn-main-action" class="w-full sm:w-auto text-white px-8 py-3.5 rounded-xl font-bold transition-all shadow-lg flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+              <span id="text-main-action"></span>
+            </button>
+          </div>
+          <div class="flex flex-wrap gap-4 text-xs text-gray-400 font-medium">
+            <span class="flex items-center gap-1.5"><span class="text-green-400">✔</span><span data-i18n="detail_verified">Verified</span></span>
+            <span class="flex items-center gap-1.5"><span class="text-blue-400">⚡</span><span data-i18n="detail_instant">Instant Delivery</span></span>
+          </div>
         </div>
-    </nav>
-
-    <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full flex-grow flex flex-col items-center">
-        <div id="loading-state" class="w-full py-20 text-center"><p class="text-gray-500 animate-pulse font-bold tracking-widest uppercase">Loading Product Details...</p></div>
-        <div id="error-state" class="hidden w-full py-20 text-center"><h2 data-i18n="detail_not_found" class="text-2xl font-bold text-red-500 mb-4">Tool not found or has been removed.</h2><button onclick="window.location.href='tools.html'" class="text-blue-400 hover:text-blue-300 font-bold underline">Return to Vault</button></div>
-
-        <div id="product-content" class="hidden w-full space-y-8">
-            <div class="bg-gray-800 rounded-3xl border border-gray-700 overflow-hidden shadow-2xl relative">
-                <div class="absolute top-0 right-0 m-6 flex gap-2 z-10">
-                    <span id="detail-cat" class="px-3 py-1 bg-gray-900/80 backdrop-blur-sm text-gray-300 rounded-full text-xs font-bold uppercase tracking-widest border border-gray-600">Category</span>
-                    <span id="detail-status" class="px-3 py-1 bg-green-500/20 backdrop-blur-sm text-green-400 rounded-full text-xs font-bold uppercase tracking-widest border border-green-500/30">Active</span>
-                </div>
-
-                <div class="flex flex-col md:flex-row">
-                    <div id="detail-image-container" class="w-full md:w-2/5 h-64 md:h-auto bg-gray-700 flex items-center justify-center text-7xl shrink-0 relative overflow-hidden">
-                        <span id="detail-icon" class="z-10 relative drop-shadow-xl">📦</span>
-                    </div>
-
-                    <div class="w-full md:w-3/5 p-6 md:p-8 flex flex-col justify-between">
-                        <div>
-                            <h1 id="detail-name" class="text-3xl md:text-4xl font-extrabold text-white mb-2 leading-tight">Product Name</h1>
-                            <p id="detail-desc" class="text-gray-400 text-sm md:text-base leading-relaxed mb-6">Product description goes here.</p>
-                        </div>
-
-                        <div class="bg-gray-900/50 rounded-2xl p-5 border border-gray-700/50 flex flex-col sm:flex-row items-center justify-between gap-4 mt-auto">
-                            <div><p class="text-xs text-gray-500 font-bold uppercase tracking-widest mb-1" data-i18n="detail_license">License / Access</p><div id="detail-price" class="text-2xl md:text-3xl font-black text-green-400">FREE</div></div>
-                            <button id="btn-main-action" onclick="handleMainAction()" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-500 text-white px-8 py-3.5 rounded-xl font-bold transition-all shadow-lg shadow-blue-500/30 flex items-center justify-center gap-2">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg> <span id="text-main-action" data-i18n="detail_btn_download">Download Now</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="video-wrapper" class="hidden w-full aspect-video bg-black rounded-3xl overflow-hidden border border-gray-700 shadow-2xl">
-                <iframe id="detail-video" class="w-full h-full" src="" frameborder="0" allowfullscreen></iframe>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
-                <div class="bg-gray-800 rounded-3xl p-6 md:p-8 border border-gray-700 shadow-xl">
-                    <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2"><svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> <span data-i18n="detail_req_min_title">Minimum Requirements</span></h3>
-                    <ul id="list-req-min" class="space-y-3 text-sm text-gray-300 font-medium"></ul>
-                </div>
-
-                <div class="bg-gray-800 rounded-3xl p-6 md:p-8 border border-gray-700 shadow-xl">
-                    <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2"><svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg> <span data-i18n="detail_req_rec_title">Recommended Specs</span></h3>
-                    <ul id="list-req-rec" class="space-y-3 text-sm text-gray-300 font-medium"></ul>
-                </div>
-            </div>
-
-            <div id="ad-container" class="w-full hidden mt-8">
-                <div class="bg-gray-800/50 border border-gray-700 border-dashed rounded-2xl flex flex-col items-center justify-center p-8 text-center relative overflow-hidden">
-                    <span class="absolute top-2 right-3 text-[10px] text-gray-500 uppercase tracking-widest">Advertisement</span>
-                    <p class="text-gray-400 font-medium">Khu vực hiển thị Quảng Cáo Google</p>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <footer class="bg-gray-900 border-t border-gray-800 pt-16 pb-8 w-full mt-auto text-left">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-12 mb-12">
-                <div class="md:col-span-2">
-                    <a href="index.html" class="flex items-center gap-3 mb-4 hover:scale-105 transition-transform w-fit"><img src="logo.svg" alt="CoreVault Logo" class="w-10 h-10 shadow-lg shadow-blue-500/20 rounded-xl"><span class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">CoreVault</span></a>
-                    <p class="text-gray-400 text-sm leading-relaxed max-w-sm" data-i18n="hero_desc">Your premier destination for premium tools, optimized resources, and exclusive tech applications.</p>
-                </div>
-                <div>
-                    <h4 class="text-white font-bold mb-5 uppercase text-sm tracking-widest text-blue-400" data-i18n="footer_nav">Navigation</h4>
-                    <ul class="space-y-3 text-sm text-gray-400 font-medium">
-                        <li><a href="index.html" class="hover:text-white transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> <span data-i18n="nav_home">Home</span></a></li>
-                        <li><a href="tools.html" class="hover:text-white transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> <span data-i18n="nav_tools">Tools Vault</span></a></li>
-                        <li><a href="about.html" class="hover:text-white transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> <span data-i18n="nav_about">About Me</span></a></li>
-                        <li><a href="auth.html" class="hover:text-white transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> <span data-i18n="nav_login">Login / Register</span></a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-white font-bold mb-5 uppercase text-sm tracking-widest text-purple-400" data-i18n="footer_legal">Legal & Support</h4>
-                    <ul class="space-y-3 text-sm text-gray-400 font-medium">
-                        <li><a href="#" class="hover:text-white transition-colors">Privacy Policy</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Terms of Service</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Contact Admin</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4">
-                <p data-i18n="footer_copy" class="text-gray-500 text-xs">© 2026 CoreVault Project. Developed by <span class="text-gray-300">LunarRider0</span>.</p>
-                <div class="flex items-center gap-3 bg-gray-800/50 px-4 py-2 rounded-full border border-gray-700 w-full md:w-auto justify-center">
-                    <span class="relative flex h-2.5 w-2.5"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span></span>
-                    <span data-i18n="footer_status" class="text-xs text-gray-400 font-bold uppercase tracking-wider">System Online</span>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <div id="paymentModal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
-        <div class="bg-gray-800 border border-gray-700 rounded-3xl w-full max-w-sm p-8 shadow-2xl relative text-center">
-            <button onclick="closePaymentModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
-            <h3 data-i18n="modal_pay_title" class="text-2xl font-bold text-white mb-2">Payment Checkout</h3>
-            <p data-i18n="modal_pay_desc" class="text-gray-400 text-sm mb-6">Scan the QR code with your banking app.</p>
-            <div class="bg-white p-4 rounded-xl inline-block mb-6 shadow-inner"><img id="qr-image" src="" alt="QR Code" class="w-48 h-48 object-contain"></div>
-            <div class="bg-gray-900/50 rounded-xl p-4 border border-gray-700/50 mb-6">
-                <p class="text-sm text-gray-400 mb-1">Số tiền thanh toán:</p>
-                <p id="qr-price" class="text-2xl font-black text-green-400"></p>
-                <p class="text-xs text-gray-500 mt-2">Nội dung CK: <span id="qr-memo" class="font-mono text-white bg-gray-800 px-2 py-1 rounded"></span></p>
-            </div>
-            <button onclick="confirmPayment()" data-i18n="modal_pay_btn" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-blue-500/30 transition-all">I have paid</button>
-        </div>
+      </div>
     </div>
 
-    <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3 pointer-events-none">
-        <div id="fab-menu" class="flex flex-col gap-3 transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] transform translate-y-10 opacity-0 pointer-events-none origin-bottom mr-1">
-            <a href="community.html" class="pointer-events-auto group flex items-center justify-end gap-3"><span class="bg-gray-800 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity" data-i18n="nav_community">Community</span><div class="w-12 h-12 rounded-full bg-indigo-600 text-white flex items-center justify-center shadow-[0_0_15px_rgba(79,70,229,0.5)] hover:scale-110 transition-transform"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"></path></svg></div></a>
-            <a href="videos.html" class="pointer-events-auto group flex items-center justify-end gap-3"><span class="bg-gray-800 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity" data-i18n="nav_videos">Anime & Donghua</span><div class="w-12 h-12 rounded-full bg-rose-600 text-white flex items-center justify-center shadow-[0_0_15px_rgba(225,29,72,0.5)] hover:scale-110 transition-transform"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg></div></a>
-            <a href="resources.html" class="pointer-events-auto group flex items-center justify-end gap-3"><span class="bg-gray-800 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity" data-i18n="nav_resources">OS & Resources</span><div class="w-12 h-12 rounded-full bg-emerald-600 text-white flex items-center justify-center shadow-[0_0_15px_rgba(5,150,105,0.5)] hover:scale-110 transition-transform"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg></div></a>
-        </div>
-        <div class="flex items-center gap-3 pointer-events-auto">
-            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" id="btn-totop" class="w-12 h-12 rounded-full bg-gray-800 border border-gray-700 text-gray-400 flex items-center justify-center shadow-lg hover:text-white transition-all opacity-0 pointer-events-none transform translate-y-4"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 15l7-7 7 7"></path></svg></button>
-            <button onclick="toggleFAB()" class="w-14 h-14 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-[0_0_20px_rgba(59,130,246,0.6)] hover:bg-blue-500 transition-colors relative z-10"><svg id="fab-icon" class="w-6 h-6 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg></button>
-        </div>
+    <div id="video-wrapper" class="hidden w-full aspect-video bg-black rounded-3xl overflow-hidden border border-gray-700 shadow-2xl">
+      <iframe id="detail-video" class="w-full h-full" title="Trailer" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
     </div>
 
-    <script>
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            if (menu.classList.contains('opacity-0')) {
-                menu.classList.remove('opacity-0', '-translate-y-4', 'pointer-events-none');
-                menu.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
-            } else {
-                menu.classList.add('opacity-0', '-translate-y-4', 'pointer-events-none');
-                menu.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
-            }
-        }
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+      <div class="bg-gray-800 rounded-3xl p-6 md:p-8 border border-gray-700 shadow-xl">
+        <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2"><span class="text-blue-400">✔</span><span data-i18n="detail_req_min_title">Minimum Requirements</span></h3>
+        <ul id="list-req-min" class="space-y-3 text-sm text-gray-300 font-medium"></ul>
+      </div>
+      <div class="bg-gray-800 rounded-3xl p-6 md:p-8 border border-gray-700 shadow-xl">
+        <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2"><span class="text-purple-400">⚡</span><span data-i18n="detail_req_rec_title">Recommended Specs</span></h3>
+        <ul id="list-req-rec" class="space-y-3 text-sm text-gray-300 font-medium"></ul>
+      </div>
+    </div>
 
-        function toggleFAB() {
-            const menu = document.getElementById('fab-menu');
-            const icon = document.getElementById('fab-icon');
-            if(menu) {
-                if(menu.classList.contains('opacity-0')) {
-                    menu.classList.remove('opacity-0', 'translate-y-10', 'pointer-events-none');
-                    menu.classList.add('opacity-100', 'translate-y-0');
-                    if(icon) icon.classList.add('rotate-45');
-                } else {
-                    menu.classList.add('opacity-0', 'translate-y-10', 'pointer-events-none');
-                    menu.classList.remove('opacity-100', 'translate-y-0');
-                    if(icon) icon.classList.remove('rotate-45');
-                }
-            }
-        }
+    <div id="ad-container" class="w-full hidden">
+      <div class="bg-gray-800/50 border border-gray-700 border-dashed rounded-2xl flex items-center justify-center p-8 text-center relative overflow-hidden">
+        <span class="absolute top-2 right-3 text-[10px] text-gray-500 uppercase tracking-widest" data-i18n="ad_label">Advertisement</span>
+        <p class="text-gray-500 text-sm">AdSense</p>
+      </div>
+    </div>
+  </div>
+</main>
 
-        let lastScrollY = window.scrollY;
-        const navbar = document.getElementById('main-nav');
+<!-- THANH TOÁN -->
+<div id="paymentModal" class="fixed inset-0 z-[60] hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4 overflow-y-auto" role="dialog" aria-modal="true">
+  <div class="bg-gray-800 border border-gray-700 rounded-3xl w-full max-w-sm p-6 md:p-8 shadow-2xl relative text-center my-auto">
+    <button id="pay-close" aria-label="Close" class="absolute top-4 right-4 text-gray-400 hover:text-white"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+    <h3 data-i18n="modal_pay_title" class="text-2xl font-bold text-white mb-2">Payment Checkout</h3>
+    <p data-i18n="modal_pay_desc" class="text-gray-400 text-sm mb-5">Scan the QR code with your banking app.</p>
+    <div class="bg-white p-3 rounded-xl inline-block mb-5 shadow-inner"><img id="qr-image" alt="QR" class="w-48 h-48 object-contain"></div>
+    <div class="bg-gray-900/50 rounded-xl p-4 border border-gray-700/50 mb-4 text-left space-y-2 text-sm">
+      <div class="flex justify-between gap-3"><span class="text-gray-400" data-i18n="pay_amount">Amount:</span><b id="qr-price" class="text-green-400 text-lg"></b></div>
+      <div class="flex justify-between gap-3 items-center"><span class="text-gray-400" data-i18n="pay_account">Account:</span><span class="font-mono text-white text-xs text-right"><span id="qr-acc"></span> · <span id="qr-name"></span></span></div>
+      <div class="flex justify-between gap-3 items-center"><span class="text-gray-400" data-i18n="pay_memo">Transfer note:</span><span class="flex items-center gap-2"><span id="qr-memo" class="font-mono text-white bg-gray-800 px-2 py-1 rounded"></span><button id="copy-memo" class="text-blue-400 hover:text-blue-300 text-xs font-bold" data-i18n="pay_copy">Copy</button></span></div>
+    </div>
+    <p class="text-xs text-gray-500 mb-5 leading-relaxed" data-i18n="pay_note">After transferring, press the button below. The admin will verify your payment and unlock your download.</p>
+    <button id="pay-confirm" data-i18n="modal_pay_btn" class="w-full bg-blue-600 hover:bg-blue-500 disabled:opacity-60 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-blue-500/30 transition-all">I have paid</button>
+  </div>
+</div>
 
-        window.addEventListener('scroll', () => {
-            const btnToTop = document.getElementById('btn-totop');
-            if(btnToTop) {
-                if(window.scrollY > 300) {
-                    btnToTop.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
-                    btnToTop.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
-                } else {
-                    btnToTop.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
-                    btnToTop.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
-                }
-            }
-            
-            // Auto-hide Navbar logic
-            if (window.scrollY > lastScrollY && window.scrollY > 80) {
-                navbar.classList.add('-translate-y-full'); // Cuộn xuống -> Ẩn
-            } else {
-                navbar.classList.remove('-translate-y-full'); // Cuộn lên -> Hiện
-            }
-            lastScrollY = window.scrollY;
-        });
-    </script>
-    
-    <script src="lang.js"></script>
-    <script type="module">
-        import { db, doc, getDoc, collection, addDoc, auth } from './firebase.js';
-        import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+<div id="site-footer"></div>
+<script src="layout.js"></script>
+<script src="lang.js"></script>
+<script type="module">
+import { db, doc, getDoc, setDoc } from './firebase.js';
+import { onUser, renderHeaderAuth, esc, safeUrl, lang, t, toast, authUrl, applyAds, findOrder, youtubeId, catKey, catIcon, $ } from './common.js';
+import { BANK, EXCHANGE_RATE } from './config.js';
 
-        let currentProduct = null;
-        let currentUser = null;
-        let currentOrderId = null;
+const productId = new URLSearchParams(location.search).get('id');
+let user = null, product = null, order = null, orderCode = null, busy = false;
 
-        onAuthStateChanged(auth, async (user) => {
-            const authContainer = document.getElementById('header-auth');
-            if (user) {
-                currentUser = user;
-                try {
-                    const userDoc = await getDoc(doc(db, "users", user.uid));
-                    let username = user.email.split('@')[0]; let avatar = `https://api.dicebear.com/7.x/avataaars/svg?seed=${username}`;
-                    if (userDoc.exists()) {
-                        const data = userDoc.data();
-                        if (data.status === 'Banned') { await signOut(auth); window.location.href = "index.html"; return; }
-                        if (data.username) username = data.username;
-                        if (data.avatar && data.avatar.trim() !== '') avatar = data.avatar;
-                    }
-                    const isAdmin = user.email === "thaituan.28012020@gmail.com";
-                    const adminLink = isAdmin ? `<a href="admin.html" class="text-xs font-bold text-purple-400 hover:text-purple-300 border border-purple-500/50 px-2 py-1 rounded transition-colors mr-2 hidden md:block">Admin Panel</a>` : '';
-                    authContainer.innerHTML = `${adminLink}<span class="hidden md:block text-sm font-medium text-gray-300 mr-3">Welcome back, <b class="text-white">${username}</b></span><div class="flex items-center gap-2 md:gap-3"><div title="Kho đồ của ${username}" onclick="window.location.href='my-vault.html'" class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gray-800 flex items-center justify-center overflow-hidden border-2 border-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.5)] cursor-pointer hover:scale-110 transition-transform"><img src="${avatar}" class="w-full h-full object-cover"></div><button id="btn-logout-home" class="text-xs md:text-sm font-bold text-gray-400 hover:text-red-400 transition-colors hidden md:block">Logout</button></div>`;
-                    document.getElementById('btn-logout-home')?.addEventListener('click', () => { signOut(auth).then(() => { window.location.reload(); }); });
-                } catch(error) {}
-            } else {
-                currentUser = null;
-                authContainer.innerHTML = `<a href="auth.html" data-i18n="nav_login" class="text-xs md:text-sm font-semibold text-white bg-blue-600 hover:bg-blue-500 px-3 md:px-5 py-1.5 md:py-2 rounded-lg transition-colors shadow-lg shadow-blue-500/20">Login</a>`;
-                if (typeof updateLanguage === 'function') updateLanguage();
-            }
-        });
+onUser(async (u, p) => {
+  user = u; renderHeaderAuth(p);
+  order = u ? await findOrder(u, productId) : null;
+  updateAction();
+});
 
-        async function fetchProductDetail() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const productId = urlParams.get('id');
-            if (!productId) { showNotFound(); return; }
+const show = (id) => { ['loading-state', 'error-state', 'product-content'].forEach((x) => $('#' + x).classList.toggle('hidden', x !== id)); };
 
-            try {
-                const docRef = doc(db, "products", productId);
-                const docSnap = await getDoc(docRef);
+async function load() {
+  if (!productId) return show('error-state');
+  try {
+    const s = await getDoc(doc(db, 'products', productId));
+    if (!s.exists() || s.data().status === 'Hidden') return show('error-state');
+    product = s.data(); render(); show('product-content');
+  } catch (e) { console.error(e); show('error-state'); }
+  applyAds();
+}
 
-                if (docSnap.exists() && docSnap.data().status !== 'Hidden') {
-                    currentProduct = docSnap.data();
-                    renderProduct(currentProduct);
-                } else { showNotFound(); }
-            } catch (error) { console.error("Lỗi:", error); showNotFound(); }
-            checkAds();
-        }
+function list(id, text) {
+  const el = $('#' + id);
+  const items = String(text || '').split(/\r?\n|\\n/).map((x) => x.trim()).filter(Boolean);
+  el.innerHTML = items.length
+    ? items.map((i) => `<li class="flex items-start gap-2"><span class="w-1.5 h-1.5 mt-1.5 rounded-full bg-gray-500 shrink-0"></span><span class="break-words">${esc(i)}</span></li>`).join('')
+    : `<li class="text-gray-500 italic" data-i18n="not_specified">Not specified</li>`;
+}
 
-        function showNotFound() {
-            document.getElementById('loading-state').classList.add('hidden');
-            document.getElementById('error-state').classList.remove('hidden');
-        }
+function render() {
+  const d = product, vn = lang() === 'vn';
+  document.title = `${d.name} | CoreVault`;
+  $('#detail-name').textContent = d.name;
+  $('#detail-desc').textContent = (vn ? (d.descVn || d.descEn) : (d.descEn || d.descVn)) || '';
+  const cat = $('#detail-cat'); cat.setAttribute('data-i18n', catKey(d.category));
+  const st = $('#detail-status'), active = d.status === 'Active';
+  st.setAttribute('data-i18n', active ? 'val_active' : 'val_maintenance');
+  st.className = `px-3 py-1 backdrop-blur-sm rounded-full text-xs font-bold uppercase tracking-widest border ${active ? 'bg-green-500/20 text-green-400 border-green-500/30' : 'bg-yellow-500/20 text-yellow-500 border-yellow-500/30'}`;
+  $('#detail-icon').textContent = d.icon || catIcon(d.category);
+  const img = safeUrl(d.image), imgEl = $('#detail-image');
+  if (img) { imgEl.src = img; imgEl.classList.remove('hidden'); imgEl.onerror = () => imgEl.classList.add('hidden'); } else imgEl.classList.add('hidden');
+  const yid = youtubeId(d.video);
+  if (yid) { $('#detail-video').src = `https://www.youtube-nocookie.com/embed/${yid}`; $('#video-wrapper').classList.remove('hidden'); }
+  list('list-req-min', d.reqMin); list('list-req-rec', d.reqRec);
+  const price = $('#detail-price');
+  if (Number(d.price) > 0) { price.removeAttribute('data-i18n'); price.setAttribute('data-price-value', Number(d.price)); }
+  else { price.removeAttribute('data-price-value'); price.setAttribute('data-i18n', 'val_free'); }
+  updateAction();
+}
 
-        function renderProduct(data) {
-            document.getElementById('loading-state').classList.add('hidden');
-            document.getElementById('product-content').classList.remove('hidden');
+function updateAction() {
+  if (!product) return;
+  const btn = $('#btn-main-action'), txt = $('#text-main-action');
+  let key, color = 'bg-blue-600 hover:bg-blue-500 shadow-blue-500/30', disabled = false;
+  if (order && order.status === 'Completed') { key = 'detail_btn_vault'; color = 'bg-green-600 hover:bg-green-500 shadow-green-500/30'; }
+  else if (order) { key = 'detail_btn_pending'; color = 'bg-yellow-600 hover:bg-yellow-500 shadow-yellow-500/30'; }
+  else if (product.status !== 'Active') { key = 'val_maintenance'; disabled = true; color = 'bg-gray-600'; }
+  else if (!(Number(product.price) > 0)) { key = 'detail_btn_download'; color = 'bg-green-600 hover:bg-green-500 shadow-green-500/30'; }
+  else key = 'detail_btn_buy';
+  txt.setAttribute('data-i18n', key);
+  btn.className = `w-full sm:w-auto text-white px-8 py-3.5 rounded-xl font-bold transition-all shadow-lg flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed ${color}`;
+  btn.disabled = disabled || busy;
+  window.updateLanguage();
+}
 
-            document.getElementById('detail-name').innerText = data.name;
-            const isVn = localStorage.getItem('site_language') === 'vn';
-            document.getElementById('detail-desc').innerText = isVn ? (data.descVn || data.descEn || "") : (data.descEn || "");
-            
-            document.getElementById('detail-cat').setAttribute('data-i18n', data.category === 'Gaming' ? 'val_gaming' : (data.category === 'Graphics' ? 'val_graphics' : 'val_system'));
-            const statusEl = document.getElementById('detail-status');
-            statusEl.setAttribute('data-i18n', data.status === 'Active' ? 'val_active' : 'val_maintenance');
-            if(data.status !== 'Active') { statusEl.className = "px-3 py-1 bg-yellow-500/20 backdrop-blur-sm text-yellow-500 rounded-full text-xs font-bold uppercase tracking-widest border border-yellow-500/30"; }
+const newCode = () => 'ORD-' + [...crypto.getRandomValues(new Uint8Array(4))].map((b) => b.toString(36).toUpperCase().padStart(2, '0')).join('').slice(0, 6);
 
-            if (data.image) {
-                const imgContainer = document.getElementById('detail-image-container');
-                imgContainer.innerHTML = `<img src="${data.image}" alt="${data.name}" class="w-full h-full object-cover opacity-80 mix-blend-overlay"><span class="absolute z-10 text-5xl md:text-7xl drop-shadow-2xl bg-black/40 p-4 rounded-3xl backdrop-blur-sm border border-white/10">${data.icon}</span>`;
-            } else { document.getElementById('detail-icon').innerText = data.icon; }
+async function createOrder(status) {
+  const data = {
+    orderId: orderCode || newCode(), productId, uid: user.uid, user: user.email,
+    product: product.name, price: Number(product.price) || 0, status, timestamp: Date.now()
+  };
+  await setDoc(doc(db, 'orders', `${user.uid}_${productId}`), data);
+  order = { id: `${user.uid}_${productId}`, ...data };
+}
 
-            if (data.video) {
-                const videoIdMatch = data.video.match(/(?:youtu\.be\/|youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=))([^\"&?\/\s]{11})/);
-                if (videoIdMatch) {
-                    const videoId = videoIdMatch[1];
-                    document.getElementById('video-wrapper').classList.remove('hidden');
-                    document.getElementById('detail-video').src = `https://www.youtube.com/embed/${videoId}`;
-                }
-            }
+$('#btn-main-action').addEventListener('click', async () => {
+  if (busy || !product) return;
+  if (!user) { toast(t('msg_login_req'), 'warn'); setTimeout(() => { location.href = authUrl(); }, 900); return; }
+  if (order) { location.href = 'my-vault.html'; return; }
+  if (product.status !== 'Active') return toast(t('tool_desc_maintenance'), 'warn');
+  if (!(Number(product.price) > 0)) {
+    busy = true; updateAction();
+    try { await createOrder('Completed'); toast(t('msg_got_tool'), 'success'); setTimeout(() => { location.href = 'my-vault.html'; }, 1200); }
+    catch (e) { console.error(e); busy = false; updateAction(); toast(t('msg_order_fail'), 'error'); }
+    return;
+  }
+  openPayment();
+});
 
-            renderList('list-req-min', data.reqMin);
-            renderList('list-req-rec', data.reqRec);
+// ---------- THANH TOÁN ----------
+const modal = $('#paymentModal');
+function openPayment() {
+  orderCode = newCode();
+  const vnd = Math.round(Number(product.price) * EXCHANGE_RATE);
+  $('#qr-memo').textContent = orderCode;
+  $('#qr-acc').textContent = BANK.account; $('#qr-name').textContent = BANK.name;
+  $('#qr-price').textContent = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(vnd);
+  $('#qr-image').src = `https://img.vietqr.io/image/${BANK.bankId}-${BANK.account}-compact2.png?amount=${vnd}&addInfo=${encodeURIComponent(orderCode)}&accountName=${encodeURIComponent(BANK.name)}`;
+  modal.classList.remove('hidden'); modal.classList.add('flex');
+  window.updateLanguage();
+}
+function closePayment() { modal.classList.add('hidden'); modal.classList.remove('flex'); $('#qr-image').removeAttribute('src'); }
+$('#pay-close').onclick = closePayment;
+modal.addEventListener('click', (e) => { if (e.target === modal) closePayment(); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closePayment(); });
+$('#copy-memo').onclick = () => navigator.clipboard?.writeText(orderCode).then(() => toast(t('msg_copied'), 'success', 1500));
+$('#pay-confirm').onclick = async (e) => {
+  const b = e.currentTarget; b.disabled = true;
+  try { await createOrder('Pending'); closePayment(); toast(t('msg_pay_sent'), 'success', 6000); updateAction(); }
+  catch (err) { console.error(err); toast(t('msg_order_fail'), 'error'); }
+  b.disabled = false;
+};
 
-            const btn = document.getElementById('btn-main-action');
-            const txt = document.getElementById('text-main-action');
-            const priceEl = document.getElementById('detail-price');
-            
-            if (data.price === 0) {
-                priceEl.setAttribute('data-i18n', 'val_free');
-                txt.setAttribute('data-i18n', 'detail_btn_download');
-                btn.className = "w-full sm:w-auto bg-green-600 hover:bg-green-500 text-white px-8 py-3.5 rounded-xl font-bold transition-all shadow-lg shadow-green-500/30 flex items-center justify-center gap-2";
-            } else {
-                priceEl.removeAttribute('data-i18n');
-                priceEl.setAttribute('data-price-value', data.price);
-                txt.setAttribute('data-i18n', 'detail_btn_buy');
-                btn.className = "w-full sm:w-auto bg-blue-600 hover:bg-blue-500 text-white px-8 py-3.5 rounded-xl font-bold transition-all shadow-lg shadow-blue-500/30 flex items-center justify-center gap-2";
-            }
-
-            if (typeof updateLanguage === 'function') updateLanguage();
-        }
-
-        function renderList(elementId, text) {
-            const el = document.getElementById(elementId);
-            if (!text) { el.innerHTML = "<li class='text-gray-500 italic'>Not specified</li>"; return; }
-            el.innerHTML = text.split('\\n').map(item => `<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-gray-500 shrink-0"></span> ${item}</li>`).join('');
-        }
-
-        window.handleMainAction = function() {
-            if (!currentUser) { alert(localStorage.getItem('site_language') === 'vn' ? "Vui lòng Đăng nhập để tiếp tục!" : "Please login to continue!"); window.location.href = "auth.html"; return; }
-            if (currentProduct.status !== 'Active') { alert("Công cụ đang được bảo trì!"); return; }
-
-            if (currentProduct.price === 0) {
-                createOrder('Completed');
-            } else {
-                document.getElementById('paymentModal').classList.remove('hidden');
-                
-                const VCB_STK = "0111000305886";
-                const VCB_NAME = "THAI TUAN";
-                const bankId = "970436";
-                
-                currentOrderId = "ORD-" + Math.random().toString(36).substring(2, 8).toUpperCase();
-                document.getElementById('qr-memo').innerText = currentOrderId;
-
-                const EXCHANGE_RATE = 25000;
-                const priceVND = currentProduct.price * EXCHANGE_RATE;
-                document.getElementById('qr-price').innerText = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(priceVND);
-
-                const qrUrl = `https://img.vietqr.io/image/${bankId}-${VCB_STK}-compact2.png?amount=${priceVND}&addInfo=${currentOrderId}&accountName=${VCB_NAME}`;
-                document.getElementById('qr-image').src = qrUrl;
-            }
-        }
-
-        window.closePaymentModal = function() {
-            document.getElementById('paymentModal').classList.add('hidden');
-            document.getElementById('qr-image').src = "";
-            setTimeout(() => { currentOrderId = null; }, 500);
-        }
-
-        window.confirmPayment = function() {
-            createOrder('Pending');
-            closePaymentModal();
-        }
-
-        async function createOrder(status) {
-            if (!currentOrderId) currentOrderId = "ORD-" + Math.random().toString(36).substring(2, 8).toUpperCase();
-            const urlParams = new URLSearchParams(window.location.search);
-            const productId = urlParams.get('id');
-
-            const orderData = { orderId: currentOrderId, productId: productId, user: currentUser.email, product: currentProduct.name, price: currentProduct.price, status: status, timestamp: new Date().getTime() };
-
-            try {
-                await addDoc(collection(db, "orders"), orderData);
-                if (status === 'Completed') { alert("Nhận công cụ thành công! Vui lòng kiểm tra Kho đồ của bạn."); } 
-                else { alert("Đã gửi yêu cầu xác nhận thanh toán! Đơn hàng của bạn đang được Admin xử lý."); }
-            } catch (error) { alert("Lỗi khi xử lý giao dịch. Vui lòng thử lại sau."); }
-        }
-
-        async function checkAds() {
-            try {
-                const adSnap = await getDoc(doc(db, "settings", "ads"));
-                if (adSnap.exists() && adSnap.data().isActive === true) { document.getElementById('ad-container').classList.remove('hidden'); }
-            } catch (e) {}
-        }
-        
-        document.addEventListener("DOMContentLoaded", fetchProductDetail);
-    </script>
+document.addEventListener('languagechange', () => { if (product) render(); });
+load();
+</script>
 </body>
 </html>

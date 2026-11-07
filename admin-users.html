@@ -1,163 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CoreVault OS | Users</title>
-    <link rel="icon" type="image/svg+xml" href="logo.svg">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#3b82f6', }, fontFamily: { sans: ['Inter', 'sans-serif'], } } } }
-    </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Users | CoreVault Admin</title>
+<meta name="description" content="Admin">
+<meta name="theme-color" content="#111827">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="logo.svg">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#3b82f6' }, fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] } } } }</script>
+<style>
+  body { font-family: Inter, system-ui, sans-serif; }
+  .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+  .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+  .custom-scrollbar::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 10px; }
+  .no-scrollbar::-webkit-scrollbar { display: none; } .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  @media (prefers-reduced-motion: reduce) { * { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+</style>
 </head>
-<body class="bg-gray-900 text-white font-sans overflow-hidden" style="display: none;">
+<body class="bg-gray-900 text-white font-sans" style="visibility:hidden">
+<div id="admin-page" data-active="users">
+  <div class="mb-6"><h1 data-i18n="user_title" class="text-2xl md:text-3xl font-bold">Users</h1><p data-i18n="user_desc" class="text-gray-400 text-sm md:text-base mt-1">Monitor accounts.</p></div>
+  <input type="search" id="search" placeholder="Tìm theo email hoặc tên…" class="w-full md:w-80 mb-4 bg-gray-800 border border-gray-700 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-blue-500">
+  <div class="bg-gray-800 rounded-xl border border-gray-700 shadow-lg w-full mb-4 overflow-hidden"><div class="overflow-x-auto">
+    <table class="w-full min-w-[760px] text-left"><thead class="bg-gray-900/50 text-gray-400 text-xs uppercase tracking-wider"><tr>
+      <th class="p-4 font-medium" data-i18n="th_user">User</th><th class="p-4 font-medium" data-i18n="th_plan">Plan</th><th class="p-4 font-medium">Ngày tạo</th><th class="p-4 font-medium" data-i18n="th_status">Status</th><th class="p-4 font-medium text-right" data-i18n="th_action">Actions</th></tr></thead>
+    <tbody id="tbody" class="divide-y divide-gray-700/50"></tbody></table></div></div>
+  <p class="text-xs text-gray-500">“Xóa hồ sơ” chỉ xóa dữ liệu trên Firestore. Để xóa hẳn tài khoản đăng nhập, vào Firebase Console → Authentication.</p>
+</div>
+<script src="lang.js"></script>
+<script type="module">
+import { adminReady } from './auth-guard.js';
+import { db, collection, getDocs, doc, updateDoc, deleteDoc } from './firebase.js';
+import { esc, safeUrl, dicebear, tsOf, fmtDate, toast, isAdminEmail, $ } from './common.js';
+const me = await adminReady;
 
-    <div class="flex h-screen w-full relative">
-        <div id="sidebar-overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/60 z-40 hidden md:hidden backdrop-blur-sm transition-opacity"></div>
-        <aside id="admin-sidebar" class="w-64 bg-gray-800 border-r border-gray-700 flex flex-col absolute inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 transition-transform duration-300 z-50 shadow-2xl md:shadow-none">
-            <div class="h-16 flex items-center justify-between px-6 border-b border-gray-700">
-                <a href="index.html" class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">CoreVault OS</a>
-                <button onclick="toggleSidebar()" class="md:hidden text-gray-400 hover:text-white"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
-            </div>
-            <nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
-                <a href="admin.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-700 rounded-xl transition-all">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg> <span data-i18n="admin_dashboard">Dashboard</span>
-                </a>
-                <a href="admin-products.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-700 rounded-xl transition-all">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg> <span data-i18n="admin_products">Products</span>
-                </a>
-                <a href="admin-users.html" class="flex items-center gap-3 px-4 py-3 bg-blue-600/20 text-blue-400 rounded-xl border border-blue-600/30 font-medium transition-all">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg> <span data-i18n="admin_users">Users</span>
-                </a>
-                <a href="admin-orders.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-700 rounded-xl transition-all">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg> <span data-i18n="admin_orders">Orders</span>
-                </a>
-                <a href="admin-settings.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-700 rounded-xl transition-all">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path></svg> <span data-i18n="admin_settings">Settings</span>
-                </a>
-                <a href="admin-content.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-700 rounded-xl transition-all font-bold">
-    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
-    Content Hub
-</a>
-            </nav>
-        </aside>
-
-        <main class="flex-1 flex flex-col h-screen overflow-hidden relative">
-            <header class="h-16 bg-gray-900 border-b border-gray-800 flex items-center justify-between px-4 md:px-8">
-                <div class="flex items-center gap-3">
-                    <button onclick="toggleSidebar()" class="md:hidden text-gray-400 hover:text-white p-2 rounded-lg bg-gray-800 border border-gray-700"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg></button>
-                    <div class="relative w-40 md:w-64 hidden sm:block">
-                        <span class="absolute inset-y-0 left-0 flex items-center pl-3"><svg class="w-5 h-5 text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></span>
-                        <input type="text" data-i18n="admin_search" class="w-full bg-gray-800 text-white border border-gray-700 rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:border-blue-500 transition-colors text-sm" placeholder="Search...">
-                    </div>
-                </div>
-                <div class="flex items-center gap-3 md:gap-4">
-                    <button onclick="toggleLanguage()" class="text-gray-300 hover:text-white px-3 py-1.5 text-xs md:text-sm font-medium border border-gray-700 hover:border-gray-500 hover:bg-gray-800 rounded-lg transition-all flex items-center gap-1"><span data-i18n="lang_btn">EN / VN</span></button>
-                    <div class="flex items-center gap-2">
-                        <span id="admin-username-display" class="hidden md:block text-sm font-bold text-gray-300">Admin</span>
-                        <div id="admin-profile-btn" onclick="logoutAdmin()" title="Đăng Xuất (Logout)" class="w-8 h-8 md:w-9 md:h-9 rounded-full bg-gray-800 flex items-center justify-center font-bold text-xs md:text-sm shadow-lg cursor-pointer hover:scale-110 transition-transform overflow-hidden border border-gray-600">LR</div>
-                    </div>
-                </div>
-            </header>
-
-            <div class="flex-1 overflow-y-auto p-4 md:p-8">
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-6 md:mb-8 gap-4">
-                    <div>
-                        <h1 data-i18n="user_title" class="text-2xl md:text-3xl font-bold">Users Management</h1>
-                        <p data-i18n="user_desc" class="text-gray-400 text-sm md:text-base mt-1">Monitor accounts and security logs.</p>
-                    </div>
-                    <button class="w-full md:w-auto bg-blue-600 hover:bg-blue-500 text-white px-6 py-2.5 rounded-xl font-bold shadow-lg">
-                        <span data-i18n="user_add">Add User</span>
-                    </button>
-                </div>
-
-                <!-- ĐÃ FIX: Bao bọc Table tránh lỗi văng scroll -->
-                <div class="bg-gray-800 rounded-xl border border-gray-700 shadow-lg w-full mb-8 overflow-hidden">
-                    <div class="overflow-x-auto w-full">
-                        <table class="w-full min-w-[700px] text-left border-collapse">
-                            <thead class="bg-gray-900/50 text-gray-400 text-xs uppercase tracking-wider">
-                                <tr>
-                                    <th data-i18n="th_user" class="p-4 font-medium">User</th>
-                                    <th data-i18n="th_plan" class="p-4 font-medium">Plan</th>
-                                    <th data-i18n="th_status" class="p-4 font-medium">Status</th>
-                                    <th data-i18n="th_action" class="p-4 font-medium text-right">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="users-tbody" class="divide-y divide-gray-700/50">
-                                <tr><td colspan="4" class="text-center p-8 text-gray-500 animate-pulse">Đang tải danh sách...</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </div>
-
-    <script src="lang.js"></script>
-    <script type="module" src="auth-guard.js"></script>
-    <script>function toggleSidebar() { document.getElementById('admin-sidebar').classList.toggle('-translate-x-full'); document.getElementById('sidebar-overlay').classList.toggle('hidden'); }</script>
-    
-    <script type="module">
-        import { db, collection, getDocs, addDoc, doc, updateDoc, deleteDoc } from './firebase.js';
-
-        async function loadUsers() {
-            const tbody = document.getElementById('users-tbody');
-            try {
-                const querySnapshot = await getDocs(collection(db, "users"));
-                tbody.innerHTML = ''; 
-                if (querySnapshot.empty) {
-                    tbody.innerHTML = '<tr><td colspan="4" class="text-center p-8 text-gray-500">Chưa có người dùng nào.</td></tr>';
-                    return;
-                }
-
-                querySnapshot.forEach((docSnap) => {
-                    const data = docSnap.data(); const docId = docSnap.id;
-                    const planColor = data.plan === 'Premium' ? 'text-purple-400 font-bold' : 'text-gray-400 font-bold';
-                    const planI18n = data.plan === 'Premium' ? 'val_premium' : 'val_free';
-                    
-                    let statusDisplay = data.status === 'Active' 
-                        ? `<span data-i18n="val_active" class="px-2.5 py-1 bg-green-500/20 text-green-400 border border-green-500/30 rounded-full text-xs font-bold">Active</span>`
-                        : `<span class="px-2.5 py-1 bg-red-500/20 text-red-400 border border-red-500/30 rounded-full text-xs font-bold">Banned</span>`;
-
-                    const actionBtn = data.status === 'Active' 
-                        ? `<button onclick="toggleBan('${docId}', 'Banned')" data-i18n="btn_ban" class="text-gray-400 hover:text-yellow-500 px-3 py-1 border border-transparent hover:border-yellow-500/50 rounded transition-all text-sm whitespace-nowrap">Ban</button>`
-                        : `<button onclick="toggleBan('${docId}', 'Active')" class="text-gray-400 hover:text-green-400 px-3 py-1 border border-transparent hover:border-green-500/50 rounded transition-all text-sm whitespace-nowrap">Unban</button>`;
-                        
-                    const deleteBtn = `<button onclick="deleteUser('${docId}')" class="text-gray-400 hover:text-red-500 px-3 py-1 border border-transparent hover:border-red-500/50 rounded transition-all text-sm whitespace-nowrap">Delete</button>`;
-
-                    const newRow = document.createElement('tr');
-                    newRow.className = "hover:bg-gray-700/20 transition-colors group";
-                    newRow.innerHTML = `
-                        <td class="p-4 font-medium text-white text-sm whitespace-nowrap">${data.email}</td>
-                        <td class="p-4 ${planColor} text-sm whitespace-nowrap"><span data-i18n="${planI18n}">${data.plan}</span></td>
-                        <td class="p-4 whitespace-nowrap">${statusDisplay}</td>
-                        <td class="p-4 text-right flex justify-end gap-2">${actionBtn}${deleteBtn}</td>
-                    `;
-                    tbody.appendChild(newRow);
-                });
-                if (typeof updateLanguage === 'function') updateLanguage();
-            } catch (error) { tbody.innerHTML = '<tr><td colspan="4" class="text-center p-8 text-red-500">Lỗi kết nối máy chủ!</td></tr>'; }
-        }
-
-        window.toggleBan = async function(docId, newStatus) {
-            const actionName = newStatus === 'Banned' ? "KHÓA" : "MỞ KHÓA";
-            if(confirm(`Bạn có chắc chắn muốn ${actionName} tài khoản này không?`)) {
-                try { await updateDoc(doc(db, "users", docId), { status: newStatus }); loadUsers(); } 
-                catch(error) { alert("Lỗi thao tác: " + error.message); }
-            }
-        };
-
-        window.deleteUser = async function(docId) {
-            if(confirm("Bạn có chắc chắn muốn XÓA VĨNH VIỄN người dùng này khỏi Database không?")) {
-                try { await deleteDoc(doc(db, "users", docId)); loadUsers(); } 
-                catch(error) { alert("Lỗi thao tác: " + error.message); }
-            }
-        };
-
-        document.addEventListener("DOMContentLoaded", loadUsers);
-    </script>
+let users = [];
+const tbody = $('#tbody');
+async function load() {
+  tbody.innerHTML = '<tr><td colspan="5" class="text-center p-8 text-gray-500 animate-pulse">Đang tải…</td></tr>';
+  try { users = (await getDocs(collection(db, 'users'))).docs.map((d) => ({ id: d.id, ...d.data() })).sort((a, b) => tsOf(b.createdAt) - tsOf(a.createdAt)); render(); }
+  catch (e) { console.error(e); tbody.innerHTML = '<tr><td colspan="5" class="text-center p-8 text-red-400">Lỗi kết nối máy chủ!</td></tr>'; }
+}
+function render() {
+  const q = $('#search').value.trim().toLowerCase();
+  const rows = users.filter((u) => !q || `${u.email} ${u.username}`.toLowerCase().includes(q));
+  if (!rows.length) { tbody.innerHTML = '<tr><td colspan="5" class="text-center p-8 text-gray-500">Không có người dùng.</td></tr>'; return; }
+  tbody.innerHTML = rows.map((u) => {
+    const banned = u.status === 'Banned', self = u.id === me.uid || isAdminEmail(u.email), prem = u.plan === 'Premium';
+    const av = safeUrl(u.avatar, { data: true }) || dicebear(u.username || u.email);
+    const actions = self ? '<span class="text-xs text-gray-600">Admin</span>' : `
+      <button data-act="${banned ? 'unban' : 'ban'}" class="text-gray-300 ${banned ? 'hover:text-green-400' : 'hover:text-yellow-400'} px-2 py-1 text-sm">${banned ? 'Mở khóa' : 'Khóa'}</button>
+      <button data-act="plan" class="text-gray-300 hover:text-purple-400 px-2 py-1 text-sm">${prem ? 'Hạ Free' : 'Lên Premium'}</button>
+      <button data-act="delete" class="text-gray-300 hover:text-red-400 px-2 py-1 text-sm">Xóa hồ sơ</button>`;
+    return `<tr data-id="${esc(u.id)}" class="hover:bg-gray-700/20"><td class="p-4"><div class="flex items-center gap-3 min-w-[220px]"><img src="${esc(av)}" alt="" class="w-9 h-9 rounded-full object-cover bg-gray-700"><div class="min-w-0"><p class="font-bold text-sm truncate">${esc(u.username || '—')}</p><p class="text-xs text-gray-400 truncate">${esc(u.email)}</p></div></div></td>
+      <td class="p-4 text-sm font-bold ${prem ? 'text-purple-400' : 'text-gray-400'}">${esc(u.plan || 'Free')}</td><td class="p-4 text-xs text-gray-400 whitespace-nowrap">${esc(fmtDate(u.createdAt))}</td>
+      <td class="p-4"><span class="px-2.5 py-1 border rounded-full text-xs font-bold ${banned ? 'bg-red-500/20 text-red-400 border-red-500/30' : 'bg-green-500/20 text-green-400 border-green-500/30'}">${banned ? 'Banned' : 'Active'}</span></td>
+      <td class="p-4 text-right whitespace-nowrap">${actions}</td></tr>`;
+  }).join('');
+}
+$('#search').addEventListener('input', render);
+tbody.addEventListener('click', async (e) => {
+  const b = e.target.closest('[data-act]'); if (!b) return;
+  const id = b.closest('tr').dataset.id, u = users.find((x) => x.id === id), ref = doc(db, 'users', id), a = b.dataset.act;
+  try {
+    if (a === 'ban' || a === 'unban') { if (!confirm(`${a === 'ban' ? 'KHÓA' : 'MỞ KHÓA'} tài khoản ${u.email}?`)) return; await updateDoc(ref, { status: a === 'ban' ? 'Banned' : 'Active' }); }
+    if (a === 'plan') await updateDoc(ref, { plan: u.plan === 'Premium' ? 'Free' : 'Premium' });
+    if (a === 'delete') { if (!confirm(`Xóa hồ sơ ${u.email} khỏi Firestore?`)) return; await deleteDoc(ref); }
+    toast('Đã cập nhật.', 'success'); load();
+  } catch (err) { console.error(err); toast('Lỗi: ' + err.message, 'error'); }
+});
+load();
+</script>
 </body>
 </html>

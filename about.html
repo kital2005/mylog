@@ -1,298 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CoreVault | About Me</title>
-    <link rel="icon" type="image/svg+xml" href="logo.svg">
-    <meta name="description" content="Gặp gỡ LunarRider0 - Sinh viên IT, Lập trình viên và Content Creator đứng sau CoreVault OS.">
-    <meta name="keywords" content="CoreVault, LunarRider0, Gaming Tools, Optimization, Tech Resources, CTU IT">
-    <meta name="author" content="LunarRider0">
-
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://corevaultos.com/about">
-    <meta property="og:title" content="CoreVault OS | About Me">
-    <meta property="og:description" content="Gặp gỡ LunarRider0 - Sinh viên IT, Lập trình viên và Content Creator đứng sau CoreVault OS.">
-    <meta property="og:image" content="https://imgur.com/example_thumbnail.png">
-
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://corevaultos.com/about">
-    <meta property="twitter:title" content="CoreVault OS | About Me">
-    <meta property="twitter:description" content="Gặp gỡ LunarRider0 - Sinh viên IT, Lập trình viên và Content Creator đứng sau CoreVault OS.">
-    <meta property="twitter:image" content="https://imgur.com/example_thumbnail.png">
-
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
-    <script>
-        tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#3b82f6', }, fontFamily: { sans: ['Inter', 'sans-serif'], } } } }
-    </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>About LunarRider0 | CoreVault</title>
+<meta name="description" content="Sinh viên IT, lập trình viên và người sáng tạo nội dung đứng sau CoreVault.">
+<meta name="theme-color" content="#111827">
+<link rel="icon" type="image/svg+xml" href="logo.svg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CoreVault OS">
+<meta property="og:title" content="About LunarRider0 | CoreVault">
+<meta property="og:description" content="Sinh viên IT, lập trình viên và người sáng tạo nội dung đứng sau CoreVault.">
+<meta property="og:image" content="https://www.corevaultos.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="About LunarRider0 | CoreVault">
+<meta name="twitter:description" content="Sinh viên IT, lập trình viên và người sáng tạo nội dung đứng sau CoreVault.">
+<meta name="twitter:image" content="https://www.corevaultos.com/og-image.png">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#3b82f6' }, fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] } } } }</script>
+<style>
+  body { font-family: Inter, system-ui, sans-serif; }
+  .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+  .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+  .custom-scrollbar::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 10px; }
+  .no-scrollbar::-webkit-scrollbar { display: none; } .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  @media (prefers-reduced-motion: reduce) { * { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+</style>
 </head>
-<body class="bg-gray-900 text-white min-h-screen flex flex-col items-center justify-center relative overflow-x-hidden">
+<body class="bg-gray-900 text-white min-h-screen flex flex-col relative overflow-x-hidden" data-page="about">
+<div class="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[120px] pointer-events-none"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-[400px] h-[400px] bg-purple-600/20 rounded-full blur-[100px] pointer-events-none"></div>
+<div id="site-header"></div>
 
-    <div class="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[120px] pointer-events-none"></div>
-    <div class="absolute bottom-[-10%] right-[-10%] w-[400px] h-[400px] bg-purple-600/20 rounded-full blur-[100px] pointer-events-none"></div>
-
-    <nav id="main-nav" class="sticky top-0 z-50 w-full bg-gray-900/80 backdrop-blur-md border-b border-gray-800 transition-transform duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                
-                <div class="flex-shrink-0">
-                    <a href="index.html" class="flex items-center gap-3 hover:scale-105 transition-transform">
-                        <img src="logo.svg" alt="CoreVault Logo" class="w-10 h-10 shadow-lg shadow-blue-500/20 rounded-xl">
-                        <span class="text-xl md:text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">CoreVault</span>
-                    </a>
-                </div>
-
-                <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-2">
-                        <a href="index.html" data-i18n="nav_home" class="text-gray-300 px-4 py-2 rounded-lg border border-transparent hover:border-gray-600 hover:bg-gray-800 transition-all duration-200 text-sm font-medium">Home</a>
-                        <a href="tools.html" data-i18n="nav_tools" class="text-gray-300 px-4 py-2 rounded-lg border border-transparent hover:border-gray-600 hover:bg-gray-800 transition-all duration-200 text-sm font-medium">Tools Vault</a>
-                        <a href="about.html" data-i18n="nav_about" class="text-blue-400 px-4 py-2 rounded-lg border border-blue-500/30 bg-blue-600/10 transition-all duration-200 text-sm font-bold">About Me</a>
-                    </div>
-                </div>
-
-                <div class="flex items-center space-x-2 md:space-x-3">
-                    <button onclick="toggleLanguage()" class="text-gray-300 hover:text-white px-2 md:px-3 py-1.5 md:py-2 text-xs md:text-sm font-medium border border-gray-700 hover:bg-gray-800 rounded-lg transition-all flex items-center gap-1">
-                        <span data-i18n="lang_btn">EN / VN</span>
-                    </button>
-                    <div id="header-auth" class="flex items-center gap-2 md:gap-3 ml-1 md:ml-2"><div class="w-8 h-8 rounded-full bg-gray-700 animate-pulse"></div></div>
-                    <button onclick="toggleMobileMenu()" class="md:hidden text-gray-400 hover:text-white p-1.5 ml-1 rounded-lg border border-gray-700 bg-gray-800 focus:outline-none transition-colors">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div id="mobile-menu" class="md:hidden bg-gray-900 border-b border-gray-800 px-4 pt-2 pb-3 space-y-1 shadow-2xl absolute w-full left-0 top-16 z-40 transition-all duration-300 ease-out transform -translate-y-4 opacity-0 pointer-events-none origin-top">
-            <a href="index.html" class="block px-4 py-2.5 rounded-xl text-gray-300 hover:bg-gray-800 hover:text-white font-medium transition-colors">Home</a>
-            <a href="tools.html" class="block px-4 py-2.5 rounded-xl text-gray-300 hover:bg-gray-800 hover:text-white font-medium transition-colors">Tools Vault</a>
-            <a href="about.html" class="block px-4 py-2.5 rounded-xl text-blue-400 bg-blue-600/10 border border-blue-500/20 font-bold">About Me</a>
-        </div>
-    </nav>
-
-    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full flex-grow relative z-10">
-        
-        <div class="flex flex-col md:flex-row items-center gap-8 md:gap-12 mb-16">
-            <div class="relative group">
-                <div class="absolute inset-0 bg-gradient-to-tr from-blue-500 to-purple-500 rounded-full blur-lg opacity-60 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <img id="avatar-img" src="" alt="LunarRider0" class="w-40 h-40 md:w-56 md:h-56 rounded-full object-cover border-4 border-gray-800 relative z-10 shadow-2xl">
-            </div>
-            
-            <div class="text-center md:text-left flex-grow">
-                <h1 id="name-display" class="text-4xl md:text-5xl font-black text-white mb-2 tracking-tight">LunarRider0</h1>
-                <p id="role-display" data-i18n="about_role" class="text-lg md:text-xl text-blue-400 font-bold mb-4">IT Student | Developer | Content Creator</p>
-                <div id="tags-container" class="flex flex-wrap justify-center md:justify-start gap-2 mb-6"></div>
-                
-                <div class="flex items-center justify-center md:justify-start gap-4">
-                    <a id="link-twitch" href="#" target="_blank" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:text-[#9146FF] hover:bg-white transition-all shadow-lg hover:scale-110"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/></svg></a>
-                    <a id="link-tiktok" href="#" target="_blank" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:text-black hover:bg-white transition-all shadow-lg hover:scale-110"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93v7.2c-.01 2.39-.9 4.78-2.61 6.32-1.72 1.54-4.14 2.35-6.55 2.14-2.41-.21-4.66-1.39-6.17-3.17-1.52-1.79-2.31-4.24-2.07-6.65.23-2.4 1.44-4.63 3.25-6.11 1.8-1.48 4.21-2.22 6.59-1.95v4.03c-1.15-.22-2.35-.11-3.44.33-1.1.44-2.06 1.18-2.73 2.09-.67.92-1.04 2.05-1.05 3.2-.02 1.14.33 2.27.97 3.2 1.25 1.74 3.51 2.45 5.56 1.74 2.04-.71 3.44-2.6 3.57-4.75.05-3.32.02-6.64.03-9.96z"/></svg></a>
-                    <a id="link-github" href="#" target="_blank" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:text-black hover:bg-white transition-all shadow-lg hover:scale-110"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
-                </div>
-            </div>
-        </div>
-
-        <div class="bg-gray-800/50 rounded-3xl p-8 md:p-10 border border-gray-700 shadow-2xl relative overflow-hidden">
-            <div class="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl transform translate-x-10 -translate-y-10 pointer-events-none"></div>
-            <h2 data-i18n="about_bio_title" class="text-2xl font-bold text-white mb-6 flex items-center gap-3"><svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> <span class="tracking-wide">My Journey</span></h2>
-            <div id="bio-display" data-i18n="about_bio_text" class="text-gray-300 leading-relaxed space-y-4 text-sm md:text-base">
-                <p>Hello! I'm an IT student at CTU...</p>
-            </div>
-        </div>
-
-        <div id="ad-container" class="w-full hidden mt-12">
-            <div class="bg-gray-800/50 border border-gray-700 border-dashed rounded-2xl flex flex-col items-center justify-center p-8 text-center relative overflow-hidden">
-                <span class="absolute top-2 right-3 text-[10px] text-gray-500 uppercase tracking-widest">Advertisement</span>
-                <p class="text-gray-400 font-medium">Khu vực hiển thị Quảng Cáo Google</p>
-            </div>
-        </div>
-    </main>
-
-    <footer class="bg-gray-900 border-t border-gray-800 pt-16 pb-8 w-full mt-auto relative z-10 text-left">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-12 mb-12">
-                <div class="md:col-span-2">
-                    <a href="index.html" class="flex items-center gap-3 mb-4 hover:scale-105 transition-transform w-fit"><img src="logo.svg" alt="CoreVault Logo" class="w-10 h-10 shadow-lg shadow-blue-500/20 rounded-xl"><span class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">CoreVault</span></a>
-                    <p class="text-gray-400 text-sm leading-relaxed max-w-sm" data-i18n="hero_desc">Your premier destination for premium tools, optimized resources, and exclusive tech applications.</p>
-                </div>
-                <div>
-                    <h4 class="text-white font-bold mb-5 uppercase text-sm tracking-widest text-blue-400" data-i18n="footer_nav">Navigation</h4>
-                    <ul class="space-y-3 text-sm text-gray-400 font-medium">
-                        <li><a href="index.html" class="hover:text-white transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> <span data-i18n="nav_home">Home</span></a></li>
-                        <li><a href="tools.html" class="hover:text-white transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> <span data-i18n="nav_tools">Tools Vault</span></a></li>
-                        <li><a href="about.html" class="hover:text-white transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> <span data-i18n="nav_about">About Me</span></a></li>
-                        <li><a href="auth.html" class="hover:text-white transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> <span data-i18n="nav_login">Login / Register</span></a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-white font-bold mb-5 uppercase text-sm tracking-widest text-purple-400" data-i18n="footer_legal">Legal & Support</h4>
-                    <ul class="space-y-3 text-sm text-gray-400 font-medium">
-                        <li><a href="#" class="hover:text-white transition-colors">Privacy Policy</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Terms of Service</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Contact Admin</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4">
-                <p data-i18n="footer_copy" class="text-gray-500 text-xs">© 2026 CoreVault Project. Developed by <span class="text-gray-300">LunarRider0</span>.</p>
-                <div class="flex items-center gap-3 bg-gray-800/50 px-4 py-2 rounded-full border border-gray-700 w-full md:w-auto justify-center">
-                    <span class="relative flex h-2.5 w-2.5"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span></span>
-                    <span data-i18n="footer_status" class="text-xs text-gray-400 font-bold uppercase tracking-wider">System Online</span>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3 pointer-events-none">
-        <div id="fab-menu" class="flex flex-col gap-3 transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] transform translate-y-10 opacity-0 pointer-events-none origin-bottom mr-1">
-            <a href="community.html" class="pointer-events-auto group flex items-center justify-end gap-3"><span class="bg-gray-800 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity" data-i18n="nav_community">Community</span><div class="w-12 h-12 rounded-full bg-indigo-600 text-white flex items-center justify-center shadow-[0_0_15px_rgba(79,70,229,0.5)] hover:scale-110 transition-transform"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"></path></svg></div></a>
-            <a href="videos.html" class="pointer-events-auto group flex items-center justify-end gap-3"><span class="bg-gray-800 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity" data-i18n="nav_videos">Anime & Donghua</span><div class="w-12 h-12 rounded-full bg-rose-600 text-white flex items-center justify-center shadow-[0_0_15px_rgba(225,29,72,0.5)] hover:scale-110 transition-transform"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg></div></a>
-            <a href="resources.html" class="pointer-events-auto group flex items-center justify-end gap-3"><span class="bg-gray-800 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity" data-i18n="nav_resources">OS & Resources</span><div class="w-12 h-12 rounded-full bg-emerald-600 text-white flex items-center justify-center shadow-[0_0_15px_rgba(5,150,105,0.5)] hover:scale-110 transition-transform"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg></div></a>
-        </div>
-        <div class="flex items-center gap-3 pointer-events-auto">
-            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" id="btn-totop" class="w-12 h-12 rounded-full bg-gray-800 border border-gray-700 text-gray-400 flex items-center justify-center shadow-lg hover:text-white transition-all opacity-0 pointer-events-none transform translate-y-4"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 15l7-7 7 7"></path></svg></button>
-            <button onclick="toggleFAB()" class="w-14 h-14 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-[0_0_20px_rgba(59,130,246,0.6)] hover:bg-blue-500 transition-colors relative z-10"><svg id="fab-icon" class="w-6 h-6 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg></button>
-        </div>
+<main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 w-full flex-grow relative z-10">
+  <div class="flex flex-col md:flex-row items-center gap-8 md:gap-12 mb-14">
+    <div class="relative group shrink-0">
+      <div class="absolute inset-0 bg-gradient-to-tr from-blue-500 to-purple-500 rounded-full blur-lg opacity-60 group-hover:opacity-100 transition-opacity duration-500"></div>
+      <img id="avatar-img" alt="" class="w-40 h-40 md:w-56 md:h-56 rounded-full object-cover border-4 border-gray-800 relative z-10 shadow-2xl bg-gray-800">
     </div>
+    <div class="text-center md:text-left flex-grow min-w-0">
+      <h1 id="name-display" class="text-4xl md:text-5xl font-black text-white mb-2 tracking-tight break-words">LunarRider0</h1>
+      <p id="role-display" class="text-lg md:text-xl text-blue-400 font-bold mb-4"></p>
+      <div id="tags-container" class="flex flex-wrap justify-center md:justify-start gap-2 mb-6"></div>
+      <div id="social-links" class="flex items-center justify-center md:justify-start gap-4">
+        <a id="link-twitch" hidden target="_blank" rel="noopener noreferrer" aria-label="Twitch" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:text-[#9146FF] hover:bg-white transition-all shadow-lg hover:scale-110"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/></svg></a>
+        <a id="link-tiktok" hidden target="_blank" rel="noopener noreferrer" aria-label="TikTok" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:text-black hover:bg-white transition-all shadow-lg hover:scale-110"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93v7.2c-.01 2.39-.9 4.78-2.61 6.32-1.72 1.54-4.14 2.35-6.55 2.14-2.41-.21-4.66-1.39-6.17-3.17-1.52-1.79-2.31-4.24-2.07-6.65.23-2.4 1.44-4.63 3.25-6.11 1.8-1.48 4.21-2.22 6.59-1.95v4.03c-1.15-.22-2.35-.11-3.44.33-1.1.44-2.06 1.18-2.73 2.09-.67.92-1.04 2.05-1.05 3.2-.02 1.14.33 2.27.97 3.2 1.25 1.74 3.51 2.45 5.56 1.74 2.04-.71 3.44-2.6 3.57-4.75.05-3.32.02-6.64.03-9.96z"/></svg></a>
+        <a id="link-github" hidden target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:text-black hover:bg-white transition-all shadow-lg hover:scale-110"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
+      </div>
+    </div>
+  </div>
 
-    <script>
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            if (menu.classList.contains('opacity-0')) {
-                menu.classList.remove('opacity-0', '-translate-y-4', 'pointer-events-none');
-                menu.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
-            } else {
-                menu.classList.add('opacity-0', '-translate-y-4', 'pointer-events-none');
-                menu.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
-            }
-        }
+  <section class="bg-gray-800/50 rounded-3xl p-8 md:p-10 border border-gray-700 shadow-2xl relative overflow-hidden">
+    <div class="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl translate-x-10 -translate-y-10 pointer-events-none"></div>
+    <h2 class="text-2xl font-bold text-white mb-6 tracking-wide" data-i18n="about_bio_title">My Journey</h2>
+    <div id="bio-display" class="text-gray-300 leading-relaxed space-y-4 text-sm md:text-base"></div>
+  </section>
 
-        function toggleFAB() {
-            const menu = document.getElementById('fab-menu');
-            const icon = document.getElementById('fab-icon');
-            if(menu) {
-                if(menu.classList.contains('opacity-0')) {
-                    menu.classList.remove('opacity-0', 'translate-y-10', 'pointer-events-none');
-                    menu.classList.add('opacity-100', 'translate-y-0');
-                    if(icon) icon.classList.add('rotate-45');
-                } else {
-                    menu.classList.add('opacity-0', 'translate-y-10', 'pointer-events-none');
-                    menu.classList.remove('opacity-100', 'translate-y-0');
-                    if(icon) icon.classList.remove('rotate-45');
-                }
-            }
-        }
+  <div id="ad-container" class="w-full hidden mt-12">
+    <div class="bg-gray-800/50 border border-gray-700 border-dashed rounded-2xl flex items-center justify-center p-8 text-center relative overflow-hidden">
+      <span class="absolute top-2 right-3 text-[10px] text-gray-500 uppercase tracking-widest" data-i18n="ad_label">Advertisement</span>
+      <p class="text-gray-500 text-sm">AdSense</p>
+    </div>
+  </div>
+</main>
 
-        let lastScrollY = window.scrollY;
-        window.addEventListener('scroll', () => {
-            const btnToTop = document.getElementById('btn-totop');
-            const navbar = document.getElementById('main-nav');
+<div id="site-footer"></div>
+<script src="layout.js"></script>
+<script src="lang.js"></script>
+<script type="module">
+import { db, doc, getDoc } from './firebase.js';
+import { onUser, renderHeaderAuth, applyAds, safeUrl, dicebear, esc, lang, t, $ } from './common.js';
 
-            // Xử lý nút cuộn lên đầu trang
-            if (btnToTop) {
-                if (window.scrollY > 300) {
-                    btnToTop.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
-                    btnToTop.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
-                } else {
-                    btnToTop.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
-                    btnToTop.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
-                }
-            }
+onUser((u, p) => renderHeaderAuth(p));
+applyAds();
+let cfg = {};
 
-            // Xử lý ẩn/hiện Navbar mượt mà
-            if (navbar) {
-                if (window.scrollY > lastScrollY && window.scrollY > 80) {
-                    // Người dùng cuộn xuống -> Ẩn thanh Navbar
-                    navbar.classList.add('-translate-y-full'); 
-                } else {
-                    // Người dùng cuộn lên -> Hiện thanh Navbar
-                    navbar.classList.remove('-translate-y-full'); 
-                }
-            }
-            lastScrollY = window.scrollY;
-        });
-    </script>
-    
-    <script src="lang.js"></script>
-    <script type="module">
-        import { db, doc, getDoc, auth } from './firebase.js';
-        import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
-
-        onAuthStateChanged(auth, async (user) => {
-            const authContainer = document.getElementById('header-auth');
-            if (user) {
-                try {
-                    const userDoc = await getDoc(doc(db, "users", user.uid));
-                    let username = user.email.split('@')[0]; let avatar = `https://api.dicebear.com/7.x/avataaars/svg?seed=${username}`;
-                    if (userDoc.exists()) {
-                        const data = userDoc.data();
-                        if (data.status === 'Banned') { await signOut(auth); window.location.href = "index.html"; return; }
-                        if (data.username) username = data.username;
-                        if (data.avatar && data.avatar.trim() !== '') avatar = data.avatar;
-                    }
-                    const isAdmin = user.email === "thaituan.28012020@gmail.com";
-                    const adminLink = isAdmin ? `<a href="admin.html" class="text-xs font-bold text-purple-400 hover:text-purple-300 border border-purple-500/50 px-2 py-1 rounded transition-colors mr-2 hidden md:block">Admin Panel</a>` : '';
-                    authContainer.innerHTML = `${adminLink}<span class="hidden md:block text-sm font-medium text-gray-300 mr-3">Welcome back, <b class="text-white">${username}</b></span><div class="flex items-center gap-2 md:gap-3"><div title="Kho đồ của ${username}" onclick="window.location.href='my-vault.html'" class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gray-800 flex items-center justify-center overflow-hidden border-2 border-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.5)] cursor-pointer hover:scale-110 transition-transform"><img src="${avatar}" class="w-full h-full object-cover"></div><button id="btn-logout-home" class="text-xs md:text-sm font-bold text-gray-400 hover:text-red-400 transition-colors hidden md:block">Logout</button></div>`;
-                    document.getElementById('btn-logout-home')?.addEventListener('click', () => { signOut(auth).then(() => { window.location.reload(); }); });
-                } catch(error) {}
-            } else {
-                authContainer.innerHTML = `<a href="auth.html" data-i18n="nav_login" class="text-xs md:text-sm font-semibold text-white bg-blue-600 hover:bg-blue-500 px-3 md:px-5 py-1.5 md:py-2 rounded-lg transition-colors shadow-lg shadow-blue-500/20">Login</a>`;
-                if (typeof updateLanguage === 'function') updateLanguage();
-            }
-        });
-
-        async function loadAboutData() {
-            try {
-                const docRef = doc(db, "settings", "about");
-                const docSnap = await getDoc(docRef);
-                if (docSnap.exists()) {
-                    const d = docSnap.data();
-                    const isVn = localStorage.getItem('site_language') === 'vn';
-                    
-                    if(d.avatar) document.getElementById('avatar-img').src = d.avatar;
-                    if(d.name) document.getElementById('name-display').innerText = d.name;
-                    
-                    document.getElementById('role-display').removeAttribute('data-i18n');
-                    document.getElementById('role-display').innerText = isVn ? (d.roleVn || d.roleEn || "") : (d.roleEn || "");
-
-                    document.getElementById('bio-display').removeAttribute('data-i18n');
-                    const bioText = isVn ? (d.bioVn || d.bioEn || "") : (d.bioEn || "");
-                    document.getElementById('bio-display').innerHTML = bioText.replace(/\n/g, '<br>');
-
-                    if(d.tags) {
-                        const tagsArr = d.tags.split(',');
-                        document.getElementById('tags-container').innerHTML = tagsArr.map(t => `<span class="px-3 py-1 bg-gray-800 border border-gray-700 rounded-full text-xs text-gray-300 font-bold">${t.trim()}</span>`).join('');
-                    }
-
-                    if(d.twitch) document.getElementById('link-twitch').href = d.twitch;
-                    if(d.tiktok) document.getElementById('link-tiktok').href = d.tiktok;
-                    if(d.github) document.getElementById('link-github').href = d.github;
-                }
-            } catch(e) { console.error(e); }
-        }
-
-        async function checkAds() {
-            try {
-                const adSnap = await getDoc(doc(db, "settings", "ads"));
-                if (adSnap.exists() && adSnap.data().isActive === true) {
-                    document.getElementById('ad-container').classList.remove('hidden');
-                } else {
-                    document.getElementById('ad-container').classList.add('hidden');
-                }
-            } catch (e) { console.error("Lỗi tải cấu hình quảng cáo", e); }
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            loadAboutData();
-            checkAds();
-            const btnLang = document.querySelector('[onclick="toggleLanguage()"]');
-            if(btnLang) {
-                btnLang.addEventListener('click', () => {
-                    setTimeout(() => { loadAboutData(); }, 50); 
-                });
-            }
-        });
-    </script>
+function render() {
+  const vn = lang() === 'vn';
+  $('#avatar-img').src = safeUrl(cfg.avatar, { data: true }) || dicebear(cfg.name || 'LunarRider0');
+  $('#name-display').textContent = cfg.name || 'LunarRider0';
+  $('#role-display').textContent = (vn ? (cfg.roleVn || cfg.roleEn) : (cfg.roleEn || cfg.roleVn)) || t('about_role');
+  const bio = (vn ? (cfg.bioVn || cfg.bioEn) : (cfg.bioEn || cfg.bioVn)) || t('about_bio_text');
+  $('#bio-display').innerHTML = String(bio).split(/\n{2,}/).map((para) => `<p class="whitespace-pre-line break-words">${esc(para.trim())}</p>`).join('');
+  const tags = String(cfg.tags || '').split(',').map((x) => x.trim()).filter(Boolean);
+  $('#tags-container').innerHTML = tags.map((x) => `<span class="px-3 py-1 bg-gray-800 border border-gray-700 rounded-full text-xs text-gray-300 font-bold">${esc(x)}</span>`).join('');
+  for (const k of ['twitch', 'tiktok', 'github']) {
+    const a = $('#link-' + k), u = safeUrl(cfg[k]);
+    a.hidden = !u; if (u) a.href = u;
+  }
+}
+async function load() {
+  try { const s = await getDoc(doc(db, 'settings', 'about')); if (s.exists()) cfg = s.data(); } catch (e) { console.warn(e); }
+  render();
+}
+document.addEventListener('languagechange', render);
+render(); load();
+</script>
 </body>
 </html>

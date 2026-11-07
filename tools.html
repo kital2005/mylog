@@ -1,284 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tools Vault | CoreVault</title>
-    <link rel="icon" type="image/svg+xml" href="logo.svg">
-    <meta name="description" content="CoreVault OS - Hệ điều hành kho công cụ, tài nguyên tối ưu và ứng dụng công nghệ độc quyền dành cho Gamer và Developer.">
-    <meta name="keywords" content="CoreVault, LunarRider0, Gaming Tools, Optimization, Tech Resources, CTU IT">
-    <meta name="author" content="LunarRider0">
-
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://corevaultos.com/tools">
-    <meta property="og:title" content="CoreVault OS | Tools Vault">
-    <meta property="og:description" content="Khám phá kho công cụ cao cấp, tài nguyên tối ưu và ứng dụng công nghệ độc quyền phát triển bởi LunarRider0.">
-    <meta property="og:image" content="https://imgur.com/example_thumbnail.png">
-
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://corevaultos.com/tools">
-    <meta property="twitter:title" content="CoreVault OS | Tools Vault">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#3b82f6', }, fontFamily: { sans: ['Inter', 'sans-serif'], } } } }
-    </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Tools Vault | CoreVault</title>
+<meta name="description" content="Kho công cụ cao cấp & miễn phí cho Gamer và Developer: tối ưu hệ thống, game, đồ họa.">
+<meta name="theme-color" content="#111827">
+<link rel="icon" type="image/svg+xml" href="logo.svg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CoreVault OS">
+<meta property="og:title" content="Tools Vault | CoreVault">
+<meta property="og:description" content="Kho công cụ cao cấp & miễn phí cho Gamer và Developer: tối ưu hệ thống, game, đồ họa.">
+<meta property="og:image" content="https://www.corevaultos.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tools Vault | CoreVault">
+<meta name="twitter:description" content="Kho công cụ cao cấp & miễn phí cho Gamer và Developer: tối ưu hệ thống, game, đồ họa.">
+<meta name="twitter:image" content="https://www.corevaultos.com/og-image.png">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#3b82f6' }, fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] } } } }</script>
+<style>
+  body { font-family: Inter, system-ui, sans-serif; }
+  .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+  .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+  .custom-scrollbar::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 10px; }
+  .no-scrollbar::-webkit-scrollbar { display: none; } .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  @media (prefers-reduced-motion: reduce) { * { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+</style>
 </head>
-<body class="bg-gray-900 text-white min-h-screen flex flex-col">
+<body class="bg-gray-900 text-white min-h-screen flex flex-col" data-page="tools">
+<div id="site-header"></div>
 
-    <nav id="main-nav" class="sticky top-0 z-50 w-full bg-gray-900/80 backdrop-blur-md border-b border-gray-800 transition-transform duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                
-                <div class="flex-shrink-0">
-                    <a href="index.html" class="flex items-center gap-3 hover:scale-105 transition-transform">
-                        <img src="logo.svg" alt="CoreVault Logo" class="w-10 h-10 shadow-lg shadow-blue-500/20 rounded-xl">
-                        <span class="text-xl md:text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">CoreVault</span>
-                    </a>
-                </div>
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-12 w-full flex-grow">
+  <div class="w-full text-center mb-10">
+    <h1 data-i18n="prod_title" class="text-4xl md:text-5xl font-extrabold text-white mb-4 tracking-tight">Products Vault</h1>
+    <p data-i18n="hero_desc" class="text-gray-400 text-base md:text-lg max-w-2xl mx-auto">Your premier destination for premium tools.</p>
+  </div>
 
-                <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-2">
-                        <a href="index.html" data-i18n="nav_home" class="text-gray-300 px-4 py-2 rounded-lg border border-transparent hover:border-gray-600 hover:bg-gray-800 transition-all duration-200 text-sm font-medium">Home</a>
-                        <a href="tools.html" data-i18n="nav_tools" class="text-blue-400 px-4 py-2 rounded-lg border border-blue-500/30 bg-blue-600/10 transition-all duration-200 text-sm font-bold">Tools Vault</a>
-                        <a href="about.html" data-i18n="nav_about" class="text-gray-300 px-4 py-2 rounded-lg border border-transparent hover:border-gray-600 hover:bg-gray-800 transition-all duration-200 text-sm font-medium">About Me</a>
-                    </div>
-                </div>
-
-                <div class="flex items-center space-x-2 md:space-x-3">
-                    <button onclick="toggleLanguage()" class="text-gray-300 hover:text-white px-2 md:px-3 py-1.5 md:py-2 text-xs md:text-sm font-medium border border-gray-700 hover:bg-gray-800 rounded-lg transition-all flex items-center gap-1">
-                        <span data-i18n="lang_btn">EN / VN</span>
-                    </button>
-                    <div id="header-auth" class="flex items-center gap-2 md:gap-3 ml-1 md:ml-2"><div class="w-8 h-8 rounded-full bg-gray-700 animate-pulse"></div></div>
-                    <button onclick="toggleMobileMenu()" class="md:hidden text-gray-400 hover:text-white p-1.5 ml-1 rounded-lg border border-gray-700 bg-gray-800 focus:outline-none transition-colors">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div id="mobile-menu" class="md:hidden bg-gray-900 border-b border-gray-800 px-4 pt-2 pb-3 space-y-1 shadow-2xl absolute w-full left-0 top-16 z-40 transition-all duration-300 ease-out transform -translate-y-4 opacity-0 pointer-events-none origin-top">
-            <a href="index.html" class="block px-4 py-2.5 rounded-xl text-gray-300 hover:bg-gray-800 hover:text-white font-medium transition-colors">Home</a>
-            <a href="tools.html" class="block px-4 py-2.5 rounded-xl text-blue-400 bg-blue-600/10 border border-blue-500/20 font-bold">Tools Vault</a>
-            <a href="about.html" class="block px-4 py-2.5 rounded-xl text-gray-300 hover:bg-gray-800 hover:text-white font-medium transition-colors">About Me</a>
-        </div>
-    </nav>
-
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full flex-grow flex flex-col items-center">
-        
-        <div class="w-full text-center mb-10">
-            <h1 data-i18n="prod_title" class="text-4xl md:text-5xl font-extrabold text-white mb-4 tracking-tight">Products Vault</h1>
-            <p data-i18n="hero_desc" class="text-gray-400 text-base md:text-lg max-w-2xl mx-auto">Your premier destination for premium tools, optimized resources, and exclusive tech applications.</p>
-        </div>
-
-        <div class="w-full flex flex-col md:flex-row gap-4 mb-10 items-center justify-between bg-gray-800/50 p-4 rounded-2xl border border-gray-700 shadow-lg">
-            <div class="relative w-full md:w-96">
-                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none"><svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></div>
-                <input type="text" id="searchInput" onkeyup="filterProducts()" data-i18n="search_tools" class="w-full bg-gray-900 border border-gray-700 rounded-xl pl-12 pr-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors shadow-inner" placeholder="Search for tools...">
-            </div>
-            
-            <div class="flex items-center gap-3 w-full md:w-auto">
-                <span data-i18n="filter_category" class="text-sm font-bold text-gray-400 whitespace-nowrap hidden sm:block">Filter by Category:</span>
-                <select id="categoryFilter" onchange="filterProducts()" class="w-full md:w-auto bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 font-medium shadow-inner cursor-pointer">
-                    <option value="All" data-i18n="filter_all">All</option>
-                    <option value="Gaming" data-i18n="val_gaming">Gaming</option>
-                    <option value="System" data-i18n="val_system">System</option>
-                    <option value="Graphics" data-i18n="val_graphics">Graphics</option>
-                </select>
-            </div>
-        </div>
-
-        <div id="ad-container" class="w-full max-w-7xl mx-auto px-0 md:px-4 hidden mb-12">
-            <div class="bg-gray-800/50 border border-gray-700 border-dashed rounded-2xl flex flex-col items-center justify-center p-8 text-center relative overflow-hidden">
-                <span class="absolute top-2 right-3 text-[10px] text-gray-500 uppercase tracking-widest">Advertisement</span>
-                <p class="text-gray-400 font-medium">Khu vực hiển thị Quảng Cáo Google</p>
-            </div>
-        </div>
-
-        <div id="products-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 w-full">
-            <div class="col-span-full text-center py-20"><p data-i18n="home_fetching" class="text-gray-500 animate-pulse font-bold tracking-widest uppercase">Fetching data from Cloud...</p></div>
-        </div>
-        <div id="no-result" class="hidden w-full text-center py-16"><p data-i18n="home_no_tools" class="text-gray-500 text-lg font-medium">Currently no tools available.</p></div>
-    </main>
-
-    <footer class="bg-gray-900 border-t border-gray-800 pt-16 pb-8 w-full mt-auto text-left">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-12 mb-12">
-                <div class="md:col-span-2">
-                    <a href="index.html" class="flex items-center gap-3 mb-4 hover:scale-105 transition-transform w-fit"><img src="logo.svg" alt="CoreVault Logo" class="w-10 h-10 shadow-lg shadow-blue-500/20 rounded-xl"><span class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">CoreVault</span></a>
-                    <p class="text-gray-400 text-sm leading-relaxed max-w-sm" data-i18n="hero_desc">Your premier destination for premium tools, optimized resources, and exclusive tech applications.</p>
-                </div>
-                <div>
-                    <h4 class="text-white font-bold mb-5 uppercase text-sm tracking-widest text-blue-400" data-i18n="footer_nav">Navigation</h4>
-                    <ul class="space-y-3 text-sm text-gray-400 font-medium">
-                        <li><a href="index.html" class="hover:text-white transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> <span data-i18n="nav_home">Home</span></a></li>
-                        <li><a href="tools.html" class="hover:text-white transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> <span data-i18n="nav_tools">Tools Vault</span></a></li>
-                        <li><a href="about.html" class="hover:text-white transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> <span data-i18n="nav_about">About Me</span></a></li>
-                        <li><a href="auth.html" class="hover:text-white transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> <span data-i18n="nav_login">Login / Register</span></a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-white font-bold mb-5 uppercase text-sm tracking-widest text-purple-400" data-i18n="footer_legal">Legal & Support</h4>
-                    <ul class="space-y-3 text-sm text-gray-400 font-medium">
-                        <li><a href="#" class="hover:text-white transition-colors">Privacy Policy</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Terms of Service</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Contact Admin</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4">
-                <p data-i18n="footer_copy" class="text-gray-500 text-xs">© 2026 CoreVault Project. Developed by <span class="text-gray-300">LunarRider0</span>.</p>
-                <div class="flex items-center gap-3 bg-gray-800/50 px-4 py-2 rounded-full border border-gray-700 w-full md:w-auto justify-center">
-                    <span class="relative flex h-2.5 w-2.5"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span></span>
-                    <span data-i18n="footer_status" class="text-xs text-gray-400 font-bold uppercase tracking-wider">System Online</span>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3 pointer-events-none">
-        <div id="fab-menu" class="flex flex-col gap-3 transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] transform translate-y-10 opacity-0 pointer-events-none origin-bottom mr-1">
-            <a href="community.html" class="pointer-events-auto group flex items-center justify-end gap-3"><span class="bg-gray-800 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity" data-i18n="nav_community">Community</span><div class="w-12 h-12 rounded-full bg-indigo-600 text-white flex items-center justify-center shadow-[0_0_15px_rgba(79,70,229,0.5)] hover:scale-110 transition-transform"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"></path></svg></div></a>
-            <a href="videos.html" class="pointer-events-auto group flex items-center justify-end gap-3"><span class="bg-gray-800 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity" data-i18n="nav_videos">Anime & Donghua</span><div class="w-12 h-12 rounded-full bg-rose-600 text-white flex items-center justify-center shadow-[0_0_15px_rgba(225,29,72,0.5)] hover:scale-110 transition-transform"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg></div></a>
-            <a href="resources.html" class="pointer-events-auto group flex items-center justify-end gap-3"><span class="bg-gray-800 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity" data-i18n="nav_resources">OS & Resources</span><div class="w-12 h-12 rounded-full bg-emerald-600 text-white flex items-center justify-center shadow-[0_0_15px_rgba(5,150,105,0.5)] hover:scale-110 transition-transform"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg></div></a>
-        </div>
-        <div class="flex items-center gap-3 pointer-events-auto">
-            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" id="btn-totop" class="w-12 h-12 rounded-full bg-gray-800 border border-gray-700 text-gray-400 flex items-center justify-center shadow-lg hover:text-white transition-all opacity-0 pointer-events-none transform translate-y-4"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 15l7-7 7 7"></path></svg></button>
-            <button onclick="toggleFAB()" class="w-14 h-14 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-[0_0_20px_rgba(59,130,246,0.6)] hover:bg-blue-500 transition-colors relative z-10"><svg id="fab-icon" class="w-6 h-6 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg></button>
-        </div>
+  <div class="w-full flex flex-col lg:flex-row gap-4 mb-8 items-stretch lg:items-center justify-between bg-gray-800/50 p-4 rounded-2xl border border-gray-700 shadow-lg">
+    <div class="relative w-full lg:w-96">
+      <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none"><svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></div>
+      <input type="search" id="searchInput" data-i18n="search_tools" autocomplete="off" class="w-full bg-gray-900 border border-gray-700 rounded-xl pl-12 pr-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors" placeholder="Search for tools...">
     </div>
+    <div class="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
+      <select id="categoryFilter" class="w-full sm:w-auto bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 font-medium cursor-pointer">
+        <option value="All" data-i18n="filter_all">All</option>
+        <option value="Gaming" data-i18n="val_gaming">Gaming</option>
+        <option value="System" data-i18n="val_system">System</option>
+        <option value="Graphics" data-i18n="val_graphics">Graphics</option>
+      </select>
+      <select id="sortBy" class="w-full sm:w-auto bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 font-medium cursor-pointer">
+        <option value="new" data-i18n="sort_newest">Newest</option>
+        <option value="priceAsc" data-i18n="sort_price_asc">Price: low to high</option>
+        <option value="priceDesc" data-i18n="sort_price_desc">Price: high to low</option>
+        <option value="name" data-i18n="sort_name">Name A–Z</option>
+      </select>
+    </div>
+  </div>
 
-    <script>
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            if (menu.classList.contains('opacity-0')) {
-                menu.classList.remove('opacity-0', '-translate-y-4', 'pointer-events-none');
-                menu.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
-            } else {
-                menu.classList.add('opacity-0', '-translate-y-4', 'pointer-events-none');
-                menu.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
-            }
-        }
+  <p id="result-count" class="text-sm text-gray-500 mb-4 font-medium"></p>
 
-        function toggleFAB() {
-            const menu = document.getElementById('fab-menu');
-            const icon = document.getElementById('fab-icon');
-            if(menu) {
-                if(menu.classList.contains('opacity-0')) {
-                    menu.classList.remove('opacity-0', 'translate-y-10', 'pointer-events-none');
-                    menu.classList.add('opacity-100', 'translate-y-0');
-                    if(icon) icon.classList.add('rotate-45');
-                } else {
-                    menu.classList.add('opacity-0', 'translate-y-10', 'pointer-events-none');
-                    menu.classList.remove('opacity-100', 'translate-y-0');
-                    if(icon) icon.classList.remove('rotate-45');
-                }
-            }
-        }
+  <div id="ad-container" class="w-full hidden mb-10">
+    <div class="bg-gray-800/50 border border-gray-700 border-dashed rounded-2xl flex items-center justify-center p-8 text-center relative overflow-hidden">
+      <span class="absolute top-2 right-3 text-[10px] text-gray-500 uppercase tracking-widest" data-i18n="ad_label">Advertisement</span>
+      <p class="text-gray-500 text-sm">AdSense</p>
+    </div>
+  </div>
 
-        let lastScrollY = window.scrollY;
-        const navbar = document.getElementById('main-nav');
+  <div id="products-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 w-full" aria-live="polite"></div>
+  <div id="no-result" class="hidden w-full text-center py-16"><p data-i18n="no_match" class="text-gray-500 text-lg font-medium">No tools match your search.</p></div>
+</main>
 
-        window.addEventListener('scroll', () => {
-            const btnToTop = document.getElementById('btn-totop');
-            if(btnToTop) {
-                if(window.scrollY > 300) {
-                    btnToTop.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
-                    btnToTop.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
-                } else {
-                    btnToTop.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
-                    btnToTop.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
-                }
-            }
-            
-            // Auto-hide Navbar logic
-            if (window.scrollY > lastScrollY && window.scrollY > 80) {
-                navbar.classList.add('-translate-y-full'); // Cuộn xuống -> Ẩn
-            } else {
-                navbar.classList.remove('-translate-y-full'); // Cuộn lên -> Hiện
-            }
-            lastScrollY = window.scrollY;
-        });
-    </script>
-    
-    <script src="lang.js"></script>
-    <script type="module">
-        import { db, collection, getDocs, auth, doc, getDoc } from './firebase.js';
-        import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+<div id="site-footer"></div>
+<script src="layout.js"></script>
+<script src="lang.js"></script>
+<script type="module">
+import { onUser, renderHeaderAuth, fetchPublicProducts, productCard, applyAds, tsOf, t, $ } from './common.js';
 
-        onAuthStateChanged(auth, async (user) => {
-            const authContainer = document.getElementById('header-auth');
-            if (user) {
-                try {
-                    const userDoc = await getDoc(doc(db, "users", user.uid));
-                    let username = user.email.split('@')[0]; let avatar = `https://api.dicebear.com/7.x/avataaars/svg?seed=${username}`;
-                    if (userDoc.exists()) {
-                        const data = userDoc.data();
-                        if (data.status === 'Banned') { await signOut(auth); window.location.href = "index.html"; return; }
-                        if (data.username) username = data.username;
-                        if (data.avatar && data.avatar.trim() !== '') avatar = data.avatar;
-                    }
-                    const isAdmin = user.email === "thaituan.28012020@gmail.com";
-                    const adminLink = isAdmin ? `<a href="admin.html" class="text-xs font-bold text-purple-400 hover:text-purple-300 border border-purple-500/50 px-2 py-1 rounded transition-colors mr-2 hidden md:block">Admin Panel</a>` : '';
-                    authContainer.innerHTML = `${adminLink}<span class="hidden md:block text-sm font-medium text-gray-300 mr-3">Welcome back, <b class="text-white">${username}</b></span><div class="flex items-center gap-2 md:gap-3"><div title="Kho đồ của ${username}" onclick="window.location.href='my-vault.html'" class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gray-800 flex items-center justify-center overflow-hidden border-2 border-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.5)] cursor-pointer hover:scale-110 transition-transform"><img src="${avatar}" class="w-full h-full object-cover"></div><button id="btn-logout-home" class="text-xs md:text-sm font-bold text-gray-400 hover:text-red-400 transition-colors hidden md:block">Logout</button></div>`;
-                    document.getElementById('btn-logout-home')?.addEventListener('click', () => { signOut(auth).then(() => { window.location.reload(); }); });
-                } catch(error) {}
-            } else {
-                authContainer.innerHTML = `<a href="auth.html" data-i18n="nav_login" class="text-xs md:text-sm font-semibold text-white bg-blue-600 hover:bg-blue-500 px-3 md:px-5 py-1.5 md:py-2 rounded-lg transition-colors shadow-lg shadow-blue-500/20">Login</a>`;
-                if (typeof updateLanguage === 'function') updateLanguage();
-            }
-        });
+onUser((u, p) => renderHeaderAuth(p));
+applyAds();
 
-        let allProducts = [];
+const box = $('#products-container'), none = $('#no-result'), count = $('#result-count');
+let all = null;
 
-        async function loadProducts() {
-            const container = document.getElementById('products-container');
-            try {
-                const querySnapshot = await getDocs(collection(db, "products"));
-                allProducts = []; 
-                querySnapshot.forEach((doc) => { if(doc.data().status !== 'Hidden') allProducts.push({ id: doc.id, ...doc.data() }); });
-                allProducts.sort((a, b) => b.timestamp - a.timestamp);
-                renderProducts(allProducts);
-            } catch (error) { console.error(error); }
-        }
+function apply() {
+  if (!all) return;
+  const q = $('#searchInput').value.trim().toLowerCase();
+  const cat = $('#categoryFilter').value, sort = $('#sortBy').value;
+  let list = all.filter((p) => (cat === 'All' || p.category === cat) &&
+    (!q || [p.name, p.descEn, p.descVn].some((s) => String(s || '').toLowerCase().includes(q))));
+  const cmp = {
+    new: (a, b) => tsOf(b.timestamp) - tsOf(a.timestamp),
+    priceAsc: (a, b) => (a.price || 0) - (b.price || 0),
+    priceDesc: (a, b) => (b.price || 0) - (a.price || 0),
+    name: (a, b) => String(a.name).localeCompare(String(b.name))
+  }[sort];
+  list = [...list].sort(cmp);
+  box.innerHTML = list.map((p) => productCard(p.id, p)).join('');
+  none.classList.toggle('hidden', list.length > 0);
+  count.textContent = t('tools_count', { n: list.length });
+  window.updateLanguage();
+}
 
-        function renderProducts(productsToRender) {
-            const container = document.getElementById('products-container');
-            const noResult = document.getElementById('no-result');
-            container.innerHTML = '';
-            
-            if (productsToRender.length === 0) { noResult.classList.remove('hidden'); container.classList.add('hidden'); return; }
-            noResult.classList.add('hidden'); container.classList.remove('hidden');
+async function load() {
+  box.innerHTML = Array(6).fill('<div class="h-72 rounded-2xl bg-gray-800/60 border border-gray-700 animate-pulse"></div>').join('');
+  try { all = await fetchPublicProducts(); apply(); }
+  catch (e) {
+    console.error(e);
+    box.innerHTML = `<div class="col-span-full text-center py-12"><p class="text-red-400 mb-4" data-i18n="err_load">Could not load data.</p><button id="retry" data-i18n="btn_retry" class="bg-blue-600 hover:bg-blue-500 px-5 py-2 rounded-lg font-bold">Retry</button></div>`;
+    $('#retry').onclick = load; window.updateLanguage();
+  }
+}
 
-            productsToRender.forEach(data => {
-                const catI18n = data.category === 'Gaming' ? 'val_gaming' : (data.category === 'Graphics' ? 'val_graphics' : 'val_system');
-                const descI18n = data.status === 'Active' ? 'tool_desc_active' : 'tool_desc_maintenance';
-                let priceBadge = data.price === 0 ? `<div class="absolute top-3 right-3 px-3 py-1 bg-green-500 text-white text-xs font-bold rounded-full shadow-lg" data-i18n="val_free">FREE</div>` : `<div class="absolute top-3 right-3 px-3 py-1 bg-blue-600 text-white text-xs font-bold rounded-full shadow-lg" data-price-value="${data.price}"></div>`;
-                const card = document.createElement('div'); card.className = "group bg-gray-800/50 border border-gray-700 rounded-2xl overflow-hidden hover:border-blue-500/50 transition-all duration-300 hover:shadow-2xl flex flex-col";
-                card.innerHTML = `<div class="h-40 md:h-48 bg-gray-700 flex items-center justify-center relative overflow-hidden text-5xl md:text-6xl cursor-pointer" onclick="window.location.href='detail.html?id=${data.id}'"><div class="group-hover:scale-125 transition-transform duration-300">${data.icon}</div>${priceBadge}</div><div class="p-5 md:p-6 flex-grow flex flex-col"><h3 class="text-lg md:text-xl font-bold mb-2 group-hover:text-blue-400 cursor-pointer" onclick="window.location.href='detail.html?id=${data.id}'">${data.name}</h3><p data-i18n="${descI18n}" class="text-gray-400 text-sm mb-4 line-clamp-2 flex-grow h-10"></p><div class="flex items-center justify-between mt-auto"><span data-i18n="${catI18n}" class="text-gray-500 text-xs uppercase font-bold tracking-widest"></span><button onclick="window.location.href='detail.html?id=${data.id}'" data-i18n="btn_get_tool" class="text-xs md:text-sm font-bold text-white bg-blue-600 hover:bg-blue-500 px-3 md:px-4 py-2 rounded-lg transition-all shadow-lg hover:scale-105">Get Tool</button></div></div>`;
-                container.appendChild(card);
-            });
-            if (typeof updateLanguage === 'function') updateLanguage();
-        }
-
-        window.filterProducts = function() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-            const filterCat = document.getElementById('categoryFilter').value;
-            const filtered = allProducts.filter(p => {
-                const matchSearch = p.name.toLowerCase().includes(searchTerm) || (p.descEn && p.descEn.toLowerCase().includes(searchTerm));
-                const matchCat = filterCat === 'All' || p.category === filterCat;
-                return matchSearch && matchCat;
-            });
-            renderProducts(filtered);
-        };
-
-        async function checkAds() {
-            try {
-                const adSnap = await getDoc(doc(db, "settings", "ads"));
-                if (adSnap.exists() && adSnap.data().isActive === true) { document.getElementById('ad-container').classList.remove('hidden'); } else { document.getElementById('ad-container').classList.add('hidden'); }
-            } catch (e) { console.error("Lỗi tải cấu hình quảng cáo", e); }
-        }
-
-        document.addEventListener("DOMContentLoaded", () => { loadProducts(); checkAds(); });
-    </script>
+// Lưu bộ lọc trên URL để chia sẻ / quay lại không mất
+const params = new URLSearchParams(location.search);
+if (params.get('q')) $('#searchInput').value = params.get('q');
+if (params.get('cat')) $('#categoryFilter').value = params.get('cat');
+let timer;
+$('#searchInput').addEventListener('input', () => { clearTimeout(timer); timer = setTimeout(apply, 150); });
+$('#categoryFilter').addEventListener('change', apply);
+$('#sortBy').addEventListener('change', apply);
+document.addEventListener('languagechange', apply);
+load();
+</script>
 </body>
 </html>

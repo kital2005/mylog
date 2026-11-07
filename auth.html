@@ -1,292 +1,276 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Authentication | CoreVault</title>
-    <link rel="icon" type="image/svg+xml" href="logo.svg">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        .fade-enter { opacity: 0; transform: translateY(10px); }
-        .fade-enter-active { opacity: 1; transform: translateY(0); transition: all 0.4s ease-out; }
-        .hidden-form { display: none; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Login / Sign Up | CoreVault</title>
+<meta name="description" content="Đăng nhập hoặc tạo tài khoản CoreVault.">
+<meta name="theme-color" content="#111827">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="logo.svg">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#3b82f6' }, fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] } } } }</script>
+<style>
+  body { font-family: Inter, system-ui, sans-serif; }
+  .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+  .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+  .custom-scrollbar::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 10px; }
+  .no-scrollbar::-webkit-scrollbar { display: none; } .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  @media (prefers-reduced-motion: reduce) { * { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+</style>
 </head>
-<body class="bg-gray-900 text-white font-sans min-h-screen flex items-center justify-center relative overflow-x-hidden py-12">
+<body class="bg-gray-900 text-white min-h-screen flex items-center justify-center relative overflow-x-hidden py-16">
+<div class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-blue-600/20 rounded-full blur-[100px] pointer-events-none"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-purple-600/20 rounded-full blur-[100px] pointer-events-none"></div>
 
-    <div class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-blue-600/20 rounded-full blur-[100px]"></div>
-    <div class="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-purple-600/20 rounded-full blur-[100px]"></div>
+<a id="btn-back" href="index.html" class="absolute top-5 left-5 text-gray-400 hover:text-white flex items-center gap-2 transition-colors z-20 text-sm">
+  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+  <span data-i18n="auth_back">Back to Home</span>
+</a>
+<button onclick="toggleLanguage()" class="absolute top-5 right-5 text-gray-300 hover:text-white px-3 py-1.5 border border-gray-700 hover:border-gray-500 rounded-lg transition-colors z-20 text-sm"><span data-i18n="lang_btn">EN / VN</span></button>
 
-    <a id="btn-back" href="index.html" class="absolute top-6 left-6 text-gray-400 hover:text-white flex items-center gap-2 transition-colors z-20">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
-        <span data-i18n="auth_back">Back to Home</span>
-    </a>
+<div class="w-full max-w-md bg-gray-800/80 backdrop-blur-xl rounded-3xl border border-gray-700 shadow-2xl overflow-hidden relative z-10 m-4">
+  <div class="pt-8 pb-4 px-8 text-center">
+    <img src="logo.svg" alt="" class="w-14 h-14 mx-auto mb-3 rounded-2xl shadow-lg shadow-blue-500/20">
+    <h1 class="text-3xl font-extrabold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent inline-block mb-1">CoreVault</h1>
+    <p id="form-subtitle" data-i18n="auth_subtitle_login" class="text-gray-400 text-sm">Welcome back!</p>
+  </div>
 
-    <button onclick="toggleLanguage()" class="absolute top-6 right-6 text-gray-300 hover:text-white px-4 py-2 border border-gray-700 hover:border-gray-500 rounded-lg transition-colors z-20">
-        <span data-i18n="lang_btn">EN / VN</span>
-    </button>
+  <div id="main-tabs" class="flex border-b border-gray-700">
+    <button type="button" id="tab-login" class="flex-1 py-4 text-center font-bold text-blue-400 border-b-2 border-blue-500 bg-gray-700/30 transition-all"><span data-i18n="auth_tab_login">Log In</span></button>
+    <button type="button" id="tab-register" class="flex-1 py-4 text-center font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-300 transition-all"><span data-i18n="auth_tab_reg">Sign Up</span></button>
+  </div>
 
-    <div class="w-full max-w-md bg-gray-800/80 backdrop-blur-xl rounded-3xl border border-gray-700 shadow-2xl overflow-hidden relative z-10 m-4">
-        
-        <div class="pt-8 pb-4 px-8 text-center">
-            <h2 class="text-3xl font-extrabold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent inline-block mb-2">CoreVault</h2>
-            <p data-i18n="auth_subtitle_login" class="text-gray-400 text-sm" id="form-subtitle">Welcome back, gamer!</p>
+  <div class="p-6 md:p-8">
+    <div id="form-msg" class="hidden mb-4 text-sm rounded-xl px-4 py-3 border" role="alert"></div>
+
+    <!-- ĐĂNG NHẬP -->
+    <form id="form-login" class="space-y-5" novalidate>
+      <div>
+        <label for="login-email" data-i18n="auth_user_email" class="block text-sm font-medium text-gray-400 mb-1">Email Address</label>
+        <input type="email" id="login-email" required autocomplete="email" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500" placeholder="name@example.com">
+      </div>
+      <div>
+        <label for="login-pwd" data-i18n="auth_pwd" class="block text-sm font-medium text-gray-400 mb-1">Password</label>
+        <div class="relative">
+          <input type="password" id="login-pwd" required autocomplete="current-password" class="w-full bg-gray-900 border border-gray-700 rounded-xl pl-4 pr-12 py-3 text-white focus:outline-none focus:border-blue-500" placeholder="••••••••">
+          <button type="button" data-toggle="login-pwd" aria-label="Show password" class="absolute right-4 top-3.5 text-gray-500 hover:text-gray-300">👁</button>
         </div>
+      </div>
+      <div class="flex items-center justify-between text-sm">
+        <label class="flex items-center text-gray-400 cursor-pointer"><input type="checkbox" id="login-remember" checked class="mr-2 rounded bg-gray-900"> <span data-i18n="auth_remember">Remember me</span></label>
+        <button type="button" id="btn-forgot" data-i18n="auth_forgot" class="text-blue-400 hover:text-blue-300 font-medium">Forgot Password?</button>
+      </div>
+      <button type="submit" id="btn-login" data-i18n="auth_btn_login" class="w-full bg-blue-600 hover:bg-blue-500 disabled:opacity-60 text-white font-bold py-3 rounded-xl transition-all shadow-lg">Sign In</button>
+    </form>
 
-        <div id="main-tabs" class="flex border-b border-gray-700">
-            <button onclick="switchTab('login')" id="tab-login" class="flex-1 py-4 text-center font-bold text-blue-400 border-b-2 border-blue-500 bg-gray-700/30 transition-all">
-                <span data-i18n="auth_tab_login">Log In</span>
-            </button>
-            <button onclick="switchTab('register')" id="tab-register" class="flex-1 py-4 text-center font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-300 transition-all">
-                <span data-i18n="auth_tab_reg">Sign Up</span>
-            </button>
+    <!-- ĐĂNG KÝ -->
+    <form id="form-register" class="hidden space-y-4" novalidate>
+      <div class="flex flex-col items-center justify-center mb-1">
+        <button type="button" id="avatar-pick" class="relative group"><img id="avatar-preview" alt="" class="w-20 h-20 rounded-full border-2 border-gray-600 object-cover group-hover:border-blue-500 transition-all bg-gray-900"></button>
+        <input type="file" id="avatar-upload" class="hidden" accept="image/*">
+        <span data-i18n="auth_avatar" class="text-xs text-gray-500 mt-2">Avatar (Optional)</span>
+      </div>
+      <div>
+        <input type="text" id="reg-user" maxlength="20" autocomplete="username" data-i18n="auth_user" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500" placeholder="Username (Unique)">
+        <p id="err-user" class="text-red-400 text-xs mt-1 hidden"></p>
+      </div>
+      <input type="email" id="reg-email" required autocomplete="email" data-i18n="auth_email" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500" placeholder="Email Address">
+      <div>
+        <div class="relative">
+          <input type="password" id="reg-pwd" autocomplete="new-password" data-i18n="auth_pwd" class="w-full bg-gray-900 border border-gray-700 rounded-xl pl-4 pr-12 py-3 text-white focus:outline-none focus:border-blue-500" placeholder="Password">
+          <button type="button" data-toggle="reg-pwd" aria-label="Show password" class="absolute right-4 top-3.5 text-gray-500 hover:text-gray-300">👁</button>
         </div>
+        <ul class="text-xs text-gray-500 mt-2 space-y-1 pl-1" id="pwd-rules">
+          <li data-rule="len"><span class="inline-block w-4">○</span><span data-i18n="rule_len">At least 8 characters</span></li>
+          <li data-rule="upper"><span class="inline-block w-4">○</span><span data-i18n="rule_upper">1 uppercase letter</span></li>
+          <li data-rule="num"><span class="inline-block w-4">○</span><span data-i18n="rule_num">1 number</span></li>
+          <li data-rule="spec"><span class="inline-block w-4">○</span><span data-i18n="rule_spec">1 special character (@$!%*?&amp;)</span></li>
+        </ul>
+      </div>
+      <div>
+        <input type="password" id="reg-pwd-confirm" autocomplete="new-password" data-i18n="auth_pwd_confirm" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500" placeholder="Confirm Password">
+        <p id="err-pwd-match" data-i18n="auth_err_match" class="text-red-400 text-xs mt-1 hidden">Passwords do not match.</p>
+      </div>
+      <label class="flex items-start text-xs text-gray-400 cursor-pointer">
+        <input type="checkbox" id="reg-agree" class="mr-2 mt-0.5 rounded bg-gray-900">
+        <span><span data-i18n="auth_agree">I agree to the Terms of Service and Privacy Policy.</span> <a href="legal.html#terms" target="_blank" class="text-blue-400 underline" data-i18n="auth_read">Read</a></span>
+      </label>
+      <button type="submit" id="btn-register" data-i18n="auth_btn_reg" class="w-full bg-purple-600 hover:bg-purple-500 disabled:opacity-60 text-white font-bold py-3 rounded-xl transition-all shadow-lg">Create Account</button>
+    </form>
 
-        <div class="p-8">
-            <form id="form-login" class="fade-enter-active" onsubmit="return submitLogin(event)">
-                <div class="space-y-5">
-                    <div>
-                        <label data-i18n="auth_user_email" class="block text-sm font-medium text-gray-400 mb-1">Email Address</label>
-                        <input type="email" required class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500" placeholder="name@example.com">
-                    </div>
-                    <div>
-                        <label data-i18n="auth_pwd" class="block text-sm font-medium text-gray-400 mb-1">Password</label>
-                        <div class="relative">
-                            <input type="password" id="login-pwd" required class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500" placeholder="••••••••">
-                            <button type="button" onclick="togglePassword('login-pwd')" class="absolute right-4 top-3.5 text-gray-500 hover:text-gray-300">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="flex items-center justify-between text-sm">
-                        <label class="flex items-center text-gray-400 cursor-pointer">
-                            <input type="checkbox" class="mr-2 rounded bg-gray-900"> <span data-i18n="auth_remember">Remember me</span>
-                        </label>
-                        <button type="button" onclick="showForgot()" data-i18n="auth_forgot" class="text-blue-400 hover:text-blue-300 font-medium">Forgot Password?</button>
-                    </div>
-                    <button type="submit" data-i18n="auth_btn_login" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-xl transition-all shadow-lg">Sign In</button>
-                </div>
-            </form>
+    <!-- QUÊN MẬT KHẨU -->
+    <form id="form-forgot" class="hidden space-y-5 text-center" novalidate>
+      <p data-i18n="auth_forgot_desc" class="text-gray-400 text-sm">Enter your email address and we'll send you a link to reset your password.</p>
+      <input type="email" id="forgot-email" required autocomplete="email" data-i18n="auth_email" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 text-left" placeholder="Email Address">
+      <button type="submit" id="btn-reset" data-i18n="auth_btn_reset" class="w-full bg-blue-600 hover:bg-blue-500 disabled:opacity-60 text-white font-bold py-3 rounded-xl transition-all shadow-lg">Send Reset Link</button>
+      <button type="button" id="btn-cancel-forgot" data-i18n="auth_cancel" class="text-gray-400 hover:text-white text-sm font-medium">Cancel and return to Login</button>
+    </form>
+  </div>
+</div>
 
-            <form id="form-register" class="hidden-form" onsubmit="return submitRegister(event)">
-                <div class="space-y-4">
-                    <div class="flex flex-col items-center justify-center mb-2">
-                        <div class="relative group cursor-pointer" onclick="document.getElementById('avatar-upload').click()">
-                            <img id="avatar-preview" src="https://api.dicebear.com/7.x/avataaars/svg?seed=placeholder" class="w-20 h-20 rounded-full border-2 border-gray-600 object-cover group-hover:border-blue-500 transition-all">
-                        </div>
-                        <input type="file" id="avatar-upload" class="hidden" accept="image/*" onchange="previewAvatar(event)">
-                        <span data-i18n="auth_avatar" class="text-xs text-gray-500 mt-2">Avatar (Optional)</span>
-                    </div>
+<script src="lang.js"></script>
+<script type="module">
+import {
+  auth, db, doc, getDoc, writeBatch, onAuthStateChanged, deleteUser,
+  createUserWithEmailAndPassword, signInWithEmailAndPassword, setPersistence,
+  browserLocalPersistence, browserSessionPersistence, sendPasswordResetEmail, signOut
+} from './firebase.js';
+import { safeReturn, fileToAvatar, dicebear, isAdminEmail, t, $ } from './common.js';
+import { RESERVED_USERNAMES } from './config.js';
 
-                    <div>
-                        <input type="text" id="reg-user" data-i18n="auth_user" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500" placeholder="Username (Unique)">
-                        <p id="err-user" data-i18n="auth_err_user" class="text-red-400 text-xs mt-1 hidden">This username is already taken.</p>
-                    </div>
-                    <div>
-                        <input type="email" required data-i18n="auth_email" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500" placeholder="Email Address">
-                    </div>
-                    <div>
-                        <div class="relative">
-                            <input type="password" id="reg-pwd" data-i18n="auth_pwd" onkeyup="checkPassword()" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500" placeholder="Password">
-                            <button type="button" onclick="togglePassword('reg-pwd')" class="absolute right-4 top-3.5 text-gray-500 hover:text-gray-300">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
-                            </button>
-                        </div>
-                        <ul class="text-xs text-gray-500 mt-2 space-y-1 pl-1">
-                            <li id="rule-len" class="flex items-center gap-1"><span class="w-3">○</span> 8-12 characters</li>
-                            <li id="rule-upper" class="flex items-center gap-1"><span class="w-3">○</span> 1 Uppercase letter</li>
-                            <li id="rule-num" class="flex items-center gap-1"><span class="w-3">○</span> 1 Number</li>
-                            <li id="rule-spec" class="flex items-center gap-1"><span class="w-3">○</span> 1 Special character (@$!%*?&)</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <input type="password" id="reg-pwd-confirm" onkeyup="checkPasswordMatch()" data-i18n="auth_pwd_confirm" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-all" placeholder="Confirm Password">
-                        <p id="err-pwd-match" data-i18n="auth_err_match" class="text-red-400 text-xs mt-1 hidden">Passwords do not match.</p>
-                    </div>
+const redirectUrl = safeReturn(new URLSearchParams(location.search).get('return'));
+if (redirectUrl) $('#btn-back').href = redirectUrl;
+$('#avatar-preview').src = dicebear('new-user');
 
-                    <label class="flex items-start text-xs text-gray-400 cursor-pointer mt-2">
-                        <input type="checkbox" class="mr-2 mt-0.5 rounded bg-gray-900"> 
-                        <span data-i18n="auth_agree">I agree to the Terms of Service and Privacy Policy.</span>
-                    </label>
-                    <button type="submit" data-i18n="auth_btn_reg" class="w-full bg-purple-600 hover:bg-purple-500 text-white font-bold py-3 rounded-xl transition-all shadow-lg">Create Account</button>
-                </div>
-            </form>
+let avatarData = '';       // ảnh đại diện đã nén (nếu người dùng chọn)
+let justRegistered = false; // tránh tự chuyển trang ngay sau khi đăng ký
+let loggingIn = false;      // đang đăng nhập thủ công
 
-            <form id="form-forgot" class="hidden-form" onsubmit="submitForgot(event)">
-                <div class="space-y-5 text-center">
-                    <p data-i18n="auth_forgot_desc" class="text-gray-400 text-sm">Enter your email address and we'll send you a link to reset your password.</p>
-                    <input type="email" required data-i18n="auth_email" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 text-left" placeholder="Email Address">
-                    <button type="submit" data-i18n="auth_btn_reset" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-xl transition-all shadow-lg">Send Reset Link</button>
-                    <button type="button" onclick="cancelForgot()" data-i18n="auth_cancel" class="text-gray-400 hover:text-white text-sm mt-4 font-medium">Cancel and return to Login</button>
-                </div>
-            </form>
-        </div>
-    </div>
+// Đã đăng nhập sẵn → chuyển đi luôn
+onAuthStateChanged(auth, (u) => { if (u && !justRegistered && !loggingIn) location.replace(redirectUrl || (isAdminEmail(u.email) ? 'admin.html' : 'index.html')); });
 
-    <script src="lang.js"></script>
-    <script type="module">
-        import { 
-            auth, db, collection, addDoc, getDocs, getDoc, setDoc, doc, query, where,
-            createUserWithEmailAndPassword, signInWithEmailAndPassword,
-            setPersistence, browserLocalPersistence, browserSessionPersistence, sendPasswordResetEmail
-        } from './firebase.js';
+// ---------- Hiển thị thông báo / chuyển form ----------
+function msg(text, type = 'error') {
+  const el = $('#form-msg');
+  if (!text) return el.classList.add('hidden');
+  el.className = `mb-4 text-sm rounded-xl px-4 py-3 border ${type === 'error' ? 'bg-red-500/10 border-red-500/40 text-red-300' : 'bg-green-500/10 border-green-500/40 text-green-300'}`;
+  el.textContent = text;
+}
+const forms = { login: $('#form-login'), register: $('#form-register'), forgot: $('#form-forgot') };
+function show(name) {
+  Object.entries(forms).forEach(([k, f]) => f.classList.toggle('hidden', k !== name));
+  $('#main-tabs').classList.toggle('hidden', name === 'forgot');
+  const on = 'flex-1 py-4 text-center font-bold border-b-2 bg-gray-700/30 transition-all ', off = 'flex-1 py-4 text-center font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-300 transition-all';
+  $('#tab-login').className = name === 'register' ? off : on + 'text-blue-400 border-blue-500';
+  $('#tab-register').className = name === 'register' ? on + 'text-purple-400 border-purple-500' : off;
+  $('#form-subtitle').setAttribute('data-i18n', { login: 'auth_subtitle_login', register: 'auth_subtitle_reg', forgot: 'auth_subtitle_forgot' }[name]);
+  msg(''); window.updateLanguage();
+}
+$('#tab-login').onclick = () => show('login');
+$('#tab-register').onclick = () => show('register');
+$('#btn-forgot').onclick = () => { $('#forgot-email').value = $('#login-email').value; show('forgot'); };
+$('#btn-cancel-forgot').onclick = () => show('login');
+if (location.hash === '#register') show('register');
 
-        const urlParams = new URLSearchParams(window.location.search);
-        const redirectUrl = urlParams.get('return');
+document.querySelectorAll('[data-toggle]').forEach((b) => b.onclick = () => { const i = $('#' + b.dataset.toggle); i.type = i.type === 'password' ? 'text' : 'password'; });
 
-        document.addEventListener("DOMContentLoaded", () => {
-            if (redirectUrl) {
-                document.getElementById('btn-back').href = redirectUrl;
-            }
-        });
+// Thông báo lỗi thân thiện từ mã lỗi Firebase
+function authError(e) {
+  const map = {
+    'auth/invalid-credential': 'err_login', 'auth/wrong-password': 'err_login', 'auth/user-not-found': 'err_login', 'auth/invalid-email': 'err_email',
+    'auth/email-already-in-use': 'err_email_used', 'auth/weak-password': 'err_weak', 'auth/too-many-requests': 'err_too_many',
+    'auth/network-request-failed': 'err_network', 'auth/user-disabled': 'msg_banned'
+  };
+  return t(map[e && e.code] || 'err_generic');
+}
 
-        window.switchTab = function(tab) {
-            const formLogin = document.getElementById('form-login');
-            const formRegister = document.getElementById('form-register');
-            const tabLogin = document.getElementById('tab-login');
-            const tabRegister = document.getElementById('tab-register');
-            const subtitle = document.getElementById('form-subtitle');
+// ---------- Ảnh đại diện ----------
+$('#avatar-pick').onclick = () => $('#avatar-upload').click();
+$('#avatar-upload').onchange = async (e) => {
+  const f = e.target.files[0]; if (!f) return;
+  try { avatarData = await fileToAvatar(f); $('#avatar-preview').src = avatarData; } catch { msg(t('err_image')); }
+};
 
-            if (tab === 'login') {
-                formRegister.classList.replace('fade-enter-active', 'hidden-form');
-                formLogin.classList.replace('hidden-form', 'fade-enter-active');
-                tabLogin.className = "flex-1 py-4 text-center font-bold text-blue-400 border-b-2 border-blue-500 bg-gray-700/30 transition-all";
-                tabRegister.className = "flex-1 py-4 text-center font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-300 transition-all";
-                subtitle.setAttribute('data-i18n', 'auth_subtitle_login');
-            } else {
-                formLogin.classList.replace('fade-enter-active', 'hidden-form');
-                formRegister.classList.replace('hidden-form', 'fade-enter-active');
-                tabRegister.className = "flex-1 py-4 text-center font-bold text-purple-400 border-b-2 border-purple-500 bg-gray-700/30 transition-all";
-                tabLogin.className = "flex-1 py-4 text-center font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-300 transition-all";
-                subtitle.setAttribute('data-i18n', 'auth_subtitle_reg');
-            }
-            if (typeof updateLanguage === 'function') updateLanguage();
-        }
+// ---------- Mật khẩu ----------
+const rules = {
+  len: (p) => p.length >= 8, upper: (p) => /[A-Z]/.test(p), num: (p) => /\d/.test(p), spec: (p) => /[^A-Za-z0-9\s]/.test(p)
+};
+const pwdOk = (p) => Object.values(rules).every((f) => f(p));
+function checkPwd() {
+  const p = $('#reg-pwd').value;
+  document.querySelectorAll('#pwd-rules li').forEach((li) => {
+    const ok = rules[li.dataset.rule](p);
+    li.className = ok ? 'text-green-400' : 'text-gray-500';
+    li.firstElementChild.textContent = ok ? '✓' : '○';
+  });
+  checkMatch();
+}
+function checkMatch() {
+  const c = $('#reg-pwd-confirm'), bad = c.value && c.value !== $('#reg-pwd').value;
+  $('#err-pwd-match').classList.toggle('hidden', !bad); c.classList.toggle('border-red-500', !!bad);
+  return !bad;
+}
+$('#reg-pwd').addEventListener('input', checkPwd);
+$('#reg-pwd-confirm').addEventListener('input', checkMatch);
 
-        window.showForgot = function() {
-            document.getElementById('form-login').classList.replace('fade-enter-active', 'hidden-form');
-            document.getElementById('main-tabs').style.display = 'none';
-            document.getElementById('form-forgot').classList.replace('hidden-form', 'fade-enter-active');
-            document.getElementById('form-subtitle').setAttribute('data-i18n', 'auth_subtitle_forgot');
-            if (typeof updateLanguage === 'function') updateLanguage();
-        }
+// ---------- Tên người dùng ----------
+const normName = (n) => n.trim().toLowerCase();
+const nameValid = (n) => /^[\p{L}\p{N}_.\- ]{3,20}$/u.test(n.trim());
+async function usernameStatus(name) {
+  if (!nameValid(name)) return 'invalid';
+  if (RESERVED_USERNAMES.includes(normName(name))) return 'reserved';
+  try { if ((await getDoc(doc(db, 'usernames', normName(name).replace(/\s+/g, '_')))).exists()) return 'taken'; } catch (e) { /* bỏ qua nếu chưa có quyền đọc */ }
+  return 'ok';
+}
+async function showUsernameStatus() {
+  const v = $('#reg-user').value, err = $('#err-user');
+  if (!v.trim()) { err.classList.add('hidden'); return 'ok'; }
+  const s = await usernameStatus(v);
+  err.textContent = s === 'ok' ? '' : t({ invalid: 'err_user_invalid', reserved: 'err_user_reserved', taken: 'auth_err_user' }[s]);
+  err.classList.toggle('hidden', s === 'ok'); $('#reg-user').classList.toggle('border-red-500', s !== 'ok');
+  return s;
+}
+$('#reg-user').addEventListener('blur', showUsernameStatus);
 
-        window.cancelForgot = function() {
-            document.getElementById('form-forgot').classList.replace('fade-enter-active', 'hidden-form');
-            document.getElementById('main-tabs').style.display = 'flex';
-            document.getElementById('form-login').classList.replace('hidden-form', 'fade-enter-active');
-            document.getElementById('form-subtitle').setAttribute('data-i18n', 'auth_subtitle_login');
-            if (typeof updateLanguage === 'function') updateLanguage();
-        }
+// ---------- Đăng nhập ----------
+forms.login.addEventListener('submit', async (e) => {
+  e.preventDefault(); msg('');
+  const email = $('#login-email').value.trim(), pwd = $('#login-pwd').value;
+  if (!email || !pwd) return msg(t('err_fill'));
+  const btn = $('#btn-login'); btn.disabled = true; loggingIn = true;
+  try {
+    await setPersistence(auth, $('#login-remember').checked ? browserLocalPersistence : browserSessionPersistence);
+    const cred = await signInWithEmailAndPassword(auth, email, pwd);
+    let banned = false;
+    try { const s = await getDoc(doc(db, 'users', cred.user.uid)); banned = s.exists() && s.data().status === 'Banned'; } catch (e2) { /* ignore */ }
+    if (banned) { await signOut(auth); loggingIn = false; btn.disabled = false; return msg(t('msg_banned')); }
+    location.href = redirectUrl || (isAdminEmail(cred.user.email) ? 'admin.html' : 'index.html');
+  } catch (err) { loggingIn = false; btn.disabled = false; msg(authError(err)); }
+});
 
-        window.togglePassword = function(inputId) {
-            const input = document.getElementById(inputId);
-            input.type = input.type === "password" ? "text" : "password";
-        }
+// ---------- Đăng ký ----------
+forms.register.addEventListener('submit', async (e) => {
+  e.preventDefault(); msg('');
+  const email = $('#reg-email').value.trim(), pwd = $('#reg-pwd').value;
+  let username = $('#reg-user').value.trim() || email.split('@')[0].slice(0, 20);
+  if (!email) return msg(t('err_fill'));
+  if (!pwdOk(pwd)) return msg(t('err_weak'));
+  if (!checkMatch() || !$('#reg-pwd-confirm').value) return msg(t('auth_err_match'));
+  if (!$('#reg-agree').checked) return msg(t('err_agree'));
+  const st = await showUsernameStatus();
+  if (st !== 'ok') return msg($('#err-user').textContent);
 
-        window.previewAvatar = function(event) {
-            const reader = new FileReader();
-            reader.onload = function() { document.getElementById('avatar-preview').src = reader.result; }
-            if(event.target.files[0]) reader.readAsDataURL(event.target.files[0]);
-        }
+  const btn = $('#btn-register'); btn.disabled = true; justRegistered = true;
+  let cred = null;
+  try {
+    cred = await createUserWithEmailAndPassword(auth, email, pwd);
+    const batch = writeBatch(db);
+    batch.set(doc(db, 'usernames', normName(username).replace(/\s+/g, '_')), { uid: cred.user.uid });
+    batch.set(doc(db, 'users', cred.user.uid), { username, email, avatar: avatarData, status: 'Active', plan: 'Free', createdAt: new Date() });
+    await batch.commit();
+    location.href = redirectUrl || 'index.html';
+  } catch (err) {
+    console.error(err);
+    // Nếu lưu hồ sơ thất bại (ví dụ trùng tên) thì xóa tài khoản vừa tạo để người dùng thử lại
+    if (cred) { try { await deleteUser(cred.user); } catch (e2) { try { await signOut(auth); } catch (e3) { /* ignore */ } } }
+    justRegistered = false; btn.disabled = false;
+    msg(cred ? t('auth_err_user') : authError(err));
+  }
+});
 
-        window.checkPassword = function() {
-            const pwd = document.getElementById('reg-pwd').value;
-            const elLen = document.getElementById('rule-len');
-            if(pwd.length >= 8 && pwd.length <= 12) { elLen.className = "flex items-center gap-1 text-green-400"; elLen.innerHTML = '<span class="w-3">✓</span> 8-12 characters'; } else { elLen.className = "flex items-center gap-1 text-gray-500"; elLen.innerHTML = '<span class="w-3">○</span> 8-12 characters'; }
-            const elUpper = document.getElementById('rule-upper');
-            if(/[A-Z]/.test(pwd)) { elUpper.className = "flex items-center gap-1 text-green-400"; elUpper.innerHTML = '<span class="w-3">✓</span> 1 Uppercase letter'; } else { elUpper.className = "flex items-center gap-1 text-gray-500"; elUpper.innerHTML = '<span class="w-3">○</span> 1 Uppercase letter'; }
-            const elNum = document.getElementById('rule-num');
-            if(/\d/.test(pwd)) { elNum.className = "flex items-center gap-1 text-green-400"; elNum.innerHTML = '<span class="w-3">✓</span> 1 Number'; } else { elNum.className = "flex items-center gap-1 text-gray-500"; elNum.innerHTML = '<span class="w-3">○</span> 1 Number'; }
-            const elSpec = document.getElementById('rule-spec');
-            if(/[!@#$%^&*(),.?":{}|<>]/.test(pwd)) { elSpec.className = "flex items-center gap-1 text-green-400"; elSpec.innerHTML = '<span class="w-3">✓</span> 1 Special character (@$!%*?&)'; } else { elSpec.className = "flex items-center gap-1 text-gray-500"; elSpec.innerHTML = '<span class="w-3">○</span> 1 Special character (@$!%*?&)'; }
-            window.checkPasswordMatch();
-        }
-
-        window.checkPasswordMatch = function() {
-            const pwd = document.getElementById('reg-pwd').value;
-            const confirmPwd = document.getElementById('reg-pwd-confirm');
-            const errMatch = document.getElementById('err-pwd-match');
-            if (confirmPwd.value.length > 0 && pwd !== confirmPwd.value) { errMatch.classList.remove('hidden'); confirmPwd.classList.add('border-red-500'); } 
-            else { errMatch.classList.add('hidden'); confirmPwd.classList.remove('border-red-500'); }
-        }
-
-        window.submitLogin = function(event) {
-            event.preventDefault(); 
-            const emailInput = document.querySelector('#form-login input[type="email"]').value.trim();
-            const pwdInput = document.getElementById('login-pwd').value.trim();
-            const rememberMe = document.querySelector('#form-login input[type="checkbox"]').checked;
-            const persistenceType = rememberMe ? browserLocalPersistence : browserSessionPersistence;
-
-            setPersistence(auth, persistenceType)
-                .then(() => { return signInWithEmailAndPassword(auth, emailInput, pwdInput); })
-                .then(async (userCredential) => {
-                    const user = userCredential.user;
-                    const userDoc = await getDoc(doc(db, "users", user.uid));
-                    if (userDoc.exists() && userDoc.data().status === 'Banned') {
-                        alert("LỖI: Tài khoản của bạn đã bị khóa!");
-                        return auth.signOut();
-                    }
-                    
-                    if (user.email === "thaituan.28012020@gmail.com") {
-                        window.location.href = "admin.html";
-                    } else if (redirectUrl) {
-                        window.location.href = redirectUrl;
-                    } else {
-                        window.location.href = "index.html";
-                    }
-                })
-                .catch(() => { alert("Lỗi đăng nhập: Sai email hoặc mật khẩu!"); });
-        }
-
-        window.submitRegister = function(event) {
-            event.preventDefault(); 
-            const email = document.querySelector('#form-register input[type="email"]').value.trim(); 
-            const pwd = document.getElementById('reg-pwd').value.trim();
-            const confirmPwd = document.getElementById('reg-pwd-confirm').value.trim();
-            
-            let username = document.getElementById('reg-user').value.trim();
-            let avatarSrc = document.getElementById('avatar-preview').src;
-            
-            if (!username) username = email.split('@')[0];
-            if (avatarSrc.includes('placeholder')) avatarSrc = '';
-
-            if (pwd !== confirmPwd) { window.checkPasswordMatch(); return false; }
-
-            createUserWithEmailAndPassword(auth, email, pwd)
-                .then(async (userCredential) => {
-                    const user = userCredential.user;
-                    await setDoc(doc(db, "users", user.uid), {
-                        username: username,
-                        email: email,
-                        avatar: avatarSrc,
-                        status: 'Active',
-                        plan: 'Free',
-                        createdAt: new Date()
-                    });
-                    alert("Tạo tài khoản thành công! Hãy đăng nhập để bắt đầu.");
-                    window.switchTab('login'); 
-                })
-                .catch((error) => { alert("Lỗi đăng ký: " + error.message); });
-        }
-
-        window.submitForgot = function(event) {
-            event.preventDefault(); 
-            const email = document.querySelector('#form-forgot input[type="email"]').value.trim();
-            if (!email) { alert("Vui lòng nhập địa chỉ Email!"); return; }
-            sendPasswordResetEmail(auth, email)
-                .then(() => { alert("Link khôi phục mật khẩu đã được gửi! Vui lòng kiểm tra Email."); window.cancelForgot(); })
-                .catch((error) => { alert("Lỗi thao tác: " + error.message); });
-        };
-
-        document.getElementById('reg-user').addEventListener('blur', function(e) {
-            const err = document.getElementById('err-user');
-            if(e.target.value.toLowerCase() === 'admin') {
-                err.classList.remove('hidden'); e.target.classList.add('border-red-500');
-            } else {
-                err.classList.add('hidden'); e.target.classList.remove('border-red-500');
-            }
-        });
-    </script>
+// ---------- Quên mật khẩu ----------
+forms.forgot.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const email = $('#forgot-email').value.trim(); if (!email) return msg(t('err_fill'));
+  const btn = $('#btn-reset'); btn.disabled = true;
+  try { await sendPasswordResetEmail(auth, email); show('login'); msg(t('msg_reset_sent'), 'ok'); }
+  catch (err) { msg(authError(err)); }
+  btn.disabled = false;
+});
+</script>
 </body>
 </html>

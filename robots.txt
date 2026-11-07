@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /auth
+Disallow: /reset
+Disallow: /my-vault
+
+Sitemap: https://www.corevaultos.com/sitemap.xml
